@@ -4,7 +4,7 @@
 
 ## Быстрый старт
 
-1. Сделайте [fork](https://github.com/Tinkoff/invest-python/fork) проекта
+1. Сделайте [fork](https://github.com/RussianInvestments/invest-python/fork) проекта
 2. Склонируйте репозиторий на свой локальный компьютер
     ```bash
     git clone https://github.com/username/invest-python.git

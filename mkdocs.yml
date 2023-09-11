@@ -3,7 +3,7 @@ site_url: https://tinkoff.github.io/invest-python/
 site_description: 'Tinkoff Invest Python'
 
 repo_name: 'Tinkoff/invest-python'
-repo_url: 'https://github.com/Tinkoff/invest-python'
+repo_url: 'https://github.com/RussianInvestments/invest-python'
 edit_uri: "edit/main/docs/"
 
 copyright: 'Copyright &copy; 2023 Tinkoff'
