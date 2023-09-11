@@ -63,7 +63,7 @@ bump-version:
 	poetry version $(v)
 	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
 	git add . && git commit -m "chore(release): bump version to $(v)"
-	git tag -a $(v) -m ""
+	# git tag -a $(v) -m ""
 
 .PHONY: install-poetry
 install-poetry:
