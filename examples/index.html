@@ -1,0 +1,1845 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python SDK, gRPC client, bot examples">
+      
+      
+      
+        <link rel="canonical" href="https://RussianInvestments.github.io/invest-python/examples/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Примеры - Tinkoff Invest Python SDK</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../custom.css">
+    
+      <link rel="stylesheet" href="../termynal.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="yellow">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="Tinkoff Invest Python SDK" class="md-header__button md-logo" aria-label="Tinkoff Invest Python SDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tinkoff Invest Python SDK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Примеры
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/RussianInvestments/invest-python" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RussianInvestments/invest-python
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Tinkoff Invest Python SDK" class="md-nav__button md-logo" aria-label="Tinkoff Invest Python SDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tinkoff Invest Python SDK
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/RussianInvestments/invest-python" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RussianInvestments/invest-python
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Главная
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/clients/" class="md-nav__link">
+        Clients
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Примеры
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Примеры
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание раздела">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание раздела
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Получение и вывод в консоль свечей с часовым интервалом за год
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Асинхронная функция получения и вывода в консоль свечей с часовым интервалом за год
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Асинхронная функция получения и вывода счетов пользователя
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    Асинхронная функция получения и вывода минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    Подписка на стрим котировок по минутным свечам и вывод получаемых свечей в консоль
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    Отмена всех выставленных поручений
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    Функция получения и вывода счетов клиента
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    Загрузка и вывод всех минутных свечей по интрументу
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    Асинхронная подписка на стрим минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    Простая подписка на стрим минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    Получение списка операций и их постраничный вывод
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    Функция кэширования инструментов
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Функция получения списка инструментов подходящих под строку query
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    Функция логгирования ошибок
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    Подписка на стрим портфолио и вывод информации
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    Подписка на стрим позиций и вывод информации
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    Функция получения и вывода минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    Получение и вывод информации об аккаунте пользователя в песочнице
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    Подписка на стрим минутных свечей и их вывод
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    Создание тэйк-профит стоп ордера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    Отмена всех выставленных стоп ордеров
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figi" class="md-nav__link">
+    Получение figi для тикера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-ohlcv" class="md-nav__link">
+    Пример live стратегии для нескольких тикеров. Вывод OHLCV для каждой сформировавшейся свечи.
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robots/" class="md-nav__link">
+        Готовые работы
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        Список изменений
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTRIBUTING/" class="md-nav__link">
+        Участие в проекте
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание раздела">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание раздела
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Получение и вывод в консоль свечей с часовым интервалом за год
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Асинхронная функция получения и вывода в консоль свечей с часовым интервалом за год
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Асинхронная функция получения и вывода счетов пользователя
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    Асинхронная функция получения и вывода минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    Подписка на стрим котировок по минутным свечам и вывод получаемых свечей в консоль
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    Отмена всех выставленных поручений
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    Функция получения и вывода счетов клиента
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    Загрузка и вывод всех минутных свечей по интрументу
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    Асинхронная подписка на стрим минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    Простая подписка на стрим минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    Получение списка операций и их постраничный вывод
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    Функция кэширования инструментов
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Функция получения списка инструментов подходящих под строку query
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    Функция логгирования ошибок
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    Подписка на стрим портфолио и вывод информации
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    Подписка на стрим позиций и вывод информации
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    Функция получения и вывода минутных свечей
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    Получение и вывод информации об аккаунте пользователя в песочнице
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    Подписка на стрим минутных свечей и их вывод
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    Создание тэйк-профит стоп ордера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    Отмена всех выставленных стоп ордеров
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figi" class="md-nav__link">
+    Получение figi для тикера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-ohlcv" class="md-nav__link">
+    Пример live стратегии для нескольких тикеров. Вывод OHLCV для каждой сформировавшейся свечи.
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/RussianInvestments/invest-python/edit/main/docs/examples.md" title="Редактировать страницу" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Примеры</h1>
+
+<p>Больше примеров доступно <a href="https://github.com/RussianInvestments/invest-python/tree/main/examples">здесь</a>.</p>
+<h2 id="_1">Получение и вывод в консоль свечей с часовым интервалом за год</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/all_candles.py">examples/all_candles.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">CandleInterval</span><span class="p">,</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_HOUR</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_2">Асинхронная функция получения и вывода в консоль свечей с часовым интервалом за год</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/async_all_candles.py">examples/async_all_candles.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">CandleInterval</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_HOUR</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="_3">Асинхронная функция получения и вывода счетов пользователя</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/async_client.py">examples/async_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">AsyncClient</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="_4">Асинхронная функция получения и вывода минутных свечей</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/async_retrying_client.py">examples/async_retrying_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">CandleInterval</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.retrying.aio.client</span> <span class="kn">import</span> <span class="n">AsyncRetryingClient</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.retrying.settings</span> <span class="kn">import</span> <span class="n">RetryClientSettings</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">retry_settings</span> <span class="o">=</span> <span class="n">RetryClientSettings</span><span class="p">(</span><span class="n">use_retry</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_retry_attempt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncRetryingClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">retry_settings</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG000B9XRY4&quot;</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">301</span><span class="p">),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="_5">Подписка на стрим котировок по минутным свечам и вывод получаемых свечей в консоль</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/async_stream_client.py">examples/async_stream_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AsyncClient</span><span class="p">,</span>
+    <span class="n">CandleInstrument</span><span class="p">,</span>
+    <span class="n">MarketDataRequest</span><span class="p">,</span>
+    <span class="n">SubscribeCandlesRequest</span><span class="p">,</span>
+    <span class="n">SubscriptionAction</span><span class="p">,</span>
+    <span class="n">SubscriptionInterval</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">request_iterator</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="n">MarketDataRequest</span><span class="p">(</span>
+            <span class="n">subscribe_candles_request</span><span class="o">=</span><span class="n">SubscribeCandlesRequest</span><span class="p">(</span>
+                <span class="n">subscription_action</span><span class="o">=</span><span class="n">SubscriptionAction</span><span class="o">.</span><span class="n">SUBSCRIPTION_ACTION_SUBSCRIBE</span><span class="p">,</span>
+                <span class="n">instruments</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">CandleInstrument</span><span class="p">(</span>
+                        <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+                        <span class="n">interval</span><span class="o">=</span><span class="n">SubscriptionInterval</span><span class="o">.</span><span class="n">SUBSCRIPTION_INTERVAL_ONE_MINUTE</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">marketdata</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">market_data_stream</span><span class="o">.</span><span class="n">market_data_stream</span><span class="p">(</span>
+            <span class="n">request_iterator</span><span class="p">()</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="_6">Отмена всех выставленных поручений</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/cancel_orders.py">examples/cancel_orders.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">account</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">cancel_all_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_7">Функция получения и вывода счетов клиента</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/client.py">examples/client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_8">Загрузка и вывод всех минутных свечей по интрументу</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/download_all_candles.py">examples/download_all_candles.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">CandleInterval</span><span class="p">,</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.caching.market_data_cache.cache</span> <span class="kn">import</span> <span class="n">MarketDataCache</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.caching.market_data_cache.cache_settings</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MarketDataCacheSettings</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">MarketDataCacheSettings</span><span class="p">(</span><span class="n">base_cache_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;market_data_cache&quot;</span><span class="p">))</span>
+        <span class="n">market_data_cache</span> <span class="o">=</span> <span class="n">MarketDataCache</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">market_data_cache</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_9">Асинхронная подписка на стрим минутных свечей</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/easy_async_stream_client.py">examples/easy_async_stream_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AsyncClient</span><span class="p">,</span>
+    <span class="n">CandleInstrument</span><span class="p">,</span>
+    <span class="n">InfoInstrument</span><span class="p">,</span>
+    <span class="n">SubscriptionInterval</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.async_services</span> <span class="kn">import</span> <span class="n">AsyncMarketDataStreamManager</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">market_data_stream</span><span class="p">:</span> <span class="n">AsyncMarketDataStreamManager</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">create_market_data_stream</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">market_data_stream</span><span class="o">.</span><span class="n">candles</span><span class="o">.</span><span class="n">waiting_close</span><span class="p">()</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">CandleInstrument</span><span class="p">(</span>
+                    <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+                    <span class="n">interval</span><span class="o">=</span><span class="n">SubscriptionInterval</span><span class="o">.</span><span class="n">SUBSCRIPTION_INTERVAL_ONE_MINUTE</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">marketdata</span> <span class="ow">in</span> <span class="n">market_data_stream</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
+            <span class="n">market_data_stream</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="n">InfoInstrument</span><span class="p">(</span><span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">)])</span>
+            <span class="k">if</span> <span class="n">marketdata</span><span class="o">.</span><span class="n">subscribe_info_response</span><span class="p">:</span>
+                <span class="n">market_data_stream</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="_10">Простая подписка на стрим минутных свечей</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/easy_stream_client.py">examples/easy_stream_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CandleInstrument</span><span class="p">,</span>
+    <span class="n">Client</span><span class="p">,</span>
+    <span class="n">InfoInstrument</span><span class="p">,</span>
+    <span class="n">SubscriptionInterval</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.services</span> <span class="kn">import</span> <span class="n">MarketDataStreamManager</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">market_data_stream</span><span class="p">:</span> <span class="n">MarketDataStreamManager</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_market_data_stream</span><span class="p">()</span>
+        <span class="n">market_data_stream</span><span class="o">.</span><span class="n">candles</span><span class="o">.</span><span class="n">waiting_close</span><span class="p">()</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">CandleInstrument</span><span class="p">(</span>
+                    <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+                    <span class="n">interval</span><span class="o">=</span><span class="n">SubscriptionInterval</span><span class="o">.</span><span class="n">SUBSCRIPTION_INTERVAL_ONE_MINUTE</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">marketdata</span> <span class="ow">in</span> <span class="n">market_data_stream</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
+            <span class="n">market_data_stream</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="n">InfoInstrument</span><span class="p">(</span><span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">)])</span>
+            <span class="k">if</span> <span class="n">marketdata</span><span class="o">.</span><span class="n">subscribe_info_response</span><span class="p">:</span>
+                <span class="n">market_data_stream</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_11">Получение списка операций и их постраничный вывод</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/get_operations_by_cursor.py">examples/get_operations_by_cursor.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">GetOperationsByCursorRequest</span>
+
+<span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="n">accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+    <span class="n">account_id</span> <span class="o">=</span> <span class="n">accounts</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+
+    <span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">GetOperationsByCursorRequest</span><span class="p">(</span>
+            <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+            <span class="n">instrument_id</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+            <span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">,</span>
+            <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations_by_cursor</span><span class="p">(</span><span class="n">get_request</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">operations</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">get_request</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">operations</span><span class="o">.</span><span class="n">next_cursor</span><span class="p">)</span>
+        <span class="n">operations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations_by_cursor</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="_12">Функция кэширования инструментов</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/instrument_cache.py">examples/instrument_cache.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">InstrumentIdType</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.caching.instruments_cache.instruments_cache</span> <span class="kn">import</span> <span class="n">InstrumentsCache</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.caching.instruments_cache.settings</span> <span class="kn">import</span> <span class="n">InstrumentsCacheSettings</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">etfs</span><span class="p">()</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+
+        <span class="n">from_server</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">etf_by</span><span class="p">(</span>
+            <span class="n">id_type</span><span class="o">=</span><span class="n">InstrumentIdType</span><span class="o">.</span><span class="n">INSTRUMENT_ID_TYPE_UID</span><span class="p">,</span>
+            <span class="n">class_code</span><span class="o">=</span><span class="n">inst</span><span class="o">.</span><span class="n">class_code</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">inst</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">from_server</span><span class="p">)</span>
+
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">InstrumentsCacheSettings</span><span class="p">()</span>
+        <span class="n">instruments_cache</span> <span class="o">=</span> <span class="n">InstrumentsCache</span><span class="p">(</span>
+            <span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">,</span> <span class="n">instruments_service</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">instruments</span>
+        <span class="p">)</span>
+
+        <span class="n">from_cache</span> <span class="o">=</span> <span class="n">instruments_cache</span><span class="o">.</span><span class="n">etf_by</span><span class="p">(</span>
+            <span class="n">id_type</span><span class="o">=</span><span class="n">InstrumentIdType</span><span class="o">.</span><span class="n">INSTRUMENT_ID_TYPE_UID</span><span class="p">,</span>
+            <span class="n">class_code</span><span class="o">=</span><span class="n">inst</span><span class="o">.</span><span class="n">class_code</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">inst</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">from_cache</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_server</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_cache</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;cache miss&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="query">Функция получения списка инструментов подходящих под строку query</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/instruments.py">examples/instruments.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">find_instrument</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;BBG001M2SC01&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instruments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_13">Функция логгирования ошибок</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/logger.py">examples/logger.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">RequestError</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_margin_attributes</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="s2">&quot;123&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">RequestError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">tracking_id</span> <span class="o">=</span> <span class="n">err</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">tracking_id</span> <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">metadata</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error tracking_id=</span><span class="si">%s</span><span class="s2"> code=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tracking_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">code</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_14">Подписка на стрим портфолио и вывод информации</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/porfolio_stream_client.py">examples/porfolio_stream_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">operations_stream</span><span class="o">.</span><span class="n">portfolio_stream</span><span class="p">(</span>
+            <span class="n">accounts</span><span class="o">=</span><span class="p">[</span><span class="n">acc</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">accounts</span><span class="o">.</span><span class="n">accounts</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">portfolio</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_15">Подписка на стрим позиций и вывод информации</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/positions_stream.py">examples/positions_stream.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="n">account</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">account</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">operations_stream</span><span class="o">.</span><span class="n">positions_stream</span><span class="p">(</span><span class="n">accounts</span><span class="o">=</span><span class="n">accounts</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_16">Функция получения и вывода минутных свечей</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/retrying_client.py">examples/retrying_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">CandleInterval</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.retrying.settings</span> <span class="kn">import</span> <span class="n">RetryClientSettings</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.retrying.sync.client</span> <span class="kn">import</span> <span class="n">RetryingClient</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">retry_settings</span> <span class="o">=</span> <span class="n">RetryClientSettings</span><span class="p">(</span><span class="n">use_retry</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_retry_attempt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">RetryingClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">retry_settings</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+        <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG000B9XRY4&quot;</span><span class="p">,</span>
+        <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">301</span><span class="p">),</span>
+        <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="_17">Получение и вывод информации об аккаунте пользователя в песочнице</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/sandbox_client.py">examples/sandbox_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest.sandbox.client</span> <span class="kn">import</span> <span class="n">SandboxClient</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">SandboxClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_info</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_18">Подписка на стрим минутных свечей и их вывод</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/stream_client.py">examples/stream_client.py</a>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CandleInstrument</span><span class="p">,</span>
+    <span class="n">Client</span><span class="p">,</span>
+    <span class="n">MarketDataRequest</span><span class="p">,</span>
+    <span class="n">SubscribeCandlesRequest</span><span class="p">,</span>
+    <span class="n">SubscriptionAction</span><span class="p">,</span>
+    <span class="n">SubscriptionInterval</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">request_iterator</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="n">MarketDataRequest</span><span class="p">(</span>
+            <span class="n">subscribe_candles_request</span><span class="o">=</span><span class="n">SubscribeCandlesRequest</span><span class="p">(</span>
+                <span class="n">waiting_close</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">subscription_action</span><span class="o">=</span><span class="n">SubscriptionAction</span><span class="o">.</span><span class="n">SUBSCRIPTION_ACTION_SUBSCRIBE</span><span class="p">,</span>
+                <span class="n">instruments</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">CandleInstrument</span><span class="p">(</span>
+                        <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+                        <span class="n">interval</span><span class="o">=</span><span class="n">SubscriptionInterval</span><span class="o">.</span><span class="n">SUBSCRIPTION_INTERVAL_ONE_MINUTE</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">marketdata</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">market_data_stream</span><span class="o">.</span><span class="n">market_data_stream</span><span class="p">(</span>
+            <span class="n">request_iterator</span><span class="p">()</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="-">Создание тэйк-профит стоп ордера</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/wiseplat_create_take_profit_stop_order.py">examples/wiseplat_create_take_profit_stop_order.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to create takeprofit buy order.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Client</span><span class="p">,</span>
+    <span class="n">InstrumentIdType</span><span class="p">,</span>
+    <span class="n">StopOrderDirection</span><span class="p">,</span>
+    <span class="n">StopOrderExpirationType</span><span class="p">,</span>
+    <span class="n">StopOrderType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.exceptions</span> <span class="kn">import</span> <span class="n">InvestError</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">decimal_to_quotation</span><span class="p">,</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to create takeprofit buy order.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">account</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
+
+        <span class="n">figi</span> <span class="o">=</span> <span class="s2">&quot;BBG004730ZJ9&quot;</span>  <span class="c1"># BBG004730ZJ9 - VTBR / BBG004730N88 - SBER</span>
+
+        <span class="c1"># getting the last price for instrument</span>
+        <span class="n">last_price</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">market_data</span><span class="o">.</span><span class="n">get_last_prices</span><span class="p">(</span><span class="n">figi</span><span class="o">=</span><span class="p">[</span><span class="n">figi</span><span class="p">])</span><span class="o">.</span><span class="n">last_prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">price</span>
+        <span class="p">)</span>
+        <span class="n">last_price</span> <span class="o">=</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">last_price</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;figi, last price = </span><span class="si">{</span><span class="n">last_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># setting the percentage by which the takeprofit stop order</span>
+        <span class="c1"># should be set below the last price</span>
+        <span class="n">percent_down</span> <span class="o">=</span> <span class="mi">5</span>
+
+        <span class="c1"># calculation of the price for takeprofit stop order</span>
+        <span class="n">calculated_price</span> <span class="o">=</span> <span class="n">last_price</span> <span class="o">-</span> <span class="n">last_price</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">percent_down</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;calculated_price = </span><span class="si">{</span><span class="n">calculated_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># getting the min price increment and the number of digits after point</span>
+        <span class="n">min_price_increment</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">get_instrument_by</span><span class="p">(</span>
+            <span class="n">id_type</span><span class="o">=</span><span class="n">InstrumentIdType</span><span class="o">.</span><span class="n">INSTRUMENT_ID_TYPE_FIGI</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">figi</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">min_price_increment</span>
+        <span class="n">number_digits_after_point</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">min_price_increment</span><span class="o">.</span><span class="n">nano</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">min_price_increment</span> <span class="o">=</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">min_price_increment</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;min_price_increment = </span><span class="si">{</span><span class="n">min_price_increment</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;number_digits_after_point=</span><span class="si">{</span><span class="n">number_digits_after_point</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># calculation of the price for instrument which is</span>
+        <span class="c1"># divisible to min price increment</span>
+        <span class="n">calculated_price</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">round</span><span class="p">(</span><span class="n">calculated_price</span> <span class="o">/</span> <span class="n">min_price_increment</span><span class="p">)</span> <span class="o">*</span> <span class="n">min_price_increment</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;let&#39;s send stop order at price = &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">calculated_price</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">number_digits_after_point</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2"> divisible to &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;min price increment </span><span class="si">{</span><span class="n">min_price_increment</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># creating takeprofit buy order</span>
+        <span class="n">stop_order_type</span> <span class="o">=</span> <span class="n">StopOrderType</span><span class="o">.</span><span class="n">STOP_ORDER_TYPE_TAKE_PROFIT</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">StopOrderDirection</span><span class="o">.</span><span class="n">STOP_ORDER_DIRECTION_BUY</span>
+        <span class="n">exp_type</span> <span class="o">=</span> <span class="n">StopOrderExpirationType</span><span class="o">.</span><span class="n">STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">post_stop_order</span><span class="p">(</span>
+                <span class="n">figi</span><span class="o">=</span><span class="n">figi</span><span class="p">,</span>
+                <span class="n">quantity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">price</span><span class="o">=</span><span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">calculated_price</span><span class="p">)),</span>
+                <span class="n">stop_price</span><span class="o">=</span><span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">calculated_price</span><span class="p">)),</span>
+                <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+                <span class="n">expiration_type</span><span class="o">=</span><span class="n">exp_type</span><span class="p">,</span>
+                <span class="n">stop_order_type</span><span class="o">=</span><span class="n">stop_order_type</span><span class="p">,</span>
+                <span class="n">expire_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stop_order_id=&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stop_order_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">InvestError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Posting trade takeprofit order failed. Exception: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_19">Отмена всех выставленных стоп ордеров</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/wiseplat_cancel_all_stop_orders.py">examples/wiseplat_cancel_all_stop_orders.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to cancel all stop orders.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.exceptions</span> <span class="kn">import</span> <span class="n">InvestError</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to cancel all stop orders.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">account</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stop_orders_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">get_stop_orders</span><span class="p">(</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span>
+            <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stop Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stop_orders_response</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">stop_order</span> <span class="ow">in</span> <span class="n">stop_orders_response</span><span class="o">.</span><span class="n">stop_orders</span><span class="p">:</span>
+                <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">cancel_stop_order</span><span class="p">(</span>
+                    <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">stop_order_id</span><span class="o">=</span><span class="n">stop_order</span><span class="o">.</span><span class="n">stop_order_id</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stop Order: </span><span class="si">%s</span><span class="s2"> was canceled.&quot;</span><span class="p">,</span> <span class="n">stop_order</span><span class="o">.</span><span class="n">stop_order_id</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">get_stop_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">InvestError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to cancel all orders. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="figi">Получение figi для тикера</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/wiseplat_get_figi_for_ticker.py">examples/wiseplat_get_figi_for_ticker.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to get figi by name of ticker.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">SecurityTradingStatus</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.services</span> <span class="kn">import</span> <span class="n">InstrumentsService</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to get figi by name of ticker.&quot;&quot;&quot;</span>
+
+    <span class="n">ticker</span> <span class="o">=</span> <span class="s2">&quot;VTBR&quot;</span>  <span class="c1"># &quot;BRH3&quot; &quot;SBER&quot; &quot;VTBR&quot;</span>
+
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">instruments</span><span class="p">:</span> <span class="n">InstrumentsService</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span>
+        <span class="n">tickers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;shares&quot;</span><span class="p">,</span> <span class="s2">&quot;bonds&quot;</span><span class="p">,</span> <span class="s2">&quot;etfs&quot;</span><span class="p">,</span> <span class="s2">&quot;currencies&quot;</span><span class="p">,</span> <span class="s2">&quot;futures&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instruments</span><span class="p">,</span> <span class="n">method</span><span class="p">)()</span><span class="o">.</span><span class="n">instruments</span><span class="p">:</span>
+                <span class="n">tickers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span>
+                        <span class="s2">&quot;class_code&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">class_code</span><span class="p">,</span>
+                        <span class="s2">&quot;figi&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">figi</span><span class="p">,</span>
+                        <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span>
+                        <span class="s2">&quot;min_price_increment&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span>
+                            <span class="n">item</span><span class="o">.</span><span class="n">min_price_increment</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">9</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">min_price_increment</span><span class="o">.</span><span class="n">nano</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;lot&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">lot</span><span class="p">,</span>
+                        <span class="s2">&quot;trading_status&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="n">SecurityTradingStatus</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">trading_status</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;api_trade_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">api_trade_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
+                        <span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">exchange</span><span class="p">,</span>
+                        <span class="s2">&quot;buy_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">buy_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;sell_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">sell_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;short_enabled_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">short_enabled_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;klong&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">klong</span><span class="p">),</span>
+                        <span class="s2">&quot;kshort&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">kshort</span><span class="p">),</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+
+        <span class="n">tickers_df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span>
+
+        <span class="n">ticker_df</span> <span class="o">=</span> <span class="n">tickers_df</span><span class="p">[</span><span class="n">tickers_df</span><span class="p">[</span><span class="s2">&quot;ticker&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ticker</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ticker_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;There is no such ticker: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ticker</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">figi</span> <span class="o">=</span> <span class="n">ticker_df</span><span class="p">[</span><span class="s2">&quot;figi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ticker </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> have figi=</span><span class="si">{</span><span class="n">figi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Additional info for this </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> ticker:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ticker_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_20">Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/wiseplat_set_get_sandbox_balance.py">examples/wiseplat_set_get_sandbox_balance.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot; Example - How to set/get balance for sandbox account.</span>
+<span class="sd">    How to get/close all sandbox accounts.</span>
+<span class="sd">    How to open new sandbox account. &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">MoneyValue</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.sandbox.client</span> <span class="kn">import</span> <span class="n">SandboxClient</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">decimal_to_quotation</span><span class="p">,</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;rub&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to add money to sandbox account.&quot;&quot;&quot;</span>
+    <span class="n">money</span> <span class="o">=</span> <span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">money</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">sandbox_pay_in</span><span class="p">(</span>
+        <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">MoneyValue</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">money</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">nano</span><span class="o">=</span><span class="n">money</span><span class="o">.</span><span class="n">nano</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="n">currency</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to set/get balance for sandbox account.</span>
+<span class="sd">    How to get/close all sandbox accounts.</span>
+<span class="sd">    How to open new sandbox account.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">SandboxClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="c1"># get all sandbox accounts</span>
+        <span class="n">sandbox_accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_accounts</span><span class="p">)</span>
+
+        <span class="c1"># close all sandbox accounts</span>
+        <span class="k">for</span> <span class="n">sandbox_account</span> <span class="ow">in</span> <span class="n">sandbox_accounts</span><span class="o">.</span><span class="n">accounts</span><span class="p">:</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">close_sandbox_account</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="c1"># open new sandbox account</span>
+        <span class="n">sandbox_account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">open_sandbox_account</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span><span class="p">)</span>
+
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span>
+
+        <span class="c1"># add initial 2 000 000 to sandbox account</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;money: &quot;</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">(</span>
+                <span class="n">quotation_to_decimal</span><span class="p">(</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span><span class="o">.</span><span class="n">money</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;portfolio: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;operations: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations</span><span class="p">(</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+                <span class="n">from_</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">to</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;withdraw_limits: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_withdraw_limits</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># add + 2 000 000 to sandbox account, total is 4 000 000</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># close new sandbox account</span>
+        <span class="n">sandbox_account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">close_sandbox_account</span><span class="p">(</span>
+            <span class="n">account_id</span><span class="o">=</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_account</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="live-ohlcv">Пример live стратегии для нескольких тикеров. Вывод OHLCV для каждой сформировавшейся свечи.</h2>
+<p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/wiseplat_live_strategy_print_ohlcv.py">examples/wiseplat_live_strategy_print_ohlcv.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This code is an example of applying Trading Strategy for several Tickers.</span>
+<span class="sd">    The strategy in this code is for demonstration only purposes</span>
+<span class="sd">    - it outputs OHLCV values.</span>
+<span class="sd">    Author: Oleg Shpagin, my github: https://github.com/WISEPLAT</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">AioRequestError</span><span class="p">,</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">CandleInterval</span><span class="p">,</span> <span class="n">HistoricCandle</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.async_services</span> <span class="kn">import</span> <span class="n">AsyncServices</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">LogOnlyCandlesStrategy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is responsible for a strategy. You can put here</span>
+<span class="sd">    your methods for your strategy.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">figi</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">timeframe</span><span class="p">:</span> <span class="n">CandleInterval</span><span class="p">,</span>
+        <span class="n">days_back</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">check_interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AsyncServices</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">figi</span> <span class="o">=</span> <span class="n">figi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeframe</span> <span class="o">=</span> <span class="n">timeframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">days_back</span> <span class="o">=</span> <span class="n">days_back</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_interval</span> <span class="o">=</span> <span class="n">check_interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">candles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">HistoricCandle</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_historical_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets historical data for the instrument. Returns list of candles.</span>
+<span class="sd">        Requests all the candles of timeframe from days_back to now.</span>
+
+<span class="sd">        :return: list of HistoricCandle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;Start getting historical data for </span><span class="si">%s</span><span class="s2"> days back from now. figi=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">days_back</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">figi</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">figi</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">days_back</span><span class="p">),</span>
+            <span class="n">to</span><span class="o">=</span><span class="n">now</span><span class="p">(),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeframe</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">candle</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candles</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">candle</span><span class="o">.</span><span class="n">is_complete</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">candles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%s</span><span class="s2"> - figi=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">candle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">figi</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">ensure_market_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensure that the market is open. Loop until the instrument is available.</span>
+<span class="sd">        :return: when instrument is available for trading</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trading_status</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">market_data</span><span class="o">.</span><span class="n">get_trading_status</span><span class="p">(</span>
+            <span class="n">figi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">figi</span>
+        <span class="p">)</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="p">(</span>
+            <span class="n">trading_status</span><span class="o">.</span><span class="n">market_order_available_flag</span>
+            <span class="ow">and</span> <span class="n">trading_status</span><span class="o">.</span><span class="n">api_trade_available_flag</span>
+        <span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Waiting for the market to open. figi=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">figi</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+            <span class="n">trading_status</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">market_data</span><span class="o">.</span><span class="n">get_trading_status</span><span class="p">(</span>
+                <span class="n">figi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">figi</span>
+            <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">main_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main cycle for live strategy.&quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_market_open</span><span class="p">()</span>
+                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_historical_data</span><span class="p">()</span>
+
+                <span class="c1"># put your strategy code here for live</span>
+                <span class="c1"># to generate signals for buying or selling tickers</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;- live mode: run some strategy code to buy or sell - figi=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">figi</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">except</span> <span class="n">AioRequestError</span> <span class="k">as</span> <span class="n">are</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Client error </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">are</span><span class="p">)</span>
+
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_interval</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Strategy starts from this function.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">account_id</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">id</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="n">AioRequestError</span> <span class="k">as</span> <span class="n">are</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error taking account id. Stopping strategy. </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">are</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_cycle</span><span class="p">()</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run_strategy</span><span class="p">(</span><span class="n">portfolio</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">,</span> <span class="n">days_back</span><span class="p">,</span> <span class="n">check_interval</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;From this function we are starting</span>
+<span class="sd">    strategy for every ticker from portfolio.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">TOKEN</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="s2">&quot;TinkoffApp&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">strategy_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="n">portfolio</span><span class="p">:</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="n">LogOnlyCandlesStrategy</span><span class="p">(</span>
+                <span class="n">figi</span><span class="o">=</span><span class="n">instrument</span><span class="p">,</span>
+                <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">,</span>
+                <span class="n">days_back</span><span class="o">=</span><span class="n">days_back</span><span class="p">,</span>
+                <span class="n">check_interval</span><span class="o">=</span><span class="n">check_interval</span><span class="p">,</span>
+                <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">strategy_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">strategy</span><span class="o">.</span><span class="n">start</span><span class="p">()))</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">strategy_tasks</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">sber_figi</span> <span class="o">=</span> <span class="s2">&quot;BBG004730N88&quot;</span>
+    <span class="n">vtbr_figi</span> <span class="o">=</span> <span class="s2">&quot;BBG004730ZJ9&quot;</span>
+    <span class="n">portfolio</span> <span class="o">=</span> <span class="p">{</span><span class="n">sber_figi</span><span class="p">,</span> <span class="n">vtbr_figi</span><span class="p">}</span>
+    <span class="n">timeframe</span> <span class="o">=</span> <span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span>
+    <span class="n">days_back</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">check_interval</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># seconds to check interval for new completed candle</span>
+
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span>
+        <span class="n">run_strategy</span><span class="p">(</span>
+            <span class="n">portfolio</span><span class="o">=</span><span class="n">portfolio</span><span class="p">,</span>
+            <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="p">,</span>
+            <span class="n">days_back</span><span class="o">=</span><span class="n">days_back</span><span class="p">,</span>
+            <span class="n">check_interval</span><span class="o">=</span><span class="n">check_interval</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre></div></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Нижний колонтитул" >
+      
+        
+        <a href="../api/clients/" class="md-footer__link md-footer__link--prev" aria-label="Назад: Clients" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Назад
+              </span>
+              Clients
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../robots/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Готовые работы" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Вперед
+              </span>
+              Готовые работы
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 Tinkoff
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.config.lang": "ru", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "\u041f\u043e\u0438\u0441\u043a", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version.title": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+        <script src="../termynal.js"></script>
+      
+    
+    
+  </body>
+</html>
