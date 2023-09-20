@@ -7,8 +7,8 @@
 
 Данный репозиторий предоставляет клиент для взаимодействия с торговой платформой [Тинькофф Инвестиции](https://www.tinkoff.ru/invest/) на языке Python.
 
-- [Основной репозиторий с документацией](https://github.com/RussianInvestments/investAPI)
-- [Документация для разработчиков](https://RussianInvestments.github.io/investAPI/)
+- [Документация](https://RussianInvestments.github.io/invest-python/)
+- [Документация по Invest API](https://RussianInvestments.github.io/investAPI/)
 
 ## Начало работы
 

@@ -1,8 +1,8 @@
-site_name: Tinkoff Invest
-site_url: https://tinkoff.github.io/invest-python/
-site_description: 'Tinkoff Invest Python'
+site_name: Tinkoff Invest Python SDK
+site_url: https://RussianInvestments.github.io/invest-python/
+site_description: 'Python SDK, gRPC client, bot examples'
 
-repo_name: 'Tinkoff/invest-python'
+repo_name: 'RussianInvestments/invest-python'
 repo_url: 'https://github.com/RussianInvestments/invest-python'
 edit_uri: "edit/main/docs/"
 
