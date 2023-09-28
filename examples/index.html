@@ -950,7 +950,7 @@
 <span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">now</span>
 
 <span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(levelname)s</span><span class="s2">: </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -959,10 +959,10 @@
         <span class="n">market_data_cache</span> <span class="o">=</span> <span class="n">MarketDataCache</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">candle</span> <span class="ow">in</span> <span class="n">market_data_cache</span><span class="o">.</span><span class="n">get_all_candles</span><span class="p">(</span>
             <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
-            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
-            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span><span class="p">,</span>
+            <span class="n">from_</span><span class="o">=</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_HOUR</span><span class="p">,</span>
         <span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">candle</span><span class="o">.</span><span class="n">is_complete</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="mi">0</span>
 
