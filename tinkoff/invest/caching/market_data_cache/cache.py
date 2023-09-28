@@ -6,6 +6,7 @@ from tinkoff.invest import CandleInterval, HistoricCandle
 from tinkoff.invest.caching.market_data_cache.cache_settings import (
     MarketDataCacheSettings,
 )
+from tinkoff.invest.caching.market_data_cache.datetime_range import DatetimeRange
 from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data import (
     InstrumentDateRangeData,
 )
@@ -15,9 +16,9 @@ from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage imp
 from tinkoff.invest.services import Services
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
-    datetime_range_floor,
     floor_datetime,
     now,
+    round_datetime_range,
     with_filtering_distinct_candles,
 )
 
@@ -47,31 +48,22 @@ class MarketDataCache:
         self,
         storage: InstrumentMarketDataStorage,
         from_net: Iterable[HistoricCandle],
-        net_range: Tuple[datetime, datetime],
-        interval_delta: timedelta,
     ) -> Iterable[HistoricCandle]:
         candles = list(from_net)
         if candles:
-            filtered_net_range = self._round_net_range(net_range, interval_delta)
-            filtered_candles = list(self._filter_complete_candles(candles))
+            complete_candles = list(self._filter_complete_candles(candles))
+            complete_candle_times = [candle.time for candle in complete_candles]
+            complete_net_range = (
+                min(complete_candle_times),
+                max(complete_candle_times),
+            )
             storage.update(
                 [
                     InstrumentDateRangeData(
-                        date_range=filtered_net_range, historic_candles=filtered_candles
+                        date_range=complete_net_range,
+                        historic_candles=complete_candles,
                     )
                 ]
-            )
-            logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
-            logger.debug(
-                "Filtered net [\n%s\n%s\n]",
-                str(filtered_net_range[0]),
-                str(filtered_net_range[1]),
-            )
-            candle_times = [candle.time for candle in filtered_candles]
-            logger.debug(
-                "Filtered net real [\n%s\n%s\n]",
-                str(min(candle_times)),
-                str(max(candle_times)),
             )
 
         yield from candles
@@ -92,12 +84,14 @@ class MarketDataCache:
     ) -> Generator[HistoricCandle, None, None]:
         interval_delta = candle_interval_to_timedelta(interval)
         to = to or now()
-        from_, to = datetime_range_floor((from_, to))
-        logger.debug("Request [\n%s\n%s\n]", str(from_), str(to))
 
         processed_time = from_
         figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
-        for cached in figi_cache_storage.get(request_range=(from_, to)):
+        for cached in figi_cache_storage.get(
+            request_range=round_datetime_range(
+                date_range=(from_, to), interval=interval
+            )
+        ):
             cached_start, cached_end = cached.date_range
             cached_candles = list(cached.historic_candles)
             if cached_start > processed_time:
@@ -106,12 +100,7 @@ class MarketDataCache:
                     from_net=self._get_candles_from_net(
                         figi, interval, processed_time, cached_start
                     ),
-                    net_range=(processed_time, cached_start),
-                    interval_delta=interval_delta,
                 )
-            logger.debug(
-                "Returning from cache [\n%s\n%s\n]", str(cached_start), str(cached_end)
-            )
 
             yield from cached_candles
             processed_time = cached_end
@@ -120,9 +109,9 @@ class MarketDataCache:
             yield from self._with_saving_into_cache(
                 storage=figi_cache_storage,
                 from_net=self._get_candles_from_net(figi, interval, processed_time, to),
-                net_range=(processed_time, to),
-                interval_delta=interval_delta,
             )
+
+        figi_cache_storage.merge()
 
     def _get_figi_cache_storage(
         self, figi: str, interval: CandleInterval
@@ -137,7 +126,9 @@ class MarketDataCache:
         return storage  # noqa:R504
 
     def _round_net_range(
-        self, net_range: Tuple[datetime, datetime], interval_delta: timedelta
-    ) -> Tuple[datetime, datetime]:
+        self, net_range: DatetimeRange, interval_delta: timedelta
+    ) -> DatetimeRange:
         start, end = net_range
-        return start, floor_datetime(end, interval_delta)
+        return floor_datetime(start, interval_delta), floor_datetime(
+            end, interval_delta
+        )

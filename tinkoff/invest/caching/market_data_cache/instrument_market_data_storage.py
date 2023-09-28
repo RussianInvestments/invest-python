@@ -12,6 +12,7 @@ from tinkoff.invest.caching.market_data_cache.cache_settings import (
     MarketDataCacheSettings,
     meta_file_context,
 )
+from tinkoff.invest.caching.market_data_cache.datetime_range import DatetimeRange
 from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data import (
     InstrumentDateRangeData,
 )
@@ -19,7 +20,7 @@ from tinkoff.invest.caching.market_data_cache.interface import (
     IInstrumentMarketDataStorage,
 )
 from tinkoff.invest.schemas import CandleInterval, HistoricCandle
-from tinkoff.invest.utils import dataclass_from_dict, datetime_range_floor
+from tinkoff.invest.utils import dataclass_from_dict
 
 logger = logging.getLogger(__name__)
 
@@ -49,13 +50,13 @@ class InstrumentMarketDataStorage(
     def _datetime_to_safe_filename(dt: datetime) -> str:
         return str(int(dt.timestamp()))
 
-    def _get_file_path(self, date_range: Tuple[datetime, datetime]) -> Path:
+    def _get_file_path(self, date_range: DatetimeRange) -> Path:
         start, end = date_range
         filepath = self._get_base_file_path(figi=self._figi, interval=self._interval)
         start_str = self._datetime_to_safe_filename(start)
         end_str = self._datetime_to_safe_filename(end)
         filepath = filepath.parent / (filepath.name + f"-{start_str}-{end_str}")
-        return filepath.with_suffix(f".{self._settings.format_extension}")
+        return filepath.with_suffix(f".{self._settings.format_extension.value}")
 
     def _get_metafile(self, file: Path) -> Path:
         return file.with_suffix(f".{self._settings.meta_extension}")
@@ -69,7 +70,7 @@ class InstrumentMarketDataStorage(
         return self._settings.base_cache_dir / figi
 
     def _get_range_from_file(
-        self, reader: Iterable[Dict], request_range: Tuple[datetime, datetime]
+        self, reader: Iterable[Dict], request_range: DatetimeRange
     ) -> Iterable[Dict]:
         start, end = request_range
         for row in reader:
@@ -83,7 +84,7 @@ class InstrumentMarketDataStorage(
     def _get_candles_from_cache(
         self,
         file: Path,
-        request_range: Tuple[datetime, datetime],
+        request_range: DatetimeRange,
     ) -> Generator[HistoricCandle, None, None]:
         with open(file, "r") as infile:  # pylint: disable=W1514
             reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
@@ -167,9 +168,9 @@ class InstrumentMarketDataStorage(
 
     def _get_intersection(
         self,
-        request_range: Tuple[datetime, datetime],
-        cached_range: Tuple[datetime, datetime],
-    ) -> Optional[Tuple[datetime, datetime]]:
+        request_range: DatetimeRange,
+        cached_range: DatetimeRange,
+    ) -> Optional[DatetimeRange]:
         request_start, request_end = request_range
         cached_start, cached_end = cached_range
         max_start = max(request_start, cached_start)
@@ -181,12 +182,19 @@ class InstrumentMarketDataStorage(
     def _merge_intersecting_files(  # pylint: disable=R0914
         self,
         file1: Path,
-        range1: Tuple[datetime, datetime],
+        range1: DatetimeRange,
         file2: Path,
-        range2: Tuple[datetime, datetime],
-    ) -> Tuple[Tuple[datetime, datetime], Path]:
+        range2: DatetimeRange,
+    ) -> Tuple[DatetimeRange, Path]:
         new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
         new_file = self._get_file_path(date_range=new_range)
+
+        if new_file == file1:
+            file2.unlink()
+            return new_range, new_file
+        if new_file == file2:
+            file1.unlink()
+            return new_range, new_file
 
         with open(file1, "r") as infile1:  # pylint: disable=W1514
             reader1 = csv.DictReader(infile1, fieldnames=self._settings.field_names)
@@ -213,20 +221,21 @@ class InstrumentMarketDataStorage(
         file2.unlink()
         return new_range, new_file
 
-    def _get_distinct_product(self, cached_range_in_file) -> Iterable[Tuple]:
-        for i, items1 in enumerate(  # pylint: disable=R1702
-            cached_range_in_file.items()
-        ):
-            for j, items2 in enumerate(cached_range_in_file.items()):
+    def _get_distinct_product(
+        self, cached_range_in_file: Dict[DatetimeRange, Path]
+    ) -> Iterable[Tuple[DatetimeRange, Path]]:
+        sorted_items = self._get_cached_items_sorted_by_start(cached_range_in_file)
+        for i, items1 in enumerate(sorted_items):  # pylint: disable=R1702
+            for j, items2 in enumerate(sorted_items):
                 if i < j:
                     yield items1, items2
 
     def _try_merge_files(
-        self, cached_range_in_file: Dict[Tuple[datetime, datetime], Path]
-    ) -> Dict[Tuple[datetime, datetime], Path]:
+        self, cached_range_in_file: Dict[DatetimeRange, Path]
+    ) -> Dict[DatetimeRange, Path]:
         new_cached_range_in_file = cached_range_in_file.copy()
         file_pairs = self._get_distinct_product(new_cached_range_in_file)
-        for (cached_range, cached_file), (cached_range2, cached_file2) in file_pairs:
+        for ((cached_range, cached_file), (cached_range2, cached_file2)) in file_pairs:
             intersection_range = self._get_intersection(
                 request_range=cached_range2, cached_range=cached_range
             )
@@ -237,20 +246,19 @@ class InstrumentMarketDataStorage(
                     file2=cached_file2,
                     range2=cached_range2,
                 )
-                new_cached_range_in_file[merged_range] = merged_file
                 del new_cached_range_in_file[cached_range]
                 del new_cached_range_in_file[cached_range2]
+                new_cached_range_in_file[merged_range] = merged_file
                 return self._try_merge_files(new_cached_range_in_file)
         return new_cached_range_in_file
 
-    def get(
-        self, request_range: Tuple[datetime, datetime]
-    ) -> Iterable[InstrumentDateRangeData]:
-        request_range = datetime_range_floor(request_range)
+    def get(self, request_range: DatetimeRange) -> Iterable[InstrumentDateRangeData]:
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             cached_range_in_file = meta_file.cached_range_in_file
 
-        for cached_range, cached_file in cached_range_in_file.items():
+        for cached_range, cached_file in self._get_cached_items_sorted_by_start(
+            cached_range_in_file
+        ):
             intersection = self._get_intersection(
                 request_range=request_range, cached_range=cached_range
             )
@@ -265,10 +273,17 @@ class InstrumentMarketDataStorage(
     def update(self, data_list: Iterable[InstrumentDateRangeData]):
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             for data in data_list:
-                data.date_range = datetime_range_floor(data.date_range)
                 new_file = self._write_candles_file(data)
                 meta_file.cached_range_in_file[data.date_range] = new_file
+
+    def merge(self):
+        with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             new_cached_range_in_file = self._try_merge_files(
                 meta_file.cached_range_in_file
             )
             meta_file.cached_range_in_file = new_cached_range_in_file
+
+    def _get_cached_items_sorted_by_start(
+        self, cached_range_in_file: Dict[DatetimeRange, Path]
+    ) -> Iterable[Tuple[DatetimeRange, Path]]:
+        return sorted(cached_range_in_file.items(), key=lambda pair: pair[0][0])

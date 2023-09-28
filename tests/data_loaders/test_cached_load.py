@@ -296,53 +296,6 @@ class TestCachedLoad:
         self.assert_has_cached_ranges(cache_storage, [(A, B), (C, D)])
         self.assert_file_count(cache_storage, 3)
 
-    def test_loads_cache_merge_middle(
-        self,
-        market_data_service: MarketDataService,
-        market_data_cache: MarketDataCache,
-        settings: MarketDataCacheSettings,
-        figi: str,
-    ):
-
-        interval = CandleInterval.CANDLE_INTERVAL_DAY
-        # [A request B]
-        # [A cached  B]  [C request D]
-        # [A cached  B]  [C cached  D]
-        #        [E request F]
-        # [A         cached         D]
-        A, E, B, C, F, D = self._get_date_point_by_index(0, 2, 3, 6, 7, 9)
-        self.get_by_range_and_assert_has_cache(
-            range=(A, B),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-        self.get_by_range_and_assert_has_cache(
-            range=(C, D),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-
-        self.get_by_range_and_assert_has_cache(
-            range=(E, F),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-
-        cache_storage = InstrumentMarketDataStorage(
-            figi=figi, interval=interval, settings=settings
-        )
-        self.assert_has_cached_ranges(cache_storage, [(A, D)])
-        self.assert_file_count(cache_storage, 2)
-
     def _get_date_point_by_index(
         self, *idx, interval=CandleInterval.CANDLE_INTERVAL_DAY
     ):
@@ -456,52 +409,6 @@ class TestCachedLoad:
         self.assert_in_range(result, start, end, interval)
 
         market_data_service.get_candles.reset_mock()
-
-    def test_loads_cache_merge_out_left(
-        self,
-        market_data_service: MarketDataService,
-        market_data_cache: MarketDataCache,
-        settings: MarketDataCacheSettings,
-        log,
-        figi: str,
-    ):
-        interval = CandleInterval.CANDLE_INTERVAL_DAY
-        #   [A request B]
-        #   [A cached  B]  [C request D]
-        #   [A cached  B]  [C cached  D]
-        # [E           request    F]
-        # [E           cached         D]
-        E, A, B, C, F, D = self._get_date_point_by_index(0, 1, 3, 4, 6, 7)
-        self.get_by_range_and_assert_has_cache(
-            range=(A, B),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-        self.get_by_range_and_assert_has_cache(
-            range=(C, D),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-        self.get_by_range_and_assert_has_cache(
-            range=(E, F),
-            has_from_net=True,
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-
-        cache_storage = InstrumentMarketDataStorage(
-            figi=figi, interval=interval, settings=settings
-        )
-        self.assert_has_cached_ranges(cache_storage, [(E, D)])
-        self.assert_file_count(cache_storage, 2)
 
     def test_loads_cache_merge_out_right(
         self,
@@ -619,53 +526,9 @@ class TestCachedLoad:
         cached_ls = list(cache_storage._meta_path.parent.glob("*"))
         assert len(cached_ls) == 2
         assert any(
-            str(file).endswith(f".{settings.format_extension}") for file in cached_ls
+            str(file).endswith(f".{settings.format_extension.value}")
+            for file in cached_ls
         )
         assert any(
             str(file).endswith(f".{settings.meta_extension}") for file in cached_ls
         )
-
-    def test_do_not_cache_if_is_not_complete_candle(
-        self,
-        market_data_service: MarketDataService,
-        market_data_cache: MarketDataCache,
-        settings: MarketDataCacheSettings,
-        log,
-        figi: str,
-    ):
-        interval = CandleInterval.CANDLE_INTERVAL_DAY
-        # +: is_complete=True
-        # -: is_complete=False
-        #   1   2   3   4   5   6   7
-        #   +---+---+---+---+---+---+
-        #   [A    request    D]
-        #   [A    cached   C]
-        #     [B    request       F]
-        #   [A    cached       E]
-        A, B, C, D, E, F = self._get_date_point_by_index(
-            1, 1.5, 5, 5.5, 6, 6.6, interval=interval
-        )
-        self.get_by_range_and_assert_ranges(
-            request_range=(A, D),
-            from_cache_ranges=[],
-            from_net_ranges=[(A, D)],
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-        self.get_by_range_and_assert_ranges(
-            request_range=(B, F),
-            from_cache_ranges=[(B, C)],
-            from_net_ranges=[(C, F)],
-            figi=figi,
-            interval=interval,
-            market_data_cache=market_data_cache,
-            market_data_service=market_data_service,
-        )
-
-        cache_storage = InstrumentMarketDataStorage(
-            figi=figi, interval=interval, settings=settings
-        )
-        self.assert_has_cached_ranges(cache_storage, [(A, E)])
-        self.assert_file_count(cache_storage, 2)

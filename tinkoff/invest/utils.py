@@ -18,7 +18,7 @@ __all__ = (
     "ceil_datetime",
     "floor_datetime",
     "dataclass_from_dict",
-    "datetime_range_floor",
+    "round_datetime_range",
 )
 
 DAYS_IN_YEAR = 365
@@ -46,8 +46,7 @@ def get_intervals(
 ) -> Generator[Tuple[datetime, datetime], None, None]:
     max_interval = MAX_INTERVALS[interval]
     local_from = from_
-    interval_timedelta = candle_interval_to_timedelta(interval)
-    while local_from + interval_timedelta <= to:
+    while local_from < to:
         yield local_from, min(local_from + max_interval, to)
         local_from += max_interval
 
@@ -143,11 +142,60 @@ def dataclass_from_dict(klass, d):
     return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})
 
 
-def datetime_range_floor(
-    date_range: Tuple[datetime, datetime]
+_datetime_range_replace_floor_by_interval = {
+    CandleInterval.CANDLE_INTERVAL_1_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_2_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_3_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_5_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_10_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_15_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_30_MIN: lambda r: r.replace(second=0, microsecond=0),
+    CandleInterval.CANDLE_INTERVAL_HOUR: lambda r: r.replace(
+        minute=0, second=0, microsecond=0
+    ),
+    CandleInterval.CANDLE_INTERVAL_2_HOUR: lambda r: r.replace(
+        minute=0, second=0, microsecond=0
+    ),
+    CandleInterval.CANDLE_INTERVAL_4_HOUR: lambda r: r.replace(
+        minute=0, second=0, microsecond=0
+    ),
+    CandleInterval.CANDLE_INTERVAL_DAY: lambda r: r.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    ),
+    CandleInterval.CANDLE_INTERVAL_WEEK: lambda r: r.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    ),
+    CandleInterval.CANDLE_INTERVAL_MONTH: lambda r: r.replace(
+        hour=0, minute=0, second=0, microsecond=0
+    ),
+}
+
+
+def round_datetime_range(
+    date_range: Tuple[datetime, datetime],
+    interval: CandleInterval,
 ) -> Tuple[datetime, datetime]:
+    """Expands datetime range to nearest round range.
+
+    interval = CandleInterval.CANDLE_INTERVAL_DAY,
+    date_range = [
+        2023-09-11 21:39:04.988646+00:00
+        2023-09-14 21:39:04.988660+00:00
+    ].
+
+    Returns
+    -------
+    [
+        2023-09-11 00:00:00+00:00
+        2023-09-15 00:00:00+00:00
+    ].
+    """
+    floor = _datetime_range_replace_floor_by_interval[interval]
     start, end = date_range
-    return start.replace(second=0, microsecond=0), end.replace(second=0, microsecond=0)
+    start = floor(start)
+    interval_delta = candle_interval_to_timedelta(interval)
+    end = floor(end + interval_delta)
+    return start, end
 
 
 def filter_distinct_candles(candles: List[HistoricCandle]) -> List[HistoricCandle]:

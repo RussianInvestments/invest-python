@@ -1,11 +1,11 @@
 import dataclasses
-from datetime import datetime
-from typing import Iterable, Tuple
+from typing import Iterable
 
+from tinkoff.invest.caching.market_data_cache.datetime_range import DatetimeRange
 from tinkoff.invest.schemas import HistoricCandle
 
 
 @dataclasses.dataclass()
 class InstrumentDateRangeData:
-    date_range: Tuple[datetime, datetime]
+    date_range: DatetimeRange
     historic_candles: Iterable[HistoricCandle]
