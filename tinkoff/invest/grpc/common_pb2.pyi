@@ -143,6 +143,30 @@ SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.
 """Недоступна торговля в режиме внутренней ликвидности брокера"""
 global___SecurityTradingStatus = SecurityTradingStatus
 
+class _PriceType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PriceType.ValueType], builtins.type):  # noqa: F821
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    PRICE_TYPE_UNSPECIFIED: _PriceType.ValueType  # 0
+    """Значение не определено."""
+    PRICE_TYPE_POINT: _PriceType.ValueType  # 1
+    """Цена в пунктах (только для фьючерсов и облигаций)."""
+    PRICE_TYPE_CURRENCY: _PriceType.ValueType  # 2
+    """Цена в валюте расчётов по инструменту."""
+
+class PriceType(_PriceType, metaclass=_PriceTypeEnumTypeWrapper):
+    """Тип цены."""
+
+PRICE_TYPE_UNSPECIFIED: PriceType.ValueType  # 0
+"""Значение не определено."""
+PRICE_TYPE_POINT: PriceType.ValueType  # 1
+"""Цена в пунктах (только для фьючерсов и облигаций)."""
+PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
+"""Цена в валюте расчётов по инструменту."""
+global___PriceType = PriceType
+
 class MoneyValue(google.protobuf.message.Message):
     """Денежная сумма в определенной валюте"""
 
@@ -169,7 +193,7 @@ class MoneyValue(google.protobuf.message.Message):
 global___MoneyValue = MoneyValue
 
 class Quotation(google.protobuf.message.Message):
-    """Котировка - денежная сумма без указания валюты"""
+    """Котировка — денежная сумма без указания валюты"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -207,3 +231,45 @@ class Ping(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["time", b"time"]) -> None: ...
 
 global___Ping = Ping
+
+class Page(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LIMIT_FIELD_NUMBER: builtins.int
+    PAGE_NUMBER_FIELD_NUMBER: builtins.int
+    limit: builtins.int
+    """Максимальное число возвращаемых записей."""
+    page_number: builtins.int
+    """Порядковый номер страницы, начиная с 0."""
+    def __init__(
+        self,
+        *,
+        limit: builtins.int = ...,
+        page_number: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["limit", b"limit", "page_number", b"page_number"]) -> None: ...
+
+global___Page = Page
+
+class PageResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LIMIT_FIELD_NUMBER: builtins.int
+    PAGE_NUMBER_FIELD_NUMBER: builtins.int
+    TOTAL_COUNT_FIELD_NUMBER: builtins.int
+    limit: builtins.int
+    """Максимальное число возвращаемых записей."""
+    page_number: builtins.int
+    """Порядковый номер страницы, начиная с 0."""
+    total_count: builtins.int
+    """Общее количество записей."""
+    def __init__(
+        self,
+        *,
+        limit: builtins.int = ...,
+        page_number: builtins.int = ...,
+        total_count: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["limit", b"limit", "page_number", b"page_number", "total_count", b"total_count"]) -> None: ...
+
+global___PageResponse = PageResponse

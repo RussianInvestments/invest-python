@@ -73,6 +73,7 @@ def market_data_service(mocker) -> MarketDataService:
         from_: datetime,
         to: datetime,
         interval: CandleInterval = CandleInterval(0),
+        instrument_id: str = "",
     ) -> GetCandlesResponse:
         return get_candles_response(start=from_, end=to, interval=interval)
 
@@ -268,7 +269,6 @@ class TestCachedLoad:
         settings: MarketDataCacheSettings,
         figi: str,
     ):
-
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # [A request B]
         # [A cached  B]  [C request D]

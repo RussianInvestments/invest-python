@@ -2,7 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from tinkoff.invest.grpc import instruments_pb2 as tinkoff_dot_invest_dot_grpc_dot_instruments__pb2
+from tinkoff.invest.grpc import (
+    instruments_pb2 as tinkoff_dot_invest_dot_grpc_dot_instruments__pb2,
+)
 
 
 class InstrumentsServiceStub(object):
@@ -151,6 +153,11 @@ class InstrumentsServiceStub(object):
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrandBy',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.FromString,
+                )
+        self.GetAssetFundamentals = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetFundamentals',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.FromString,
                 )
 
 
@@ -301,7 +308,7 @@ class InstrumentsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAssets(self, request, context):
-        """Метод получения списка активов.
+        """Метод получения списка активов. Метод работает для всех инструментов, за исключением срочных - опционов и фьючерсов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -344,6 +351,13 @@ class InstrumentsServiceServicer(object):
 
     def GetBrandBy(self, request, context):
         """Метод получения бренда по его идентификатору.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAssetFundamentals(self, request, context):
+        """Метод получения фундаментальных показателей по активу
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -486,6 +500,11 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetBrandBy,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.SerializeToString,
+            ),
+            'GetAssetFundamentals': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAssetFundamentals,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -956,5 +975,22 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrandBy',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAssetFundamentals(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetFundamentals',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

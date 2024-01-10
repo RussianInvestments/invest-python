@@ -178,7 +178,7 @@ class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Идентификатор позиции."""
 
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
-    """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
+    """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://russianinvestments.github.io/investAPI/faq_identification/)"""
 
 INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType  # 0
 """Значение не определено."""
@@ -201,7 +201,7 @@ class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INSTRUMENT_STATUS_UNSPECIFIED: _InstrumentStatus.ValueType  # 0
     """Значение не определено."""
     INSTRUMENT_STATUS_BASE: _InstrumentStatus.ValueType  # 1
-    """Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
+    """Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API. Cейчас списки бумаг, доступных из api и других интерфейсах совпадают (за исключением внебиржевых бумаг), но в будущем возможны ситуации, когда списки инструментов будут отличаться"""
     INSTRUMENT_STATUS_ALL: _InstrumentStatus.ValueType  # 2
     """Список всех инструментов."""
 
@@ -211,7 +211,7 @@ class InstrumentStatus(_InstrumentStatus, metaclass=_InstrumentStatusEnumTypeWra
 INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType  # 0
 """Значение не определено."""
 INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType  # 1
-"""Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
+"""Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API. Cейчас списки бумаг, доступных из api и других интерфейсах совпадают (за исключением внебиржевых бумаг), но в будущем возможны ситуации, когда списки инструментов будут отличаться"""
 INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType  # 2
 """Список всех инструментов."""
 global___InstrumentStatus = InstrumentStatus
@@ -379,6 +379,7 @@ class _RiskLevel:
 class _RiskLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RiskLevel.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     RISK_LEVEL_UNSPECIFIED: _RiskLevel.ValueType  # 0
+    """не указан"""
     RISK_LEVEL_LOW: _RiskLevel.ValueType  # 1
     """Низкий уровень риска"""
     RISK_LEVEL_MODERATE: _RiskLevel.ValueType  # 2
@@ -390,6 +391,7 @@ class RiskLevel(_RiskLevel, metaclass=_RiskLevelEnumTypeWrapper):
     """Уровень риска облигации."""
 
 RISK_LEVEL_UNSPECIFIED: RiskLevel.ValueType  # 0
+"""не указан"""
 RISK_LEVEL_LOW: RiskLevel.ValueType  # 1
 """Низкий уровень риска"""
 RISK_LEVEL_MODERATE: RiskLevel.ValueType  # 2
@@ -414,11 +416,17 @@ class TradingSchedulesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        exchange: builtins.str = ...,
+        exchange: builtins.str | None = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["exchange", b"exchange", "from", b"from", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_exchange", b"_exchange", "_from", b"_from", "_to", b"_to", "exchange", b"exchange", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_exchange", b"_exchange", "_from", b"_from", "_to", b"_to", "exchange", b"exchange", "from", b"from", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_exchange", b"_exchange"]) -> typing_extensions.Literal["exchange"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_from", b"_from"]) -> typing_extensions.Literal["from"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_to", b"_to"]) -> typing_extensions.Literal["to"] | None: ...
 
 global___TradingSchedulesRequest = TradingSchedulesRequest
 
@@ -559,7 +567,7 @@ class InstrumentRequest(google.protobuf.message.Message):
     CLASS_CODE_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     id_type: global___InstrumentIdType.ValueType
-    """Тип идентификатора инструмента. Возможные значения: figi, ticker. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
+    """Тип идентификатора инструмента. Возможные значения: figi, ticker. Подробнее об идентификации инструментов: [Идентификация инструментов](https://russianinvestments.github.io/investAPI/faq_identification/)"""
     class_code: builtins.str
     """Идентификатор class_code. Обязателен при id_type = ticker."""
     id: builtins.str
@@ -568,10 +576,12 @@ class InstrumentRequest(google.protobuf.message.Message):
         self,
         *,
         id_type: global___InstrumentIdType.ValueType = ...,
-        class_code: builtins.str = ...,
+        class_code: builtins.str | None = ...,
         id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["class_code", b"class_code", "id", b"id", "id_type", b"id_type"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_class_code", b"_class_code", "class_code", b"class_code"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_class_code", b"_class_code", "class_code", b"class_code", "id", b"id", "id_type", b"id_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_class_code", b"_class_code"]) -> typing_extensions.Literal["class_code"] | None: ...
 
 global___InstrumentRequest = InstrumentRequest
 
@@ -586,9 +596,11 @@ class InstrumentsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        instrument_status: global___InstrumentStatus.ValueType = ...,
+        instrument_status: global___InstrumentStatus.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["instrument_status", b"instrument_status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_instrument_status", b"_instrument_status", "instrument_status", b"instrument_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_instrument_status", b"_instrument_status", "instrument_status", b"instrument_status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_status", b"_instrument_status"]) -> typing_extensions.Literal["instrument_status"] | None: ...
 
 global___InstrumentsRequest = InstrumentsRequest
 
@@ -606,10 +618,15 @@ class FilterOptionsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        basic_asset_uid: builtins.str = ...,
-        basic_asset_position_uid: builtins.str = ...,
+        basic_asset_uid: builtins.str | None = ...,
+        basic_asset_position_uid: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["basic_asset_position_uid", b"basic_asset_position_uid", "basic_asset_uid", b"basic_asset_uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_basic_asset_position_uid", b"_basic_asset_position_uid", "_basic_asset_uid", b"_basic_asset_uid", "basic_asset_position_uid", b"basic_asset_position_uid", "basic_asset_uid", b"basic_asset_uid"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_basic_asset_position_uid", b"_basic_asset_position_uid", "_basic_asset_uid", b"_basic_asset_uid", "basic_asset_position_uid", b"basic_asset_position_uid", "basic_asset_uid", b"basic_asset_uid"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_basic_asset_position_uid", b"_basic_asset_position_uid"]) -> typing_extensions.Literal["basic_asset_position_uid"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_basic_asset_uid", b"_basic_asset_uid"]) -> typing_extensions.Literal["basic_asset_uid"] | None: ...
 
 global___FilterOptionsRequest = FilterOptionsRequest
 
@@ -658,19 +675,27 @@ class GetBondCouponsRequest(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация по coupon_date (дата выплаты купона)"""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_from", b"_from"]) -> typing_extensions.Literal["from"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_to", b"_to"]) -> typing_extensions.Literal["to"] | None: ...
 
 global___GetBondCouponsRequest = GetBondCouponsRequest
 
@@ -956,7 +981,7 @@ class Option(google.protobuf.message.Message):
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов. Допустимые значения: [REAL_EXCHANGE_MOEX, REAL_EXCHANGE_RTS]"""
+    """Реальная площадка исполнения расчётов (биржа). Допустимые значения: [REAL_EXCHANGE_MOEX, REAL_EXCHANGE_RTS]"""
     direction: global___OptionDirection.ValueType
     """Направление опциона."""
     payment_type: global___OptionPaymentType.ValueType
@@ -976,7 +1001,7 @@ class Option(google.protobuf.message.Message):
     basic_asset: builtins.str
     """Основной актив."""
     exchange: builtins.str
-    """Биржа."""
+    """Tорговая площадка (секция биржи)."""
     country_of_risk: builtins.str
     """Код страны рисков."""
     country_of_risk_name: builtins.str
@@ -990,22 +1015,22 @@ class Option(google.protobuf.message.Message):
         """Размер основного актива."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по клиенту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по клиенту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи лонг."""
+        """Ставка риска начальной маржи для КСУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи шорт."""
+        """Ставка риска начальной маржи для КСУР шорт.  Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи лонг."""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи шорт."""
+        """Ставка риска начальной маржи для КПУР шорт.  Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Минимальный шаг цены."""
@@ -1199,33 +1224,33 @@ class Bond(google.protobuf.message.Message):
     isin: builtins.str
     """Isin-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по инструменту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по инструменту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)."""
     coupon_quantity_per_year: builtins.int
     """Количество выплат по купонам в год."""
     @property
@@ -1283,7 +1308,7 @@ class Bond(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов. (биржа)"""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -1413,33 +1438,33 @@ class Currency(google.protobuf.message.Message):
     isin: builtins.str
     """Isin-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по инструменту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по инструменту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг.Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)"""
     @property
     def nominal(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Номинал."""
@@ -1465,7 +1490,7 @@ class Currency(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -1578,33 +1603,33 @@ class Etf(google.protobuf.message.Message):
     isin: builtins.str
     """Isin-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по инструменту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по инструменту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг.Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)."""
     @property
     def fixed_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Размер фиксированной комиссии фонда."""
@@ -1640,7 +1665,7 @@ class Etf(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -1752,6 +1777,9 @@ class Future(google.protobuf.message.Message):
     BLOCKED_TCA_FLAG_FIELD_NUMBER: builtins.int
     FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
     FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    INITIAL_MARGIN_ON_BUY_FIELD_NUMBER: builtins.int
+    INITIAL_MARGIN_ON_SELL_FIELD_NUMBER: builtins.int
+    MIN_PRICE_INCREMENT_AMOUNT_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     ticker: builtins.str
@@ -1759,33 +1787,33 @@ class Future(google.protobuf.message.Message):
     class_code: builtins.str
     """Класс-код (секция торгов)."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по клиенту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по клиенту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг.Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)."""
     @property
     def first_trade_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата начала обращения контракта в часовом поясе UTC."""
@@ -1826,7 +1854,7 @@ class Future(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     basic_asset_position_uid: builtins.str
@@ -1845,6 +1873,15 @@ class Future(google.protobuf.message.Message):
     @property
     def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата первой дневной свечи."""
+    @property
+    def initial_margin_on_buy(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Гарантийное обеспечение при покупке."""
+    @property
+    def initial_margin_on_sell(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Гарантийное обеспечение при продаже."""
+    @property
+    def min_price_increment_amount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Стоимость шага цены."""
     def __init__(
         self,
         *,
@@ -1888,9 +1925,12 @@ class Future(google.protobuf.message.Message):
         blocked_tca_flag: builtins.bool = ...,
         first_1min_candle_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         first_1day_candle_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        initial_margin_on_buy: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        initial_margin_on_sell: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        min_price_increment_amount: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size", b"basic_asset_size", "dlong", b"dlong", "dlong_min", b"dlong_min", "dshort", b"dshort", "dshort_min", b"dshort_min", "expiration_date", b"expiration_date", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "first_trade_date", b"first_trade_date", "klong", b"klong", "kshort", b"kshort", "last_trade_date", b"last_trade_date", "min_price_increment", b"min_price_increment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "asset_type", b"asset_type", "basic_asset", b"basic_asset", "basic_asset_position_uid", b"basic_asset_position_uid", "basic_asset_size", b"basic_asset_size", "blocked_tca_flag", b"blocked_tca_flag", "buy_available_flag", b"buy_available_flag", "class_code", b"class_code", "country_of_risk", b"country_of_risk", "country_of_risk_name", b"country_of_risk_name", "currency", b"currency", "dlong", b"dlong", "dlong_min", b"dlong_min", "dshort", b"dshort", "dshort_min", b"dshort_min", "exchange", b"exchange", "expiration_date", b"expiration_date", "figi", b"figi", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "first_trade_date", b"first_trade_date", "for_iis_flag", b"for_iis_flag", "for_qual_investor_flag", b"for_qual_investor_flag", "futures_type", b"futures_type", "klong", b"klong", "kshort", b"kshort", "last_trade_date", b"last_trade_date", "lot", b"lot", "min_price_increment", b"min_price_increment", "name", b"name", "otc_flag", b"otc_flag", "position_uid", b"position_uid", "real_exchange", b"real_exchange", "sector", b"sector", "sell_available_flag", b"sell_available_flag", "short_enabled_flag", b"short_enabled_flag", "ticker", b"ticker", "trading_status", b"trading_status", "uid", b"uid", "weekend_flag", b"weekend_flag"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size", b"basic_asset_size", "dlong", b"dlong", "dlong_min", b"dlong_min", "dshort", b"dshort", "dshort_min", b"dshort_min", "expiration_date", b"expiration_date", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "first_trade_date", b"first_trade_date", "initial_margin_on_buy", b"initial_margin_on_buy", "initial_margin_on_sell", b"initial_margin_on_sell", "klong", b"klong", "kshort", b"kshort", "last_trade_date", b"last_trade_date", "min_price_increment", b"min_price_increment", "min_price_increment_amount", b"min_price_increment_amount"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "asset_type", b"asset_type", "basic_asset", b"basic_asset", "basic_asset_position_uid", b"basic_asset_position_uid", "basic_asset_size", b"basic_asset_size", "blocked_tca_flag", b"blocked_tca_flag", "buy_available_flag", b"buy_available_flag", "class_code", b"class_code", "country_of_risk", b"country_of_risk", "country_of_risk_name", b"country_of_risk_name", "currency", b"currency", "dlong", b"dlong", "dlong_min", b"dlong_min", "dshort", b"dshort", "dshort_min", b"dshort_min", "exchange", b"exchange", "expiration_date", b"expiration_date", "figi", b"figi", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "first_trade_date", b"first_trade_date", "for_iis_flag", b"for_iis_flag", "for_qual_investor_flag", b"for_qual_investor_flag", "futures_type", b"futures_type", "initial_margin_on_buy", b"initial_margin_on_buy", "initial_margin_on_sell", b"initial_margin_on_sell", "klong", b"klong", "kshort", b"kshort", "last_trade_date", b"last_trade_date", "lot", b"lot", "min_price_increment", b"min_price_increment", "min_price_increment_amount", b"min_price_increment_amount", "name", b"name", "otc_flag", b"otc_flag", "position_uid", b"position_uid", "real_exchange", b"real_exchange", "sector", b"sector", "sell_available_flag", b"sell_available_flag", "short_enabled_flag", b"short_enabled_flag", "ticker", b"ticker", "trading_status", b"trading_status", "uid", b"uid", "weekend_flag", b"weekend_flag"]) -> None: ...
 
 global___Future = Future
 
@@ -1948,33 +1988,33 @@ class Share(google.protobuf.message.Message):
     isin: builtins.str
     """Isin-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по инструменту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по инструменту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг.Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)."""
     @property
     def ipo_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата IPO акции в часовом поясе UTC."""
@@ -2002,7 +2042,7 @@ class Share(google.protobuf.message.Message):
     div_yield_flag: builtins.bool
     """Признак наличия дивидендной доходности."""
     share_type: global___ShareType.ValueType
-    """Тип акции. Возможные значения: [ShareType](https://tinkoff.github.io/investAPI/instruments#sharetype)"""
+    """Тип акции. Возможные значения: [ShareType](https://russianinvestments.github.io/investAPI/instruments#sharetype)"""
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
@@ -2011,7 +2051,7 @@ class Share(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -2087,19 +2127,23 @@ class GetAccruedInterestsRequest(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "to", b"to"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
 
 global___GetAccruedInterestsRequest = GetAccruedInterestsRequest
 
@@ -2161,14 +2205,18 @@ class GetFuturesMarginRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Идентификатор инструмента."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
 
 global___GetFuturesMarginRequest = GetFuturesMarginRequest
 
@@ -2273,33 +2321,33 @@ class Instrument(google.protobuf.message.Message):
     isin: builtins.str
     """Isin-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://russianinvestments.github.io/investAPI/glossary#lot)"""
     currency: builtins.str
     """Валюта расчётов."""
     @property
     def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска длинной позиции по инструменту."""
+        """Коэффициент ставки риска длинной позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Коэффициент ставки риска короткой позиции по инструменту."""
+        """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР). 1 – клиент с повышенным уровнем риска (КПУР)"""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР лонг.Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КСУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        """Ставка риска начальной маржи для КПУР шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
     """Название инструмента."""
     exchange: builtins.str
-    """Торговая площадка."""
+    """Tорговая площадка (секция биржи)."""
     country_of_risk: builtins.str
     """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
     country_of_risk_name: builtins.str
@@ -2322,7 +2370,7 @@ class Instrument(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчётов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -2392,19 +2440,27 @@ class GetDividendsRequest(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация происходит по параметру *record_date* (дата фиксации реестра)."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_from", b"_from"]) -> typing_extensions.Literal["from"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_to", b"_to"]) -> typing_extensions.Literal["to"] | None: ...
 
 global___GetDividendsRequest = GetDividendsRequest
 
@@ -2533,9 +2589,11 @@ class AssetsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        instrument_type: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType = ...,
+        instrument_type: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["instrument_type", b"instrument_type"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_instrument_type", b"_instrument_type", "instrument_type", b"instrument_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_instrument_type", b"_instrument_type", "instrument_type", b"instrument_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_type", b"_instrument_type"]) -> typing_extensions.Literal["instrument_type"] | None: ...
 
 global___AssetsRequest = AssetsRequest
 
@@ -3501,10 +3559,15 @@ class FindInstrumentRequest(google.protobuf.message.Message):
         self,
         *,
         query: builtins.str = ...,
-        instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType = ...,
-        api_trade_available_flag: builtins.bool = ...,
+        instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType | None = ...,
+        api_trade_available_flag: builtins.bool | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "instrument_kind", b"instrument_kind", "query", b"query"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_api_trade_available_flag", b"_api_trade_available_flag", "_instrument_kind", b"_instrument_kind", "api_trade_available_flag", b"api_trade_available_flag", "instrument_kind", b"instrument_kind"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_api_trade_available_flag", b"_api_trade_available_flag", "_instrument_kind", b"_instrument_kind", "api_trade_available_flag", b"api_trade_available_flag", "instrument_kind", b"instrument_kind", "query", b"query"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_api_trade_available_flag", b"_api_trade_available_flag"]) -> typing_extensions.Literal["api_trade_available_flag"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_kind", b"_instrument_kind"]) -> typing_extensions.Literal["instrument_kind"] | None: ...
 
 global___FindInstrumentRequest = FindInstrumentRequest
 
@@ -3611,9 +3674,17 @@ class GetBrandsRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PAGING_FIELD_NUMBER: builtins.int
+    @property
+    def paging(self) -> tinkoff.invest.grpc.common_pb2.Page:
+        """Настройки пагинации."""
     def __init__(
         self,
+        *,
+        paging: tinkoff.invest.grpc.common_pb2.Page | None = ...,
     ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["paging", b"paging"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["paging", b"paging"]) -> None: ...
 
 global___GetBrandsRequest = GetBrandsRequest
 
@@ -3640,14 +3711,285 @@ class GetBrandsResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     BRANDS_FIELD_NUMBER: builtins.int
+    PAGING_FIELD_NUMBER: builtins.int
     @property
     def brands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Brand]:
         """Массив брендов."""
+    @property
+    def paging(self) -> tinkoff.invest.grpc.common_pb2.PageResponse:
+        """Данные по пагинации"""
     def __init__(
         self,
         *,
         brands: collections.abc.Iterable[global___Brand] | None = ...,
+        paging: tinkoff.invest.grpc.common_pb2.PageResponse | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["brands", b"brands"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["paging", b"paging"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["brands", b"brands", "paging", b"paging"]) -> None: ...
 
 global___GetBrandsResponse = GetBrandsResponse
+
+class GetAssetFundamentalsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ASSETS_FIELD_NUMBER: builtins.int
+    @property
+    def assets(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Массив идентификаторов активов (не более 100 шт.)."""
+    def __init__(
+        self,
+        *,
+        assets: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["assets", b"assets"]) -> None: ...
+
+global___GetAssetFundamentalsRequest = GetAssetFundamentalsRequest
+
+class GetAssetFundamentalsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class StatisticResponse(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ASSET_UID_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        MARKET_CAPITALIZATION_FIELD_NUMBER: builtins.int
+        HIGH_PRICE_LAST_52_WEEKS_FIELD_NUMBER: builtins.int
+        LOW_PRICE_LAST_52_WEEKS_FIELD_NUMBER: builtins.int
+        AVERAGE_DAILY_VOLUME_LAST_10_DAYS_FIELD_NUMBER: builtins.int
+        AVERAGE_DAILY_VOLUME_LAST_4_WEEKS_FIELD_NUMBER: builtins.int
+        BETA_FIELD_NUMBER: builtins.int
+        FREE_FLOAT_FIELD_NUMBER: builtins.int
+        FORWARD_ANNUAL_DIVIDEND_YIELD_FIELD_NUMBER: builtins.int
+        SHARES_OUTSTANDING_FIELD_NUMBER: builtins.int
+        REVENUE_TTM_FIELD_NUMBER: builtins.int
+        EBITDA_TTM_FIELD_NUMBER: builtins.int
+        NET_INCOME_TTM_FIELD_NUMBER: builtins.int
+        EPS_TTM_FIELD_NUMBER: builtins.int
+        DILUTED_EPS_TTM_FIELD_NUMBER: builtins.int
+        FREE_CASH_FLOW_TTM_FIELD_NUMBER: builtins.int
+        FIVE_YEAR_ANNUAL_REVENUE_GROWTH_RATE_FIELD_NUMBER: builtins.int
+        THREE_YEAR_ANNUAL_REVENUE_GROWTH_RATE_FIELD_NUMBER: builtins.int
+        PE_RATIO_TTM_FIELD_NUMBER: builtins.int
+        PRICE_TO_SALES_TTM_FIELD_NUMBER: builtins.int
+        PRICE_TO_BOOK_TTM_FIELD_NUMBER: builtins.int
+        PRICE_TO_FREE_CASH_FLOW_TTM_FIELD_NUMBER: builtins.int
+        TOTAL_ENTERPRISE_VALUE_MRQ_FIELD_NUMBER: builtins.int
+        EV_TO_EBITDA_MRQ_FIELD_NUMBER: builtins.int
+        NET_MARGIN_MRQ_FIELD_NUMBER: builtins.int
+        NET_INTEREST_MARGIN_MRQ_FIELD_NUMBER: builtins.int
+        ROE_FIELD_NUMBER: builtins.int
+        ROA_FIELD_NUMBER: builtins.int
+        ROIC_FIELD_NUMBER: builtins.int
+        TOTAL_DEBT_MRQ_FIELD_NUMBER: builtins.int
+        TOTAL_DEBT_TO_EQUITY_MRQ_FIELD_NUMBER: builtins.int
+        TOTAL_DEBT_TO_EBITDA_MRQ_FIELD_NUMBER: builtins.int
+        FREE_CASH_FLOW_TO_PRICE_FIELD_NUMBER: builtins.int
+        NET_DEBT_TO_EBITDA_FIELD_NUMBER: builtins.int
+        CURRENT_RATIO_MRQ_FIELD_NUMBER: builtins.int
+        FIXED_CHARGE_COVERAGE_RATIO_FY_FIELD_NUMBER: builtins.int
+        DIVIDEND_YIELD_DAILY_TTM_FIELD_NUMBER: builtins.int
+        DIVIDEND_RATE_TTM_FIELD_NUMBER: builtins.int
+        DIVIDENDS_PER_SHARE_FIELD_NUMBER: builtins.int
+        FIVE_YEARS_AVERAGE_DIVIDEND_YIELD_FIELD_NUMBER: builtins.int
+        FIVE_YEAR_ANNUAL_DIVIDEND_GROWTH_RATE_FIELD_NUMBER: builtins.int
+        DIVIDEND_PAYOUT_RATIO_FY_FIELD_NUMBER: builtins.int
+        BUY_BACK_TTM_FIELD_NUMBER: builtins.int
+        ONE_YEAR_ANNUAL_REVENUE_GROWTH_RATE_FIELD_NUMBER: builtins.int
+        DOMICILE_INDICATOR_CODE_FIELD_NUMBER: builtins.int
+        ADR_TO_COMMON_SHARE_RATIO_FIELD_NUMBER: builtins.int
+        NUMBER_OF_EMPLOYEES_FIELD_NUMBER: builtins.int
+        EX_DIVIDEND_DATE_FIELD_NUMBER: builtins.int
+        FISCAL_PERIOD_START_DATE_FIELD_NUMBER: builtins.int
+        FISCAL_PERIOD_END_DATE_FIELD_NUMBER: builtins.int
+        REVENUE_CHANGE_FIVE_YEARS_FIELD_NUMBER: builtins.int
+        EPS_CHANGE_FIVE_YEARS_FIELD_NUMBER: builtins.int
+        EBITDA_CHANGE_FIVE_YEARS_FIELD_NUMBER: builtins.int
+        TOTAL_DEBT_CHANGE_FIVE_YEARS_FIELD_NUMBER: builtins.int
+        EV_TO_SALES_FIELD_NUMBER: builtins.int
+        asset_uid: builtins.str
+        currency: builtins.str
+        """Валюта"""
+        market_capitalization: builtins.float
+        """Рыночная капитализация"""
+        high_price_last_52_weeks: builtins.float
+        """Максимум за год"""
+        low_price_last_52_weeks: builtins.float
+        """Минимум за год"""
+        average_daily_volume_last_10_days: builtins.float
+        """Средний объем торгов за 10 дней"""
+        average_daily_volume_last_4_weeks: builtins.float
+        """Средний объем торгов за месяц"""
+        beta: builtins.float
+        free_float: builtins.float
+        """Доля акций в свободном обращении"""
+        forward_annual_dividend_yield: builtins.float
+        """Процент форвардной дивидендной доходности по отношению к цене акций."""
+        shares_outstanding: builtins.float
+        """Количество акций в обращении"""
+        revenue_ttm: builtins.float
+        """Выручка"""
+        ebitda_ttm: builtins.float
+        """EBITDA Прибыль до вычета процентов, налогов, износа и амортизации"""
+        net_income_ttm: builtins.float
+        """Чистая прибыль"""
+        eps_ttm: builtins.float
+        """EPS Величина чистой прибыли компании, приходящуюся на каждую обыкновенную акцию"""
+        diluted_eps_ttm: builtins.float
+        """EPS компании с допущением, что все конвертируемые ценные бумаги компании были сконвертированы в обыкновенные акции"""
+        free_cash_flow_ttm: builtins.float
+        """Свободный денежный поток"""
+        five_year_annual_revenue_growth_rate: builtins.float
+        """Среднегодовой  рocт выручки (за 5 лет)"""
+        three_year_annual_revenue_growth_rate: builtins.float
+        """Среднегодовой  рocт выручки (за 3 года)"""
+        pe_ratio_ttm: builtins.float
+        """Показывает соотношение рыночной капитализации компании к ее чистой прибыли"""
+        price_to_sales_ttm: builtins.float
+        """Показывает соотношение рыночной капитализации компании к ее выручке"""
+        price_to_book_ttm: builtins.float
+        """Показывает соотношение рыночной капитализации компании к ее балансовой стоимости"""
+        price_to_free_cash_flow_ttm: builtins.float
+        """Показывает соотношение рыночной капитализации компании к ее свободному денежному потоку"""
+        total_enterprise_value_mrq: builtins.float
+        """Рыночная стоимость компании"""
+        ev_to_ebitda_mrq: builtins.float
+        """Соотношение EV и EBITDA"""
+        net_margin_mrq: builtins.float
+        """Маржа чистой прибыли"""
+        net_interest_margin_mrq: builtins.float
+        """Рентабельность чистой прибыли"""
+        roe: builtins.float
+        """Рентабельность собственного капитала"""
+        roa: builtins.float
+        """Рентабельность активов"""
+        roic: builtins.float
+        """Рентабельность активов"""
+        total_debt_mrq: builtins.float
+        """Сумма краткосрочных и долгосрочных обязательств компании"""
+        total_debt_to_equity_mrq: builtins.float
+        """Соотношение долга к собственному капиталу"""
+        total_debt_to_ebitda_mrq: builtins.float
+        """Total Debt/EBITDA"""
+        free_cash_flow_to_price: builtins.float
+        """Отношение свободглго кэша к стоимости"""
+        net_debt_to_ebitda: builtins.float
+        """Отношение чистого долга к ebitda"""
+        current_ratio_mrq: builtins.float
+        """Коэффициент текущей ликвидности"""
+        fixed_charge_coverage_ratio_fy: builtins.float
+        """Коэффициент покрытия фиксированных платежей (FCCR)"""
+        dividend_yield_daily_ttm: builtins.float
+        """Дивидендная доходность за 12 мес"""
+        dividend_rate_ttm: builtins.float
+        """Выплаченные дивиденды за 12 мес."""
+        dividends_per_share: builtins.float
+        """Значение дивидендов на акцию"""
+        five_years_average_dividend_yield: builtins.float
+        """Средняя дивидендная доходность за 5 лет"""
+        five_year_annual_dividend_growth_rate: builtins.float
+        """Среднегодовой рост дивидендов за 5 лет"""
+        dividend_payout_ratio_fy: builtins.float
+        """Процент чистой прибыли, уходящий на выплату дивидендов"""
+        buy_back_ttm: builtins.float
+        """Деньги, потраченные на обратный выкуп акций"""
+        one_year_annual_revenue_growth_rate: builtins.float
+        """Рост выручки за 1 год"""
+        domicile_indicator_code: builtins.str
+        """Код страны"""
+        adr_to_common_share_ratio: builtins.float
+        """Соотношение депозитарной расписки к акциям"""
+        number_of_employees: builtins.float
+        """Количество сотрудников"""
+        @property
+        def ex_dividend_date(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+        @property
+        def fiscal_period_start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Начало фискального периода"""
+        @property
+        def fiscal_period_end_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Конец фискального периода"""
+        revenue_change_five_years: builtins.float
+        """Изменение общего дохода за 5 лет"""
+        eps_change_five_years: builtins.float
+        """Изменение eps за 5 лет"""
+        ebitda_change_five_years: builtins.float
+        """Изменение ebitda за 5 лет"""
+        total_debt_change_five_years: builtins.float
+        """Изменение общей задолжности за 5 лет"""
+        ev_to_sales: builtins.float
+        """Отношение EV к выручке"""
+        def __init__(
+            self,
+            *,
+            asset_uid: builtins.str = ...,
+            currency: builtins.str = ...,
+            market_capitalization: builtins.float = ...,
+            high_price_last_52_weeks: builtins.float = ...,
+            low_price_last_52_weeks: builtins.float = ...,
+            average_daily_volume_last_10_days: builtins.float = ...,
+            average_daily_volume_last_4_weeks: builtins.float = ...,
+            beta: builtins.float = ...,
+            free_float: builtins.float = ...,
+            forward_annual_dividend_yield: builtins.float = ...,
+            shares_outstanding: builtins.float = ...,
+            revenue_ttm: builtins.float = ...,
+            ebitda_ttm: builtins.float = ...,
+            net_income_ttm: builtins.float = ...,
+            eps_ttm: builtins.float = ...,
+            diluted_eps_ttm: builtins.float = ...,
+            free_cash_flow_ttm: builtins.float = ...,
+            five_year_annual_revenue_growth_rate: builtins.float = ...,
+            three_year_annual_revenue_growth_rate: builtins.float = ...,
+            pe_ratio_ttm: builtins.float = ...,
+            price_to_sales_ttm: builtins.float = ...,
+            price_to_book_ttm: builtins.float = ...,
+            price_to_free_cash_flow_ttm: builtins.float = ...,
+            total_enterprise_value_mrq: builtins.float = ...,
+            ev_to_ebitda_mrq: builtins.float = ...,
+            net_margin_mrq: builtins.float = ...,
+            net_interest_margin_mrq: builtins.float = ...,
+            roe: builtins.float = ...,
+            roa: builtins.float = ...,
+            roic: builtins.float = ...,
+            total_debt_mrq: builtins.float = ...,
+            total_debt_to_equity_mrq: builtins.float = ...,
+            total_debt_to_ebitda_mrq: builtins.float = ...,
+            free_cash_flow_to_price: builtins.float = ...,
+            net_debt_to_ebitda: builtins.float = ...,
+            current_ratio_mrq: builtins.float = ...,
+            fixed_charge_coverage_ratio_fy: builtins.float = ...,
+            dividend_yield_daily_ttm: builtins.float = ...,
+            dividend_rate_ttm: builtins.float = ...,
+            dividends_per_share: builtins.float = ...,
+            five_years_average_dividend_yield: builtins.float = ...,
+            five_year_annual_dividend_growth_rate: builtins.float = ...,
+            dividend_payout_ratio_fy: builtins.float = ...,
+            buy_back_ttm: builtins.float = ...,
+            one_year_annual_revenue_growth_rate: builtins.float = ...,
+            domicile_indicator_code: builtins.str = ...,
+            adr_to_common_share_ratio: builtins.float = ...,
+            number_of_employees: builtins.float = ...,
+            ex_dividend_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            fiscal_period_start_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            fiscal_period_end_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            revenue_change_five_years: builtins.float = ...,
+            eps_change_five_years: builtins.float = ...,
+            ebitda_change_five_years: builtins.float = ...,
+            total_debt_change_five_years: builtins.float = ...,
+            ev_to_sales: builtins.float = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["ex_dividend_date", b"ex_dividend_date", "fiscal_period_end_date", b"fiscal_period_end_date", "fiscal_period_start_date", b"fiscal_period_start_date"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["adr_to_common_share_ratio", b"adr_to_common_share_ratio", "asset_uid", b"asset_uid", "average_daily_volume_last_10_days", b"average_daily_volume_last_10_days", "average_daily_volume_last_4_weeks", b"average_daily_volume_last_4_weeks", "beta", b"beta", "buy_back_ttm", b"buy_back_ttm", "currency", b"currency", "current_ratio_mrq", b"current_ratio_mrq", "diluted_eps_ttm", b"diluted_eps_ttm", "dividend_payout_ratio_fy", b"dividend_payout_ratio_fy", "dividend_rate_ttm", b"dividend_rate_ttm", "dividend_yield_daily_ttm", b"dividend_yield_daily_ttm", "dividends_per_share", b"dividends_per_share", "domicile_indicator_code", b"domicile_indicator_code", "ebitda_change_five_years", b"ebitda_change_five_years", "ebitda_ttm", b"ebitda_ttm", "eps_change_five_years", b"eps_change_five_years", "eps_ttm", b"eps_ttm", "ev_to_ebitda_mrq", b"ev_to_ebitda_mrq", "ev_to_sales", b"ev_to_sales", "ex_dividend_date", b"ex_dividend_date", "fiscal_period_end_date", b"fiscal_period_end_date", "fiscal_period_start_date", b"fiscal_period_start_date", "five_year_annual_dividend_growth_rate", b"five_year_annual_dividend_growth_rate", "five_year_annual_revenue_growth_rate", b"five_year_annual_revenue_growth_rate", "five_years_average_dividend_yield", b"five_years_average_dividend_yield", "fixed_charge_coverage_ratio_fy", b"fixed_charge_coverage_ratio_fy", "forward_annual_dividend_yield", b"forward_annual_dividend_yield", "free_cash_flow_to_price", b"free_cash_flow_to_price", "free_cash_flow_ttm", b"free_cash_flow_ttm", "free_float", b"free_float", "high_price_last_52_weeks", b"high_price_last_52_weeks", "low_price_last_52_weeks", b"low_price_last_52_weeks", "market_capitalization", b"market_capitalization", "net_debt_to_ebitda", b"net_debt_to_ebitda", "net_income_ttm", b"net_income_ttm", "net_interest_margin_mrq", b"net_interest_margin_mrq", "net_margin_mrq", b"net_margin_mrq", "number_of_employees", b"number_of_employees", "one_year_annual_revenue_growth_rate", b"one_year_annual_revenue_growth_rate", "pe_ratio_ttm", b"pe_ratio_ttm", "price_to_book_ttm", b"price_to_book_ttm", "price_to_free_cash_flow_ttm", b"price_to_free_cash_flow_ttm", "price_to_sales_ttm", b"price_to_sales_ttm", "revenue_change_five_years", b"revenue_change_five_years", "revenue_ttm", b"revenue_ttm", "roa", b"roa", "roe", b"roe", "roic", b"roic", "shares_outstanding", b"shares_outstanding", "three_year_annual_revenue_growth_rate", b"three_year_annual_revenue_growth_rate", "total_debt_change_five_years", b"total_debt_change_five_years", "total_debt_mrq", b"total_debt_mrq", "total_debt_to_ebitda_mrq", b"total_debt_to_ebitda_mrq", "total_debt_to_equity_mrq", b"total_debt_to_equity_mrq", "total_enterprise_value_mrq", b"total_enterprise_value_mrq"]) -> None: ...
+
+    FUNDAMENTALS_FIELD_NUMBER: builtins.int
+    @property
+    def fundamentals(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetAssetFundamentalsResponse.StatisticResponse]: ...
+    def __init__(
+        self,
+        *,
+        fundamentals: collections.abc.Iterable[global___GetAssetFundamentalsResponse.StatisticResponse] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["fundamentals", b"fundamentals"]) -> None: ...
+
+global___GetAssetFundamentalsResponse = GetAssetFundamentalsResponse

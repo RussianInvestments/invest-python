@@ -109,7 +109,7 @@ class TestSandboxCachedLoad:
         ],
     )
     def test_same_from_net_and_cache(
-        self, sandbox_service, calls_kwargs: Iterable[Dict[str, datetime]]
+        self, sandbox_service, calls_kwargs: Iterable[Dict[str, datetime.datetime]]
     ):
         settings = MarketDataCacheSettings(base_cache_dir=Path(tempfile.gettempdir()))
         market_data_cache = MarketDataCache(settings=settings, services=sandbox_service)

@@ -54,6 +54,7 @@ from .schemas import (
     EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
+    ExchangeOrderType,
     FilterOptionsRequest,
     FindInstrumentRequest,
     FindInstrumentResponse,
@@ -65,6 +66,8 @@ from .schemas import (
     GetAccountsResponse,
     GetAccruedInterestsRequest,
     GetAccruedInterestsResponse,
+    GetAssetFundamentalsRequest,
+    GetAssetFundamentalsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
     GetBrandRequest,
@@ -94,10 +97,14 @@ from .schemas import (
     GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
+    GetMaxLotsRequest,
+    GetMaxLotsResponse,
     GetOperationsByCursorRequest,
     GetOperationsByCursorResponse,
     GetOrderBookRequest,
     GetOrderBookResponse,
+    GetOrderPriceRequest,
+    GetOrderPriceResponse,
     GetOrdersRequest,
     GetOrdersResponse,
     GetOrderStateRequest,
@@ -130,6 +137,7 @@ from .schemas import (
     OrderDirection,
     OrderState,
     OrderType,
+    Page,
     PortfolioRequest,
     PortfolioResponse,
     PortfolioStreamRequest,
@@ -141,7 +149,9 @@ from .schemas import (
     PostOrderRequest,
     PostOrderResponse,
     PostStopOrderRequest,
+    PostStopOrderRequestTrailingData,
     PostStopOrderResponse,
+    PriceType,
     Quotation,
     ReplaceOrderRequest,
     SandboxPayInRequest,
@@ -150,7 +160,10 @@ from .schemas import (
     SharesResponse,
     StopOrderDirection,
     StopOrderExpirationType,
+    StopOrderStatusOption,
     StopOrderType,
+    TakeProfitType,
+    TimeInForceType,
     TradesStreamRequest,
     TradesStreamResponse,
     TradingSchedulesRequest,
@@ -529,9 +542,11 @@ class InstrumentsService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetAccruedInterestsResponse:
         request = GetAccruedInterestsRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -551,9 +566,12 @@ class InstrumentsService(_grpc_helpers.Service):
         )
 
     @handle_aio_request_error("GetFuturesMargin")
-    async def get_futures_margin(self, *, figi: str = "") -> GetFuturesMarginResponse:
+    async def get_futures_margin(
+        self, *, figi: str = "", instrument_id: str = ""
+    ) -> GetFuturesMarginResponse:
         request = GetFuturesMarginRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response_coro = self.stub.GetFuturesMargin(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetFuturesMarginRequest()
@@ -593,9 +611,11 @@ class InstrumentsService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetDividendsResponse:
         request = GetDividendsRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -617,9 +637,11 @@ class InstrumentsService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetBondCouponsResponse:
         request = GetBondCouponsRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -746,8 +768,11 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetBrands")
     async def get_brands(
         self,
+        paging: Optional[Page] = None,
     ) -> GetBrandsResponse:
         request = GetBrandsRequest()
+        if paging is not None:
+            request.paging = paging
         response_coro = self.stub.GetBrands(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetBrandsRequest()
@@ -771,6 +796,24 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetBrandBy")
         return _grpc_helpers.protobuf_to_dataclass(response, Brand)
+
+    @handle_aio_request_error("GetAssetFundamentals")
+    async def get_asset_fundamentals(
+        self, request: GetAssetFundamentalsRequest
+    ) -> GetAssetFundamentalsResponse:
+        response_coro = self.stub.GetAssetFundamentals(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetAssetFundamentalsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetAssetFundamentals"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetAssetFundamentalsResponse
+        )
 
 
 class MarketDataService(_grpc_helpers.Service):
@@ -1174,6 +1217,8 @@ class OrdersService(_grpc_helpers.Service):
         order_type: OrderType = OrderType(0),
         order_id: str = "",
         instrument_id: str = "",
+        time_in_force: TimeInForceType = TimeInForceType(0),
+        price_type: PriceType = PriceType(0),
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.figi = figi
@@ -1185,6 +1230,8 @@ class OrdersService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_type = order_type
         request.order_id = order_id
+        request.time_in_force = time_in_force
+        request.price_type = price_type
         response_coro = self.stub.PostOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.PostOrderRequest()
@@ -1214,11 +1261,16 @@ class OrdersService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetOrderState")
     async def get_order_state(
-        self, *, account_id: str = "", order_id: str = ""
+        self,
+        *,
+        account_id: str = "",
+        order_id: str = "",
+        price_type: PriceType = PriceType(0),
     ) -> OrderState:
         request = GetOrderStateRequest()
         request.account_id = account_id
         request.order_id = order_id
+        request.price_type = price_type
         response_coro = self.stub.GetOrderState(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrderStateRequest()
@@ -1254,6 +1306,32 @@ class OrdersService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "ReplaceOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+
+    @handle_aio_request_error("GetMaxLots")
+    async def get_max_lots(self, request: GetMaxLotsRequest) -> GetMaxLotsResponse:
+        response_coro = self.stub.GetMaxLots(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetMaxLotsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetMaxLots")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetMaxLotsResponse)
+
+    @handle_aio_request_error("GetOrderPrice")
+    async def get_order_price(
+        self, request: GetOrderPriceRequest
+    ) -> GetOrderPriceResponse:
+        response_coro = self.stub.GetOrderPrice(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetOrderPriceRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetOrderPrice")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetOrderPriceResponse)
 
 
 class UsersService(_grpc_helpers.Service):
@@ -1384,6 +1462,8 @@ class SandboxService(_grpc_helpers.Service):
         order_type: OrderType = OrderType(0),
         order_id: str = "",
         instrument_id: str = "",
+        time_in_force: TimeInForceType = TimeInForceType(0),
+        price_type: PriceType = PriceType(0),
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.figi = figi
@@ -1395,6 +1475,8 @@ class SandboxService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_type = order_type
         request.order_id = order_id
+        request.time_in_force = time_in_force
+        request.price_type = price_type
         response_coro = self.stub.PostSandboxOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.PostOrderRequest()
@@ -1457,11 +1539,16 @@ class SandboxService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetSandboxOrderState")
     async def get_sandbox_order_state(
-        self, *, account_id: str = "", order_id: str = ""
+        self,
+        *,
+        account_id: str = "",
+        order_id: str = "",
+        price_type: PriceType = PriceType(0),
     ) -> OrderState:
         request = GetOrderStateRequest()
         request.account_id = account_id
         request.order_id = order_id
+        request.price_type = price_type
         response_coro = self.stub.GetSandboxOrderState(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrderStateRequest()
@@ -1592,6 +1679,10 @@ class StopOrdersService(_grpc_helpers.Service):
         stop_order_type: StopOrderType = StopOrderType(0),
         expire_date: Optional[datetime] = None,
         instrument_id: str = "",
+        exchange_order_type: ExchangeOrderType = ExchangeOrderType(0),
+        take_profit_type: TakeProfitType = TakeProfitType(0),
+        trailing_data: Optional[PostStopOrderRequestTrailingData] = None,
+        price_type: PriceType = PriceType(0),
     ) -> PostStopOrderResponse:
         request = PostStopOrderRequest()
         request.figi = figi
@@ -1607,6 +1698,11 @@ class StopOrdersService(_grpc_helpers.Service):
         request.stop_order_type = stop_order_type
         if expire_date is not None:
             request.expire_date = expire_date
+        request.exchange_order_type = exchange_order_type
+        request.take_profit_type = take_profit_type
+        if trailing_data is not None:
+            request.trailing_data = trailing_data
+        request.price_type = price_type
         response_coro = self.stub.PostStopOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, stoporders_pb2.PostStopOrderRequest()
@@ -1618,9 +1714,21 @@ class StopOrdersService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, PostStopOrderResponse)
 
     @handle_aio_request_error("GetStopOrders")
-    async def get_stop_orders(self, *, account_id: str = "") -> GetStopOrdersResponse:
+    async def get_stop_orders(
+        self,
+        *,
+        account_id: str = "",
+        status: StopOrderStatusOption = StopOrderStatusOption(0),
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+    ) -> GetStopOrdersResponse:
         request = GetStopOrdersRequest()
         request.account_id = account_id
+        request.status = status
+        if from_ is not None:
+            request.from_ = from_
+        if to is not None:
+            request.to = to
         response_coro = self.stub.GetStopOrders(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, stoporders_pb2.GetStopOrdersRequest()

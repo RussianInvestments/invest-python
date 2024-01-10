@@ -10,7 +10,7 @@ TOKEN = os.environ["INVEST_TOKEN"]
 def main():
     with Client(TOKEN) as client:
         for candle in client.get_all_candles(
-            figi="BBG004730N88",
+            instrument_id="BBG004730N88",
             from_=now() - timedelta(days=365),
             interval=CandleInterval.CANDLE_INTERVAL_HOUR,
         ):

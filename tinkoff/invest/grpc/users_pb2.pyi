@@ -346,7 +346,7 @@ class GetInfoResponse(google.protobuf.message.Message):
     """Признак квалифицированного инвестора."""
     @property
     def qualified_for_work_with(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](https://tinkoff.github.io/investAPI/faq_users/)."""
+        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](https://russianinvestments.github.io/investAPI/faq_users/)."""
     tariff: builtins.str
     """Наименование тарифа пользователя."""
     def __init__(

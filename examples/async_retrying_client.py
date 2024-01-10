@@ -16,7 +16,6 @@ retry_settings = RetryClientSettings(use_retry=True, max_retry_attempt=2)
 
 
 async def main():
-
     async with AsyncRetryingClient(TOKEN, settings=retry_settings) as client:
         async for candle in client.get_all_candles(
             figi="BBG000B9XRY4",

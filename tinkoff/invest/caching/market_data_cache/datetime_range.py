@@ -1,4 +1,4 @@
 from datetime import datetime
-from typing import NewType, Tuple
+from typing import Tuple
 
-DatetimeRange = NewType("DatetimeRange", Tuple[datetime, datetime])
+DatetimeRange = Tuple[datetime, datetime]

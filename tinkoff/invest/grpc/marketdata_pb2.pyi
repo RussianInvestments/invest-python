@@ -56,6 +56,28 @@ class _SubscriptionIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wr
     """Минутные свечи."""
     SUBSCRIPTION_INTERVAL_FIVE_MINUTES: _SubscriptionInterval.ValueType  # 2
     """Пятиминутные свечи."""
+    SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES: _SubscriptionInterval.ValueType  # 3
+    """Пятнадцатиминутные свечи"""
+    SUBSCRIPTION_INTERVAL_ONE_HOUR: _SubscriptionInterval.ValueType  # 4
+    """Часовые свечи"""
+    SUBSCRIPTION_INTERVAL_ONE_DAY: _SubscriptionInterval.ValueType  # 5
+    """Дневные свечи"""
+    SUBSCRIPTION_INTERVAL_2_MIN: _SubscriptionInterval.ValueType  # 6
+    """Двухминутные свечи"""
+    SUBSCRIPTION_INTERVAL_3_MIN: _SubscriptionInterval.ValueType  # 7
+    """Трехминутные свечи"""
+    SUBSCRIPTION_INTERVAL_10_MIN: _SubscriptionInterval.ValueType  # 8
+    """Десятиминутные свечи"""
+    SUBSCRIPTION_INTERVAL_30_MIN: _SubscriptionInterval.ValueType  # 9
+    """Тридцатиминутные свечи"""
+    SUBSCRIPTION_INTERVAL_2_HOUR: _SubscriptionInterval.ValueType  # 10
+    """Двухчасовые свечи"""
+    SUBSCRIPTION_INTERVAL_4_HOUR: _SubscriptionInterval.ValueType  # 11
+    """Четырехчасовые свечи"""
+    SUBSCRIPTION_INTERVAL_WEEK: _SubscriptionInterval.ValueType  # 12
+    """Недельные свечи"""
+    SUBSCRIPTION_INTERVAL_MONTH: _SubscriptionInterval.ValueType  # 13
+    """Месячные свечи"""
 
 class SubscriptionInterval(_SubscriptionInterval, metaclass=_SubscriptionIntervalEnumTypeWrapper):
     """Интервал свечи."""
@@ -66,6 +88,28 @@ SUBSCRIPTION_INTERVAL_ONE_MINUTE: SubscriptionInterval.ValueType  # 1
 """Минутные свечи."""
 SUBSCRIPTION_INTERVAL_FIVE_MINUTES: SubscriptionInterval.ValueType  # 2
 """Пятиминутные свечи."""
+SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES: SubscriptionInterval.ValueType  # 3
+"""Пятнадцатиминутные свечи"""
+SUBSCRIPTION_INTERVAL_ONE_HOUR: SubscriptionInterval.ValueType  # 4
+"""Часовые свечи"""
+SUBSCRIPTION_INTERVAL_ONE_DAY: SubscriptionInterval.ValueType  # 5
+"""Дневные свечи"""
+SUBSCRIPTION_INTERVAL_2_MIN: SubscriptionInterval.ValueType  # 6
+"""Двухминутные свечи"""
+SUBSCRIPTION_INTERVAL_3_MIN: SubscriptionInterval.ValueType  # 7
+"""Трехминутные свечи"""
+SUBSCRIPTION_INTERVAL_10_MIN: SubscriptionInterval.ValueType  # 8
+"""Десятиминутные свечи"""
+SUBSCRIPTION_INTERVAL_30_MIN: SubscriptionInterval.ValueType  # 9
+"""Тридцатиминутные свечи"""
+SUBSCRIPTION_INTERVAL_2_HOUR: SubscriptionInterval.ValueType  # 10
+"""Двухчасовые свечи"""
+SUBSCRIPTION_INTERVAL_4_HOUR: SubscriptionInterval.ValueType  # 11
+"""Четырехчасовые свечи"""
+SUBSCRIPTION_INTERVAL_WEEK: SubscriptionInterval.ValueType  # 12
+"""Недельные свечи"""
+SUBSCRIPTION_INTERVAL_MONTH: SubscriptionInterval.ValueType  # 13
+"""Месячные свечи"""
 global___SubscriptionInterval = SubscriptionInterval
 
 class _SubscriptionStatus:
@@ -81,17 +125,19 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: _SubscriptionStatus.ValueType  # 2
     """Инструмент не найден."""
     SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: _SubscriptionStatus.ValueType  # 3
-    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)."""
+    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://russianinvestments.github.io/investAPI/marketdata#subscriptionaction)."""
     SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: _SubscriptionStatus.ValueType  # 4
     """Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: _SubscriptionStatus.ValueType  # 5
-    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
+    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://russianinvestments.github.io/investAPI/marketdata#subscriptioninterval)."""
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: _SubscriptionStatus.ValueType  # 6
-    """Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
+    """Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://russianinvestments.github.io/investAPI/limits/)."""
     SUBSCRIPTION_STATUS_INTERNAL_ERROR: _SubscriptionStatus.ValueType  # 7
     """Внутренняя ошибка сервиса."""
     SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS: _SubscriptionStatus.ValueType  # 8
     """Превышен лимит на количество запросов на подписки в течение установленного отрезка времени"""
+    SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND: _SubscriptionStatus.ValueType  # 9
+    """Активная подписка не найдена. Ошибка может возникнуть только при отписке от не существующей отписки"""
 
 class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper):
     """Результат подписки."""
@@ -103,17 +149,19 @@ SUBSCRIPTION_STATUS_SUCCESS: SubscriptionStatus.ValueType  # 1
 SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType  # 2
 """Инструмент не найден."""
 SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType  # 3
-"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)."""
+"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://russianinvestments.github.io/investAPI/marketdata#subscriptionaction)."""
 SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType  # 4
 """Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
 SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType  # 5
-"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
+"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://russianinvestments.github.io/investAPI/marketdata#subscriptioninterval)."""
 SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType  # 6
-"""Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
+"""Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://russianinvestments.github.io/investAPI/limits/)."""
 SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType  # 7
 """Внутренняя ошибка сервиса."""
 SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS: SubscriptionStatus.ValueType  # 8
 """Превышен лимит на количество запросов на подписки в течение установленного отрезка времени"""
+SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND: SubscriptionStatus.ValueType  # 9
+"""Активная подписка не найдена. Ошибка может возникнуть только при отписке от не существующей отписки"""
 global___SubscriptionStatus = SubscriptionStatus
 
 class _TradeDirection:
@@ -149,31 +197,31 @@ class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     CANDLE_INTERVAL_UNSPECIFIED: _CandleInterval.ValueType  # 0
     """Интервал не определён."""
     CANDLE_INTERVAL_1_MIN: _CandleInterval.ValueType  # 1
-    """1 минута."""
+    """от 1 минуты до 1 дня."""
     CANDLE_INTERVAL_5_MIN: _CandleInterval.ValueType  # 2
-    """5 минут."""
+    """от 5 минут до 1 дня."""
     CANDLE_INTERVAL_15_MIN: _CandleInterval.ValueType  # 3
-    """15 минут."""
+    """от 15 минут до 1 дня."""
     CANDLE_INTERVAL_HOUR: _CandleInterval.ValueType  # 4
-    """1 час."""
+    """от 1 часа до 1 недели."""
     CANDLE_INTERVAL_DAY: _CandleInterval.ValueType  # 5
-    """1 день."""
+    """от 1 дня до 1 года."""
     CANDLE_INTERVAL_2_MIN: _CandleInterval.ValueType  # 6
-    """2 минуты."""
+    """от 2 минут до 1 дня."""
     CANDLE_INTERVAL_3_MIN: _CandleInterval.ValueType  # 7
-    """3 минуты."""
+    """от 3 минут до 1 дня."""
     CANDLE_INTERVAL_10_MIN: _CandleInterval.ValueType  # 8
-    """10 минут."""
+    """от 10 минут до 1 дня."""
     CANDLE_INTERVAL_30_MIN: _CandleInterval.ValueType  # 9
-    """30 минут."""
+    """от 30 минут до 2 дней."""
     CANDLE_INTERVAL_2_HOUR: _CandleInterval.ValueType  # 10
-    """2 часа."""
+    """от 2 часов до 1 месяца."""
     CANDLE_INTERVAL_4_HOUR: _CandleInterval.ValueType  # 11
-    """4 часа."""
+    """от 4 часов до 1 месяца."""
     CANDLE_INTERVAL_WEEK: _CandleInterval.ValueType  # 12
-    """1 неделя."""
+    """от 1 недели до 2 лет."""
     CANDLE_INTERVAL_MONTH: _CandleInterval.ValueType  # 13
-    """1 месяц."""
+    """от 1 месяца до 10 лет."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
     """Интервал свечей."""
@@ -181,31 +229,31 @@ class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
 CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType  # 0
 """Интервал не определён."""
 CANDLE_INTERVAL_1_MIN: CandleInterval.ValueType  # 1
-"""1 минута."""
+"""от 1 минуты до 1 дня."""
 CANDLE_INTERVAL_5_MIN: CandleInterval.ValueType  # 2
-"""5 минут."""
+"""от 5 минут до 1 дня."""
 CANDLE_INTERVAL_15_MIN: CandleInterval.ValueType  # 3
-"""15 минут."""
+"""от 15 минут до 1 дня."""
 CANDLE_INTERVAL_HOUR: CandleInterval.ValueType  # 4
-"""1 час."""
+"""от 1 часа до 1 недели."""
 CANDLE_INTERVAL_DAY: CandleInterval.ValueType  # 5
-"""1 день."""
+"""от 1 дня до 1 года."""
 CANDLE_INTERVAL_2_MIN: CandleInterval.ValueType  # 6
-"""2 минуты."""
+"""от 2 минут до 1 дня."""
 CANDLE_INTERVAL_3_MIN: CandleInterval.ValueType  # 7
-"""3 минуты."""
+"""от 3 минут до 1 дня."""
 CANDLE_INTERVAL_10_MIN: CandleInterval.ValueType  # 8
-"""10 минут."""
+"""от 10 минут до 1 дня."""
 CANDLE_INTERVAL_30_MIN: CandleInterval.ValueType  # 9
-"""30 минут."""
+"""от 30 минут до 2 дней."""
 CANDLE_INTERVAL_2_HOUR: CandleInterval.ValueType  # 10
-"""2 часа."""
+"""от 2 часов до 1 месяца."""
 CANDLE_INTERVAL_4_HOUR: CandleInterval.ValueType  # 11
-"""4 часа."""
+"""от 4 часов до 1 месяца."""
 CANDLE_INTERVAL_WEEK: CandleInterval.ValueType  # 12
-"""1 неделя."""
+"""от 1 недели до 2 лет."""
 CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
-"""1 месяц."""
+"""от 1 месяца до 10 лет."""
 global___CandleInterval = CandleInterval
 
 class MarketDataRequest(google.protobuf.message.Message):
@@ -374,7 +422,7 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CandleInstrument]:
         """Массив инструментов для подписки на свечи."""
     waiting_close: builtins.bool
-    """Флаг ожидания закрытия временного интервала для отправки свечи, применяется только для минутных свечей."""
+    """Флаг ожидания закрытия временного интервала для отправки свечи."""
     def __init__(
         self,
         *,
@@ -419,7 +467,7 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     CANDLES_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def candles_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CandleSubscription]:
         """Массив статусов подписки на свечи."""
@@ -442,6 +490,7 @@ class CandleSubscription(google.protobuf.message.Message):
     INTERVAL_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    WAITING_CLOSE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     interval: global___SubscriptionInterval.ValueType
@@ -450,6 +499,8 @@ class CandleSubscription(google.protobuf.message.Message):
     """Статус подписки."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    waiting_close: builtins.bool
+    """Флаг ожидания закрытия временного интервала для отправки свечи"""
     def __init__(
         self,
         *,
@@ -457,8 +508,9 @@ class CandleSubscription(google.protobuf.message.Message):
         interval: global___SubscriptionInterval.ValueType = ...,
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
+        waiting_close: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "interval", b"interval", "subscription_status", b"subscription_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "interval", b"interval", "subscription_status", b"subscription_status", "waiting_close", b"waiting_close"]) -> None: ...
 
 global___CandleSubscription = CandleSubscription
 
@@ -517,7 +569,7 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     ORDER_BOOK_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def order_book_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderBookSubscription]:
         """Массив статусов подписки на стаканы."""
@@ -611,7 +663,7 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def trade_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradeSubscription]:
         """Массив статусов подписки на поток сделок."""
@@ -701,7 +753,7 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     INFO_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def info_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InfoSubscription]:
         """Массив статусов подписки на торговый статус."""
@@ -791,7 +843,7 @@ class SubscribeLastPriceResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     LAST_PRICE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def last_price_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPriceSubscription]:
         """Массив статусов подписки на цену последней сделки."""
@@ -851,16 +903,16 @@ class Candle(google.protobuf.message.Message):
     """Интервал свечи."""
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     volume: builtins.int
     """Объём сделок в лотах."""
     @property
@@ -921,10 +973,10 @@ class OrderBook(google.protobuf.message.Message):
         """Время формирования стакана в часовом поясе UTC по времени биржи."""
     @property
     def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     instrument_uid: builtins.str
     """Uid инструмента"""
     def __init__(
@@ -954,7 +1006,7 @@ class Order(google.protobuf.message.Message):
     QUANTITY_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     quantity: builtins.int
     """Количество в лотах."""
     def __init__(
@@ -985,7 +1037,7 @@ class Trade(google.protobuf.message.Message):
     """Направление сделки."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     quantity: builtins.int
     """Количество лотов."""
     @property
@@ -1069,13 +1121,17 @@ class GetCandlesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
+        figi: builtins.str | None = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         interval: global___CandleInterval.ValueType = ...,
-        instrument_id: builtins.str = ...,
+        instrument_id: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "interval", b"interval", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "interval", b"interval", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_id", b"_instrument_id"]) -> typing_extensions.Literal["instrument_id"] | None: ...
 
 global___GetCandlesRequest = GetCandlesRequest
 
@@ -1111,16 +1167,16 @@ class HistoricCandle(google.protobuf.message.Message):
     IS_COMPLETE_FIELD_NUMBER: builtins.int
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     volume: builtins.int
     """Объём торгов в лотах."""
     @property
@@ -1198,7 +1254,7 @@ class LastPrice(google.protobuf.message.Message):
     """Figi инструмента."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время получения последней цены в часовом поясе UTC по времени биржи."""
@@ -1234,11 +1290,16 @@ class GetOrderBookRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
+        figi: builtins.str | None = ...,
         depth: builtins.int = ...,
-        instrument_id: builtins.str = ...,
+        instrument_id: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["depth", b"depth", "figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "instrument_id", b"instrument_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "depth", b"depth", "figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_id", b"_instrument_id"]) -> typing_extensions.Literal["instrument_id"] | None: ...
 
 global___GetOrderBookRequest = GetOrderBookRequest
 
@@ -1271,16 +1332,16 @@ class GetOrderBookResponse(google.protobuf.message.Message):
         """Множество пар значений на продажу."""
     @property
     def last_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def close_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     @property
     def last_price_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время получения цены последней сделки."""
@@ -1327,10 +1388,15 @@ class GetTradingStatusRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
-        instrument_id: builtins.str = ...,
+        figi: builtins.str | None = ...,
+        instrument_id: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "instrument_id", b"instrument_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_id", b"_instrument_id"]) -> typing_extensions.Literal["instrument_id"] | None: ...
 
 global___GetTradingStatusRequest = GetTradingStatusRequest
 
@@ -1426,12 +1492,16 @@ class GetLastTradesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
+        figi: builtins.str | None = ...,
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        instrument_id: builtins.str = ...,
+        instrument_id: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_instrument_id", b"_instrument_id"]) -> typing_extensions.Literal["instrument_id"] | None: ...
 
 global___GetLastTradesRequest = GetLastTradesRequest
 
@@ -1525,6 +1595,7 @@ class InstrumentClosePriceResponse(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
+    EVENING_SESSION_PRICE_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi инструмента."""
@@ -1534,6 +1605,9 @@ class InstrumentClosePriceResponse(google.protobuf.message.Message):
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена закрытия торговой сессии."""
     @property
+    def evening_session_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена последней сделки с вечерней сессии"""
+    @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата совершения торгов."""
     def __init__(
@@ -1542,9 +1616,10 @@ class InstrumentClosePriceResponse(google.protobuf.message.Message):
         figi: builtins.str = ...,
         instrument_uid: builtins.str = ...,
         price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        evening_session_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["price", b"price", "time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "price", b"price", "time", b"time"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["evening_session_price", b"evening_session_price", "price", b"price", "time", b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["evening_session_price", b"evening_session_price", "figi", b"figi", "instrument_uid", b"instrument_uid", "price", b"price", "time", b"time"]) -> None: ...
 
 global___InstrumentClosePriceResponse = InstrumentClosePriceResponse

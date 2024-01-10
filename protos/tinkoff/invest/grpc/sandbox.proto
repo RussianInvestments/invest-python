@@ -13,6 +13,7 @@ import "tinkoff/invest/grpc/common.proto";
 import "tinkoff/invest/grpc/orders.proto";
 import "tinkoff/invest/grpc/operations.proto";
 import "tinkoff/invest/grpc/users.proto";
+import "tinkoff/invest/grpc/google/api/field_behavior.proto";
 
 service SandboxService { //Сервис для работы с песочницей TINKOFF INVEST API
 
@@ -37,7 +38,7 @@ service SandboxService { //Сервис для работы с песочниц�
   //Метод отмены торгового поручения в песочнице.
   rpc CancelSandboxOrder(CancelOrderRequest) returns (CancelOrderResponse);
 
-  //Метод получения статуса заявки в песочнице.
+  //Метод получения статуса заявки в песочнице. Заявки хранятся в таблице 7 дней.
   rpc GetSandboxOrderState(GetOrderStateRequest) returns (OrderState);
 
   //Метод получения позиций по виртуальному счёту песочницы.
@@ -71,7 +72,7 @@ message OpenSandboxAccountResponse {
 
 //Запрос закрытия счёта в песочнице.
 message CloseSandboxAccountRequest {
-  string account_id = 1; //Номер счёта
+  string account_id = 1 [(google.api.field_behavior) = REQUIRED]; //Номер счёта
 }
 
 //Результат закрытия счёта в песочнице.
@@ -81,8 +82,8 @@ message CloseSandboxAccountResponse {
 
 //Запрос пополнения счёта в песочнице.
 message SandboxPayInRequest {
-  string account_id = 1; //Номер счёта
-  MoneyValue amount = 2; //Сумма пополнения счёта в рублях
+  string account_id = 1 [(google.api.field_behavior) = REQUIRED]; //Номер счёта
+  MoneyValue amount = 2 [(google.api.field_behavior) = REQUIRED]; //Сумма пополнения счёта в рублях
 }
 
 //Результат пополнения счёта, текущий баланс.

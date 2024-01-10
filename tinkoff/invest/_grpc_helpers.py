@@ -11,6 +11,7 @@ from typing import (
     Tuple,
     Type,
     TypeVar,
+    Union,
     get_args,
     get_origin,
     get_type_hints,
@@ -20,6 +21,7 @@ from google.protobuf import symbol_database
 from google.protobuf.timestamp_pb2 import Timestamp
 
 _sym_db = symbol_database.Default()
+NoneType = type(None)
 
 T = TypeVar("T")
 
@@ -77,7 +79,7 @@ class FieldMetadata:
 
     @staticmethod
     def get(field: dataclasses.Field) -> "FieldMetadata":
-        """Returns the field metadata for a dataclass field."""
+        """Return the field metadata for a dataclass field."""
         return field.metadata["proto"]
 
 
@@ -90,7 +92,7 @@ def dataclass_field(
     wraps: Optional[str] = None,
     optional: bool = False,
 ) -> dataclasses.Field:
-    """Creates a dataclass field with attached protobuf metadata."""
+    """Create a dataclass field with attached protobuf metadata."""
     return dataclasses.field(
         default=None if optional else PLACEHOLDER,  # type:ignore
         metadata={
@@ -352,25 +354,7 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
             continue
         origin = get_origin(field_type)
         if origin is None:
-            if field_type in PRIMITIVE_TYPES:
-                setattr(protobuff_obj, field_name, field_value)
-            elif issubclass(field_type, datetime):
-                field_name_ = field_name
-                if field_name == "from_":
-                    field_name_ = "from"
-                pb_value = getattr(protobuff_obj, field_name_)
-                seconds, nanos = datetime_to_ts(field_value)
-                pb_value.seconds = seconds
-                pb_value.nanos = nanos
-            elif dataclasses.is_dataclass(field_type):
-                pb_value = getattr(protobuff_obj, field_name)
-                dataclass_to_protobuff(field_value, pb_value)
-            elif issubclass(field_type, Enum):
-                if isinstance(field_value, int):
-                    field_value = field_type(field_value)
-                setattr(protobuff_obj, field_name, field_value.value)
-            else:
-                raise UnknownType(f"type {field_type} unknown")
+            _update_field(field_type, protobuff_obj, field_name, field_value)
         elif origin == list:
             args = get_args(field_type)
             first_arg = args[0]
@@ -388,7 +372,39 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
                 pb_value.extend(item.value for item in field_value)
             else:
                 raise UnknownType(f"type {field_type} unknown")
+        elif origin == Union:
+            args = get_args(field_type)
+            first_arg = args[0]
+            second_arg = args[1]
+            if second_arg != NoneType:
+                raise UnknownType(f"type {field_type} unknown")
+
+            _update_field(first_arg, protobuff_obj, field_name, field_value)
         else:
             raise UnknownType(f"type {field_type} unknown")
 
     return protobuff_obj
+
+
+def _update_field(
+    field_type: Type[Any], protobuff_obj: Any, field_name: str, field_value: Any
+) -> None:
+    if field_type in PRIMITIVE_TYPES:
+        setattr(protobuff_obj, field_name, field_value)
+    elif issubclass(field_type, datetime):
+        field_name_ = field_name
+        if field_name == "from_":
+            field_name_ = "from"
+        pb_value = getattr(protobuff_obj, field_name_)
+        seconds, nanos = datetime_to_ts(field_value)
+        pb_value.seconds = seconds
+        pb_value.nanos = nanos
+    elif dataclasses.is_dataclass(field_type):
+        pb_value = getattr(protobuff_obj, field_name)
+        dataclass_to_protobuff(field_value, pb_value)
+    elif issubclass(field_type, Enum):
+        if isinstance(field_value, int):
+            field_value = field_type(field_value)
+        setattr(protobuff_obj, field_name, field_value.value)
+    else:
+        raise UnknownType(f"type {field_type} unknown")

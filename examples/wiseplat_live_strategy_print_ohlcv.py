@@ -133,7 +133,6 @@ async def run_strategy(portfolio, timeframe, days_back, check_interval):
 
 
 if __name__ == "__main__":
-
     sber_figi = "BBG004730N88"
     vtbr_figi = "BBG004730ZJ9"
     portfolio = {sber_figi, vtbr_figi}

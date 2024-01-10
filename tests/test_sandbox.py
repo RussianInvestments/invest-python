@@ -180,7 +180,7 @@ class TestSandboxOperations:
             MoneyValue(currency="rub", units=0, nano=0)
         )
         assert str(response.total_amount_futures) == str(
-            MoneyValue(currency="rub", units=0, nano=0)
+            MoneyValue(currency="pt.", units=0, nano=0)
         )
         assert str(response.total_amount_shares) == str(
             MoneyValue(currency="rub", units=0, nano=0)
