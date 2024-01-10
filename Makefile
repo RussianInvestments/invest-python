@@ -9,11 +9,14 @@ PROTOS = protos
 TEST = $(POETRY_RUN) pytest $(args)
 MAIN_CODE = tinkoff examples scripts
 CODE = tests $(MAIN_CODE)
-EXCLUDE_CODE = tinkoff/invest/grpc
 
 .PHONY: test
 test:
 	$(TEST) --cov
+
+.PHONY: test-fast
+test-fast:
+	$(TEST)
 
 .PHONY: test-sandbox
 test-sandbox:
@@ -22,22 +25,16 @@ test-sandbox:
 .PHONY: lint
 lint:
 	$(POETRY_RUN) ruff $(CODE)
-	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
-	$(POETRY_RUN) pylint --jobs 1 --rcfile=setup.cfg $(CODE)
-	$(POETRY_RUN) bandit -r $(MAIN_CODE)
-	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
+	$(POETRY_RUN) black --check $(CODE)
 	$(POETRY_RUN) pytest --dead-fixtures --dup-fixtures
 	$(POETRY_RUN) mypy $(MAIN_CODE)
 	$(POETRY_RUN) poetry check
-	$(POETRY_RUN) toml-sort --check pyproject.toml
 
 .PHONY: format
 format:
-	$(POETRY_RUN) autoflake --recursive --in-place --remove-all-unused-imports --exclude=$(EXCLUDE_CODE) $(CODE)
 	$(POETRY_RUN) isort $(CODE)
-	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
+	$(POETRY_RUN) black $(CODE)
 	$(POETRY_RUN) ruff --fix $(CODE)
-	$(POETRY_RUN) toml-sort --in-place pyproject.toml
 
 .PHONY: check
 check: lint test
@@ -63,11 +60,11 @@ bump-version:
 	poetry version $(v)
 	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
 	git add . && git commit -m "chore(release): bump version to $(v)"
-	# git tag -a $(v) -m ""
+	git tag -a $(v) -m ""
 
 .PHONY: install-poetry
 install-poetry:
-	pip install poetry==1.3.1
+	pip install poetry==1.7.1
 
 .PHONY: install-docs
 install-docs:
@@ -92,6 +89,7 @@ download-protos:
 .PHONY: gen-grpc
 gen-grpc:
 	rm -r ${PACKAGE_PROTO_DIR}
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/google/api/*.proto
 	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
 	touch ${PACKAGE_PROTO_DIR}/__init__.py
 
