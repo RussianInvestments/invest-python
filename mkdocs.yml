@@ -36,8 +36,6 @@ plugins:
       python:
         rendering:
           show_source: false
-    watch:
-      - tinkoff
 
 extra_css:
   - custom.css
