@@ -17,19 +17,6 @@ jobs:
         with:
           python-version: '3.8'
 
-
-      - name: Grep envs
-        run: printenv
-        env:
-          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
-          INVEST_TOKEN: ${{ secrets.INVEST_TOKEN }}
-
-      - name: Grep envs
-        run: echo $INVEST_SANDBOX_TOKEN
-        env:
-          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
-          INVEST_TOKEN: ${{ secrets.INVEST_TOKEN }}
-
       - name: Install python dependencies
         run: make install-poetry install
 
