@@ -13,12 +13,12 @@
 }
 
 [data-termynal] {
-    width: 750px;
     max-width: 100%;
+    overflow-x: auto;
     background: var(--color-bg);
     color: var(--color-text);
-    font-size: 18px;
-    font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-family: 'Roboto Mono', 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
     border-radius: 4px;
     padding: 75px 45px 35px;
     position: relative;
@@ -26,7 +26,7 @@
             box-sizing: border-box;
 }
 
-[data-termynal]:before {
+[data-termynal][data-ty-macos]:before {
     content: '';
     position: absolute;
     top: 15px;
@@ -41,6 +41,20 @@
             box-shadow: 25px 0 0 #f4c025, 50px 0 0 #3ec930;
 }
 
+[data-termynal][data-ty-windows]:before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    /* A little hack to display the window buttons in one pseudo element. */
+    background: #d9515d;
+    -webkit-box-shadow: -25px 0 0 #e6e6e6, -50px 0 0 #e6e6e6;
+            box-shadow: -25px 0 0 #e6e6e6, -50px 0 0 #e6e6e6;
+}
+
 [data-termynal]:after {
     content: 'bash';
     position: absolute;
@@ -51,9 +65,20 @@
     text-align: center;
 }
 
+[data-termynal][data-ty-title]:after {
+    content: attr(data-ty-title);
+}
+
+a[data-terminal-control] {
+    text-align: right;
+    display: block;
+    color: #aebbff;
+}
+
 [data-ty] {
     display: block;
     line-height: 2;
+    white-space: pre;
 }
 
 [data-ty]:before {
