@@ -106,29 +106,32 @@ EXECUTION_REPORT_STATUS_PARTIALLYFILL: OrderExecutionReportStatus.ValueType  # 5
 """Частично исполнена"""
 global___OrderExecutionReportStatus = OrderExecutionReportStatus
 
-class _PriceType:
+class _TimeInForceType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PriceType.ValueType], builtins.type):  # noqa: F821
+class _TimeInForceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TimeInForceType.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    PRICE_TYPE_UNSPECIFIED: _PriceType.ValueType  # 0
-    """Значение не определено."""
-    PRICE_TYPE_POINT: _PriceType.ValueType  # 1
-    """Цена в пунктах (только для фьючерсов и облигаций)."""
-    PRICE_TYPE_CURRENCY: _PriceType.ValueType  # 2
-    """Цена в валюте расчётов по инструменту."""
+    TIME_IN_FORCE_UNSPECIFIED: _TimeInForceType.ValueType  # 0
+    """Значение не определено см. TIME_IN_FORCE_DAY"""
+    TIME_IN_FORCE_DAY: _TimeInForceType.ValueType  # 1
+    """Заявка действует до конца торгового дня. значение по умолчанию"""
+    TIME_IN_FORCE_FILL_AND_KILL: _TimeInForceType.ValueType  # 2
+    """Заявка исполнена(возможно частично) и уничтожена"""
+    TIME_IN_FORCE_FILL_OR_KILL: _TimeInForceType.ValueType  # 3
+    """Заявка исполнена полностью или уничтожена, недоступно для срочного рынка"""
 
-class PriceType(_PriceType, metaclass=_PriceTypeEnumTypeWrapper):
-    """Тип цены."""
+class TimeInForceType(_TimeInForceType, metaclass=_TimeInForceTypeEnumTypeWrapper): ...
 
-PRICE_TYPE_UNSPECIFIED: PriceType.ValueType  # 0
-"""Значение не определено."""
-PRICE_TYPE_POINT: PriceType.ValueType  # 1
-"""Цена в пунктах (только для фьючерсов и облигаций)."""
-PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
-"""Цена в валюте расчётов по инструменту."""
-global___PriceType = PriceType
+TIME_IN_FORCE_UNSPECIFIED: TimeInForceType.ValueType  # 0
+"""Значение не определено см. TIME_IN_FORCE_DAY"""
+TIME_IN_FORCE_DAY: TimeInForceType.ValueType  # 1
+"""Заявка действует до конца торгового дня. значение по умолчанию"""
+TIME_IN_FORCE_FILL_AND_KILL: TimeInForceType.ValueType  # 2
+"""Заявка исполнена(возможно частично) и уничтожена"""
+TIME_IN_FORCE_FILL_OR_KILL: TimeInForceType.ValueType  # 3
+"""Заявка исполнена полностью или уничтожена, недоступно для срочного рынка"""
+global___TimeInForceType = TimeInForceType
 
 class TradesStreamRequest(google.protobuf.message.Message):
     """Запрос установки соединения."""
@@ -262,6 +265,8 @@ class PostOrderRequest(google.protobuf.message.Message):
     ORDER_TYPE_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    TIME_IN_FORCE_FIELD_NUMBER: builtins.int
+    PRICE_TYPE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     quantity: builtins.int
@@ -276,13 +281,17 @@ class PostOrderRequest(google.protobuf.message.Message):
     order_type: global___OrderType.ValueType
     """Тип заявки."""
     order_id: builtins.str
-    """Идентификатор запроса выставления поручения для целей идемпотентности. Максимальная длина 36 символов."""
+    """Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значения Figi или Instrument_uid."""
+    time_in_force: global___TimeInForceType.ValueType
+    """Алгоритм исполнения поручения, применяется только к лимитной заявке."""
+    price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
+    """Тип цены."""
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
+        figi: builtins.str | None = ...,
         quantity: builtins.int = ...,
         price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         direction: global___OrderDirection.ValueType = ...,
@@ -290,14 +299,20 @@ class PostOrderRequest(google.protobuf.message.Message):
         order_type: global___OrderType.ValueType = ...,
         order_id: builtins.str = ...,
         instrument_id: builtins.str = ...,
+        time_in_force: global___TimeInForceType.ValueType = ...,
+        price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "quantity", b"quantity"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_price", b"_price", "figi", b"figi", "price", b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_price", b"_price", "account_id", b"account_id", "direction", b"direction", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "time_in_force", b"time_in_force"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_price", b"_price"]) -> typing_extensions.Literal["price"] | None: ...
 
 global___PostOrderRequest = PostOrderRequest
 
 class PostOrderResponse(google.protobuf.message.Message):
-    """Прочитайте  про ключ идемпотентности [здесь](https://tinkoff.github.io/investAPI/head-orders/)
+    """Прочитайте  про ключ идемпотентности [здесь](https://russianinvestments.github.io/investAPI/head-orders/)
 
     Информация о выставлении поручения.
     """
@@ -321,6 +336,7 @@ class PostOrderResponse(google.protobuf.message.Message):
     MESSAGE_FIELD_NUMBER: builtins.int
     INITIAL_ORDER_PRICE_PT_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    ORDER_REQUEST_ID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
     """Биржевой идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
@@ -334,7 +350,7 @@ class PostOrderResponse(google.protobuf.message.Message):
         """Начальная цена заявки. Произведение количества запрошенных лотов на цену."""
     @property
     def executed_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Исполненная средняя цена 1 одного инструмента в заявки."""
+        """Исполненная средняя цена одного инструмента в заявке."""
     @property
     def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Итоговая стоимость заявки, включающая все комиссии."""
@@ -346,7 +362,7 @@ class PostOrderResponse(google.protobuf.message.Message):
         """Фактическая комиссия по итогам исполнения заявки."""
     @property
     def aci_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](https://tinkoff.github.io/investAPI/head-orders#coupon)"""
+        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](https://russianinvestments.github.io/investAPI/head-orders#coupon)"""
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     direction: global___OrderDirection.ValueType
@@ -363,6 +379,8 @@ class PostOrderResponse(google.protobuf.message.Message):
         """Начальная цена заявки в пунктах (для фьючерсов)."""
     instrument_uid: builtins.str
     """UID идентификатор инструмента."""
+    order_request_id: builtins.str
+    """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
     def __init__(
         self,
         *,
@@ -383,9 +401,10 @@ class PostOrderResponse(google.protobuf.message.Message):
         message: builtins.str = ...,
         initial_order_price_pt: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         instrument_uid: builtins.str = ...,
+        order_request_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_type", b"order_type", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_request_id", b"order_request_id", "order_type", b"order_type", "total_order_amount", b"total_order_amount"]) -> None: ...
 
 global___PostOrderResponse = PostOrderResponse
 
@@ -436,17 +455,21 @@ class GetOrderStateRequest(google.protobuf.message.Message):
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
+    PRICE_TYPE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Номер счёта."""
     order_id: builtins.str
     """Идентификатор заявки."""
+    price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
+    """Тип цены."""
     def __init__(
         self,
         *,
         account_id: builtins.str = ...,
         order_id: builtins.str = ...,
+        price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "order_id", b"order_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "order_id", b"order_id", "price_type", b"price_type"]) -> None: ...
 
 global___GetOrderStateRequest = GetOrderStateRequest
 
@@ -559,7 +582,7 @@ class OrderState(google.protobuf.message.Message):
     instrument_uid: builtins.str
     """UID идентификатор инструмента."""
     order_request_id: builtins.str
-    """Идентификатор ключа идемпотентности, переданный клиентом."""
+    """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
     def __init__(
         self,
         *,
@@ -638,7 +661,7 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент."""
-    price_type: global___PriceType.ValueType
+    price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены."""
     def __init__(
         self,
@@ -648,9 +671,240 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
         idempotency_key: builtins.str = ...,
         quantity: builtins.int = ...,
         price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
-        price_type: global___PriceType.ValueType = ...,
+        price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "idempotency_key", b"idempotency_key", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_price", b"_price", "_price_type", b"_price_type", "price", b"price", "price_type", b"price_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_price", b"_price", "_price_type", b"_price_type", "account_id", b"account_id", "idempotency_key", b"idempotency_key", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_price", b"_price"]) -> typing_extensions.Literal["price"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_price_type", b"_price_type"]) -> typing_extensions.Literal["price_type"] | None: ...
 
 global___ReplaceOrderRequest = ReplaceOrderRequest
+
+class GetMaxLotsRequest(google.protobuf.message.Message):
+    """Запрос на расчет количества доступных для покупки/продажи лотов. Если не указывать цену инструмента, то расчет произведется по текущум ценам в стакане: по лучшему предложению для покупки и по лучшему спросу для продажи."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    account_id: builtins.str
+    """Номер счета"""
+    instrument_id: builtins.str
+    """Идентификатор инструмента, принимает значения Figi или instrument_uid"""
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена инструмента"""
+    def __init__(
+        self,
+        *,
+        account_id: builtins.str = ...,
+        instrument_id: builtins.str = ...,
+        price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_price", b"_price", "price", b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_price", b"_price", "account_id", b"account_id", "instrument_id", b"instrument_id", "price", b"price"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_price", b"_price"]) -> typing_extensions.Literal["price"] | None: ...
+
+global___GetMaxLotsRequest = GetMaxLotsRequest
+
+class GetMaxLotsResponse(google.protobuf.message.Message):
+    """Результат количество доступных для покупки/продажи лотов"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class BuyLimitsView(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        BUY_MONEY_AMOUNT_FIELD_NUMBER: builtins.int
+        BUY_MAX_LOTS_FIELD_NUMBER: builtins.int
+        BUY_MAX_MARKET_LOTS_FIELD_NUMBER: builtins.int
+        @property
+        def buy_money_amount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Количество доступной валюты для покупки"""
+        buy_max_lots: builtins.int
+        """Максимальное доступное количество лотов для покупки"""
+        buy_max_market_lots: builtins.int
+        """Максимальное доступное количество лотов для покупки для заявки по рыночной цене на текущий момент"""
+        def __init__(
+            self,
+            *,
+            buy_money_amount: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            buy_max_lots: builtins.int = ...,
+            buy_max_market_lots: builtins.int = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["buy_money_amount", b"buy_money_amount"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["buy_max_lots", b"buy_max_lots", "buy_max_market_lots", b"buy_max_market_lots", "buy_money_amount", b"buy_money_amount"]) -> None: ...
+
+    class SellLimitsView(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        SELL_MAX_LOTS_FIELD_NUMBER: builtins.int
+        sell_max_lots: builtins.int
+        """Максимальное доступное количество лотов для продажи"""
+        def __init__(
+            self,
+            *,
+            sell_max_lots: builtins.int = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["sell_max_lots", b"sell_max_lots"]) -> None: ...
+
+    CURRENCY_FIELD_NUMBER: builtins.int
+    BUY_LIMITS_FIELD_NUMBER: builtins.int
+    BUY_MARGIN_LIMITS_FIELD_NUMBER: builtins.int
+    SELL_LIMITS_FIELD_NUMBER: builtins.int
+    SELL_MARGIN_LIMITS_FIELD_NUMBER: builtins.int
+    currency: builtins.str
+    """Валюта инструмента"""
+    @property
+    def buy_limits(self) -> global___GetMaxLotsResponse.BuyLimitsView:
+        """Лимиты для покупок на собственные деньги"""
+    @property
+    def buy_margin_limits(self) -> global___GetMaxLotsResponse.BuyLimitsView:
+        """Лимиты для покупок с учетом маржинального кредитования"""
+    @property
+    def sell_limits(self) -> global___GetMaxLotsResponse.SellLimitsView:
+        """Лимиты для продаж по собственной позиции"""
+    @property
+    def sell_margin_limits(self) -> global___GetMaxLotsResponse.SellLimitsView:
+        """Лимиты для продаж с учетом маржинального кредитования"""
+    def __init__(
+        self,
+        *,
+        currency: builtins.str = ...,
+        buy_limits: global___GetMaxLotsResponse.BuyLimitsView | None = ...,
+        buy_margin_limits: global___GetMaxLotsResponse.BuyLimitsView | None = ...,
+        sell_limits: global___GetMaxLotsResponse.SellLimitsView | None = ...,
+        sell_margin_limits: global___GetMaxLotsResponse.SellLimitsView | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["buy_limits", b"buy_limits", "buy_margin_limits", b"buy_margin_limits", "sell_limits", b"sell_limits", "sell_margin_limits", b"sell_margin_limits"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["buy_limits", b"buy_limits", "buy_margin_limits", b"buy_margin_limits", "currency", b"currency", "sell_limits", b"sell_limits", "sell_margin_limits", b"sell_margin_limits"]) -> None: ...
+
+global___GetMaxLotsResponse = GetMaxLotsResponse
+
+class GetOrderPriceRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    DIRECTION_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    account_id: builtins.str
+    """Номер счета"""
+    instrument_id: builtins.str
+    """Идентификатор инструмента, принимает значения Figi или instrument_uid"""
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена инструмента"""
+    direction: global___OrderDirection.ValueType
+    """Направление заявки"""
+    quantity: builtins.int
+    """Количество лотов"""
+    def __init__(
+        self,
+        *,
+        account_id: builtins.str = ...,
+        instrument_id: builtins.str = ...,
+        price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        direction: global___OrderDirection.ValueType = ...,
+        quantity: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["price", b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "instrument_id", b"instrument_id", "price", b"price", "quantity", b"quantity"]) -> None: ...
+
+global___GetOrderPriceRequest = GetOrderPriceRequest
+
+class GetOrderPriceResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class ExtraBond(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ACI_VALUE_FIELD_NUMBER: builtins.int
+        NOMINAL_CONVERSION_RATE_FIELD_NUMBER: builtins.int
+        @property
+        def aci_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Значение НКД (накопленного купонного дохода) на дату"""
+        @property
+        def nominal_conversion_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Курс конвертации для замещающих облигаций"""
+        def __init__(
+            self,
+            *,
+            aci_value: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            nominal_conversion_rate: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "nominal_conversion_rate", b"nominal_conversion_rate"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "nominal_conversion_rate", b"nominal_conversion_rate"]) -> None: ...
+
+    class ExtraFuture(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        INITIAL_MARGIN_FIELD_NUMBER: builtins.int
+        @property
+        def initial_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Гарантийное обеспечение для фьючерса"""
+        def __init__(
+            self,
+            *,
+            initial_margin: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["initial_margin", b"initial_margin"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["initial_margin", b"initial_margin"]) -> None: ...
+
+    TOTAL_ORDER_AMOUNT_FIELD_NUMBER: builtins.int
+    INITIAL_ORDER_AMOUNT_FIELD_NUMBER: builtins.int
+    LOTS_REQUESTED_FIELD_NUMBER: builtins.int
+    EXECUTED_COMMISSION_FIELD_NUMBER: builtins.int
+    EXECUTED_COMMISSION_RUB_FIELD_NUMBER: builtins.int
+    SERVICE_COMMISSION_FIELD_NUMBER: builtins.int
+    DEAL_COMMISSION_FIELD_NUMBER: builtins.int
+    EXTRA_BOND_FIELD_NUMBER: builtins.int
+    EXTRA_FUTURE_FIELD_NUMBER: builtins.int
+    @property
+    def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Итоговая стоимость заявки"""
+    @property
+    def initial_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Стоимость заявки без комиссий, НКД, ГО (для фьючерсов — стоимость контрактов)"""
+    lots_requested: builtins.int
+    """Запрошено лотов"""
+    @property
+    def executed_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Общая комиссия"""
+    @property
+    def executed_commission_rub(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Общая комиссия в рублях"""
+    @property
+    def service_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сервисная комиссия"""
+    @property
+    def deal_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Комиссия за проведение сделки"""
+    @property
+    def extra_bond(self) -> global___GetOrderPriceResponse.ExtraBond:
+        """Дополнительная информация по облигациям"""
+    @property
+    def extra_future(self) -> global___GetOrderPriceResponse.ExtraFuture:
+        """Дополнительная информация по фьючерсам"""
+    def __init__(
+        self,
+        *,
+        total_order_amount: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        initial_order_amount: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        lots_requested: builtins.int = ...,
+        executed_commission: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        executed_commission_rub: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        service_commission: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        deal_commission: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        extra_bond: global___GetOrderPriceResponse.ExtraBond | None = ...,
+        extra_future: global___GetOrderPriceResponse.ExtraFuture | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["deal_commission", b"deal_commission", "executed_commission", b"executed_commission", "executed_commission_rub", b"executed_commission_rub", "extra_bond", b"extra_bond", "extra_future", b"extra_future", "initial_order_amount", b"initial_order_amount", "instrument_extra", b"instrument_extra", "service_commission", b"service_commission", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deal_commission", b"deal_commission", "executed_commission", b"executed_commission", "executed_commission_rub", b"executed_commission_rub", "extra_bond", b"extra_bond", "extra_future", b"extra_future", "initial_order_amount", b"initial_order_amount", "instrument_extra", b"instrument_extra", "lots_requested", b"lots_requested", "service_commission", b"service_commission", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["instrument_extra", b"instrument_extra"]) -> typing_extensions.Literal["extra_bond", "extra_future"] | None: ...
+
+global___GetOrderPriceResponse = GetOrderPriceResponse

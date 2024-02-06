@@ -30,6 +30,7 @@ jobs:
         run: make test
         env:
           INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
+          INVEST_TOKEN: ${{ secrets.INVEST_TOKEN }}
 
   build-windows:
     runs-on: windows-latest

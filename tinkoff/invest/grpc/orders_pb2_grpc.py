@@ -2,7 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from tinkoff.invest.grpc import orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2
+from tinkoff.invest.grpc import (
+    orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2,
+)
 
 
 class OrdersStreamServiceStub(object):
@@ -104,6 +106,16 @@ class OrdersServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
                 )
+        self.GetMaxLots = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OrdersService/GetMaxLots',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
+                )
+        self.GetOrderPrice = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OrdersService/GetOrderPrice',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceResponse.FromString,
+                )
 
 
 class OrdersServiceServicer(object):
@@ -147,6 +159,20 @@ class OrdersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetMaxLots(self, request, context):
+        """расчет количества доступных для покупки/продажи лотов
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetOrderPrice(self, request, context):
+        """Метод получения предварительной стоимости для лимитной заявки
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OrdersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -174,6 +200,16 @@ def add_OrdersServiceServicer_to_server(servicer, server):
                     servicer.ReplaceOrder,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.SerializeToString,
+            ),
+            'GetMaxLots': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetMaxLots,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.SerializeToString,
+            ),
+            'GetOrderPrice': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOrderPrice,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -270,5 +306,39 @@ class OrdersService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/ReplaceOrder',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetMaxLots(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/GetMaxLots',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetOrderPrice(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/GetOrderPrice',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrderPriceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

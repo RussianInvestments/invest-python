@@ -6,11 +6,10 @@ from tinkoff.invest.strategies.base.signal import (
     OpenLongMarketOrder,
     OpenShortMarketOrder,
 )
-from tinkoff.invest.strategies.base.signal_executor_interface import ISignalExecutor
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 
 
-class SignalExecutor(ISignalExecutor):
+class SignalExecutor:
     def __init__(
         self,
         services: Services,

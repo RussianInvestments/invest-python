@@ -2,19 +2,21 @@ import os
 import shutil
 import sys
 from http import HTTPStatus
+from pathlib import Path
 from zipfile import ZipFile
 
 import requests
 
 BRANCH = "main"
 
-URL = f"https://github.com/Tinkoff/investAPI/archive/refs/heads/{BRANCH}.zip"
+URL = f"https://github.com/RussianInvestments/investAPI/archive/refs/heads/{BRANCH}.zip"
 OUTPUT_PATH = "protos/tinkoff/invest/grpc"
 PROTOS_TMP_ZIP = "protos.zip"
 ZIP_PROTOS_ROOT_PATH_BRANCH = BRANCH.replace("/", "-")
 ZIP_PROTOS_ROOT_PATH = f"investAPI-{ZIP_PROTOS_ROOT_PATH_BRANCH}"
 ZIP_PROTOS_PATH = f"{ZIP_PROTOS_ROOT_PATH}/src/docs/contracts"
 FILES = [
+    "google/api/field_behavior.proto",
     "common.proto",
     "instruments.proto",
     "marketdata.proto",
@@ -65,7 +67,9 @@ def _extract_protos():
 def _move_protos():
     os.makedirs(OUTPUT_PATH, exist_ok=True)
     for name in FILES:
-        shutil.move(f"{ZIP_PROTOS_PATH}/{name}", OUTPUT_PATH)
+        folders = "/".join(name.split("/")[:-1])
+        Path(f"{OUTPUT_PATH}/{folders}").mkdir(parents=True, exist_ok=True)
+        shutil.move(f"{ZIP_PROTOS_PATH}/{name}", f"{OUTPUT_PATH}/{folders}")
 
 
 def _clear_in_end():

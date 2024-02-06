@@ -74,7 +74,6 @@ class InstrumentMarketDataStorage(
     ) -> Iterable[Dict]:
         start, end = request_range
         for row in reader:
-
             row_time = dateutil.parser.parse(row["time"])
             if start <= row_time <= end:
                 yield row
@@ -223,7 +222,7 @@ class InstrumentMarketDataStorage(
 
     def _get_distinct_product(
         self, cached_range_in_file: Dict[DatetimeRange, Path]
-    ) -> Iterable[Tuple[DatetimeRange, Path]]:
+    ) -> Iterable[Tuple[Tuple[DatetimeRange, Path], Tuple[DatetimeRange, Path]]]:
         sorted_items = self._get_cached_items_sorted_by_start(cached_range_in_file)
         for i, items1 in enumerate(sorted_items):  # pylint: disable=R1702
             for j, items2 in enumerate(sorted_items):
@@ -235,7 +234,7 @@ class InstrumentMarketDataStorage(
     ) -> Dict[DatetimeRange, Path]:
         new_cached_range_in_file = cached_range_in_file.copy()
         file_pairs = self._get_distinct_product(new_cached_range_in_file)
-        for ((cached_range, cached_file), (cached_range2, cached_file2)) in file_pairs:
+        for (cached_range, cached_file), (cached_range2, cached_file2) in file_pairs:
             intersection_range = self._get_intersection(
                 request_range=cached_range2, cached_range=cached_range
             )

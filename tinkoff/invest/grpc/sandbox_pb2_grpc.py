@@ -2,10 +2,12 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from tinkoff.invest.grpc import operations_pb2 as tinkoff_dot_invest_dot_grpc_dot_operations__pb2
-from tinkoff.invest.grpc import orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2
-from tinkoff.invest.grpc import sandbox_pb2 as tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2
-from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_users__pb2
+from tinkoff.invest.grpc import (
+    operations_pb2 as tinkoff_dot_invest_dot_grpc_dot_operations__pb2,
+    orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2,
+    sandbox_pb2 as tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2,
+    users_pb2 as tinkoff_dot_invest_dot_grpc_dot_users__pb2,
+)
 
 
 class SandboxServiceStub(object):
@@ -144,7 +146,7 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrderState(self, request, context):
-        """Метод получения статуса заявки в песочнице.
+        """Метод получения статуса заявки в песочнице. Заявки хранятся в таблице 7 дней.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

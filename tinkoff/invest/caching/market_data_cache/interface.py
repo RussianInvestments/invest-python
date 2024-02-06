@@ -1,17 +1,13 @@
-import abc
-from typing import Generic, Iterable, TypeVar
+from typing import Protocol, TypeVar
 
 from tinkoff.invest.caching.market_data_cache.datetime_range import DatetimeRange
-from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data import (
-    InstrumentDateRangeData,
-)
 
 TInstrumentData = TypeVar("TInstrumentData")
 
 
-class IInstrumentMarketDataStorage(abc.ABC, Generic[TInstrumentData]):
-    def get(self, request_range: DatetimeRange) -> Iterable[InstrumentDateRangeData]:
+class IInstrumentMarketDataStorage(Protocol[TInstrumentData]):
+    def get(self, request_range: DatetimeRange) -> TInstrumentData:
         pass
 
-    def update(self, data_list: Iterable[InstrumentDateRangeData]):
+    def update(self, data_list: TInstrumentData):
         pass

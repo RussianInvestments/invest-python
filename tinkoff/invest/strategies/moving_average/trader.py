@@ -89,7 +89,7 @@ class MovingAverageStrategyTrader(Trader):
             while True:
                 time.sleep(1)
 
-        self._market_data_stream = self._services.market_data_stream.market_data_stream(
+        self._market_data_stream = self._services.market_data_stream.market_data_stream(  # type: ignore
             request_iterator()
         )
 
@@ -142,7 +142,7 @@ class MovingAverageStrategyTrader(Trader):
     def _execute(self, signal: Signal) -> None:
         logger.info("Trying to execute signal %s", signal)
         try:
-            self._signal_executor.execute(signal)
+            self._signal_executor.execute(signal)  # type: ignore
         except InvestError:
             was_executed = False
         else:

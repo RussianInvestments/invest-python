@@ -175,7 +175,7 @@ def round_datetime_range(
     date_range: Tuple[datetime, datetime],
     interval: CandleInterval,
 ) -> Tuple[datetime, datetime]:
-    """Expands datetime range to nearest round range.
+    """Expand datetime range to nearest round range.
 
     interval = CandleInterval.CANDLE_INTERVAL_DAY,
     date_range = [

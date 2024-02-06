@@ -2,7 +2,7 @@
 # pylint:disable=too-many-instance-attributes
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, SupportsAbs
+from typing import List, Optional, SupportsAbs
 
 from . import _grpc_helpers
 
@@ -63,6 +63,17 @@ class SubscriptionInterval(_grpc_helpers.Enum):
     SUBSCRIPTION_INTERVAL_UNSPECIFIED = 0
     SUBSCRIPTION_INTERVAL_ONE_MINUTE = 1
     SUBSCRIPTION_INTERVAL_FIVE_MINUTES = 2
+    SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES = 3
+    SUBSCRIPTION_INTERVAL_ONE_HOUR = 4
+    SUBSCRIPTION_INTERVAL_ONE_DAY = 5
+    SUBSCRIPTION_INTERVAL_2_MIN = 6
+    SUBSCRIPTION_INTERVAL_3_MIN = 7
+    SUBSCRIPTION_INTERVAL_10_MIN = 8
+    SUBSCRIPTION_INTERVAL_30_MIN = 9
+    SUBSCRIPTION_INTERVAL_2_HOUR = 10
+    SUBSCRIPTION_INTERVAL_4_HOUR = 11
+    SUBSCRIPTION_INTERVAL_WEEK = 12
+    SUBSCRIPTION_INTERVAL_MONTH = 13
 
 
 class SubscriptionStatus(_grpc_helpers.Enum):
@@ -75,6 +86,7 @@ class SubscriptionStatus(_grpc_helpers.Enum):
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED = 6
     SUBSCRIPTION_STATUS_INTERNAL_ERROR = 7
     SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS = 8
+    SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND = 9
 
 
 class TradeDirection(_grpc_helpers.Enum):
@@ -291,12 +303,6 @@ class InstrumentType(_grpc_helpers.Enum):
     INSTRUMENT_TYPE_CLEARING_CERTIFICATE = 8
 
 
-class PriceType(_grpc_helpers.Enum):
-    PRICE_TYPE_UNSPECIFIED = 0
-    PRICE_TYPE_POINT = 1
-    PRICE_TYPE_CURRENCY = 2
-
-
 class OptionDirection(_grpc_helpers.Enum):
     OPTION_DIRECTION_UNSPECIFIED = 0
     OPTION_DIRECTION_PUT = 1
@@ -333,6 +339,52 @@ class RiskLevel(_grpc_helpers.Enum):
     RISK_LEVEL_LOW = 1
     RISK_LEVEL_MODERATE = 2
     RISK_LEVEL_HIGH = 3
+
+
+class StopOrderStatusOption(_grpc_helpers.Enum):
+    STOP_ORDER_STATUS_UNSPECIFIED = 0
+    STOP_ORDER_STATUS_ALL = 1
+    STOP_ORDER_STATUS_ACTIVE = 2
+    STOP_ORDER_STATUS_EXECUTED = 3
+    STOP_ORDER_STATUS_CANCELED = 4
+    STOP_ORDER_STATUS_EXPIRED = 5
+
+
+class ExchangeOrderType(_grpc_helpers.Enum):
+    EXCHANGE_ORDER_TYPE_UNSPECIFIED = 0
+    EXCHANGE_ORDER_TYPE_MARKET = 1
+    EXCHANGE_ORDER_TYPE_LIMIT = 2
+
+
+class TakeProfitType(_grpc_helpers.Enum):
+    TAKE_PROFIT_TYPE_UNSPECIFIED = 0
+    TAKE_PROFIT_TYPE_REGULAR = 1
+    TAKE_PROFIT_TYPE_TRAILING = 2
+
+
+class TrailingValueType(_grpc_helpers.Enum):
+    TRAILING_VALUE_UNSPECIFIED = 0
+    TRAILING_VALUE_ABSOLUTE = 1
+    TRAILING_VALUE_RELATIVE = 2
+
+
+class TrailingStopStatus(_grpc_helpers.Enum):
+    TRAILING_STOP_UNSPECIFIED = 0
+    TRAILING_STOP_ACTIVE = 1
+    TRAILING_STOP_ACTIVATED = 2
+
+
+class PriceType(_grpc_helpers.Enum):
+    PRICE_TYPE_UNSPECIFIED = 0
+    PRICE_TYPE_POINT = 1
+    PRICE_TYPE_CURRENCY = 2
+
+
+class TimeInForceType(_grpc_helpers.Enum):
+    TIME_IN_FORCE_UNSPECIFIED = 0
+    TIME_IN_FORCE_DAY = 1
+    TIME_IN_FORCE_FILL_AND_KILL = 2
+    TIME_IN_FORCE_FILL_OR_KILL = 3
 
 
 @dataclass(eq=False, repr=True)
@@ -403,9 +455,9 @@ class Ping(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class TradingSchedulesRequest(_grpc_helpers.Message):
-    exchange: str = _grpc_helpers.string_field(1)
-    from_: datetime = _grpc_helpers.message_field(2)
-    to: datetime = _grpc_helpers.message_field(3)
+    exchange: Optional[str] = _grpc_helpers.string_field(1)
+    from_: Optional[datetime] = _grpc_helpers.message_field(2)
+    to: Optional[datetime] = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -442,19 +494,19 @@ class TradingDay(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
 @dataclass(eq=False, repr=True)
 class InstrumentRequest(_grpc_helpers.Message):
     id_type: "InstrumentIdType" = _grpc_helpers.enum_field(1)
-    class_code: str = _grpc_helpers.string_field(2)
+    class_code: Optional[str] = _grpc_helpers.string_field(2)
     id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
 class InstrumentsRequest(_grpc_helpers.Message):
-    instrument_status: "InstrumentStatus" = _grpc_helpers.enum_field(1)
+    instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(1)
 
 
 @dataclass(eq=False, repr=True)
 class FilterOptionsRequest(_grpc_helpers.Message):
-    basic_asset_uid: str = _grpc_helpers.string_field(1)
-    basic_asset_position_uid: str = _grpc_helpers.string_field(2)
+    basic_asset_uid: Optional[str] = _grpc_helpers.string_field(1)
+    basic_asset_position_uid: Optional[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -470,8 +522,9 @@ class BondsResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetBondCouponsRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    from_: datetime = _grpc_helpers.message_field(2)
-    to: datetime = _grpc_helpers.message_field(3)
+    from_: Optional[datetime] = _grpc_helpers.message_field(2)
+    to: Optional[datetime] = _grpc_helpers.message_field(3)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -772,6 +825,9 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     blocked_tca_flag: bool = _grpc_helpers.bool_field(44)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
+    initial_margin_on_buy: "MoneyValue" = _grpc_helpers.message_field(61)
+    initial_margin_on_sell: "MoneyValue" = _grpc_helpers.message_field(62)
+    min_price_increment_amount: "Quotation" = _grpc_helpers.message_field(63)
 
 
 @dataclass(eq=False, repr=True)
@@ -823,6 +879,7 @@ class GetAccruedInterestsRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -841,6 +898,7 @@ class AccruedInterest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetFuturesMarginRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -897,8 +955,9 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
 @dataclass(eq=False, repr=True)
 class GetDividendsRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    from_: datetime = _grpc_helpers.message_field(2)
-    to: datetime = _grpc_helpers.message_field(3)
+    from_: Optional[datetime] = _grpc_helpers.message_field(2)
+    to: Optional[datetime] = _grpc_helpers.message_field(3)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -932,7 +991,7 @@ class AssetResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class AssetsRequest(_grpc_helpers.Message):
-    instrument_type: "InstrumentType" = _grpc_helpers.enum_field(1)
+    instrument_type: Optional["InstrumentType"] = _grpc_helpers.enum_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1180,8 +1239,8 @@ class CountryResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class FindInstrumentRequest(_grpc_helpers.Message):
     query: str = _grpc_helpers.string_field(1)
-    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(2)
-    api_trade_available_flag: bool = _grpc_helpers.bool_field(3)
+    instrument_kind: Optional["InstrumentType"] = _grpc_helpers.enum_field(2)
+    api_trade_available_flag: Optional[bool] = _grpc_helpers.bool_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1211,7 +1270,7 @@ class InstrumentShort(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetBrandsRequest(_grpc_helpers.Message):
-    pass
+    paging: "Page" = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1222,6 +1281,7 @@ class GetBrandRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetBrandsResponse(_grpc_helpers.Message):
     brands: List["Brand"] = _grpc_helpers.message_field(1)
+    paging: "PageResponse" = _grpc_helpers.message_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1314,6 +1374,7 @@ class CandleSubscription(_grpc_helpers.Message):
     interval: "SubscriptionInterval" = _grpc_helpers.enum_field(2)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(3)
     instrument_uid: str = _grpc_helpers.string_field(4)
+    waiting_close: bool = _grpc_helpers.bool_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1477,11 +1538,11 @@ class TradingStatus(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetCandlesRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
-    instrument_id: str = _grpc_helpers.string_field(5)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1521,9 +1582,9 @@ class LastPrice(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetOrderBookRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
-    instrument_id: str = _grpc_helpers.string_field(3)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1544,8 +1605,8 @@ class GetOrderBookResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetTradingStatusRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
-    instrument_id: str = _grpc_helpers.string_field(2)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1570,10 +1631,10 @@ class GetTradingStatusResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetLastTradesRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
-    instrument_id: str = _grpc_helpers.string_field(4)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -1606,16 +1667,17 @@ class InstrumentClosePriceResponse(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     instrument_uid: str = _grpc_helpers.string_field(2)
     price: "Quotation" = _grpc_helpers.message_field(11)
+    evening_session_price: "Quotation" = _grpc_helpers.message_field(12)
     time: datetime = _grpc_helpers.message_field(21)
 
 
 @dataclass(eq=False, repr=True)
 class OperationsRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    from_: datetime = _grpc_helpers.message_field(2)
-    to: datetime = _grpc_helpers.message_field(3)
-    state: "OperationState" = _grpc_helpers.enum_field(4)
-    figi: str = _grpc_helpers.string_field(5)
+    from_: Optional[datetime] = _grpc_helpers.message_field(2)
+    to: Optional[datetime] = _grpc_helpers.message_field(3)
+    state: Optional["OperationState"] = _grpc_helpers.enum_field(4)
+    figi: Optional[str] = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1661,7 +1723,7 @@ class CurrencyRequest(_grpc_helpers.Enum):
 @dataclass(eq=False, repr=True)
 class PortfolioRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    currency: CurrencyRequest = _grpc_helpers.enum_field(2)
+    currency: Optional[CurrencyRequest] = _grpc_helpers.enum_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1788,14 +1850,16 @@ class OrderTrade(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class PostOrderRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
     quantity: int = _grpc_helpers.int64_field(2)
-    price: "Quotation" = _grpc_helpers.message_field(3)
+    price: Optional["Quotation"] = _grpc_helpers.message_field(3)
     direction: "OrderDirection" = _grpc_helpers.enum_field(4)
     account_id: str = _grpc_helpers.string_field(5)
     order_type: "OrderType" = _grpc_helpers.enum_field(6)
     order_id: str = _grpc_helpers.string_field(7)
     instrument_id: str = _grpc_helpers.string_field(8)
+    time_in_force: "TimeInForceType" = _grpc_helpers.message_field(9)
+    price_type: "PriceType" = _grpc_helpers.message_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -1819,6 +1883,7 @@ class PostOrderResponse(  # pylint:disable=too-many-instance-attributes
     message: str = _grpc_helpers.string_field(15)
     initial_order_price_pt: "Quotation" = _grpc_helpers.message_field(16)
     instrument_uid: str = _grpc_helpers.string_field(17)
+    order_request_id: str = _grpc_helpers.string_field(20)
 
 
 @dataclass(eq=False, repr=True)
@@ -1836,6 +1901,7 @@ class CancelOrderResponse(_grpc_helpers.Message):
 class GetOrderStateRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(2)
+    price_type: "PriceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1884,8 +1950,8 @@ class ReplaceOrderRequest(_grpc_helpers.Message):
     order_id: str = _grpc_helpers.string_field(6)
     idempotency_key: str = _grpc_helpers.string_field(7)
     quantity: int = _grpc_helpers.int64_field(11)
-    price: "Quotation" = _grpc_helpers.message_field(12)
-    price_type: "PriceType" = _grpc_helpers.enum_field(13)
+    price: Optional["Quotation"] = _grpc_helpers.message_field(12)
+    price_type: Optional["PriceType"] = _grpc_helpers.enum_field(13)
 
 
 @dataclass(eq=False, repr=True)
@@ -2005,16 +2071,28 @@ class SandboxPayInResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class PostStopOrderRequest(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
     quantity: int = _grpc_helpers.int64_field(2)
-    price: "Quotation" = _grpc_helpers.message_field(3)
-    stop_price: "Quotation" = _grpc_helpers.message_field(4)
+    price: Optional["Quotation"] = _grpc_helpers.message_field(3)
+    stop_price: Optional["Quotation"] = _grpc_helpers.message_field(4)
     direction: "StopOrderDirection" = _grpc_helpers.enum_field(5)
     account_id: str = _grpc_helpers.string_field(6)
     expiration_type: "StopOrderExpirationType" = _grpc_helpers.enum_field(7)
     stop_order_type: "StopOrderType" = _grpc_helpers.enum_field(8)
-    expire_date: datetime = _grpc_helpers.message_field(9)
+    expire_date: Optional[datetime] = _grpc_helpers.message_field(9)
     instrument_id: str = _grpc_helpers.string_field(10)
+    exchange_order_type: "ExchangeOrderType" = _grpc_helpers.message_field(11)
+    take_profit_type: "TakeProfitType" = _grpc_helpers.message_field(12)
+    trailing_data: "PostStopOrderRequestTrailingData" = _grpc_helpers.message_field(13)
+    price_type: "PriceType" = _grpc_helpers.message_field(14)
+
+
+@dataclass(eq=False, repr=True)
+class PostStopOrderRequestTrailingData(_grpc_helpers.Message):
+    indent: "Quotation" = _grpc_helpers.message_field(1)
+    indent_type: "TrailingValueType" = _grpc_helpers.message_field(2)
+    spread: "Quotation" = _grpc_helpers.message_field(3)
+    spread_type: "TrailingValueType" = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -2025,6 +2103,9 @@ class PostStopOrderResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetStopOrdersRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
+    status: "StopOrderStatusOption" = _grpc_helpers.message_field(2)
+    from_: datetime = _grpc_helpers.message_field(3)
+    to: datetime = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -2057,6 +2138,20 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     price: "MoneyValue" = _grpc_helpers.message_field(10)
     stop_price: "MoneyValue" = _grpc_helpers.message_field(11)
     instrument_uid: str = _grpc_helpers.string_field(12)
+    take_profit_type: "TakeProfitType" = _grpc_helpers.message_field(13)
+    trailing_data: "StopOrderTrailingData" = _grpc_helpers.message_field(14)
+    status: "StopOrderStatusOption" = _grpc_helpers.message_field(15)
+
+
+@dataclass(eq=False, repr=True)
+class StopOrderTrailingData(_grpc_helpers.Message):
+    indent: "Quotation" = _grpc_helpers.message_field(1)
+    indent_type: "TrailingValueType" = _grpc_helpers.message_field(2)
+    spread: "Quotation" = _grpc_helpers.message_field(3)
+    spread_type: "TrailingValueType" = _grpc_helpers.message_field(4)
+    status: "TrailingStopStatus" = _grpc_helpers.message_field(5)
+    price: "Quotation" = _grpc_helpers.message_field(7)
+    extr: "Quotation" = _grpc_helpers.message_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -2094,7 +2189,7 @@ class GenerateBrokerReportResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetBrokerReportRequest(_grpc_helpers.Message):
     task_id: str = _grpc_helpers.string_field(1)
-    page: int = _grpc_helpers.int32_field(2)
+    page: Optional[int] = _grpc_helpers.int32_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -2185,7 +2280,7 @@ class GenerateDividendsForeignIssuerReportRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetDividendsForeignIssuerReportRequest(_grpc_helpers.Message):
     task_id: str = _grpc_helpers.string_field(1)
-    page: int = _grpc_helpers.int32_field(2)
+    page: Optional[int] = _grpc_helpers.int32_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -2249,16 +2344,16 @@ class AccountSubscriptionStatus(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetOperationsByCursorRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    instrument_id: str = _grpc_helpers.string_field(2)
-    from_: datetime = _grpc_helpers.message_field(6)
-    to: datetime = _grpc_helpers.message_field(7)
-    cursor: str = _grpc_helpers.string_field(11)
-    limit: int = _grpc_helpers.int32_field(12)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(2)
+    from_: Optional[datetime] = _grpc_helpers.message_field(6)
+    to: Optional[datetime] = _grpc_helpers.message_field(7)
+    cursor: Optional[str] = _grpc_helpers.string_field(11)
+    limit: Optional[int] = _grpc_helpers.int32_field(12)
     operation_types: List["OperationType"] = _grpc_helpers.message_field(13)
-    state: "OperationState" = _grpc_helpers.message_field(14)
-    without_commissions: bool = _grpc_helpers.bool_field(15)
-    without_trades: bool = _grpc_helpers.bool_field(16)
-    without_overnights: bool = _grpc_helpers.bool_field(17)
+    state: Optional["OperationState"] = _grpc_helpers.message_field(14)
+    without_commissions: Optional[bool] = _grpc_helpers.bool_field(15)
+    without_trades: Optional[bool] = _grpc_helpers.bool_field(16)
+    without_overnights: Optional[bool] = _grpc_helpers.bool_field(17)
 
 
 @dataclass(eq=False, repr=True)
@@ -2355,3 +2450,150 @@ class PositionData(_grpc_helpers.Message):
 class PositionsMoney(_grpc_helpers.Message):
     available_value: "MoneyValue" = _grpc_helpers.message_field(1)
     blocked_value: "MoneyValue" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class Page(_grpc_helpers.Message):
+    limit: int = _grpc_helpers.int32_field(1)
+    page_number: int = _grpc_helpers.int32_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class PageResponse(_grpc_helpers.Message):
+    limit: int = _grpc_helpers.int32_field(1)
+    page_number: int = _grpc_helpers.int32_field(2)
+    total_count: int = _grpc_helpers.int32_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GetAssetFundamentalsRequest(_grpc_helpers.Message):
+    assets: List[str] = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetAssetFundamentalsResponse(_grpc_helpers.Message):
+    fundamentals: List["StatisticResponse"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class StatisticResponse(_grpc_helpers.Message):
+    asset_uid: str = _grpc_helpers.string_field(1)
+    currency: str = _grpc_helpers.string_field(2)
+    market_capitalization: float = _grpc_helpers.double_field(3)
+    high_price_last_52_weeks: float = _grpc_helpers.double_field(4)
+    low_price_last_52_weeks: float = _grpc_helpers.double_field(5)
+    average_daily_volume_last_10_days: float = _grpc_helpers.double_field(6)
+    average_daily_volume_last_4_weeks: float = _grpc_helpers.double_field(7)
+    beta: float = _grpc_helpers.double_field(8)
+    free_float: float = _grpc_helpers.double_field(9)
+    forward_annual_dividend_yield: float = _grpc_helpers.double_field(10)
+    shares_outstanding: float = _grpc_helpers.double_field(11)
+    revenue_ttm: float = _grpc_helpers.double_field(12)
+    ebitda_ttm: float = _grpc_helpers.double_field(13)
+    net_income_ttm: float = _grpc_helpers.double_field(14)
+    eps_ttm: float = _grpc_helpers.double_field(15)
+    diluted_eps_ttm: float = _grpc_helpers.double_field(16)
+    free_cash_flow_ttm: float = _grpc_helpers.double_field(17)
+    five_year_annual_revenue_growth_rate: float = _grpc_helpers.double_field(18)
+    three_year_annual_revenue_growth_rate: float = _grpc_helpers.double_field(19)
+    pe_ratio_ttm: float = _grpc_helpers.double_field(20)
+    price_to_sales_ttm: float = _grpc_helpers.double_field(21)
+    price_to_book_ttm: float = _grpc_helpers.double_field(22)
+    price_to_free_cash_flow_ttm: float = _grpc_helpers.double_field(23)
+    total_enterprise_value_mrq: float = _grpc_helpers.double_field(24)
+    ev_to_ebitda_mrq: float = _grpc_helpers.double_field(25)
+    net_margin_mrq: float = _grpc_helpers.double_field(26)
+    net_interest_margin_mrq: float = _grpc_helpers.double_field(27)
+    roe: float = _grpc_helpers.double_field(28)
+    roa: float = _grpc_helpers.double_field(29)
+    roic: float = _grpc_helpers.double_field(30)
+    total_debt_mrq: float = _grpc_helpers.double_field(31)
+    total_debt_to_equity_mrq: float = _grpc_helpers.double_field(32)
+    total_debt_to_ebitda_mrq: float = _grpc_helpers.double_field(33)
+    free_cash_flow_to_price: float = _grpc_helpers.double_field(34)
+    net_debt_to_ebitda: float = _grpc_helpers.double_field(35)
+    current_ratio_mrq: float = _grpc_helpers.double_field(36)
+    fixed_charge_coverage_ratio_fy: float = _grpc_helpers.double_field(37)
+    dividend_yield_daily_ttm: float = _grpc_helpers.double_field(38)
+    dividend_rate_ttm: float = _grpc_helpers.double_field(39)
+    dividends_per_share: float = _grpc_helpers.double_field(40)
+    five_years_average_dividend_yield: float = _grpc_helpers.double_field(41)
+    five_year_annual_dividend_growth_rate: float = _grpc_helpers.double_field(42)
+    dividend_payout_ratio_fy: float = _grpc_helpers.double_field(43)
+    buy_back_ttm: float = _grpc_helpers.double_field(44)
+    one_year_annual_revenue_growth_rate: float = _grpc_helpers.double_field(45)
+    domicile_indicator_code: str = _grpc_helpers.string_field(46)
+    adr_to_common_share_ratio: float = _grpc_helpers.double_field(47)
+    number_of_employees: float = _grpc_helpers.double_field(48)
+    ex_dividend_date: datetime = _grpc_helpers.message_field(49)
+    fiscal_period_start_date: datetime = _grpc_helpers.message_field(50)
+    fiscal_period_end_date: datetime = _grpc_helpers.message_field(51)
+    revenue_change_five_years: float = _grpc_helpers.double_field(53)
+    eps_change_five_years: float = _grpc_helpers.double_field(54)
+    ebitda_change_five_years: float = _grpc_helpers.double_field(55)
+    total_debt_change_five_years: float = _grpc_helpers.double_field(56)
+    ev_to_sales: float = _grpc_helpers.double_field(57)
+
+
+@dataclass(eq=False, repr=True)
+class GetMaxLotsRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    instrument_id: str = _grpc_helpers.string_field(2)
+    price: Optional["Quotation"] = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GetMaxLotsResponse(_grpc_helpers.Message):
+    currency: str = _grpc_helpers.string_field(1)
+    buy_limits: "BuyLimitsView" = _grpc_helpers.message_field(2)
+    buy_margin_limits: "BuyLimitsView" = _grpc_helpers.message_field(3)
+    sell_limits: "SellLimitsView" = _grpc_helpers.message_field(4)
+    sell_margin_limits: "SellLimitsView" = _grpc_helpers.message_field(5)
+
+
+@dataclass(eq=False, repr=True)
+class BuyLimitsView(_grpc_helpers.Message):
+    buy_money_amount: "Quotation" = _grpc_helpers.message_field(1)
+    buy_max_lots: int = _grpc_helpers.int64_field(2)
+    buy_max_market_lots: int = _grpc_helpers.int64_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class SellLimitsView(_grpc_helpers.Message):
+    sell_max_lots: int = _grpc_helpers.int64_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetOrderPriceRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    instrument_id: str = _grpc_helpers.string_field(2)
+    price: "Quotation" = _grpc_helpers.message_field(3)
+    direction: "OrderDirection" = _grpc_helpers.message_field(12)
+    quantity: int = _grpc_helpers.int64_field(13)
+
+
+@dataclass(eq=False, repr=True)
+class GetOrderPriceResponse(_grpc_helpers.Message):
+    total_order_amount: "MoneyValue" = _grpc_helpers.message_field(1)
+    initial_order_amount: "MoneyValue" = _grpc_helpers.message_field(5)
+    lots_requested: int = _grpc_helpers.int64_field(3)
+    executed_commission: "MoneyValue" = _grpc_helpers.message_field(7)
+    executed_commission_rub: "MoneyValue" = _grpc_helpers.message_field(8)
+    service_commission: "MoneyValue" = _grpc_helpers.message_field(9)
+    deal_commission: "MoneyValue" = _grpc_helpers.message_field(10)
+
+    extra_bond: "ExtraBond" = _grpc_helpers.message_field(12, group="instrument_extra")
+    extra_future: "ExtraFuture" = _grpc_helpers.message_field(
+        13, group="instrument_extra"
+    )
+
+
+@dataclass(eq=False, repr=True)
+class ExtraBond(_grpc_helpers.Message):
+    aci_value: "MoneyValue" = _grpc_helpers.message_field(2)
+    nominal_conversion_rate: "Quotation" = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class ExtraFuture(_grpc_helpers.Message):
+    initial_margin: "MoneyValue" = _grpc_helpers.message_field(2)
