@@ -32,7 +32,7 @@ PROGRAMMERS_DAY = datetime.datetime(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
 )
-@pytest.mark.skip('todo fix')
+@pytest.mark.skip("todo fix")
 class TestSandboxCachedLoad:
     @pytest.mark.parametrize(
         "calls_kwargs",
