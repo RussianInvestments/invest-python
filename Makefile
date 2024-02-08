@@ -80,7 +80,8 @@ install:
 
 .PHONY: publish
 publish:
-	@poetry publish --build --no-interaction --username=$(pypi_username) --password=$(pypi_password)
+	@poetry config pypi-token.pypi $(pypi_token)
+	@poetry publish --build --no-interaction
 
 .PHONY: download-protos
 download-protos:
