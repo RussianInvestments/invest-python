@@ -29,7 +29,7 @@ class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     OPERATION_STATE_UNSPECIFIED: _OperationState.ValueType  # 0
     """Статус операции не определён"""
     OPERATION_STATE_EXECUTED: _OperationState.ValueType  # 1
-    """Исполнена."""
+    """Исполнена частично или полностью."""
     OPERATION_STATE_CANCELED: _OperationState.ValueType  # 2
     """Отменена."""
     OPERATION_STATE_PROGRESS: _OperationState.ValueType  # 3
@@ -41,7 +41,7 @@ class OperationState(_OperationState, metaclass=_OperationStateEnumTypeWrapper):
 OPERATION_STATE_UNSPECIFIED: OperationState.ValueType  # 0
 """Статус операции не определён"""
 OPERATION_STATE_EXECUTED: OperationState.ValueType  # 1
-"""Исполнена."""
+"""Исполнена частично или полностью."""
 OPERATION_STATE_CANCELED: OperationState.ValueType  # 2
 """Отменена."""
 OPERATION_STATE_PROGRESS: OperationState.ValueType  # 3

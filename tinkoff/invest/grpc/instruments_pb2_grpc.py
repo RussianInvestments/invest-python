@@ -39,6 +39,11 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.FromString,
                 )
+        self.GetBondEvents = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondEvents',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsResponse.FromString,
+                )
         self.CurrencyBy = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/CurrencyBy',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
@@ -93,6 +98,11 @@ class InstrumentsServiceStub(object):
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Shares',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.FromString,
+                )
+        self.Indicatives = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Indicatives',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesResponse.FromString,
                 )
         self.GetAccruedInterests = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAccruedInterests',
@@ -159,6 +169,21 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.FromString,
                 )
+        self.GetAssetReports = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetReports',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsResponse.FromString,
+                )
+        self.GetConsensusForecasts = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetConsensusForecasts',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsResponse.FromString,
+                )
+        self.GetForecastBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetForecastBy',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastResponse.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -190,6 +215,13 @@ class InstrumentsServiceServicer(object):
 
     def GetBondCoupons(self, request, context):
         """Метод получения графика выплат купонов по облигации.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBondEvents(self, request, context):
+        """Метод получения событий по облигации
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -267,6 +299,13 @@ class InstrumentsServiceServicer(object):
 
     def Shares(self, request, context):
         """Метод получения списка акций.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Indicatives(self, request, context):
+        """Метод получения индикативных инструментов (индексов, товаров и др.)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -363,6 +402,27 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAssetReports(self, request, context):
+        """Метод получения расписания выхода отчетностей эмитентов
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetConsensusForecasts(self, request, context):
+        """Метод получения мнения аналитиков по инструменту
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetForecastBy(self, request, context):
+        """Метод получения прогнозов инвестдомов по инструменту
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -385,6 +445,11 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetBondCoupons,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.SerializeToString,
+            ),
+            'GetBondEvents': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBondEvents,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsResponse.SerializeToString,
             ),
             'CurrencyBy': grpc.unary_unary_rpc_method_handler(
                     servicer.CurrencyBy,
@@ -440,6 +505,11 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.Shares,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.SerializeToString,
+            ),
+            'Indicatives': grpc.unary_unary_rpc_method_handler(
+                    servicer.Indicatives,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesResponse.SerializeToString,
             ),
             'GetAccruedInterests': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccruedInterests,
@@ -505,6 +575,21 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetAssetFundamentals,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.SerializeToString,
+            ),
+            'GetAssetReports': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAssetReports,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsResponse.SerializeToString,
+            ),
+            'GetConsensusForecasts': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetConsensusForecasts,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsResponse.SerializeToString,
+            ),
+            'GetForecastBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetForecastBy,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -584,6 +669,23 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondCoupons',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBondEvents(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondEvents',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondEventsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -771,6 +873,23 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Shares',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Indicatives(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Indicatives',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.IndicativesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -992,5 +1111,56 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetFundamentals',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetFundamentalsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAssetReports(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetReports',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetAssetReportsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetConsensusForecasts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetConsensusForecasts',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetConsensusForecastsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetForecastBy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetForecastBy',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetForecastResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

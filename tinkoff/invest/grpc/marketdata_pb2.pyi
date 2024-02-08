@@ -445,7 +445,7 @@ class CandleInstrument(google.protobuf.message.Message):
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     interval: global___SubscriptionInterval.ValueType
-    """Интервал свечей."""
+    """Интервал свечей. (Двухчасовые и четырехчасовые свечи в стриме отсчитываются с 0:00 по UTC)"""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid"""
     def __init__(
@@ -1447,6 +1447,8 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     MARKET_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    BESTPRICE_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    ONLY_BEST_PRICE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
@@ -1459,6 +1461,10 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     """Признак доступности торгов через API."""
     instrument_uid: builtins.str
     """Uid инструмента."""
+    bestprice_order_available_flag: builtins.bool
+    """Признак доступности завяки по лучшей цене"""
+    only_best_price: builtins.bool
+    """Признак доступности только заявки по лучшей цене"""
     def __init__(
         self,
         *,
@@ -1468,8 +1474,10 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
         market_order_available_flag: builtins.bool = ...,
         api_trade_available_flag: builtins.bool = ...,
         instrument_uid: builtins.str = ...,
+        bestprice_order_available_flag: builtins.bool = ...,
+        only_best_price: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "figi", b"figi", "instrument_uid", b"instrument_uid", "limit_order_available_flag", b"limit_order_available_flag", "market_order_available_flag", b"market_order_available_flag", "trading_status", b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "bestprice_order_available_flag", b"bestprice_order_available_flag", "figi", b"figi", "instrument_uid", b"instrument_uid", "limit_order_available_flag", b"limit_order_available_flag", "market_order_available_flag", b"market_order_available_flag", "only_best_price", b"only_best_price", "trading_status", b"trading_status"]) -> None: ...
 
 global___GetTradingStatusResponse = GetTradingStatusResponse
 

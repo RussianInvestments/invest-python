@@ -1,7 +1,7 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import logging
 from datetime import datetime
-from typing import Generator, Iterable, List, Optional
+from typing import Generator, Iterable, Iterator, List, Optional
 
 import grpc
 from deprecation import deprecated
@@ -66,8 +66,12 @@ from .schemas import (
     GetAccruedInterestsResponse,
     GetAssetFundamentalsRequest,
     GetAssetFundamentalsResponse,
+    GetAssetReportsRequest,
+    GetAssetReportsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
+    GetBondEventsRequest,
+    GetBondEventsResponse,
     GetBrandRequest,
     GetBrandsRequest,
     GetBrandsResponse,
@@ -76,6 +80,8 @@ from .schemas import (
     GetCandlesResponse,
     GetClosePricesRequest,
     GetClosePricesResponse,
+    GetConsensusForecastsRequest,
+    GetConsensusForecastsResponse,
     GetCountriesRequest,
     GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
@@ -85,6 +91,8 @@ from .schemas import (
     GetDividendsResponse,
     GetFavoritesRequest,
     GetFavoritesResponse,
+    GetForecastRequest,
+    GetForecastResponse,
     GetFuturesMarginRequest,
     GetFuturesMarginResponse,
     GetInfoRequest,
@@ -115,6 +123,8 @@ from .schemas import (
     GetUserTariffRequest,
     GetUserTariffResponse,
     HistoricCandle,
+    IndicativesRequest,
+    IndicativesResponse,
     InstrumentClosePriceRequest,
     InstrumentIdType,
     InstrumentRequest,
@@ -520,6 +530,20 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "Shares")
         return _grpc_helpers.protobuf_to_dataclass(response, SharesResponse)
 
+    @handle_request_error("Indicatives")
+    def indicatives(
+        self,
+        request: IndicativesRequest,
+    ) -> IndicativesResponse:
+        response, call = self.stub.Indicatives.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "Indicatives")
+        return _grpc_helpers.protobuf_to_dataclass(response, IndicativesResponse)
+
     @handle_request_error("GetAccruedInterests")
     def get_accrued_interests(
         self,
@@ -633,6 +657,17 @@ class InstrumentsService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetBondCoupons")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBondCouponsResponse)
+
+    @handle_request_error("GetBondEvents")
+    def get_bond_events(self, request: GetBondEventsRequest) -> GetBondEventsResponse:
+        response, call = self.stub.GetBondEvents.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBondEventsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetBondEvents")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBondEventsResponse)
 
     @handle_request_error("GetAssetBy")
     def get_asset_by(
@@ -773,7 +808,7 @@ class InstrumentsService(_grpc_helpers.Service):
     ) -> GetAssetFundamentalsResponse:
         response, call = self.stub.GetAssetFundamentals.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
-                request, instruments_pb2.GetAssetFundamentalsResponse()
+                request, instruments_pb2.GetAssetFundamentalsRequest()
             ),
             metadata=self.metadata,
         )
@@ -781,6 +816,45 @@ class InstrumentsService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(
             response, GetAssetFundamentalsResponse
         )
+
+    @handle_request_error("GetAssetReports")
+    def get_asset_reports(
+        self, request: GetAssetReportsRequest
+    ) -> GetAssetReportsResponse:
+        response, call = self.stub.GetAssetReports.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetAssetReportsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetAssetReports")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetAssetReportsResponse)
+
+    @handle_request_error("GetConsensusForecasts")
+    def get_consensus_forecasts(
+        self, request: GetConsensusForecastsRequest
+    ) -> GetConsensusForecastsResponse:
+        response, call = self.stub.GetConsensusForecasts.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetConsensusForecastsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetConsensusForecasts")
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetConsensusForecastsResponse
+        )
+
+    @handle_request_error("GetForecastBy")
+    def get_forecast_by(self, request: GetForecastRequest) -> GetForecastResponse:
+        response, call = self.stub.GetForecastBy.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetForecastRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetForecastBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetForecastResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):
@@ -944,7 +1018,7 @@ class MarketDataStreamService(_grpc_helpers.Service):
     def market_data_stream(
         self,
         request_iterator: Iterable[MarketDataRequest],
-    ) -> Iterable[MarketDataResponse]:
+    ) -> Iterator[MarketDataResponse]:
         for response in self.stub.MarketDataStream(
             request_iterator=self._convert_market_data_stream_request(request_iterator),
             metadata=self.metadata,

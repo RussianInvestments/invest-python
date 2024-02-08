@@ -372,6 +372,33 @@ REAL_EXCHANGE_OTC: RealExchange.ValueType  # 3
 """Внебиржевой инструмент."""
 global___RealExchange = RealExchange
 
+class _Recommendation:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RecommendationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Recommendation.ValueType], builtins.type):  # noqa: F821
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RECOMMENDATION_UNSPECIFIED: _Recommendation.ValueType  # 0
+    """Не определено"""
+    RECOMMENDATION_BUY: _Recommendation.ValueType  # 1
+    """Покупать"""
+    RECOMMENDATION_HOLD: _Recommendation.ValueType  # 2
+    """Держать"""
+    RECOMMENDATION_SELL: _Recommendation.ValueType  # 3
+    """Продавать"""
+
+class Recommendation(_Recommendation, metaclass=_RecommendationEnumTypeWrapper): ...
+
+RECOMMENDATION_UNSPECIFIED: Recommendation.ValueType  # 0
+"""Не определено"""
+RECOMMENDATION_BUY: Recommendation.ValueType  # 1
+"""Покупать"""
+RECOMMENDATION_HOLD: Recommendation.ValueType  # 2
+"""Держать"""
+RECOMMENDATION_SELL: Recommendation.ValueType  # 3
+"""Продавать"""
+global___Recommendation = Recommendation
+
 class _RiskLevel:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -715,6 +742,191 @@ class GetBondCouponsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["events", b"events"]) -> None: ...
 
 global___GetBondCouponsResponse = GetBondCouponsResponse
+
+class GetBondEventsRequest(google.protobuf.message.Message):
+    """События по облигации."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _EventType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetBondEventsRequest._EventType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        EVENT_TYPE_UNSPECIFIED: GetBondEventsRequest._EventType.ValueType  # 0
+        """Неопределенное значение"""
+        EVENT_TYPE_CPN: GetBondEventsRequest._EventType.ValueType  # 1
+        """Купон"""
+        EVENT_TYPE_CALL: GetBondEventsRequest._EventType.ValueType  # 2
+        """Опцион (оферта)"""
+        EVENT_TYPE_MTY: GetBondEventsRequest._EventType.ValueType  # 3
+        """Погашение"""
+        EVENT_TYPE_CONV: GetBondEventsRequest._EventType.ValueType  # 4
+        """Конвертация"""
+
+    class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
+    EVENT_TYPE_UNSPECIFIED: GetBondEventsRequest.EventType.ValueType  # 0
+    """Неопределенное значение"""
+    EVENT_TYPE_CPN: GetBondEventsRequest.EventType.ValueType  # 1
+    """Купон"""
+    EVENT_TYPE_CALL: GetBondEventsRequest.EventType.ValueType  # 2
+    """Опцион (оферта)"""
+    EVENT_TYPE_MTY: GetBondEventsRequest.EventType.ValueType  # 3
+    """Погашение"""
+    EVENT_TYPE_CONV: GetBondEventsRequest.EventType.ValueType  # 4
+    """Конвертация"""
+
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
+    type: global___GetBondEventsRequest.EventType.ValueType
+    """Тип события"""
+    def __init__(
+        self,
+        *,
+        to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_id: builtins.str = ...,
+        type: global___GetBondEventsRequest.EventType.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "instrument_id", b"instrument_id", "to", b"to", "type", b"type"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_from", b"_from"]) -> typing_extensions.Literal["from"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_to", b"_to"]) -> typing_extensions.Literal["to"] | None: ...
+
+global___GetBondEventsRequest = GetBondEventsRequest
+
+class GetBondEventsResponse(google.protobuf.message.Message):
+    """Объект передачи информации о событии облигации."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class BondEvent(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+        EVENT_NUMBER_FIELD_NUMBER: builtins.int
+        EVENT_DATE_FIELD_NUMBER: builtins.int
+        EVENT_TYPE_FIELD_NUMBER: builtins.int
+        EVENT_TOTAL_VOL_FIELD_NUMBER: builtins.int
+        FIX_DATE_FIELD_NUMBER: builtins.int
+        RATE_DATE_FIELD_NUMBER: builtins.int
+        DEFAULT_DATE_FIELD_NUMBER: builtins.int
+        REAL_PAY_DATE_FIELD_NUMBER: builtins.int
+        PAY_DATE_FIELD_NUMBER: builtins.int
+        PAY_ONE_BOND_FIELD_NUMBER: builtins.int
+        MONEY_FLOW_VAL_FIELD_NUMBER: builtins.int
+        EXECUTION_FIELD_NUMBER: builtins.int
+        OPERATION_TYPE_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        NOTE_FIELD_NUMBER: builtins.int
+        CONVERT_TO_FIN_TOOL_ID_FIELD_NUMBER: builtins.int
+        COUPON_START_DATE_FIELD_NUMBER: builtins.int
+        COUPON_END_DATE_FIELD_NUMBER: builtins.int
+        COUPON_PERIOD_FIELD_NUMBER: builtins.int
+        COUPON_INTEREST_RATE_FIELD_NUMBER: builtins.int
+        instrument_id: builtins.str
+        """Идентификатор инструмента"""
+        event_number: builtins.int
+        """Номер события для данного типа события"""
+        @property
+        def event_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата события"""
+        event_type: global___GetBondEventsRequest.EventType.ValueType
+        """Тип события"""
+        @property
+        def event_total_vol(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Полное количество бумаг, задействованных в событии"""
+        @property
+        def fix_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата фиксации владельцев для участия в событии"""
+        @property
+        def rate_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата определения даты либо факта события"""
+        @property
+        def default_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата дефолта (если применимо)"""
+        @property
+        def real_pay_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата реального исполнения обязательства"""
+        @property
+        def pay_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата выплаты"""
+        @property
+        def pay_one_bond(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Выплата на одну облигацию"""
+        @property
+        def money_flow_val(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Выплаты на все бумаги, задействованные в событии"""
+        execution: builtins.str
+        """Признак исполнения"""
+        operation_type: builtins.str
+        """Тип операции"""
+        @property
+        def value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Стоимость операции (ставка купона, доля номинала, цена выкупа или коэффициент конвертации)"""
+        note: builtins.str
+        """Примечание"""
+        convert_to_fin_tool_id: builtins.str
+        """ID выпуска бумаг, в который произведена конвертация (для конвертаций)"""
+        @property
+        def coupon_start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Начало купонного периода"""
+        @property
+        def coupon_end_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Окончание купонного периода"""
+        coupon_period: builtins.int
+        """Купонный период"""
+        @property
+        def coupon_interest_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Ставка купона, процентов годовых"""
+        def __init__(
+            self,
+            *,
+            instrument_id: builtins.str = ...,
+            event_number: builtins.int = ...,
+            event_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            event_type: global___GetBondEventsRequest.EventType.ValueType = ...,
+            event_total_vol: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            fix_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            rate_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            default_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            real_pay_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            pay_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            pay_one_bond: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            money_flow_val: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            execution: builtins.str = ...,
+            operation_type: builtins.str = ...,
+            value: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            note: builtins.str = ...,
+            convert_to_fin_tool_id: builtins.str = ...,
+            coupon_start_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            coupon_end_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            coupon_period: builtins.int = ...,
+            coupon_interest_rate: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["coupon_end_date", b"coupon_end_date", "coupon_interest_rate", b"coupon_interest_rate", "coupon_start_date", b"coupon_start_date", "default_date", b"default_date", "event_date", b"event_date", "event_total_vol", b"event_total_vol", "fix_date", b"fix_date", "money_flow_val", b"money_flow_val", "pay_date", b"pay_date", "pay_one_bond", b"pay_one_bond", "rate_date", b"rate_date", "real_pay_date", b"real_pay_date", "value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["convert_to_fin_tool_id", b"convert_to_fin_tool_id", "coupon_end_date", b"coupon_end_date", "coupon_interest_rate", b"coupon_interest_rate", "coupon_period", b"coupon_period", "coupon_start_date", b"coupon_start_date", "default_date", b"default_date", "event_date", b"event_date", "event_number", b"event_number", "event_total_vol", b"event_total_vol", "event_type", b"event_type", "execution", b"execution", "fix_date", b"fix_date", "instrument_id", b"instrument_id", "money_flow_val", b"money_flow_val", "note", b"note", "operation_type", b"operation_type", "pay_date", b"pay_date", "pay_one_bond", b"pay_one_bond", "rate_date", b"rate_date", "real_pay_date", b"real_pay_date", "value", b"value"]) -> None: ...
+
+    EVENTS_FIELD_NUMBER: builtins.int
+    @property
+    def events(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetBondEventsResponse.BondEvent]: ...
+    def __init__(
+        self,
+        *,
+        events: collections.abc.Iterable[global___GetBondEventsResponse.BondEvent] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["events", b"events"]) -> None: ...
+
+global___GetBondEventsResponse = GetBondEventsResponse
 
 class Coupon(google.protobuf.message.Message):
     """Объект передачи информации о купоне облигации."""
@@ -3391,6 +3603,8 @@ class FavoriteInstrument(google.protobuf.message.Message):
     CLASS_CODE_FIELD_NUMBER: builtins.int
     ISIN_FIELD_NUMBER: builtins.int
     INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     OTC_FLAG_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     INSTRUMENT_KIND_FIELD_NUMBER: builtins.int
@@ -3404,6 +3618,10 @@ class FavoriteInstrument(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
     instrument_type: builtins.str
     """Тип инструмента."""
+    name: builtins.str
+    """Название инструмента."""
+    uid: builtins.str
+    """Уникальный идентификатор инструмента."""
     otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
     api_trade_available_flag: builtins.bool
@@ -3418,11 +3636,13 @@ class FavoriteInstrument(google.protobuf.message.Message):
         class_code: builtins.str = ...,
         isin: builtins.str = ...,
         instrument_type: builtins.str = ...,
+        name: builtins.str = ...,
+        uid: builtins.str = ...,
         otc_flag: builtins.bool = ...,
         api_trade_available_flag: builtins.bool = ...,
         instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "class_code", b"class_code", "figi", b"figi", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "isin", b"isin", "otc_flag", b"otc_flag", "ticker", b"ticker"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag", b"api_trade_available_flag", "class_code", b"class_code", "figi", b"figi", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "isin", b"isin", "name", b"name", "otc_flag", b"otc_flag", "ticker", b"ticker", "uid", b"uid"]) -> None: ...
 
 global___FavoriteInstrument = FavoriteInstrument
 
@@ -3454,14 +3674,20 @@ class EditFavoritesRequestInstrument(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента Figi или instrument_uid"""
     def __init__(
         self,
         *,
-        figi: builtins.str = ...,
+        figi: builtins.str | None = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "figi", b"figi"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
 
 global___EditFavoritesRequestInstrument = EditFavoritesRequestInstrument
 
@@ -3511,6 +3737,88 @@ class GetCountriesResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["countries", b"countries"]) -> None: ...
 
 global___GetCountriesResponse = GetCountriesResponse
+
+class IndicativesRequest(google.protobuf.message.Message):
+    """Запрос справочника индексов и товаров"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___IndicativesRequest = IndicativesRequest
+
+class IndicativesResponse(google.protobuf.message.Message):
+    """Справочник индексов и товаров"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IndicativeResponse]:
+        """Массив инструментов"""
+    def __init__(
+        self,
+        *,
+        instruments: collections.abc.Iterable[global___IndicativeResponse] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments", b"instruments"]) -> None: ...
+
+global___IndicativesResponse = IndicativesResponse
+
+class IndicativeResponse(google.protobuf.message.Message):
+    """Индикатив"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FIGI_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
+    INSTRUMENT_KIND_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    EXCHANGE_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
+    BUY_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    figi: builtins.str
+    """Figi-идентификатор инструмента"""
+    ticker: builtins.str
+    """Тикер инструмента"""
+    class_code: builtins.str
+    """Класс-код инструмента"""
+    currency: builtins.str
+    """Валюта расчётов"""
+    instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType
+    """Тип инструмента."""
+    name: builtins.str
+    """Название инструмента"""
+    exchange: builtins.str
+    """Tорговая площадка (секция биржи)"""
+    uid: builtins.str
+    """Уникальный идентификатор инструмента"""
+    buy_available_flag: builtins.bool
+    """Признак доступности для покупки"""
+    sell_available_flag: builtins.bool
+    """Признак доступности для продажи"""
+    def __init__(
+        self,
+        *,
+        figi: builtins.str = ...,
+        ticker: builtins.str = ...,
+        class_code: builtins.str = ...,
+        currency: builtins.str = ...,
+        instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType = ...,
+        name: builtins.str = ...,
+        exchange: builtins.str = ...,
+        uid: builtins.str = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["buy_available_flag", b"buy_available_flag", "class_code", b"class_code", "currency", b"currency", "exchange", b"exchange", "figi", b"figi", "instrument_kind", b"instrument_kind", "name", b"name", "sell_available_flag", b"sell_available_flag", "ticker", b"ticker", "uid", b"uid"]) -> None: ...
+
+global___IndicativeResponse = IndicativeResponse
 
 class CountryResponse(google.protobuf.message.Message):
     """Данные о стране."""
@@ -3730,6 +4038,8 @@ class GetBrandsResponse(google.protobuf.message.Message):
 global___GetBrandsResponse = GetBrandsResponse
 
 class GetAssetFundamentalsRequest(google.protobuf.message.Message):
+    """Запрос фундаментальных показателей"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ASSETS_FIELD_NUMBER: builtins.int
@@ -3746,9 +4056,13 @@ class GetAssetFundamentalsRequest(google.protobuf.message.Message):
 global___GetAssetFundamentalsRequest = GetAssetFundamentalsRequest
 
 class GetAssetFundamentalsResponse(google.protobuf.message.Message):
+    """Фундаментальные показатели"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     class StatisticResponse(google.protobuf.message.Message):
+        """Фундаментальные показатели по активу"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         ASSET_UID_FIELD_NUMBER: builtins.int
@@ -3808,6 +4122,7 @@ class GetAssetFundamentalsResponse(google.protobuf.message.Message):
         TOTAL_DEBT_CHANGE_FIVE_YEARS_FIELD_NUMBER: builtins.int
         EV_TO_SALES_FIELD_NUMBER: builtins.int
         asset_uid: builtins.str
+        """Идентификатор актива"""
         currency: builtins.str
         """Валюта"""
         market_capitalization: builtins.float
@@ -3993,3 +4308,381 @@ class GetAssetFundamentalsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["fundamentals", b"fundamentals"]) -> None: ...
 
 global___GetAssetFundamentalsResponse = GetAssetFundamentalsResponse
+
+class GetAssetReportsRequest(google.protobuf.message.Message):
+    """Запрос отчетов эмитентов"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    instrument_id: builtins.str
+    """Идентификатор инструмента в формате uid."""
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
+    def __init__(
+        self,
+        *,
+        instrument_id: builtins.str = ...,
+        to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_from", b"_from"]) -> typing_extensions.Literal["from"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_to", b"_to"]) -> typing_extensions.Literal["to"] | None: ...
+
+global___GetAssetReportsRequest = GetAssetReportsRequest
+
+class GetAssetReportsResponse(google.protobuf.message.Message):
+    """Отчеты эмитентов"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _AssetReportPeriodType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _AssetReportPeriodTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetAssetReportsResponse._AssetReportPeriodType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        PERIOD_TYPE_UNSPECIFIED: GetAssetReportsResponse._AssetReportPeriodType.ValueType  # 0
+        """не указан"""
+        PERIOD_TYPE_QUARTER: GetAssetReportsResponse._AssetReportPeriodType.ValueType  # 1
+        """Квартальный"""
+        PERIOD_TYPE_SEMIANNUAL: GetAssetReportsResponse._AssetReportPeriodType.ValueType  # 2
+        """Полугодовой"""
+        PERIOD_TYPE_ANNUAL: GetAssetReportsResponse._AssetReportPeriodType.ValueType  # 3
+        """Годовой"""
+
+    class AssetReportPeriodType(_AssetReportPeriodType, metaclass=_AssetReportPeriodTypeEnumTypeWrapper): ...
+    PERIOD_TYPE_UNSPECIFIED: GetAssetReportsResponse.AssetReportPeriodType.ValueType  # 0
+    """не указан"""
+    PERIOD_TYPE_QUARTER: GetAssetReportsResponse.AssetReportPeriodType.ValueType  # 1
+    """Квартальный"""
+    PERIOD_TYPE_SEMIANNUAL: GetAssetReportsResponse.AssetReportPeriodType.ValueType  # 2
+    """Полугодовой"""
+    PERIOD_TYPE_ANNUAL: GetAssetReportsResponse.AssetReportPeriodType.ValueType  # 3
+    """Годовой"""
+
+    class GetAssetReportsEvent(google.protobuf.message.Message):
+        """Отчет"""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+        REPORT_DATE_FIELD_NUMBER: builtins.int
+        PERIOD_YEAR_FIELD_NUMBER: builtins.int
+        PERIOD_NUM_FIELD_NUMBER: builtins.int
+        PERIOD_TYPE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        instrument_id: builtins.str
+        """Идентификатор инструмента."""
+        @property
+        def report_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата публикации отчета."""
+        period_year: builtins.int
+        """Год периода отчета."""
+        period_num: builtins.int
+        """Номер периода."""
+        period_type: global___GetAssetReportsResponse.AssetReportPeriodType.ValueType
+        """Тип отчета."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата создания записи."""
+        def __init__(
+            self,
+            *,
+            instrument_id: builtins.str = ...,
+            report_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            period_year: builtins.int = ...,
+            period_num: builtins.int = ...,
+            period_type: global___GetAssetReportsResponse.AssetReportPeriodType.ValueType = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "report_date", b"report_date"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "instrument_id", b"instrument_id", "period_num", b"period_num", "period_type", b"period_type", "period_year", b"period_year", "report_date", b"report_date"]) -> None: ...
+
+    EVENTS_FIELD_NUMBER: builtins.int
+    @property
+    def events(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetAssetReportsResponse.GetAssetReportsEvent]:
+        """Массив событий по облигации"""
+    def __init__(
+        self,
+        *,
+        events: collections.abc.Iterable[global___GetAssetReportsResponse.GetAssetReportsEvent] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["events", b"events"]) -> None: ...
+
+global___GetAssetReportsResponse = GetAssetReportsResponse
+
+class GetConsensusForecastsRequest(google.protobuf.message.Message):
+    """Запрос консенсус-прогнозов"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PAGING_FIELD_NUMBER: builtins.int
+    @property
+    def paging(self) -> tinkoff.invest.grpc.common_pb2.Page:
+        """Настройки пагинации."""
+    def __init__(
+        self,
+        *,
+        paging: tinkoff.invest.grpc.common_pb2.Page | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_paging", b"_paging", "paging", b"paging"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_paging", b"_paging", "paging", b"paging"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_paging", b"_paging"]) -> typing_extensions.Literal["paging"] | None: ...
+
+global___GetConsensusForecastsRequest = GetConsensusForecastsRequest
+
+class GetConsensusForecastsResponse(google.protobuf.message.Message):
+    """Консенсус-прогнозы"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class ConsensusForecastsItem(google.protobuf.message.Message):
+        """Прогноз"""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        UID_FIELD_NUMBER: builtins.int
+        ASSET_UID_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        BEST_TARGET_PRICE_FIELD_NUMBER: builtins.int
+        BEST_TARGET_LOW_FIELD_NUMBER: builtins.int
+        BEST_TARGET_HIGH_FIELD_NUMBER: builtins.int
+        TOTAL_BUY_RECOMMEND_FIELD_NUMBER: builtins.int
+        TOTAL_HOLD_RECOMMEND_FIELD_NUMBER: builtins.int
+        TOTAL_SELL_RECOMMEND_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        CONSENSUS_FIELD_NUMBER: builtins.int
+        PROGNOSIS_DATE_FIELD_NUMBER: builtins.int
+        uid: builtins.str
+        """uid идентификатор"""
+        asset_uid: builtins.str
+        """uid идентификатор актива"""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата и время создания записи"""
+        @property
+        def best_target_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Целевая цена на 12 месяцев"""
+        @property
+        def best_target_low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Минимальная прогнозная цена"""
+        @property
+        def best_target_high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Максимальная прогнозная цена"""
+        total_buy_recommend: builtins.int
+        """Количество аналитиков рекомендующих покупать"""
+        total_hold_recommend: builtins.int
+        """Количество аналитиков рекомендующих держать"""
+        total_sell_recommend: builtins.int
+        """Количество аналитиков рекомендующих продавать"""
+        currency: builtins.str
+        """Валюта прогнозов /инструмента"""
+        consensus: global___Recommendation.ValueType
+        """Консенсус-прогноз"""
+        @property
+        def prognosis_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата прогноза"""
+        def __init__(
+            self,
+            *,
+            uid: builtins.str = ...,
+            asset_uid: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            best_target_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            best_target_low: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            best_target_high: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            total_buy_recommend: builtins.int = ...,
+            total_hold_recommend: builtins.int = ...,
+            total_sell_recommend: builtins.int = ...,
+            currency: builtins.str = ...,
+            consensus: global___Recommendation.ValueType = ...,
+            prognosis_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["best_target_high", b"best_target_high", "best_target_low", b"best_target_low", "best_target_price", b"best_target_price", "created_at", b"created_at", "prognosis_date", b"prognosis_date"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "best_target_high", b"best_target_high", "best_target_low", b"best_target_low", "best_target_price", b"best_target_price", "consensus", b"consensus", "created_at", b"created_at", "currency", b"currency", "prognosis_date", b"prognosis_date", "total_buy_recommend", b"total_buy_recommend", "total_hold_recommend", b"total_hold_recommend", "total_sell_recommend", b"total_sell_recommend", "uid", b"uid"]) -> None: ...
+
+    ITEMS_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetConsensusForecastsResponse.ConsensusForecastsItem]:
+        """Массив прогнозов"""
+    @property
+    def page(self) -> tinkoff.invest.grpc.common_pb2.PageResponse:
+        """Данные по пагинации"""
+    def __init__(
+        self,
+        *,
+        items: collections.abc.Iterable[global___GetConsensusForecastsResponse.ConsensusForecastsItem] | None = ...,
+        page: tinkoff.invest.grpc.common_pb2.PageResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["page", b"page"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["items", b"items", "page", b"page"]) -> None: ...
+
+global___GetConsensusForecastsResponse = GetConsensusForecastsResponse
+
+class GetForecastRequest(google.protobuf.message.Message):
+    """Запрос прогнозов инвестдомов"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    instrument_id: builtins.str
+    """Идентификатор инструмента"""
+    def __init__(
+        self,
+        *,
+        instrument_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument_id", b"instrument_id"]) -> None: ...
+
+global___GetForecastRequest = GetForecastRequest
+
+class GetForecastResponse(google.protobuf.message.Message):
+    """Прогнозы инвестдомов по инструменту"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class TargetItem(google.protobuf.message.Message):
+        """Прогноз"""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        UID_FIELD_NUMBER: builtins.int
+        TICKER_FIELD_NUMBER: builtins.int
+        COMPANY_FIELD_NUMBER: builtins.int
+        RECOMMENDATION_FIELD_NUMBER: builtins.int
+        RECOMMENDATION_DATE_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        CURRENT_PRICE_FIELD_NUMBER: builtins.int
+        TARGET_PRICE_FIELD_NUMBER: builtins.int
+        PRICE_CHANGE_FIELD_NUMBER: builtins.int
+        PRICE_CHANGE_REL_FIELD_NUMBER: builtins.int
+        SHOW_NAME_FIELD_NUMBER: builtins.int
+        uid: builtins.str
+        """Уникальный идентификатор инструмента"""
+        ticker: builtins.str
+        """Тикер инструмента"""
+        company: builtins.str
+        """Название компании, давшей прогноз"""
+        recommendation: global___Recommendation.ValueType
+        """Прогноз"""
+        @property
+        def recommendation_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата прогноза"""
+        currency: builtins.str
+        """Валюта"""
+        @property
+        def current_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Текущая цена"""
+        @property
+        def target_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Прогнозируемая цена"""
+        @property
+        def price_change(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Изменение цены"""
+        @property
+        def price_change_rel(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Относительное изменение цены"""
+        show_name: builtins.str
+        """Наименование инструмента"""
+        def __init__(
+            self,
+            *,
+            uid: builtins.str = ...,
+            ticker: builtins.str = ...,
+            company: builtins.str = ...,
+            recommendation: global___Recommendation.ValueType = ...,
+            recommendation_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            currency: builtins.str = ...,
+            current_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            target_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            price_change: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            price_change_rel: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            show_name: builtins.str = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["current_price", b"current_price", "price_change", b"price_change", "price_change_rel", b"price_change_rel", "recommendation_date", b"recommendation_date", "target_price", b"target_price"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["company", b"company", "currency", b"currency", "current_price", b"current_price", "price_change", b"price_change", "price_change_rel", b"price_change_rel", "recommendation", b"recommendation", "recommendation_date", b"recommendation_date", "show_name", b"show_name", "target_price", b"target_price", "ticker", b"ticker", "uid", b"uid"]) -> None: ...
+
+    class ConsensusItem(google.protobuf.message.Message):
+        """Консенсус-прогноз"""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        UID_FIELD_NUMBER: builtins.int
+        TICKER_FIELD_NUMBER: builtins.int
+        RECOMMENDATION_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        CURRENT_PRICE_FIELD_NUMBER: builtins.int
+        CONSENSUS_FIELD_NUMBER: builtins.int
+        MIN_TARGET_FIELD_NUMBER: builtins.int
+        MAX_TARGET_FIELD_NUMBER: builtins.int
+        PRICE_CHANGE_FIELD_NUMBER: builtins.int
+        PRICE_CHANGE_REL_FIELD_NUMBER: builtins.int
+        uid: builtins.str
+        """Уникальный идентификатор инструмента"""
+        ticker: builtins.str
+        """Тикер инструмента"""
+        recommendation: global___Recommendation.ValueType
+        """Прогноз"""
+        currency: builtins.str
+        """Валюта"""
+        @property
+        def current_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Текущая цена"""
+        @property
+        def consensus(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Прогнозируемая цена"""
+        @property
+        def min_target(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Минимальная цена прогноза"""
+        @property
+        def max_target(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Максимальная цена прогноза"""
+        @property
+        def price_change(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Изменение цены"""
+        @property
+        def price_change_rel(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Относительное изменение цены"""
+        def __init__(
+            self,
+            *,
+            uid: builtins.str = ...,
+            ticker: builtins.str = ...,
+            recommendation: global___Recommendation.ValueType = ...,
+            currency: builtins.str = ...,
+            current_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            consensus: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            min_target: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            max_target: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            price_change: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            price_change_rel: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["consensus", b"consensus", "current_price", b"current_price", "max_target", b"max_target", "min_target", b"min_target", "price_change", b"price_change", "price_change_rel", b"price_change_rel"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["consensus", b"consensus", "currency", b"currency", "current_price", b"current_price", "max_target", b"max_target", "min_target", b"min_target", "price_change", b"price_change", "price_change_rel", b"price_change_rel", "recommendation", b"recommendation", "ticker", b"ticker", "uid", b"uid"]) -> None: ...
+
+    TARGETS_FIELD_NUMBER: builtins.int
+    CONSENSUS_FIELD_NUMBER: builtins.int
+    @property
+    def targets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetForecastResponse.TargetItem]:
+        """Массив прогнозов"""
+    @property
+    def consensus(self) -> global___GetForecastResponse.ConsensusItem:
+        """Согласованный прогноз"""
+    def __init__(
+        self,
+        *,
+        targets: collections.abc.Iterable[global___GetForecastResponse.TargetItem] | None = ...,
+        consensus: global___GetForecastResponse.ConsensusItem | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["consensus", b"consensus"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["consensus", b"consensus", "targets", b"targets"]) -> None: ...
+
+global___GetForecastResponse = GetForecastResponse

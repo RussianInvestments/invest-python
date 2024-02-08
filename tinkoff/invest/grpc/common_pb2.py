@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n tinkoff/invest/grpc/common.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\";\n\nMoneyValue\x12\x10\n\x08\x63urrency\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\x0c\n\x04nano\x18\x03 \x01(\x05\"(\n\tQuotation\x12\r\n\x05units\x18\x01 \x01(\x03\x12\x0c\n\x04nano\x18\x02 \x01(\x05\"0\n\x04Ping\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"*\n\x04Page\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\"G\n\x0cPageResponse\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\x12\x13\n\x0btotal_count\x18\x03 \x01(\x05*\x98\x02\n\x0eInstrumentType\x12\x1f\n\x1bINSTRUMENT_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14INSTRUMENT_TYPE_BOND\x10\x01\x12\x19\n\x15INSTRUMENT_TYPE_SHARE\x10\x02\x12\x1c\n\x18INSTRUMENT_TYPE_CURRENCY\x10\x03\x12\x17\n\x13INSTRUMENT_TYPE_ETF\x10\x04\x12\x1b\n\x17INSTRUMENT_TYPE_FUTURES\x10\x05\x12\x16\n\x12INSTRUMENT_TYPE_SP\x10\x06\x12\x1a\n\x16INSTRUMENT_TYPE_OPTION\x10\x07\x12(\n$INSTRUMENT_TYPE_CLEARING_CERTIFICATE\x10\x08*\xce\x06\n\x15SecurityTradingStatus\x12\'\n#SECURITY_TRADING_STATUS_UNSPECIFIED\x10\x00\x12\x35\n1SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING\x10\x01\x12*\n&SECURITY_TRADING_STATUS_OPENING_PERIOD\x10\x02\x12*\n&SECURITY_TRADING_STATUS_CLOSING_PERIOD\x10\x03\x12,\n(SECURITY_TRADING_STATUS_BREAK_IN_TRADING\x10\x04\x12*\n&SECURITY_TRADING_STATUS_NORMAL_TRADING\x10\x05\x12+\n\'SECURITY_TRADING_STATUS_CLOSING_AUCTION\x10\x06\x12-\n)SECURITY_TRADING_STATUS_DARK_POOL_AUCTION\x10\x07\x12,\n(SECURITY_TRADING_STATUS_DISCRETE_AUCTION\x10\x08\x12\x32\n.SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD\x10\t\x12<\n8SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE\x10\n\x12,\n(SECURITY_TRADING_STATUS_SESSION_ASSIGNED\x10\x0b\x12)\n%SECURITY_TRADING_STATUS_SESSION_CLOSE\x10\x0c\x12(\n$SECURITY_TRADING_STATUS_SESSION_OPEN\x10\r\x12\x31\n-SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING\x10\x0e\x12\x33\n/SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING\x10\x0f\x12<\n8SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING\x10\x10*V\n\tPriceType\x12\x1a\n\x16PRICE_TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10PRICE_TYPE_POINT\x10\x01\x12\x17\n\x13PRICE_TYPE_CURRENCY\x10\x02\x42\x61\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n tinkoff/invest/grpc/common.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\";\n\nMoneyValue\x12\x10\n\x08\x63urrency\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\x0c\n\x04nano\x18\x03 \x01(\x05\"(\n\tQuotation\x12\r\n\x05units\x18\x01 \x01(\x03\x12\x0c\n\x04nano\x18\x02 \x01(\x05\"C\n\x04Ping\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\tstream_id\x18\x02 \x01(\t\"*\n\x04Page\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\"G\n\x0cPageResponse\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\x12\x13\n\x0btotal_count\x18\x03 \x01(\x05\"X\n\x10ResponseMetadata\x12\x13\n\x0btracking_id\x18* \x01(\t\x12/\n\x0bserver_time\x18+ \x01(\x0b\x32\x1a.google.protobuf.Timestamp*\xd2\x02\n\x0eInstrumentType\x12\x1f\n\x1bINSTRUMENT_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14INSTRUMENT_TYPE_BOND\x10\x01\x12\x19\n\x15INSTRUMENT_TYPE_SHARE\x10\x02\x12\x1c\n\x18INSTRUMENT_TYPE_CURRENCY\x10\x03\x12\x17\n\x13INSTRUMENT_TYPE_ETF\x10\x04\x12\x1b\n\x17INSTRUMENT_TYPE_FUTURES\x10\x05\x12\x16\n\x12INSTRUMENT_TYPE_SP\x10\x06\x12\x1a\n\x16INSTRUMENT_TYPE_OPTION\x10\x07\x12(\n$INSTRUMENT_TYPE_CLEARING_CERTIFICATE\x10\x08\x12\x19\n\x15INSTRUMENT_TYPE_INDEX\x10\t\x12\x1d\n\x19INSTRUMENT_TYPE_COMMODITY\x10\n*\xce\x06\n\x15SecurityTradingStatus\x12\'\n#SECURITY_TRADING_STATUS_UNSPECIFIED\x10\x00\x12\x35\n1SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING\x10\x01\x12*\n&SECURITY_TRADING_STATUS_OPENING_PERIOD\x10\x02\x12*\n&SECURITY_TRADING_STATUS_CLOSING_PERIOD\x10\x03\x12,\n(SECURITY_TRADING_STATUS_BREAK_IN_TRADING\x10\x04\x12*\n&SECURITY_TRADING_STATUS_NORMAL_TRADING\x10\x05\x12+\n\'SECURITY_TRADING_STATUS_CLOSING_AUCTION\x10\x06\x12-\n)SECURITY_TRADING_STATUS_DARK_POOL_AUCTION\x10\x07\x12,\n(SECURITY_TRADING_STATUS_DISCRETE_AUCTION\x10\x08\x12\x32\n.SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD\x10\t\x12<\n8SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE\x10\n\x12,\n(SECURITY_TRADING_STATUS_SESSION_ASSIGNED\x10\x0b\x12)\n%SECURITY_TRADING_STATUS_SESSION_CLOSE\x10\x0c\x12(\n$SECURITY_TRADING_STATUS_SESSION_OPEN\x10\r\x12\x31\n-SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING\x10\x0e\x12\x33\n/SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING\x10\x0f\x12<\n8SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING\x10\x10*V\n\tPriceType\x12\x1a\n\x16PRICE_TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10PRICE_TYPE_POINT\x10\x01\x12\x17\n\x13PRICE_TYPE_CURRENCY\x10\x02\x42\x61\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tinkoff.invest.grpc.common_pb2', globals())
@@ -24,20 +24,22 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1'
-  _INSTRUMENTTYPE._serialized_start=379
-  _INSTRUMENTTYPE._serialized_end=659
-  _SECURITYTRADINGSTATUS._serialized_start=662
-  _SECURITYTRADINGSTATUS._serialized_end=1508
-  _PRICETYPE._serialized_start=1510
-  _PRICETYPE._serialized_end=1596
+  _INSTRUMENTTYPE._serialized_start=488
+  _INSTRUMENTTYPE._serialized_end=826
+  _SECURITYTRADINGSTATUS._serialized_start=829
+  _SECURITYTRADINGSTATUS._serialized_end=1675
+  _PRICETYPE._serialized_start=1677
+  _PRICETYPE._serialized_end=1763
   _MONEYVALUE._serialized_start=108
   _MONEYVALUE._serialized_end=167
   _QUOTATION._serialized_start=169
   _QUOTATION._serialized_end=209
   _PING._serialized_start=211
-  _PING._serialized_end=259
-  _PAGE._serialized_start=261
-  _PAGE._serialized_end=303
-  _PAGERESPONSE._serialized_start=305
-  _PAGERESPONSE._serialized_end=376
+  _PING._serialized_end=278
+  _PAGE._serialized_start=280
+  _PAGE._serialized_end=322
+  _PAGERESPONSE._serialized_start=324
+  _PAGERESPONSE._serialized_end=395
+  _RESPONSEMETADATA._serialized_start=397
+  _RESPONSEMETADATA._serialized_end=485
 # @@protoc_insertion_point(module_scope)

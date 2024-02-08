@@ -119,7 +119,7 @@ class _TimeInForceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     TIME_IN_FORCE_FILL_AND_KILL: _TimeInForceType.ValueType  # 2
     """Заявка исполнена(возможно частично) и уничтожена"""
     TIME_IN_FORCE_FILL_OR_KILL: _TimeInForceType.ValueType  # 3
-    """Заявка исполнена полностью или уничтожена, недоступно для срочного рынка"""
+    """Заявка исполнена полностью или уничтожена, недоступно для срочного рынка и торговли по выходным"""
 
 class TimeInForceType(_TimeInForceType, metaclass=_TimeInForceTypeEnumTypeWrapper): ...
 
@@ -130,7 +130,7 @@ TIME_IN_FORCE_DAY: TimeInForceType.ValueType  # 1
 TIME_IN_FORCE_FILL_AND_KILL: TimeInForceType.ValueType  # 2
 """Заявка исполнена(возможно частично) и уничтожена"""
 TIME_IN_FORCE_FILL_OR_KILL: TimeInForceType.ValueType  # 3
-"""Заявка исполнена полностью или уничтожена, недоступно для срочного рынка"""
+"""Заявка исполнена полностью или уничтожена, недоступно для срочного рынка и торговли по выходным"""
 global___TimeInForceType = TimeInForceType
 
 class TradesStreamRequest(google.protobuf.message.Message):
@@ -337,6 +337,7 @@ class PostOrderResponse(google.protobuf.message.Message):
     INITIAL_ORDER_PRICE_PT_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     ORDER_REQUEST_ID_FIELD_NUMBER: builtins.int
+    RESPONSE_METADATA_FIELD_NUMBER: builtins.int
     order_id: builtins.str
     """Биржевой идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
@@ -381,6 +382,9 @@ class PostOrderResponse(google.protobuf.message.Message):
     """UID идентификатор инструмента."""
     order_request_id: builtins.str
     """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
+    @property
+    def response_metadata(self) -> tinkoff.invest.grpc.common_pb2.ResponseMetadata:
+        """Метадата"""
     def __init__(
         self,
         *,
@@ -402,9 +406,10 @@ class PostOrderResponse(google.protobuf.message.Message):
         initial_order_price_pt: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         instrument_uid: builtins.str = ...,
         order_request_id: builtins.str = ...,
+        response_metadata: tinkoff.invest.grpc.common_pb2.ResponseMetadata | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_request_id", b"order_request_id", "order_type", b"order_type", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "response_metadata", b"response_metadata", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_request_id", b"order_request_id", "order_type", b"order_type", "response_metadata", b"response_metadata", "total_order_amount", b"total_order_amount"]) -> None: ...
 
 global___PostOrderResponse = PostOrderResponse
 
@@ -435,16 +440,21 @@ class CancelOrderResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TIME_FIELD_NUMBER: builtins.int
+    RESPONSE_METADATA_FIELD_NUMBER: builtins.int
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время отмены заявки в часовом поясе UTC."""
+    @property
+    def response_metadata(self) -> tinkoff.invest.grpc.common_pb2.ResponseMetadata:
+        """Метадата"""
     def __init__(
         self,
         *,
         time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        response_metadata: tinkoff.invest.grpc.common_pb2.ResponseMetadata | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["time", b"time"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata", "time", b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata", "time", b"time"]) -> None: ...
 
 global___CancelOrderResponse = CancelOrderResponse
 
