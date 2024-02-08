@@ -14,7 +14,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.BOT_ACCESS_TOKEN }}
 
       - name: Git user
         run: |
