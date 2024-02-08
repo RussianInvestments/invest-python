@@ -21,5 +21,4 @@ jobs:
       - name: Publish package to pypi
         run: make publish
         env:
-          pypi_username: ${{ secrets.PYPI_USERNAME }}
-          pypi_password: ${{ secrets.PYPI_PASSWORD }}
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
