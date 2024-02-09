@@ -344,14 +344,20 @@ class PostStopOrderResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
+    RESPONSE_METADATA_FIELD_NUMBER: builtins.int
     stop_order_id: builtins.str
     """Уникальный идентификатор стоп-заявки"""
+    @property
+    def response_metadata(self) -> tinkoff.invest.grpc.common_pb2.ResponseMetadata:
+        """Метадата"""
     def __init__(
         self,
         *,
         stop_order_id: builtins.str = ...,
+        response_metadata: tinkoff.invest.grpc.common_pb2.ResponseMetadata | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["stop_order_id", b"stop_order_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata", "stop_order_id", b"stop_order_id"]) -> None: ...
 
 global___PostStopOrderResponse = PostStopOrderResponse
 

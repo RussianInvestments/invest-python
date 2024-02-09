@@ -301,6 +301,8 @@ class InstrumentType(_grpc_helpers.Enum):
     INSTRUMENT_TYPE_SP = 6
     INSTRUMENT_TYPE_OPTION = 7
     INSTRUMENT_TYPE_CLEARING_CERTIFICATE = 8
+    INSTRUMENT_TYPE_INDEX = 9
+    INSTRUMENT_TYPE_COMMODITY = 10
 
 
 class OptionDirection(_grpc_helpers.Enum):
@@ -387,6 +389,28 @@ class TimeInForceType(_grpc_helpers.Enum):
     TIME_IN_FORCE_FILL_OR_KILL = 3
 
 
+class EventType(_grpc_helpers.Enum):
+    EVENT_TYPE_UNSPECIFIED = 0
+    EVENT_TYPE_CPN = 1
+    EVENT_TYPE_CALL = 2
+    EVENT_TYPE_MTY = 3
+    EVENT_TYPE_CONV = 4
+
+
+class AssetReportPeriodType(_grpc_helpers.Enum):
+    PERIOD_TYPE_UNSPECIFIED = 0
+    PERIOD_TYPE_QUARTER = 1
+    PERIOD_TYPE_SEMIANNUAL = 2
+    PERIOD_TYPE_ANNUAL = 3
+
+
+class Recommendation(_grpc_helpers.Enum):
+    RECOMMENDATION_UNSPECIFIED = 0
+    RECOMMENDATION_BUY = 1
+    RECOMMENDATION_HOLD = 2
+    RECOMMENDATION_SELL = 3
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -451,6 +475,7 @@ class Quotation(_grpc_helpers.Message, SupportsAbs):
 @dataclass(eq=False, repr=True)
 class Ping(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.int64_field(1)
+    stream_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -530,6 +555,44 @@ class GetBondCouponsRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetBondCouponsResponse(_grpc_helpers.Message):
     events: List["Coupon"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetBondEventsRequest(_grpc_helpers.Message):
+    from_: Optional[datetime] = _grpc_helpers.message_field(2)
+    to: Optional[datetime] = _grpc_helpers.message_field(3)
+    instrument_id: str = _grpc_helpers.string_field(4)
+    type: "EventType" = _grpc_helpers.enum_field(5)
+
+
+@dataclass(eq=False, repr=True)
+class BondEvent(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(2)
+    event_number: int = _grpc_helpers.int32_field(3)
+    event_date: datetime = _grpc_helpers.message_field(4)
+    event_type: "EventType" = _grpc_helpers.enum_field(5)
+    event_total_vol: "Quotation" = _grpc_helpers.message_field(6)
+    fix_date: datetime = _grpc_helpers.message_field(7)
+    rate_date: datetime = _grpc_helpers.message_field(8)
+    default_date: datetime = _grpc_helpers.message_field(9)
+    real_pay_date: datetime = _grpc_helpers.message_field(10)
+    pay_date: datetime = _grpc_helpers.message_field(11)
+    pay_one_bond: "MoneyValue" = _grpc_helpers.message_field(12)
+    money_flow_val: "MoneyValue" = _grpc_helpers.message_field(13)
+    execution: str = _grpc_helpers.string_field(14)
+    operation_type: str = _grpc_helpers.string_field(15)
+    value: "Quotation" = _grpc_helpers.message_field(16)
+    note: str = _grpc_helpers.string_field(17)
+    convert_to_fin_tool_id: str = _grpc_helpers.string_field(18)
+    coupon_start_date: datetime = _grpc_helpers.message_field(19)
+    coupon_end_date: datetime = _grpc_helpers.message_field(20)
+    coupon_period: int = _grpc_helpers.int32_field(21)
+    coupon_interest_rate: "Quotation" = _grpc_helpers.message_field(22)
+
+
+@dataclass(eq=False, repr=True)
+class GetBondEventsResponse(_grpc_helpers.Message):
+    events: List["BondEvent"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1197,6 +1260,8 @@ class FavoriteInstrument(_grpc_helpers.Message):
     class_code: str = _grpc_helpers.string_field(3)
     isin: str = _grpc_helpers.string_field(4)
     instrument_type: str = _grpc_helpers.string_field(11)
+    name: str = _grpc_helpers.string_field(12)
+    uid: str = _grpc_helpers.string_field(13)
     otc_flag: bool = _grpc_helpers.bool_field(16)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(17)
     instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(18)
@@ -1210,7 +1275,8 @@ class EditFavoritesRequest(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class EditFavoritesRequestInstrument(_grpc_helpers.Message):
-    figi: str = _grpc_helpers.string_field(1)
+    figi: Optional[str] = _grpc_helpers.string_field(1)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1226,6 +1292,30 @@ class GetCountriesRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetCountriesResponse(_grpc_helpers.Message):
     countries: List["CountryResponse"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class IndicativesRequest(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class IndicativeResponse(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    ticker: str = _grpc_helpers.string_field(2)
+    class_code: str = _grpc_helpers.string_field(3)
+    currency: str = _grpc_helpers.string_field(4)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(10)
+    name: str = _grpc_helpers.string_field(12)
+    exchange: str = _grpc_helpers.string_field(13)
+    uid: str = _grpc_helpers.string_field(14)
+    buy_available_flag: bool = _grpc_helpers.bool_field(404)
+    sell_available_flag: bool = _grpc_helpers.bool_field(405)
+
+
+@dataclass(eq=False, repr=True)
+class IndicativesResponse(_grpc_helpers.Message):
+    instruments: List["IndicativeResponse"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1628,6 +1718,9 @@ class GetTradingStatusResponse(_grpc_helpers.Message):
     api_trade_available_flag: bool = _grpc_helpers.bool_field(5)
     instrument_uid: str = _grpc_helpers.string_field(6)
 
+    bestprice_order_available_flag: bool = _grpc_helpers.bool_field(8)
+    only_best_price: bool = _grpc_helpers.bool_field(9)
+
 
 @dataclass(eq=False, repr=True)
 class GetLastTradesRequest(_grpc_helpers.Message):
@@ -1884,6 +1977,7 @@ class PostOrderResponse(  # pylint:disable=too-many-instance-attributes
     initial_order_price_pt: "Quotation" = _grpc_helpers.message_field(16)
     instrument_uid: str = _grpc_helpers.string_field(17)
     order_request_id: str = _grpc_helpers.string_field(20)
+    response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
 
 
 @dataclass(eq=False, repr=True)
@@ -1895,6 +1989,7 @@ class CancelOrderRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class CancelOrderResponse(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.message_field(1)
+    response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
 
 
 @dataclass(eq=False, repr=True)
@@ -2098,6 +2193,7 @@ class PostStopOrderRequestTrailingData(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PostStopOrderResponse(_grpc_helpers.Message):
     stop_order_id: str = _grpc_helpers.string_field(1)
+    response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
 
 
 @dataclass(eq=False, repr=True)
@@ -2466,8 +2562,14 @@ class PageResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class ResponseMetadata(_grpc_helpers.Message):
+    tracking_id: str = _grpc_helpers.string_field(42)
+    server_time: datetime = _grpc_helpers.message_field(43)
+
+
+@dataclass(eq=False, repr=True)
 class GetAssetFundamentalsRequest(_grpc_helpers.Message):
-    assets: List[str] = _grpc_helpers.string_field(1)
+    assets: List[str] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -2533,6 +2635,95 @@ class StatisticResponse(_grpc_helpers.Message):
     ebitda_change_five_years: float = _grpc_helpers.double_field(55)
     total_debt_change_five_years: float = _grpc_helpers.double_field(56)
     ev_to_sales: float = _grpc_helpers.double_field(57)
+
+
+@dataclass(eq=False, repr=True)
+class GetAssetReportsRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+    from_: datetime = _grpc_helpers.message_field(2)
+    to: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GetAssetReportsEvent(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+    report_date: datetime = _grpc_helpers.message_field(2)
+    period_year: datetime = _grpc_helpers.message_field(3)
+    period_num: datetime = _grpc_helpers.message_field(4)
+    period_type: "AssetReportPeriodType" = _grpc_helpers.enum_field(5)
+    created_at: datetime = _grpc_helpers.message_field(6)
+
+
+@dataclass(eq=False, repr=True)
+class GetAssetReportsResponse(_grpc_helpers.Message):
+    events: List["GetAssetReportsEvent"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetConsensusForecastsRequest(_grpc_helpers.Message):
+    paging: Optional["Page"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class ConsensusForecastsItem(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    asset_uid: str = _grpc_helpers.string_field(2)
+    created_at: datetime = _grpc_helpers.message_field(3)
+    best_target_price: "Quotation" = _grpc_helpers.message_field(4)
+    best_target_low: "Quotation" = _grpc_helpers.message_field(5)
+    best_target_high: "Quotation" = _grpc_helpers.message_field(6)
+    total_buy_recommend: int = _grpc_helpers.int32_field(7)
+    total_hold_recommend: int = _grpc_helpers.int32_field(8)
+    total_sell_recommend: int = _grpc_helpers.int32_field(9)
+    currency: str = _grpc_helpers.string_field(10)
+    consensus: "Recommendation" = _grpc_helpers.message_field(11)
+    prognosis_date: datetime = _grpc_helpers.message_field(12)
+
+
+@dataclass(eq=False, repr=True)
+class GetConsensusForecastsResponse(_grpc_helpers.Message):
+    items: List["ConsensusForecastsItem"] = _grpc_helpers.message_field(1)
+    page: "PageResponse" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class GetForecastRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class TargetItem(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    ticker: str = _grpc_helpers.string_field(2)
+    company: str = _grpc_helpers.string_field(3)
+    recommendation: "Recommendation" = _grpc_helpers.message_field(4)
+    recommendation_date: datetime = _grpc_helpers.message_field(5)
+    currency: str = _grpc_helpers.string_field(6)
+    current_price: "Quotation" = _grpc_helpers.message_field(7)
+    target_price: "Quotation" = _grpc_helpers.message_field(8)
+    price_change: "Quotation" = _grpc_helpers.message_field(9)
+    price_change_rel: "Quotation" = _grpc_helpers.message_field(10)
+    show_name: str = _grpc_helpers.string_field(11)
+
+
+@dataclass(eq=False, repr=True)
+class ConsensusItem(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    ticker: str = _grpc_helpers.string_field(2)
+    recommendation: "Recommendation" = _grpc_helpers.message_field(3)
+    currency: str = _grpc_helpers.string_field(4)
+    current_price: "Quotation" = _grpc_helpers.message_field(5)
+    consensus: "Quotation" = _grpc_helpers.message_field(6)
+    min_target: "Quotation" = _grpc_helpers.message_field(7)
+    max_target: "Quotation" = _grpc_helpers.message_field(8)
+    price_change: "Quotation" = _grpc_helpers.message_field(9)
+    price_change_rel: "Quotation" = _grpc_helpers.message_field(10)
+
+
+@dataclass(eq=False, repr=True)
+class GetForecastResponse(_grpc_helpers.Message):
+    targets: List["TargetItem"] = _grpc_helpers.message_field(1)
+    consensus: "ConsensusItem" = _grpc_helpers.message_field(2)
 
 
 @dataclass(eq=False, repr=True)

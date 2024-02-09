@@ -68,8 +68,12 @@ from .schemas import (
     GetAccruedInterestsResponse,
     GetAssetFundamentalsRequest,
     GetAssetFundamentalsResponse,
+    GetAssetReportsRequest,
+    GetAssetReportsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
+    GetBondEventsRequest,
+    GetBondEventsResponse,
     GetBrandRequest,
     GetBrandsRequest,
     GetBrandsResponse,
@@ -78,6 +82,8 @@ from .schemas import (
     GetCandlesResponse,
     GetClosePricesRequest,
     GetClosePricesResponse,
+    GetConsensusForecastsRequest,
+    GetConsensusForecastsResponse,
     GetCountriesRequest,
     GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
@@ -87,6 +93,8 @@ from .schemas import (
     GetDividendsResponse,
     GetFavoritesRequest,
     GetFavoritesResponse,
+    GetForecastRequest,
+    GetForecastResponse,
     GetFuturesMarginRequest,
     GetFuturesMarginResponse,
     GetInfoRequest,
@@ -117,6 +125,8 @@ from .schemas import (
     GetUserTariffRequest,
     GetUserTariffResponse,
     HistoricCandle,
+    IndicativesRequest,
+    IndicativesResponse,
     InstrumentClosePriceRequest,
     InstrumentIdType,
     InstrumentRequest,
@@ -535,6 +545,18 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "Shares")
         return _grpc_helpers.protobuf_to_dataclass(response, SharesResponse)
 
+    @handle_aio_request_error("Indicatives")
+    async def indicatives(self, request: IndicativesRequest) -> IndicativesResponse:
+        response_coro = self.stub.Indicatives(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "Indicatives")
+        return _grpc_helpers.protobuf_to_dataclass(response, IndicativesResponse)
+
     @handle_aio_request_error("GetAccruedInterests")
     async def get_accrued_interests(
         self,
@@ -655,6 +677,20 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetBondCoupons")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBondCouponsResponse)
+
+    @handle_aio_request_error("GetBondEvents")
+    async def get_bond_events(
+        self, request: GetBondEventsRequest
+    ) -> GetBondEventsResponse:
+        response_coro = self.stub.GetBondEvents(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBondEventsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetBondEvents")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBondEventsResponse)
 
     @handle_aio_request_error("GetAssetBy")
     async def get_asset_by(
@@ -814,6 +850,50 @@ class InstrumentsService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(
             response, GetAssetFundamentalsResponse
         )
+
+    @handle_aio_request_error("GetAssetReports")
+    async def get_asset_reports(
+        self, request: GetAssetReportsRequest
+    ) -> GetAssetReportsResponse:
+        response_coro = self.stub.GetAssetReports(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetAssetReportsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetAssetReports")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetAssetReportsResponse)
+
+    @handle_aio_request_error("GetConsensusForecasts")
+    async def get_consensus_forecasts(
+        self, request: GetConsensusForecastsRequest
+    ) -> GetConsensusForecastsResponse:
+        response_coro = self.stub.GetConsensusForecasts(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetConsensusForecastsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetConsensusForecasts"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetConsensusForecastsResponse
+        )
+
+    @handle_aio_request_error("GetForecastBy")
+    async def get_forecast_by(self, request: GetForecastRequest) -> GetForecastResponse:
+        response_coro = self.stub.GetForecastBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetForecastRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetForecastBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetForecastResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):

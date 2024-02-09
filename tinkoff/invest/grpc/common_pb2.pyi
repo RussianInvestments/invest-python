@@ -40,6 +40,10 @@ class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """Опцион."""
     INSTRUMENT_TYPE_CLEARING_CERTIFICATE: _InstrumentType.ValueType  # 8
     """Clearing certificate."""
+    INSTRUMENT_TYPE_INDEX: _InstrumentType.ValueType  # 9
+    """Индекс."""
+    INSTRUMENT_TYPE_COMMODITY: _InstrumentType.ValueType  # 10
+    """Товар."""
 
 class InstrumentType(_InstrumentType, metaclass=_InstrumentTypeEnumTypeWrapper):
     """Тип инструмента."""
@@ -61,6 +65,10 @@ INSTRUMENT_TYPE_OPTION: InstrumentType.ValueType  # 7
 """Опцион."""
 INSTRUMENT_TYPE_CLEARING_CERTIFICATE: InstrumentType.ValueType  # 8
 """Clearing certificate."""
+INSTRUMENT_TYPE_INDEX: InstrumentType.ValueType  # 9
+"""Индекс."""
+INSTRUMENT_TYPE_COMMODITY: InstrumentType.ValueType  # 10
+"""Товар."""
 global___InstrumentType = InstrumentType
 
 class _SecurityTradingStatus:
@@ -219,16 +227,20 @@ class Ping(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TIME_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время проверки."""
+    stream_id: builtins.str
+    """Идентификатор соединения"""
     def __init__(
         self,
         *,
         time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        stream_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["stream_id", b"stream_id", "time", b"time"]) -> None: ...
 
 global___Ping = Ping
 
@@ -273,3 +285,24 @@ class PageResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["limit", b"limit", "page_number", b"page_number", "total_count", b"total_count"]) -> None: ...
 
 global___PageResponse = PageResponse
+
+class ResponseMetadata(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TRACKING_ID_FIELD_NUMBER: builtins.int
+    SERVER_TIME_FIELD_NUMBER: builtins.int
+    tracking_id: builtins.str
+    """Идентификатор трекинга"""
+    @property
+    def server_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Серверное время"""
+    def __init__(
+        self,
+        *,
+        tracking_id: builtins.str = ...,
+        server_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["server_time", b"server_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["server_time", b"server_time", "tracking_id", b"tracking_id"]) -> None: ...
+
+global___ResponseMetadata = ResponseMetadata

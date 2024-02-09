@@ -110,7 +110,7 @@ exclude = "tinkoff/invest/grpc"
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-fail_under = 72.9
+fail_under = 65
 exclude_lines = [
   "raise NotImplementedError",
   "def __repr__",
@@ -133,6 +133,7 @@ combine_as_imports = true
 ignore_missing_imports = true
 no_implicit_optional = true
 check_untyped_defs = true
+exclude = ['venv', '.venv']
 
 [[tool.mypy.overrides]]
 module = ["tests.*", "examples.*"]

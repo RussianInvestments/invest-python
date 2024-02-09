@@ -89,7 +89,7 @@ class MovingAverageStrategyTrader(Trader):
             while True:
                 time.sleep(1)
 
-        self._market_data_stream = self._services.market_data_stream.market_data_stream(  # type: ignore
+        self._market_data_stream = self._services.market_data_stream.market_data_stream(
             request_iterator()
         )
 
