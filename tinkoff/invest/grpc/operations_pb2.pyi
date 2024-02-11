@@ -24,7 +24,7 @@ class _OperationState:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationState.ValueType], builtins.type):  # noqa: F821
+class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationState.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPERATION_STATE_UNSPECIFIED: _OperationState.ValueType  # 0
     """Статус операции не определён"""
@@ -52,7 +52,7 @@ class _OperationType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationType.ValueType], builtins.type):  # noqa: F821
+class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPERATION_TYPE_UNSPECIFIED: _OperationType.ValueType  # 0
     """Тип операции не определён."""
@@ -312,7 +312,7 @@ class _PortfolioSubscriptionStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _PortfolioSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PortfolioSubscriptionStatus.ValueType], builtins.type):  # noqa: F821
+class _PortfolioSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PortfolioSubscriptionStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED: _PortfolioSubscriptionStatus.ValueType  # 0
     """Тип не определён."""
@@ -340,7 +340,7 @@ class _PositionsAccountSubscriptionStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _PositionsAccountSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PositionsAccountSubscriptionStatus.ValueType], builtins.type):  # noqa: F821
+class _PositionsAccountSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PositionsAccountSubscriptionStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED: _PositionsAccountSubscriptionStatus.ValueType  # 0
     """Тип не определён."""
@@ -364,6 +364,7 @@ POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PositionsAccountSubscriptionStatus
 """Произошла ошибка."""
 global___PositionsAccountSubscriptionStatus = PositionsAccountSubscriptionStatus
 
+@typing_extensions.final
 class OperationsRequest(google.protobuf.message.Message):
     """Запрос получения списка операций по счёту."""
 
@@ -404,6 +405,7 @@ class OperationsRequest(google.protobuf.message.Message):
 
 global___OperationsRequest = OperationsRequest
 
+@typing_extensions.final
 class OperationsResponse(google.protobuf.message.Message):
     """Список операций."""
 
@@ -422,6 +424,7 @@ class OperationsResponse(google.protobuf.message.Message):
 
 global___OperationsResponse = OperationsResponse
 
+@typing_extensions.final
 class Operation(google.protobuf.message.Message):
     """Данные по операции."""
 
@@ -508,6 +511,7 @@ class Operation(google.protobuf.message.Message):
 
 global___Operation = Operation
 
+@typing_extensions.final
 class OperationTrade(google.protobuf.message.Message):
     """Сделка по операции."""
 
@@ -540,6 +544,7 @@ class OperationTrade(google.protobuf.message.Message):
 
 global___OperationTrade = OperationTrade
 
+@typing_extensions.final
 class PortfolioRequest(google.protobuf.message.Message):
     """Запрос получения текущего портфеля по счёту."""
 
@@ -549,7 +554,7 @@ class PortfolioRequest(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _CurrencyRequestEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PortfolioRequest._CurrencyRequest.ValueType], builtins.type):  # noqa: F821
+    class _CurrencyRequestEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PortfolioRequest._CurrencyRequest.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         RUB: PortfolioRequest._CurrencyRequest.ValueType  # 0
         """Рубли"""
@@ -584,6 +589,7 @@ class PortfolioRequest(google.protobuf.message.Message):
 
 global___PortfolioRequest = PortfolioRequest
 
+@typing_extensions.final
 class PortfolioResponse(google.protobuf.message.Message):
     """Текущий портфель по счёту."""
 
@@ -657,6 +663,7 @@ class PortfolioResponse(google.protobuf.message.Message):
 
 global___PortfolioResponse = PortfolioResponse
 
+@typing_extensions.final
 class PositionsRequest(google.protobuf.message.Message):
     """Запрос позиций портфеля по счёту."""
 
@@ -674,6 +681,7 @@ class PositionsRequest(google.protobuf.message.Message):
 
 global___PositionsRequest = PositionsRequest
 
+@typing_extensions.final
 class PositionsResponse(google.protobuf.message.Message):
     """Список позиций по счёту."""
 
@@ -716,6 +724,7 @@ class PositionsResponse(google.protobuf.message.Message):
 
 global___PositionsResponse = PositionsResponse
 
+@typing_extensions.final
 class WithdrawLimitsRequest(google.protobuf.message.Message):
     """Запрос доступного для вывода остатка."""
 
@@ -733,6 +742,7 @@ class WithdrawLimitsRequest(google.protobuf.message.Message):
 
 global___WithdrawLimitsRequest = WithdrawLimitsRequest
 
+@typing_extensions.final
 class WithdrawLimitsResponse(google.protobuf.message.Message):
     """Доступный для вывода остаток."""
 
@@ -761,6 +771,7 @@ class WithdrawLimitsResponse(google.protobuf.message.Message):
 
 global___WithdrawLimitsResponse = WithdrawLimitsResponse
 
+@typing_extensions.final
 class PortfolioPosition(google.protobuf.message.Message):
     """Позиции портфеля."""
 
@@ -850,6 +861,7 @@ class PortfolioPosition(google.protobuf.message.Message):
 
 global___PortfolioPosition = PortfolioPosition
 
+@typing_extensions.final
 class VirtualPortfolioPosition(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -913,6 +925,7 @@ class VirtualPortfolioPosition(google.protobuf.message.Message):
 
 global___VirtualPortfolioPosition = VirtualPortfolioPosition
 
+@typing_extensions.final
 class PositionsSecurities(google.protobuf.message.Message):
     """Баланс позиции ценной бумаги."""
 
@@ -954,6 +967,7 @@ class PositionsSecurities(google.protobuf.message.Message):
 
 global___PositionsSecurities = PositionsSecurities
 
+@typing_extensions.final
 class PositionsFutures(google.protobuf.message.Message):
     """Баланс фьючерса."""
 
@@ -987,6 +1001,7 @@ class PositionsFutures(google.protobuf.message.Message):
 
 global___PositionsFutures = PositionsFutures
 
+@typing_extensions.final
 class PositionsOptions(google.protobuf.message.Message):
     """Баланс опциона."""
 
@@ -1016,6 +1031,7 @@ class PositionsOptions(google.protobuf.message.Message):
 
 global___PositionsOptions = PositionsOptions
 
+@typing_extensions.final
 class BrokerReportRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1037,6 +1053,7 @@ class BrokerReportRequest(google.protobuf.message.Message):
 
 global___BrokerReportRequest = BrokerReportRequest
 
+@typing_extensions.final
 class BrokerReportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1058,6 +1075,7 @@ class BrokerReportResponse(google.protobuf.message.Message):
 
 global___BrokerReportResponse = BrokerReportResponse
 
+@typing_extensions.final
 class GenerateBrokerReportRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1080,6 +1098,7 @@ class GenerateBrokerReportRequest(google.protobuf.message.Message):
 
 global___GenerateBrokerReportRequest = GenerateBrokerReportRequest
 
+@typing_extensions.final
 class GenerateBrokerReportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1095,6 +1114,7 @@ class GenerateBrokerReportResponse(google.protobuf.message.Message):
 
 global___GenerateBrokerReportResponse = GenerateBrokerReportResponse
 
+@typing_extensions.final
 class GetBrokerReportRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1116,6 +1136,7 @@ class GetBrokerReportRequest(google.protobuf.message.Message):
 
 global___GetBrokerReportRequest = GetBrokerReportRequest
 
+@typing_extensions.final
 class GetBrokerReportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1143,6 +1164,7 @@ class GetBrokerReportResponse(google.protobuf.message.Message):
 
 global___GetBrokerReportResponse = GetBrokerReportResponse
 
+@typing_extensions.final
 class BrokerReport(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1274,6 +1296,7 @@ class BrokerReport(google.protobuf.message.Message):
 
 global___BrokerReport = BrokerReport
 
+@typing_extensions.final
 class GetDividendsForeignIssuerRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1297,6 +1320,7 @@ class GetDividendsForeignIssuerRequest(google.protobuf.message.Message):
 
 global___GetDividendsForeignIssuerRequest = GetDividendsForeignIssuerRequest
 
+@typing_extensions.final
 class GetDividendsForeignIssuerResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1320,6 +1344,7 @@ class GetDividendsForeignIssuerResponse(google.protobuf.message.Message):
 
 global___GetDividendsForeignIssuerResponse = GetDividendsForeignIssuerResponse
 
+@typing_extensions.final
 class GenerateDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
     """Объект запроса формирования отчёта "Справка о доходах за пределами РФ"."""
 
@@ -1344,6 +1369,7 @@ class GenerateDividendsForeignIssuerReportRequest(google.protobuf.message.Messag
 
 global___GenerateDividendsForeignIssuerReportRequest = GenerateDividendsForeignIssuerReportRequest
 
+@typing_extensions.final
 class GetDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
     """Объект запроса сформированного отчёта "Справка о доходах за пределами РФ"."""
 
@@ -1367,6 +1393,7 @@ class GetDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
 
 global___GetDividendsForeignIssuerReportRequest = GetDividendsForeignIssuerReportRequest
 
+@typing_extensions.final
 class GenerateDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
     """Объект результата задачи запуска формирования отчёта "Справка о доходах за пределами РФ"."""
 
@@ -1384,6 +1411,7 @@ class GenerateDividendsForeignIssuerReportResponse(google.protobuf.message.Messa
 
 global___GenerateDividendsForeignIssuerReportResponse = GenerateDividendsForeignIssuerReportResponse
 
+@typing_extensions.final
 class GetDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1411,6 +1439,7 @@ class GetDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
 
 global___GetDividendsForeignIssuerReportResponse = GetDividendsForeignIssuerReportResponse
 
+@typing_extensions.final
 class DividendsForeignIssuerReport(google.protobuf.message.Message):
     """Отчёт "Справка о доходах за пределами РФ"."""
 
@@ -1480,6 +1509,7 @@ class DividendsForeignIssuerReport(google.protobuf.message.Message):
 
 global___DividendsForeignIssuerReport = DividendsForeignIssuerReport
 
+@typing_extensions.final
 class PortfolioStreamRequest(google.protobuf.message.Message):
     """Запрос установки stream-соединения."""
 
@@ -1498,6 +1528,7 @@ class PortfolioStreamRequest(google.protobuf.message.Message):
 
 global___PortfolioStreamRequest = PortfolioStreamRequest
 
+@typing_extensions.final
 class PortfolioStreamResponse(google.protobuf.message.Message):
     """Информация по позициям и доходностям портфелей."""
 
@@ -1528,6 +1559,7 @@ class PortfolioStreamResponse(google.protobuf.message.Message):
 
 global___PortfolioStreamResponse = PortfolioStreamResponse
 
+@typing_extensions.final
 class PortfolioSubscriptionResult(google.protobuf.message.Message):
     """Объект результата подписки."""
 
@@ -1546,6 +1578,7 @@ class PortfolioSubscriptionResult(google.protobuf.message.Message):
 
 global___PortfolioSubscriptionResult = PortfolioSubscriptionResult
 
+@typing_extensions.final
 class AccountSubscriptionStatus(google.protobuf.message.Message):
     """Счет клиента."""
 
@@ -1567,6 +1600,7 @@ class AccountSubscriptionStatus(google.protobuf.message.Message):
 
 global___AccountSubscriptionStatus = AccountSubscriptionStatus
 
+@typing_extensions.final
 class GetOperationsByCursorRequest(google.protobuf.message.Message):
     """Запрос списка операций по счёту с пагинацией."""
 
@@ -1642,6 +1676,7 @@ class GetOperationsByCursorRequest(google.protobuf.message.Message):
 
 global___GetOperationsByCursorRequest = GetOperationsByCursorRequest
 
+@typing_extensions.final
 class GetOperationsByCursorResponse(google.protobuf.message.Message):
     """Список операций по счёту с пагинацией."""
 
@@ -1668,6 +1703,7 @@ class GetOperationsByCursorResponse(google.protobuf.message.Message):
 
 global___GetOperationsByCursorResponse = GetOperationsByCursorResponse
 
+@typing_extensions.final
 class OperationItem(google.protobuf.message.Message):
     """Данные об операции."""
 
@@ -1795,6 +1831,7 @@ class OperationItem(google.protobuf.message.Message):
 
 global___OperationItem = OperationItem
 
+@typing_extensions.final
 class OperationItemTrades(google.protobuf.message.Message):
     """Массив с информацией о сделках."""
 
@@ -1812,6 +1849,7 @@ class OperationItemTrades(google.protobuf.message.Message):
 
 global___OperationItemTrades = OperationItemTrades
 
+@typing_extensions.final
 class OperationItemTrade(google.protobuf.message.Message):
     """Сделка по операции."""
 
@@ -1850,6 +1888,7 @@ class OperationItemTrade(google.protobuf.message.Message):
 
 global___OperationItemTrade = OperationItemTrade
 
+@typing_extensions.final
 class PositionsStreamRequest(google.protobuf.message.Message):
     """Запрос установки stream-соединения позиций."""
 
@@ -1868,6 +1907,7 @@ class PositionsStreamRequest(google.protobuf.message.Message):
 
 global___PositionsStreamRequest = PositionsStreamRequest
 
+@typing_extensions.final
 class PositionsStreamResponse(google.protobuf.message.Message):
     """Информация по изменению позиций портфеля."""
 
@@ -1898,6 +1938,7 @@ class PositionsStreamResponse(google.protobuf.message.Message):
 
 global___PositionsStreamResponse = PositionsStreamResponse
 
+@typing_extensions.final
 class PositionsSubscriptionResult(google.protobuf.message.Message):
     """Объект результата подписки."""
 
@@ -1916,6 +1957,7 @@ class PositionsSubscriptionResult(google.protobuf.message.Message):
 
 global___PositionsSubscriptionResult = PositionsSubscriptionResult
 
+@typing_extensions.final
 class PositionsSubscriptionStatus(google.protobuf.message.Message):
     """Счет клиента."""
 
@@ -1937,6 +1979,7 @@ class PositionsSubscriptionStatus(google.protobuf.message.Message):
 
 global___PositionsSubscriptionStatus = PositionsSubscriptionStatus
 
+@typing_extensions.final
 class PositionData(google.protobuf.message.Message):
     """Данные о позиции портфеля."""
 
@@ -1980,6 +2023,7 @@ class PositionData(google.protobuf.message.Message):
 
 global___PositionData = PositionData
 
+@typing_extensions.final
 class PositionsMoney(google.protobuf.message.Message):
     """Валютная позиция портфеля."""
 

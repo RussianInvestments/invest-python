@@ -15,6 +15,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class OpenSandboxAccountRequest(google.protobuf.message.Message):
     """Запрос открытия счёта в песочнице.
     пустой запрос
@@ -28,6 +29,7 @@ class OpenSandboxAccountRequest(google.protobuf.message.Message):
 
 global___OpenSandboxAccountRequest = OpenSandboxAccountRequest
 
+@typing_extensions.final
 class OpenSandboxAccountResponse(google.protobuf.message.Message):
     """Номер открытого счёта в песочнице."""
 
@@ -45,6 +47,7 @@ class OpenSandboxAccountResponse(google.protobuf.message.Message):
 
 global___OpenSandboxAccountResponse = OpenSandboxAccountResponse
 
+@typing_extensions.final
 class CloseSandboxAccountRequest(google.protobuf.message.Message):
     """Запрос закрытия счёта в песочнице."""
 
@@ -62,6 +65,7 @@ class CloseSandboxAccountRequest(google.protobuf.message.Message):
 
 global___CloseSandboxAccountRequest = CloseSandboxAccountRequest
 
+@typing_extensions.final
 class CloseSandboxAccountResponse(google.protobuf.message.Message):
     """Результат закрытия счёта в песочнице.
     пустой ответ
@@ -75,6 +79,7 @@ class CloseSandboxAccountResponse(google.protobuf.message.Message):
 
 global___CloseSandboxAccountResponse = CloseSandboxAccountResponse
 
+@typing_extensions.final
 class SandboxPayInRequest(google.protobuf.message.Message):
     """Запрос пополнения счёта в песочнице."""
 
@@ -98,6 +103,7 @@ class SandboxPayInRequest(google.protobuf.message.Message):
 
 global___SandboxPayInRequest = SandboxPayInRequest
 
+@typing_extensions.final
 class SandboxPayInResponse(google.protobuf.message.Message):
     """Результат пополнения счёта, текущий баланс."""
 

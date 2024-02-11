@@ -24,7 +24,7 @@ class _StopOrderDirection:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StopOrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderDirection.ValueType], builtins.type):  # noqa: F821
+class _StopOrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderDirection.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_DIRECTION_UNSPECIFIED: _StopOrderDirection.ValueType  # 0
     """Значение не указано"""
@@ -48,7 +48,7 @@ class _StopOrderExpirationType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StopOrderExpirationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderExpirationType.ValueType], builtins.type):  # noqa: F821
+class _StopOrderExpirationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderExpirationType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_EXPIRATION_TYPE_UNSPECIFIED: _StopOrderExpirationType.ValueType  # 0
     """Значение не указано"""
@@ -72,7 +72,7 @@ class _StopOrderType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StopOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderType.ValueType], builtins.type):  # noqa: F821
+class _StopOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_TYPE_UNSPECIFIED: _StopOrderType.ValueType  # 0
     """Значение не указано"""
@@ -100,7 +100,7 @@ class _StopOrderStatusOption:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StopOrderStatusOptionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderStatusOption.ValueType], builtins.type):  # noqa: F821
+class _StopOrderStatusOptionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderStatusOption.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_STATUS_UNSPECIFIED: _StopOrderStatusOption.ValueType  # 0
     """Значение не указано"""
@@ -136,7 +136,7 @@ class _ExchangeOrderType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _ExchangeOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ExchangeOrderType.ValueType], builtins.type):  # noqa: F821
+class _ExchangeOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ExchangeOrderType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     EXCHANGE_ORDER_TYPE_UNSPECIFIED: _ExchangeOrderType.ValueType  # 0
     """Значение не указано"""
@@ -160,7 +160,7 @@ class _TakeProfitType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _TakeProfitTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TakeProfitType.ValueType], builtins.type):  # noqa: F821
+class _TakeProfitTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TakeProfitType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TAKE_PROFIT_TYPE_UNSPECIFIED: _TakeProfitType.ValueType  # 0
     """Значение не указано"""
@@ -184,7 +184,7 @@ class _TrailingValueType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _TrailingValueTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TrailingValueType.ValueType], builtins.type):  # noqa: F821
+class _TrailingValueTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TrailingValueType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TRAILING_VALUE_UNSPECIFIED: _TrailingValueType.ValueType  # 0
     """Значение не указано"""
@@ -208,7 +208,7 @@ class _TrailingStopStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _TrailingStopStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TrailingStopStatus.ValueType], builtins.type):  # noqa: F821
+class _TrailingStopStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TrailingStopStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TRAILING_STOP_UNSPECIFIED: _TrailingStopStatus.ValueType  # 0
     """Значение не указано"""
@@ -228,11 +228,13 @@ TRAILING_STOP_ACTIVATED: TrailingStopStatus.ValueType  # 2
 """Активированный"""
 global___TrailingStopStatus = TrailingStopStatus
 
+@typing_extensions.final
 class PostStopOrderRequest(google.protobuf.message.Message):
     """Запрос выставления стоп-заявки."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class TrailingData(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -275,6 +277,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     TAKE_PROFIT_TYPE_FIELD_NUMBER: builtins.int
     TRAILING_DATA_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
+    ORDER_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     quantity: builtins.int
@@ -295,7 +298,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     """Тип заявки"""
     @property
     def expire_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата и время окончания действия стоп-заявки в часовом поясе UTC. **Для ExpirationType = GoodTillDate заполнение обязательно**."""
+        """Дата и время окончания действия стоп-заявки в часовом поясе UTC. **Для ExpirationType = GoodTillDate заполнение обязательно, для GoodTillCancel игнорируется**."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значения Figi или instrument_uid."""
     exchange_order_type: global___ExchangeOrderType.ValueType
@@ -307,6 +310,8 @@ class PostStopOrderRequest(google.protobuf.message.Message):
         """Массив с параметрами трейлинг-стопа"""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены"""
+    order_id: builtins.str
+    """Идентификатор запроса выставления поручения для целей идемпотентности в формате UID. Максимальная длина 36 символов."""
     def __init__(
         self,
         *,
@@ -324,9 +329,10 @@ class PostStopOrderRequest(google.protobuf.message.Message):
         take_profit_type: global___TakeProfitType.ValueType = ...,
         trailing_data: global___PostStopOrderRequest.TrailingData | None = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
+        order_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "expire_date", b"expire_date", "figi", b"figi", "price", b"price", "stop_price", b"stop_price", "trailing_data", b"trailing_data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "account_id", b"account_id", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "instrument_id", b"instrument_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "account_id", b"account_id", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_expire_date", b"_expire_date"]) -> typing_extensions.Literal["expire_date"] | None: ...
     @typing.overload
@@ -338,15 +344,19 @@ class PostStopOrderRequest(google.protobuf.message.Message):
 
 global___PostStopOrderRequest = PostStopOrderRequest
 
+@typing_extensions.final
 class PostStopOrderResponse(google.protobuf.message.Message):
     """Результат выставления стоп-заявки."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
+    ORDER_REQUEST_ID_FIELD_NUMBER: builtins.int
     RESPONSE_METADATA_FIELD_NUMBER: builtins.int
     stop_order_id: builtins.str
     """Уникальный идентификатор стоп-заявки"""
+    order_request_id: builtins.str
+    """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
     @property
     def response_metadata(self) -> tinkoff.invest.grpc.common_pb2.ResponseMetadata:
         """Метадата"""
@@ -354,13 +364,15 @@ class PostStopOrderResponse(google.protobuf.message.Message):
         self,
         *,
         stop_order_id: builtins.str = ...,
+        order_request_id: builtins.str = ...,
         response_metadata: tinkoff.invest.grpc.common_pb2.ResponseMetadata | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["response_metadata", b"response_metadata", "stop_order_id", b"stop_order_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["order_request_id", b"order_request_id", "response_metadata", b"response_metadata", "stop_order_id", b"stop_order_id"]) -> None: ...
 
 global___PostStopOrderResponse = PostStopOrderResponse
 
+@typing_extensions.final
 class GetStopOrdersRequest(google.protobuf.message.Message):
     """Запрос получения списка активных стоп-заявок."""
 
@@ -389,6 +401,7 @@ class GetStopOrdersRequest(google.protobuf.message.Message):
 
 global___GetStopOrdersRequest = GetStopOrdersRequest
 
+@typing_extensions.final
 class GetStopOrdersResponse(google.protobuf.message.Message):
     """Список активных стоп-заявок."""
 
@@ -407,6 +420,7 @@ class GetStopOrdersResponse(google.protobuf.message.Message):
 
 global___GetStopOrdersResponse = GetStopOrdersResponse
 
+@typing_extensions.final
 class CancelStopOrderRequest(google.protobuf.message.Message):
     """Запрос отмены выставленной стоп-заявки."""
 
@@ -428,6 +442,7 @@ class CancelStopOrderRequest(google.protobuf.message.Message):
 
 global___CancelStopOrderRequest = CancelStopOrderRequest
 
+@typing_extensions.final
 class CancelStopOrderResponse(google.protobuf.message.Message):
     """Результат отмены выставленной стоп-заявки."""
 
@@ -447,11 +462,13 @@ class CancelStopOrderResponse(google.protobuf.message.Message):
 
 global___CancelStopOrderResponse = CancelStopOrderResponse
 
+@typing_extensions.final
 class StopOrder(google.protobuf.message.Message):
     """Информация о стоп-заявке."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class TrailingData(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
