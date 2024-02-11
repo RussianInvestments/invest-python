@@ -24,7 +24,7 @@ class _OrderDirection:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderDirection.ValueType], builtins.type):  # noqa: F821
+class _OrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderDirection.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ORDER_DIRECTION_UNSPECIFIED: _OrderDirection.ValueType  # 0
     """Значение не указано"""
@@ -48,7 +48,7 @@ class _OrderType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderType.ValueType], builtins.type):  # noqa: F821
+class _OrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ORDER_TYPE_UNSPECIFIED: _OrderType.ValueType  # 0
     """Значение не указано"""
@@ -76,7 +76,7 @@ class _OrderExecutionReportStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OrderExecutionReportStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderExecutionReportStatus.ValueType], builtins.type):  # noqa: F821
+class _OrderExecutionReportStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderExecutionReportStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     EXECUTION_REPORT_STATUS_UNSPECIFIED: _OrderExecutionReportStatus.ValueType  # 0
     EXECUTION_REPORT_STATUS_FILL: _OrderExecutionReportStatus.ValueType  # 1
@@ -110,29 +110,30 @@ class _TimeInForceType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _TimeInForceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TimeInForceType.ValueType], builtins.type):  # noqa: F821
+class _TimeInForceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TimeInForceType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TIME_IN_FORCE_UNSPECIFIED: _TimeInForceType.ValueType  # 0
     """Значение не определено см. TIME_IN_FORCE_DAY"""
     TIME_IN_FORCE_DAY: _TimeInForceType.ValueType  # 1
-    """Заявка действует до конца торгового дня. значение по умолчанию"""
+    """Заявка действует до конца торгового дня. Значение по умолчанию"""
     TIME_IN_FORCE_FILL_AND_KILL: _TimeInForceType.ValueType  # 2
-    """Заявка исполнена(возможно частично) и уничтожена"""
+    """Если в момент выставления возможно исполнение заявки(в т.ч. частичное), заявка будет исполнена или отменена сразу после выставления"""
     TIME_IN_FORCE_FILL_OR_KILL: _TimeInForceType.ValueType  # 3
-    """Заявка исполнена полностью или уничтожена, недоступно для срочного рынка и торговли по выходным"""
+    """Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным"""
 
 class TimeInForceType(_TimeInForceType, metaclass=_TimeInForceTypeEnumTypeWrapper): ...
 
 TIME_IN_FORCE_UNSPECIFIED: TimeInForceType.ValueType  # 0
 """Значение не определено см. TIME_IN_FORCE_DAY"""
 TIME_IN_FORCE_DAY: TimeInForceType.ValueType  # 1
-"""Заявка действует до конца торгового дня. значение по умолчанию"""
+"""Заявка действует до конца торгового дня. Значение по умолчанию"""
 TIME_IN_FORCE_FILL_AND_KILL: TimeInForceType.ValueType  # 2
-"""Заявка исполнена(возможно частично) и уничтожена"""
+"""Если в момент выставления возможно исполнение заявки(в т.ч. частичное), заявка будет исполнена или отменена сразу после выставления"""
 TIME_IN_FORCE_FILL_OR_KILL: TimeInForceType.ValueType  # 3
-"""Заявка исполнена полностью или уничтожена, недоступно для срочного рынка и торговли по выходным"""
+"""Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным"""
 global___TimeInForceType = TimeInForceType
 
+@typing_extensions.final
 class TradesStreamRequest(google.protobuf.message.Message):
     """Запрос установки соединения."""
 
@@ -151,6 +152,7 @@ class TradesStreamRequest(google.protobuf.message.Message):
 
 global___TradesStreamRequest = TradesStreamRequest
 
+@typing_extensions.final
 class TradesStreamResponse(google.protobuf.message.Message):
     """Информация о торговых поручениях."""
 
@@ -176,6 +178,7 @@ class TradesStreamResponse(google.protobuf.message.Message):
 
 global___TradesStreamResponse = TradesStreamResponse
 
+@typing_extensions.final
 class OrderTrades(google.protobuf.message.Message):
     """Информация об исполнении торгового поручения."""
 
@@ -220,6 +223,7 @@ class OrderTrades(google.protobuf.message.Message):
 
 global___OrderTrades = OrderTrades
 
+@typing_extensions.final
 class OrderTrade(google.protobuf.message.Message):
     """Информация о сделке."""
 
@@ -252,6 +256,7 @@ class OrderTrade(google.protobuf.message.Message):
 
 global___OrderTrade = OrderTrade
 
+@typing_extensions.final
 class PostOrderRequest(google.protobuf.message.Message):
     """Запрос выставления торгового поручения."""
 
@@ -311,6 +316,7 @@ class PostOrderRequest(google.protobuf.message.Message):
 
 global___PostOrderRequest = PostOrderRequest
 
+@typing_extensions.final
 class PostOrderResponse(google.protobuf.message.Message):
     """Прочитайте  про ключ идемпотентности [здесь](https://russianinvestments.github.io/investAPI/head-orders/)
 
@@ -413,6 +419,7 @@ class PostOrderResponse(google.protobuf.message.Message):
 
 global___PostOrderResponse = PostOrderResponse
 
+@typing_extensions.final
 class CancelOrderRequest(google.protobuf.message.Message):
     """Запрос отмены торгового поручения."""
 
@@ -434,6 +441,7 @@ class CancelOrderRequest(google.protobuf.message.Message):
 
 global___CancelOrderRequest = CancelOrderRequest
 
+@typing_extensions.final
 class CancelOrderResponse(google.protobuf.message.Message):
     """Результат отмены торгового поручения."""
 
@@ -458,6 +466,7 @@ class CancelOrderResponse(google.protobuf.message.Message):
 
 global___CancelOrderResponse = CancelOrderResponse
 
+@typing_extensions.final
 class GetOrderStateRequest(google.protobuf.message.Message):
     """Запрос получения статуса торгового поручения."""
 
@@ -483,6 +492,7 @@ class GetOrderStateRequest(google.protobuf.message.Message):
 
 global___GetOrderStateRequest = GetOrderStateRequest
 
+@typing_extensions.final
 class GetOrdersRequest(google.protobuf.message.Message):
     """Запрос получения списка активных торговых поручений."""
 
@@ -500,6 +510,7 @@ class GetOrdersRequest(google.protobuf.message.Message):
 
 global___GetOrdersRequest = GetOrdersRequest
 
+@typing_extensions.final
 class GetOrdersResponse(google.protobuf.message.Message):
     """Список активных торговых поручений."""
 
@@ -518,6 +529,7 @@ class GetOrdersResponse(google.protobuf.message.Message):
 
 global___GetOrdersResponse = GetOrdersResponse
 
+@typing_extensions.final
 class OrderState(google.protobuf.message.Message):
     """Информация о торговом поручении."""
 
@@ -622,6 +634,7 @@ class OrderState(google.protobuf.message.Message):
 
 global___OrderState = OrderState
 
+@typing_extensions.final
 class OrderStage(google.protobuf.message.Message):
     """Сделки в рамках торгового поручения."""
 
@@ -649,6 +662,7 @@ class OrderStage(google.protobuf.message.Message):
 
 global___OrderStage = OrderStage
 
+@typing_extensions.final
 class ReplaceOrderRequest(google.protobuf.message.Message):
     """Запрос изменения выставленной заявки."""
 
@@ -692,6 +706,7 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
 
 global___ReplaceOrderRequest = ReplaceOrderRequest
 
+@typing_extensions.final
 class GetMaxLotsRequest(google.protobuf.message.Message):
     """Запрос на расчет количества доступных для покупки/продажи лотов. Если не указывать цену инструмента, то расчет произведется по текущум ценам в стакане: по лучшему предложению для покупки и по лучшему спросу для продажи."""
 
@@ -720,11 +735,13 @@ class GetMaxLotsRequest(google.protobuf.message.Message):
 
 global___GetMaxLotsRequest = GetMaxLotsRequest
 
+@typing_extensions.final
 class GetMaxLotsResponse(google.protobuf.message.Message):
     """Результат количество доступных для покупки/продажи лотов"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class BuyLimitsView(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -748,6 +765,7 @@ class GetMaxLotsResponse(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal["buy_money_amount", b"buy_money_amount"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["buy_max_lots", b"buy_max_lots", "buy_max_market_lots", b"buy_max_market_lots", "buy_money_amount", b"buy_money_amount"]) -> None: ...
 
+    @typing_extensions.final
     class SellLimitsView(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -794,6 +812,7 @@ class GetMaxLotsResponse(google.protobuf.message.Message):
 
 global___GetMaxLotsResponse = GetMaxLotsResponse
 
+@typing_extensions.final
 class GetOrderPriceRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -827,9 +846,11 @@ class GetOrderPriceRequest(google.protobuf.message.Message):
 
 global___GetOrderPriceRequest = GetOrderPriceRequest
 
+@typing_extensions.final
 class GetOrderPriceResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class ExtraBond(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -850,6 +871,7 @@ class GetOrderPriceResponse(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "nominal_conversion_rate", b"nominal_conversion_rate"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "nominal_conversion_rate", b"nominal_conversion_rate"]) -> None: ...
 
+    @typing_extensions.final
     class ExtraFuture(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

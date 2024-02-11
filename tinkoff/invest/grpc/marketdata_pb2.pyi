@@ -24,7 +24,7 @@ class _SubscriptionAction:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _SubscriptionActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionAction.ValueType], builtins.type):  # noqa: F821
+class _SubscriptionActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionAction.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SUBSCRIPTION_ACTION_UNSPECIFIED: _SubscriptionAction.ValueType  # 0
     """Статус подписки не определён."""
@@ -48,7 +48,7 @@ class _SubscriptionInterval:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _SubscriptionIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionInterval.ValueType], builtins.type):  # noqa: F821
+class _SubscriptionIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionInterval.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SUBSCRIPTION_INTERVAL_UNSPECIFIED: _SubscriptionInterval.ValueType  # 0
     """Интервал свечи не определён."""
@@ -116,7 +116,7 @@ class _SubscriptionStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionStatus.ValueType], builtins.type):  # noqa: F821
+class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SUBSCRIPTION_STATUS_UNSPECIFIED: _SubscriptionStatus.ValueType  # 0
     """Статус подписки не определён."""
@@ -168,7 +168,7 @@ class _TradeDirection:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _TradeDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TradeDirection.ValueType], builtins.type):  # noqa: F821
+class _TradeDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TradeDirection.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TRADE_DIRECTION_UNSPECIFIED: _TradeDirection.ValueType  # 0
     """Направление сделки не определено."""
@@ -192,7 +192,7 @@ class _CandleInterval:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CandleInterval.ValueType], builtins.type):  # noqa: F821
+class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CandleInterval.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     CANDLE_INTERVAL_UNSPECIFIED: _CandleInterval.ValueType  # 0
     """Интервал не определён."""
@@ -256,6 +256,30 @@ CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
 """от 1 месяца до 10 лет."""
 global___CandleInterval = CandleInterval
 
+class _OrderBookType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _OrderBookTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderBookType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    ORDERBOOK_TYPE_UNSPECIFIED: _OrderBookType.ValueType  # 0
+    """не определен"""
+    ORDERBOOK_TYPE_EXCHANGE: _OrderBookType.ValueType  # 1
+    """Биржевой стакан"""
+    ORDERBOOK_TYPE_DEALER: _OrderBookType.ValueType  # 2
+    """Стакан дилера"""
+
+class OrderBookType(_OrderBookType, metaclass=_OrderBookTypeEnumTypeWrapper): ...
+
+ORDERBOOK_TYPE_UNSPECIFIED: OrderBookType.ValueType  # 0
+"""не определен"""
+ORDERBOOK_TYPE_EXCHANGE: OrderBookType.ValueType  # 1
+"""Биржевой стакан"""
+ORDERBOOK_TYPE_DEALER: OrderBookType.ValueType  # 2
+"""Стакан дилера"""
+global___OrderBookType = OrderBookType
+
+@typing_extensions.final
 class MarketDataRequest(google.protobuf.message.Message):
     """Запрос подписки или отписки на определённые биржевые данные."""
 
@@ -301,6 +325,7 @@ class MarketDataRequest(google.protobuf.message.Message):
 
 global___MarketDataRequest = MarketDataRequest
 
+@typing_extensions.final
 class MarketDataServerSideStreamRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -338,6 +363,7 @@ class MarketDataServerSideStreamRequest(google.protobuf.message.Message):
 
 global___MarketDataServerSideStreamRequest = MarketDataServerSideStreamRequest
 
+@typing_extensions.final
 class MarketDataResponse(google.protobuf.message.Message):
     """Пакет биржевой информации по подписке."""
 
@@ -408,6 +434,7 @@ class MarketDataResponse(google.protobuf.message.Message):
 
 global___MarketDataResponse = MarketDataResponse
 
+@typing_extensions.final
 class SubscribeCandlesRequest(google.protobuf.message.Message):
     """subscribeCandles | Изменения статуса подписки на свечи."""
 
@@ -434,6 +461,7 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
 
 global___SubscribeCandlesRequest = SubscribeCandlesRequest
 
+@typing_extensions.final
 class CandleInstrument(google.protobuf.message.Message):
     """Запрос изменения статус подписки на свечи."""
 
@@ -459,6 +487,7 @@ class CandleInstrument(google.protobuf.message.Message):
 
 global___CandleInstrument = CandleInstrument
 
+@typing_extensions.final
 class SubscribeCandlesResponse(google.protobuf.message.Message):
     """Результат изменения статус подписки на свечи."""
 
@@ -481,6 +510,7 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
 
 global___SubscribeCandlesResponse = SubscribeCandlesResponse
 
+@typing_extensions.final
 class CandleSubscription(google.protobuf.message.Message):
     """Статус подписки на свечи."""
 
@@ -491,6 +521,8 @@ class CandleSubscription(google.protobuf.message.Message):
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     WAITING_CLOSE_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     interval: global___SubscriptionInterval.ValueType
@@ -501,6 +533,10 @@ class CandleSubscription(google.protobuf.message.Message):
     """Uid инструмента"""
     waiting_close: builtins.bool
     """Флаг ожидания закрытия временного интервала для отправки свечи"""
+    stream_id: builtins.str
+    """Идентификатор открытого соединения"""
+    subscription_id: builtins.str
+    """Идентификатор подписки в формате UUID"""
     def __init__(
         self,
         *,
@@ -509,11 +545,14 @@ class CandleSubscription(google.protobuf.message.Message):
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
         waiting_close: builtins.bool = ...,
+        stream_id: builtins.str = ...,
+        subscription_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "interval", b"interval", "subscription_status", b"subscription_status", "waiting_close", b"waiting_close"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "interval", b"interval", "stream_id", b"stream_id", "subscription_id", b"subscription_id", "subscription_status", b"subscription_status", "waiting_close", b"waiting_close"]) -> None: ...
 
 global___CandleSubscription = CandleSubscription
 
+@typing_extensions.final
 class SubscribeOrderBookRequest(google.protobuf.message.Message):
     """Запрос на изменение статуса подписки на стаканы."""
 
@@ -536,6 +575,7 @@ class SubscribeOrderBookRequest(google.protobuf.message.Message):
 
 global___SubscribeOrderBookRequest = SubscribeOrderBookRequest
 
+@typing_extensions.final
 class OrderBookInstrument(google.protobuf.message.Message):
     """Запрос подписки на стаканы."""
 
@@ -544,23 +584,28 @@ class OrderBookInstrument(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    ORDER_BOOK_TYPE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     depth: builtins.int
     """Глубина стакана."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    order_book_type: global___OrderBookType.ValueType
+    """Тип стакана"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         depth: builtins.int = ...,
         instrument_id: builtins.str = ...,
+        order_book_type: global___OrderBookType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["depth", b"depth", "figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["depth", b"depth", "figi", b"figi", "instrument_id", b"instrument_id", "order_book_type", b"order_book_type"]) -> None: ...
 
 global___OrderBookInstrument = OrderBookInstrument
 
+@typing_extensions.final
 class SubscribeOrderBookResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на стаканы."""
 
@@ -583,6 +628,7 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
 
 global___SubscribeOrderBookResponse = SubscribeOrderBookResponse
 
+@typing_extensions.final
 class OrderBookSubscription(google.protobuf.message.Message):
     """Статус подписки."""
 
@@ -592,6 +638,9 @@ class OrderBookSubscription(google.protobuf.message.Message):
     DEPTH_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_ID_FIELD_NUMBER: builtins.int
+    ORDER_BOOK_TYPE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     depth: builtins.int
@@ -600,6 +649,12 @@ class OrderBookSubscription(google.protobuf.message.Message):
     """Статус подписки."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    stream_id: builtins.str
+    """Идентификатор открытого соединения"""
+    subscription_id: builtins.str
+    """Идентификатор подписки в формате UUID"""
+    order_book_type: global___OrderBookType.ValueType
+    """Тип стакана"""
     def __init__(
         self,
         *,
@@ -607,11 +662,15 @@ class OrderBookSubscription(google.protobuf.message.Message):
         depth: builtins.int = ...,
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
+        stream_id: builtins.str = ...,
+        subscription_id: builtins.str = ...,
+        order_book_type: global___OrderBookType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["depth", b"depth", "figi", b"figi", "instrument_uid", b"instrument_uid", "subscription_status", b"subscription_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["depth", b"depth", "figi", b"figi", "instrument_uid", b"instrument_uid", "order_book_type", b"order_book_type", "stream_id", b"stream_id", "subscription_id", b"subscription_id", "subscription_status", b"subscription_status"]) -> None: ...
 
 global___OrderBookSubscription = OrderBookSubscription
 
+@typing_extensions.final
 class SubscribeTradesRequest(google.protobuf.message.Message):
     """Изменение статуса подписки на поток обезличенных сделок."""
 
@@ -634,6 +693,7 @@ class SubscribeTradesRequest(google.protobuf.message.Message):
 
 global___SubscribeTradesRequest = SubscribeTradesRequest
 
+@typing_extensions.final
 class TradeInstrument(google.protobuf.message.Message):
     """Запрос подписки на поток обезличенных сделок."""
 
@@ -655,6 +715,7 @@ class TradeInstrument(google.protobuf.message.Message):
 
 global___TradeInstrument = TradeInstrument
 
+@typing_extensions.final
 class SubscribeTradesResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на поток обезличенных сделок."""
 
@@ -677,6 +738,7 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
 
 global___SubscribeTradesResponse = SubscribeTradesResponse
 
+@typing_extensions.final
 class TradeSubscription(google.protobuf.message.Message):
     """Статус подписки."""
 
@@ -685,23 +747,32 @@ class TradeSubscription(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    stream_id: builtins.str
+    """Идентификатор открытого соединения"""
+    subscription_id: builtins.str
+    """Идентификатор подписки в формате UUID"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
+        stream_id: builtins.str = ...,
+        subscription_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "subscription_status", b"subscription_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "stream_id", b"stream_id", "subscription_id", b"subscription_id", "subscription_status", b"subscription_status"]) -> None: ...
 
 global___TradeSubscription = TradeSubscription
 
+@typing_extensions.final
 class SubscribeInfoRequest(google.protobuf.message.Message):
     """Изменение статуса подписки на торговый статус инструмента."""
 
@@ -724,6 +795,7 @@ class SubscribeInfoRequest(google.protobuf.message.Message):
 
 global___SubscribeInfoRequest = SubscribeInfoRequest
 
+@typing_extensions.final
 class InfoInstrument(google.protobuf.message.Message):
     """Запрос подписки на торговый статус."""
 
@@ -745,6 +817,7 @@ class InfoInstrument(google.protobuf.message.Message):
 
 global___InfoInstrument = InfoInstrument
 
+@typing_extensions.final
 class SubscribeInfoResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на торговый статус."""
 
@@ -767,6 +840,7 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
 
 global___SubscribeInfoResponse = SubscribeInfoResponse
 
+@typing_extensions.final
 class InfoSubscription(google.protobuf.message.Message):
     """Статус подписки."""
 
@@ -775,23 +849,32 @@ class InfoSubscription(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    stream_id: builtins.str
+    """Идентификатор открытого соединения"""
+    subscription_id: builtins.str
+    """Идентификатор подписки в формате UUID"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
+        stream_id: builtins.str = ...,
+        subscription_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "subscription_status", b"subscription_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "stream_id", b"stream_id", "subscription_id", b"subscription_id", "subscription_status", b"subscription_status"]) -> None: ...
 
 global___InfoSubscription = InfoSubscription
 
+@typing_extensions.final
 class SubscribeLastPriceRequest(google.protobuf.message.Message):
     """Изменение статуса подписки на цену последней сделки по инструменту."""
 
@@ -814,6 +897,7 @@ class SubscribeLastPriceRequest(google.protobuf.message.Message):
 
 global___SubscribeLastPriceRequest = SubscribeLastPriceRequest
 
+@typing_extensions.final
 class LastPriceInstrument(google.protobuf.message.Message):
     """Запрос подписки на последнюю цену."""
 
@@ -835,6 +919,7 @@ class LastPriceInstrument(google.protobuf.message.Message):
 
 global___LastPriceInstrument = LastPriceInstrument
 
+@typing_extensions.final
 class SubscribeLastPriceResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на цену последней сделки."""
 
@@ -857,6 +942,7 @@ class SubscribeLastPriceResponse(google.protobuf.message.Message):
 
 global___SubscribeLastPriceResponse = SubscribeLastPriceResponse
 
+@typing_extensions.final
 class LastPriceSubscription(google.protobuf.message.Message):
     """Статус подписки на цену последней сделки."""
 
@@ -865,23 +951,32 @@ class LastPriceSubscription(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    STREAM_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    stream_id: builtins.str
+    """Идентификатор открытого соединения"""
+    subscription_id: builtins.str
+    """Идентификатор подписки в формате UUID"""
     def __init__(
         self,
         *,
         figi: builtins.str = ...,
         subscription_status: global___SubscriptionStatus.ValueType = ...,
         instrument_uid: builtins.str = ...,
+        stream_id: builtins.str = ...,
+        subscription_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "subscription_status", b"subscription_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_uid", b"instrument_uid", "stream_id", b"stream_id", "subscription_id", b"subscription_id", "subscription_status", b"subscription_status"]) -> None: ...
 
 global___LastPriceSubscription = LastPriceSubscription
 
+@typing_extensions.final
 class Candle(google.protobuf.message.Message):
     """Пакет свечей в рамках стрима."""
 
@@ -942,6 +1037,7 @@ class Candle(google.protobuf.message.Message):
 
 global___Candle = Candle
 
+@typing_extensions.final
 class OrderBook(google.protobuf.message.Message):
     """Пакет стаканов в рамках стрима."""
 
@@ -956,6 +1052,7 @@ class OrderBook(google.protobuf.message.Message):
     LIMIT_UP_FIELD_NUMBER: builtins.int
     LIMIT_DOWN_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    ORDER_BOOK_TYPE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     depth: builtins.int
@@ -979,6 +1076,8 @@ class OrderBook(google.protobuf.message.Message):
         """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    order_book_type: global___OrderBookType.ValueType
+    """Тип стакана"""
     def __init__(
         self,
         *,
@@ -991,12 +1090,14 @@ class OrderBook(google.protobuf.message.Message):
         limit_up: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         limit_down: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         instrument_uid: builtins.str = ...,
+        order_book_type: global___OrderBookType.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["limit_down", b"limit_down", "limit_up", b"limit_up", "time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asks", b"asks", "bids", b"bids", "depth", b"depth", "figi", b"figi", "instrument_uid", b"instrument_uid", "is_consistent", b"is_consistent", "limit_down", b"limit_down", "limit_up", b"limit_up", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asks", b"asks", "bids", b"bids", "depth", b"depth", "figi", b"figi", "instrument_uid", b"instrument_uid", "is_consistent", b"is_consistent", "limit_down", b"limit_down", "limit_up", b"limit_up", "order_book_type", b"order_book_type", "time", b"time"]) -> None: ...
 
 global___OrderBook = OrderBook
 
+@typing_extensions.final
 class Order(google.protobuf.message.Message):
     """Массив предложений/спроса."""
 
@@ -1020,6 +1121,7 @@ class Order(google.protobuf.message.Message):
 
 global___Order = Order
 
+@typing_extensions.final
 class Trade(google.protobuf.message.Message):
     """Информация о сделке."""
 
@@ -1060,6 +1162,7 @@ class Trade(google.protobuf.message.Message):
 
 global___Trade = Trade
 
+@typing_extensions.final
 class TradingStatus(google.protobuf.message.Message):
     """Пакет изменения торгового статуса."""
 
@@ -1099,6 +1202,7 @@ class TradingStatus(google.protobuf.message.Message):
 
 global___TradingStatus = TradingStatus
 
+@typing_extensions.final
 class GetCandlesRequest(google.protobuf.message.Message):
     """Запрос исторических свечей."""
 
@@ -1135,6 +1239,7 @@ class GetCandlesRequest(google.protobuf.message.Message):
 
 global___GetCandlesRequest = GetCandlesRequest
 
+@typing_extensions.final
 class GetCandlesResponse(google.protobuf.message.Message):
     """Список свечей."""
 
@@ -1153,6 +1258,7 @@ class GetCandlesResponse(google.protobuf.message.Message):
 
 global___GetCandlesResponse = GetCandlesResponse
 
+@typing_extensions.final
 class HistoricCandle(google.protobuf.message.Message):
     """Информация о свече."""
 
@@ -1200,6 +1306,7 @@ class HistoricCandle(google.protobuf.message.Message):
 
 global___HistoricCandle = HistoricCandle
 
+@typing_extensions.final
 class GetLastPricesRequest(google.protobuf.message.Message):
     """Запрос получения цен последних сделок."""
 
@@ -1223,6 +1330,7 @@ class GetLastPricesRequest(google.protobuf.message.Message):
 
 global___GetLastPricesRequest = GetLastPricesRequest
 
+@typing_extensions.final
 class GetLastPricesResponse(google.protobuf.message.Message):
     """Список цен последних сделок."""
 
@@ -1241,6 +1349,7 @@ class GetLastPricesResponse(google.protobuf.message.Message):
 
 global___GetLastPricesResponse = GetLastPricesResponse
 
+@typing_extensions.final
 class LastPrice(google.protobuf.message.Message):
     """Информация о цене последней сделки."""
 
@@ -1273,6 +1382,7 @@ class LastPrice(google.protobuf.message.Message):
 
 global___LastPrice = LastPrice
 
+@typing_extensions.final
 class GetOrderBookRequest(google.protobuf.message.Message):
     """Запрос стакана."""
 
@@ -1303,6 +1413,7 @@ class GetOrderBookRequest(google.protobuf.message.Message):
 
 global___GetOrderBookRequest = GetOrderBookRequest
 
+@typing_extensions.final
 class GetOrderBookResponse(google.protobuf.message.Message):
     """Информация о стакане."""
 
@@ -1374,6 +1485,7 @@ class GetOrderBookResponse(google.protobuf.message.Message):
 
 global___GetOrderBookResponse = GetOrderBookResponse
 
+@typing_extensions.final
 class GetTradingStatusRequest(google.protobuf.message.Message):
     """Запрос получения торгового статуса."""
 
@@ -1400,6 +1512,7 @@ class GetTradingStatusRequest(google.protobuf.message.Message):
 
 global___GetTradingStatusRequest = GetTradingStatusRequest
 
+@typing_extensions.final
 class GetTradingStatusesRequest(google.protobuf.message.Message):
     """Запрос получения торгового статуса."""
 
@@ -1418,6 +1531,7 @@ class GetTradingStatusesRequest(google.protobuf.message.Message):
 
 global___GetTradingStatusesRequest = GetTradingStatusesRequest
 
+@typing_extensions.final
 class GetTradingStatusesResponse(google.protobuf.message.Message):
     """Информация о торговом статусе."""
 
@@ -1436,6 +1550,7 @@ class GetTradingStatusesResponse(google.protobuf.message.Message):
 
 global___GetTradingStatusesResponse = GetTradingStatusesResponse
 
+@typing_extensions.final
 class GetTradingStatusResponse(google.protobuf.message.Message):
     """Информация о торговом статусе."""
 
@@ -1481,6 +1596,7 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
 
 global___GetTradingStatusResponse = GetTradingStatusResponse
 
+@typing_extensions.final
 class GetLastTradesRequest(google.protobuf.message.Message):
     """Запрос обезличенных сделок за последний час."""
 
@@ -1513,6 +1629,7 @@ class GetLastTradesRequest(google.protobuf.message.Message):
 
 global___GetLastTradesRequest = GetLastTradesRequest
 
+@typing_extensions.final
 class GetLastTradesResponse(google.protobuf.message.Message):
     """Обезличенных сделок за последний час."""
 
@@ -1531,6 +1648,7 @@ class GetLastTradesResponse(google.protobuf.message.Message):
 
 global___GetLastTradesResponse = GetLastTradesResponse
 
+@typing_extensions.final
 class GetMySubscriptions(google.protobuf.message.Message):
     """Запрос активных подписок."""
 
@@ -1542,6 +1660,7 @@ class GetMySubscriptions(google.protobuf.message.Message):
 
 global___GetMySubscriptions = GetMySubscriptions
 
+@typing_extensions.final
 class GetClosePricesRequest(google.protobuf.message.Message):
     """Запрос цен закрытия торговой сессии по инструментам."""
 
@@ -1560,6 +1679,7 @@ class GetClosePricesRequest(google.protobuf.message.Message):
 
 global___GetClosePricesRequest = GetClosePricesRequest
 
+@typing_extensions.final
 class InstrumentClosePriceRequest(google.protobuf.message.Message):
     """Запрос цен закрытия торговой сессии по инструменту."""
 
@@ -1577,6 +1697,7 @@ class InstrumentClosePriceRequest(google.protobuf.message.Message):
 
 global___InstrumentClosePriceRequest = InstrumentClosePriceRequest
 
+@typing_extensions.final
 class GetClosePricesResponse(google.protobuf.message.Message):
     """Цены закрытия торговой сессии по инструментам."""
 
@@ -1595,6 +1716,7 @@ class GetClosePricesResponse(google.protobuf.message.Message):
 
 global___GetClosePricesResponse = GetClosePricesResponse
 
+@typing_extensions.final
 class InstrumentClosePriceResponse(google.protobuf.message.Message):
     """Цена закрытия торговой сессии по инструменту."""
 

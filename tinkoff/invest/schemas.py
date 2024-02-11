@@ -411,6 +411,12 @@ class Recommendation(_grpc_helpers.Enum):
     RECOMMENDATION_SELL = 3
 
 
+class OrderBookType(_grpc_helpers.Enum):
+    ORDERBOOK_TYPE_UNSPECIFIED = 0
+    ORDERBOOK_TYPE_EXCHANGE = 1
+    ORDERBOOK_TYPE_DEALER = 2
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -514,6 +520,7 @@ class TradingDay(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     premarket_end_time: datetime = _grpc_helpers.message_field(15)
     closing_auction_start_time: datetime = _grpc_helpers.message_field(16)
     opening_auction_end_time: datetime = _grpc_helpers.message_field(17)
+    intervals: List["TradingInterval"] = _grpc_helpers.message_field(18)
 
 
 @dataclass(eq=False, repr=True)
@@ -672,6 +679,7 @@ class Option(_grpc_helpers.Message):
     country_of_risk: str = _grpc_helpers.string_field(151)
     country_of_risk_name: str = _grpc_helpers.string_field(152)
     sector: str = _grpc_helpers.string_field(161)
+    brand: "BrandData" = _grpc_helpers.message_field(162)
 
     lot: int = _grpc_helpers.int32_field(201)
     basic_asset_size: "Quotation" = _grpc_helpers.message_field(211)
@@ -754,6 +762,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     uid: str = _grpc_helpers.string_field(40)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(41)
     position_uid: str = _grpc_helpers.string_field(42)
+    asset_uid: str = _grpc_helpers.string_field(43)
     for_iis_flag: bool = _grpc_helpers.bool_field(51)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
     weekend_flag: bool = _grpc_helpers.bool_field(53)
@@ -763,6 +772,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
     risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
+    brand: "BrandData" = _grpc_helpers.message_field(64)
 
 
 @dataclass(eq=False, repr=True)
@@ -801,6 +811,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     blocked_tca_flag: bool = _grpc_helpers.bool_field(54)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
+    brand: "BrandData" = _grpc_helpers.message_field(60)
 
 
 @dataclass(eq=False, repr=True)
@@ -837,6 +848,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     uid: str = _grpc_helpers.string_field(31)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
+    asset_uid: str = _grpc_helpers.string_field(34)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     weekend_flag: bool = _grpc_helpers.bool_field(43)
@@ -844,6 +856,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     liquidity_flag: bool = _grpc_helpers.bool_field(45)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
+    brand: "BrandData" = _grpc_helpers.message_field(60)
 
 
 @dataclass(eq=False, repr=True)
@@ -891,6 +904,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     initial_margin_on_buy: "MoneyValue" = _grpc_helpers.message_field(61)
     initial_margin_on_sell: "MoneyValue" = _grpc_helpers.message_field(62)
     min_price_increment_amount: "Quotation" = _grpc_helpers.message_field(63)
+    brand: "BrandData" = _grpc_helpers.message_field(64)
 
 
 @dataclass(eq=False, repr=True)
@@ -928,6 +942,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     uid: str = _grpc_helpers.string_field(33)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
+    asset_uid: str = _grpc_helpers.string_field(36)
     for_iis_flag: bool = _grpc_helpers.bool_field(46)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(47)
     weekend_flag: bool = _grpc_helpers.bool_field(48)
@@ -935,6 +950,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     liquidity_flag: bool = _grpc_helpers.bool_field(50)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
+    brand: "BrandData" = _grpc_helpers.message_field(60)
 
 
 @dataclass(eq=False, repr=True)
@@ -1006,6 +1022,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     uid: str = _grpc_helpers.string_field(25)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(26)
     position_uid: str = _grpc_helpers.string_field(27)
+    asset_uid: str = _grpc_helpers.string_field(28)
     for_iis_flag: bool = _grpc_helpers.bool_field(36)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(37)
     weekend_flag: bool = _grpc_helpers.bool_field(38)
@@ -1013,6 +1030,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(40)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
+    brand: "BrandData" = _grpc_helpers.message_field(60)
 
 
 @dataclass(eq=False, repr=True)
@@ -1465,6 +1483,8 @@ class CandleSubscription(_grpc_helpers.Message):
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(3)
     instrument_uid: str = _grpc_helpers.string_field(4)
     waiting_close: bool = _grpc_helpers.bool_field(5)
+    stream_id: str = _grpc_helpers.string_field(6)
+    subscription_id: str = _grpc_helpers.string_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1478,6 +1498,7 @@ class OrderBookInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
     instrument_id: str = _grpc_helpers.string_field(3)
+    order_book_type: "OrderBookType" = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -1494,6 +1515,9 @@ class OrderBookSubscription(_grpc_helpers.Message):
     depth: int = _grpc_helpers.int32_field(2)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(3)
     instrument_uid: str = _grpc_helpers.string_field(4)
+    stream_id: str = _grpc_helpers.string_field(5)
+    subscription_id: str = _grpc_helpers.string_field(6)
+    order_book_type: "OrderBookType" = _grpc_helpers.message_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1527,6 +1551,8 @@ class LastPriceSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.message_field(2)
     instrument_uid: str = _grpc_helpers.string_field(3)
+    stream_id: str = _grpc_helpers.string_field(4)
+    subscription_id: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1546,6 +1572,8 @@ class TradeSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(2)
     instrument_uid: str = _grpc_helpers.string_field(3)
+    stream_id: str = _grpc_helpers.string_field(4)
+    subscription_id: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1571,6 +1599,8 @@ class InfoSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(2)
     instrument_uid: str = _grpc_helpers.string_field(3)
+    stream_id: str = _grpc_helpers.string_field(4)
+    subscription_id: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1598,6 +1628,7 @@ class OrderBook(_grpc_helpers.Message):
     limit_up: "Quotation" = _grpc_helpers.message_field(7)
     limit_down: "Quotation" = _grpc_helpers.message_field(8)
     instrument_uid: str = _grpc_helpers.string_field(9)
+    order_book_type: "OrderBookType" = _grpc_helpers.message_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -2180,6 +2211,7 @@ class PostStopOrderRequest(_grpc_helpers.Message):
     take_profit_type: "TakeProfitType" = _grpc_helpers.message_field(12)
     trailing_data: "PostStopOrderRequestTrailingData" = _grpc_helpers.message_field(13)
     price_type: "PriceType" = _grpc_helpers.message_field(14)
+    order_id: str = _grpc_helpers.string_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -2193,6 +2225,7 @@ class PostStopOrderRequestTrailingData(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PostStopOrderResponse(_grpc_helpers.Message):
     stop_order_id: str = _grpc_helpers.string_field(1)
+    order_request_id: str = _grpc_helpers.string_field(2)
     response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
 
 
@@ -2568,6 +2601,13 @@ class ResponseMetadata(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class BrandData(_grpc_helpers.Message):
+    logo_name: str = _grpc_helpers.string_field(1)
+    logo_base_color: str = _grpc_helpers.string_field(2)
+    text_color: str = _grpc_helpers.string_field(3)
+
+
+@dataclass(eq=False, repr=True)
 class GetAssetFundamentalsRequest(_grpc_helpers.Message):
     assets: List[str] = _grpc_helpers.message_field(1)
 
@@ -2724,6 +2764,18 @@ class ConsensusItem(_grpc_helpers.Message):
 class GetForecastResponse(_grpc_helpers.Message):
     targets: List["TargetItem"] = _grpc_helpers.message_field(1)
     consensus: "ConsensusItem" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class TimeInterval(_grpc_helpers.Message):
+    start_ts: datetime = _grpc_helpers.message_field(1)
+    end_ts: datetime = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class TradingInterval(_grpc_helpers.Message):
+    type: str = _grpc_helpers.string_field(1)
+    interval: "TimeInterval" = _grpc_helpers.message_field(2)
 
 
 @dataclass(eq=False, repr=True)

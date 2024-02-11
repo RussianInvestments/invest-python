@@ -35,7 +35,7 @@ class _FieldBehavior:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _FieldBehaviorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FieldBehavior.ValueType], builtins.type):  # noqa: F821
+class _FieldBehaviorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FieldBehavior.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     FIELD_BEHAVIOR_UNSPECIFIED: _FieldBehavior.ValueType  # 0
     """Conventional default for enums. Do not use this."""

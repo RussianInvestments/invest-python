@@ -21,7 +21,7 @@ class _InstrumentType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentType.ValueType], builtins.type):  # noqa: F821
+class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     INSTRUMENT_TYPE_UNSPECIFIED: _InstrumentType.ValueType  # 0
     INSTRUMENT_TYPE_BOND: _InstrumentType.ValueType  # 1
@@ -75,7 +75,7 @@ class _SecurityTradingStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _SecurityTradingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SecurityTradingStatus.ValueType], builtins.type):  # noqa: F821
+class _SecurityTradingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SecurityTradingStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SECURITY_TRADING_STATUS_UNSPECIFIED: _SecurityTradingStatus.ValueType  # 0
     """Торговый статус не определён"""
@@ -155,7 +155,7 @@ class _PriceType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PriceType.ValueType], builtins.type):  # noqa: F821
+class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PriceType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     PRICE_TYPE_UNSPECIFIED: _PriceType.ValueType  # 0
     """Значение не определено."""
@@ -175,6 +175,7 @@ PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
 """Цена в валюте расчётов по инструменту."""
 global___PriceType = PriceType
 
+@typing_extensions.final
 class MoneyValue(google.protobuf.message.Message):
     """Денежная сумма в определенной валюте"""
 
@@ -200,6 +201,7 @@ class MoneyValue(google.protobuf.message.Message):
 
 global___MoneyValue = MoneyValue
 
+@typing_extensions.final
 class Quotation(google.protobuf.message.Message):
     """Котировка — денежная сумма без указания валюты"""
 
@@ -221,6 +223,7 @@ class Quotation(google.protobuf.message.Message):
 
 global___Quotation = Quotation
 
+@typing_extensions.final
 class Ping(google.protobuf.message.Message):
     """Проверка активности стрима."""
 
@@ -244,6 +247,7 @@ class Ping(google.protobuf.message.Message):
 
 global___Ping = Ping
 
+@typing_extensions.final
 class Page(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -263,6 +267,7 @@ class Page(google.protobuf.message.Message):
 
 global___Page = Page
 
+@typing_extensions.final
 class PageResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -286,6 +291,7 @@ class PageResponse(google.protobuf.message.Message):
 
 global___PageResponse = PageResponse
 
+@typing_extensions.final
 class ResponseMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -306,3 +312,27 @@ class ResponseMetadata(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["server_time", b"server_time", "tracking_id", b"tracking_id"]) -> None: ...
 
 global___ResponseMetadata = ResponseMetadata
+
+@typing_extensions.final
+class BrandData(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LOGO_NAME_FIELD_NUMBER: builtins.int
+    LOGO_BASE_COLOR_FIELD_NUMBER: builtins.int
+    TEXT_COLOR_FIELD_NUMBER: builtins.int
+    logo_name: builtins.str
+    """Логотип инструмента. Имя файла для получения логотипа."""
+    logo_base_color: builtins.str
+    """	Цвет бренда."""
+    text_color: builtins.str
+    """Цвет текста для цвета логотипа бренда."""
+    def __init__(
+        self,
+        *,
+        logo_name: builtins.str = ...,
+        logo_base_color: builtins.str = ...,
+        text_color: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["logo_base_color", b"logo_base_color", "logo_name", b"logo_name", "text_color", b"text_color"]) -> None: ...
+
+global___BrandData = BrandData

@@ -24,7 +24,7 @@ class _AccountType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountType.ValueType], builtins.type):  # noqa: F821
+class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_TYPE_UNSPECIFIED: _AccountType.ValueType  # 0
     """Тип аккаунта не определён."""
@@ -52,7 +52,7 @@ class _AccountStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _AccountStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountStatus.ValueType], builtins.type):  # noqa: F821
+class _AccountStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_STATUS_UNSPECIFIED: _AccountStatus.ValueType  # 0
     """Статус счёта не определён."""
@@ -80,7 +80,7 @@ class _AccessLevel:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _AccessLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccessLevel.ValueType], builtins.type):  # noqa: F821
+class _AccessLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccessLevel.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_ACCESS_LEVEL_UNSPECIFIED: _AccessLevel.ValueType  # 0
     """Уровень доступа не определён."""
@@ -104,6 +104,7 @@ ACCOUNT_ACCESS_LEVEL_NO_ACCESS: AccessLevel.ValueType  # 3
 """Доступ отсутствует."""
 global___AccessLevel = AccessLevel
 
+@typing_extensions.final
 class GetAccountsRequest(google.protobuf.message.Message):
     """Запрос получения счетов пользователя."""
 
@@ -115,6 +116,7 @@ class GetAccountsRequest(google.protobuf.message.Message):
 
 global___GetAccountsRequest = GetAccountsRequest
 
+@typing_extensions.final
 class GetAccountsResponse(google.protobuf.message.Message):
     """Список счетов пользователя."""
 
@@ -133,6 +135,7 @@ class GetAccountsResponse(google.protobuf.message.Message):
 
 global___GetAccountsResponse = GetAccountsResponse
 
+@typing_extensions.final
 class Account(google.protobuf.message.Message):
     """Информация о счёте."""
 
@@ -177,6 +180,7 @@ class Account(google.protobuf.message.Message):
 
 global___Account = Account
 
+@typing_extensions.final
 class GetMarginAttributesRequest(google.protobuf.message.Message):
     """Запрос маржинальных показателей по счёту"""
 
@@ -194,6 +198,7 @@ class GetMarginAttributesRequest(google.protobuf.message.Message):
 
 global___GetMarginAttributesRequest = GetMarginAttributesRequest
 
+@typing_extensions.final
 class GetMarginAttributesResponse(google.protobuf.message.Message):
     """Маржинальные показатели по счёту."""
 
@@ -238,6 +243,7 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
 
 global___GetMarginAttributesResponse = GetMarginAttributesResponse
 
+@typing_extensions.final
 class GetUserTariffRequest(google.protobuf.message.Message):
     """Запрос текущих лимитов пользователя."""
 
@@ -249,6 +255,7 @@ class GetUserTariffRequest(google.protobuf.message.Message):
 
 global___GetUserTariffRequest = GetUserTariffRequest
 
+@typing_extensions.final
 class GetUserTariffResponse(google.protobuf.message.Message):
     """Текущие лимиты пользователя."""
 
@@ -272,6 +279,7 @@ class GetUserTariffResponse(google.protobuf.message.Message):
 
 global___GetUserTariffResponse = GetUserTariffResponse
 
+@typing_extensions.final
 class UnaryLimit(google.protobuf.message.Message):
     """Лимит unary-методов."""
 
@@ -294,6 +302,7 @@ class UnaryLimit(google.protobuf.message.Message):
 
 global___UnaryLimit = UnaryLimit
 
+@typing_extensions.final
 class StreamLimit(google.protobuf.message.Message):
     """Лимит stream-соединений."""
 
@@ -320,6 +329,7 @@ class StreamLimit(google.protobuf.message.Message):
 
 global___StreamLimit = StreamLimit
 
+@typing_extensions.final
 class GetInfoRequest(google.protobuf.message.Message):
     """Запрос информации о пользователе."""
 
@@ -331,6 +341,7 @@ class GetInfoRequest(google.protobuf.message.Message):
 
 global___GetInfoRequest = GetInfoRequest
 
+@typing_extensions.final
 class GetInfoResponse(google.protobuf.message.Message):
     """Информация о пользователе."""
 

@@ -24,32 +24,32 @@ from tinkoff.invest.grpc.google.api import (
     field_behavior_pb2 as tinkoff_dot_invest_dot_grpc_dot_google_dot_api_dot_field__behavior__pb2,
 )
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!tinkoff/invest/grpc/sandbox.proto\x12%tinkoff.public.invest.api.contract.v1\x1a tinkoff/invest/grpc/common.proto\x1a tinkoff/invest/grpc/orders.proto\x1a$tinkoff/invest/grpc/operations.proto\x1a\x1ftinkoff/invest/grpc/users.proto\x1a\x33tinkoff/invest/grpc/google/api/field_behavior.proto\"\x1b\n\x19OpenSandboxAccountRequest\"0\n\x1aOpenSandboxAccountResponse\x12\x12\n\naccount_id\x18\x01 \x01(\t\"5\n\x1a\x43loseSandboxAccountRequest\x12\x17\n\naccount_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x1d\n\x1b\x43loseSandboxAccountResponse\"v\n\x13SandboxPayInRequest\x12\x17\n\naccount_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x46\n\x06\x61mount\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValueB\x03\xe0\x41\x02\"Z\n\x14SandboxPayInResponse\x12\x42\n\x07\x62\x61lance\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue2\x82\x10\n\x0eSandboxService\x12\x99\x01\n\x12OpenSandboxAccount\x12@.tinkoff.public.invest.api.contract.v1.OpenSandboxAccountRequest\x1a\x41.tinkoff.public.invest.api.contract.v1.OpenSandboxAccountResponse\x12\x8b\x01\n\x12GetSandboxAccounts\x12\x39.tinkoff.public.invest.api.contract.v1.GetAccountsRequest\x1a:.tinkoff.public.invest.api.contract.v1.GetAccountsResponse\x12\x9c\x01\n\x13\x43loseSandboxAccount\x12\x41.tinkoff.public.invest.api.contract.v1.CloseSandboxAccountRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.CloseSandboxAccountResponse\x12\x85\x01\n\x10PostSandboxOrder\x12\x37.tinkoff.public.invest.api.contract.v1.PostOrderRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PostOrderResponse\x12\x8b\x01\n\x13ReplaceSandboxOrder\x12:.tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PostOrderResponse\x12\x85\x01\n\x10GetSandboxOrders\x12\x37.tinkoff.public.invest.api.contract.v1.GetOrdersRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.GetOrdersResponse\x12\x8b\x01\n\x12\x43\x61ncelSandboxOrder\x12\x39.tinkoff.public.invest.api.contract.v1.CancelOrderRequest\x1a:.tinkoff.public.invest.api.contract.v1.CancelOrderResponse\x12\x86\x01\n\x14GetSandboxOrderState\x12;.tinkoff.public.invest.api.contract.v1.GetOrderStateRequest\x1a\x31.tinkoff.public.invest.api.contract.v1.OrderState\x12\x88\x01\n\x13GetSandboxPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x8b\x01\n\x14GetSandboxOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\xa9\x01\n\x1cGetSandboxOperationsByCursor\x12\x43.tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest\x1a\x44.tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse\x12\x88\x01\n\x13GetSandboxPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x87\x01\n\x0cSandboxPayIn\x12:.tinkoff.public.invest.api.contract.v1.SandboxPayInRequest\x1a;.tinkoff.public.invest.api.contract.v1.SandboxPayInResponse\x12\x97\x01\n\x18GetSandboxWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!tinkoff/invest/grpc/sandbox.proto\x12%tinkoff.public.invest.api.contract.v1\x1a tinkoff/invest/grpc/common.proto\x1a tinkoff/invest/grpc/orders.proto\x1a$tinkoff/invest/grpc/operations.proto\x1a\x1ftinkoff/invest/grpc/users.proto\x1a\x33tinkoff/invest/grpc/google/api/field_behavior.proto\"\x1b\n\x19OpenSandboxAccountRequest\"0\n\x1aOpenSandboxAccountResponse\x12\x12\n\naccount_id\x18\x01 \x01(\t\"6\n\x1a\x43loseSandboxAccountRequest\x12\x18\n\naccount_id\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\"\x1d\n\x1b\x43loseSandboxAccountResponse\"x\n\x13SandboxPayInRequest\x12\x18\n\naccount_id\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12G\n\x06\x61mount\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValueB\x04\xe2\x41\x01\x02\"Z\n\x14SandboxPayInResponse\x12\x42\n\x07\x62\x61lance\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue2\x82\x10\n\x0eSandboxService\x12\x99\x01\n\x12OpenSandboxAccount\x12@.tinkoff.public.invest.api.contract.v1.OpenSandboxAccountRequest\x1a\x41.tinkoff.public.invest.api.contract.v1.OpenSandboxAccountResponse\x12\x8b\x01\n\x12GetSandboxAccounts\x12\x39.tinkoff.public.invest.api.contract.v1.GetAccountsRequest\x1a:.tinkoff.public.invest.api.contract.v1.GetAccountsResponse\x12\x9c\x01\n\x13\x43loseSandboxAccount\x12\x41.tinkoff.public.invest.api.contract.v1.CloseSandboxAccountRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.CloseSandboxAccountResponse\x12\x85\x01\n\x10PostSandboxOrder\x12\x37.tinkoff.public.invest.api.contract.v1.PostOrderRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PostOrderResponse\x12\x8b\x01\n\x13ReplaceSandboxOrder\x12:.tinkoff.public.invest.api.contract.v1.ReplaceOrderRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PostOrderResponse\x12\x85\x01\n\x10GetSandboxOrders\x12\x37.tinkoff.public.invest.api.contract.v1.GetOrdersRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.GetOrdersResponse\x12\x8b\x01\n\x12\x43\x61ncelSandboxOrder\x12\x39.tinkoff.public.invest.api.contract.v1.CancelOrderRequest\x1a:.tinkoff.public.invest.api.contract.v1.CancelOrderResponse\x12\x86\x01\n\x14GetSandboxOrderState\x12;.tinkoff.public.invest.api.contract.v1.GetOrderStateRequest\x1a\x31.tinkoff.public.invest.api.contract.v1.OrderState\x12\x88\x01\n\x13GetSandboxPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x8b\x01\n\x14GetSandboxOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\xa9\x01\n\x1cGetSandboxOperationsByCursor\x12\x43.tinkoff.public.invest.api.contract.v1.GetOperationsByCursorRequest\x1a\x44.tinkoff.public.invest.api.contract.v1.GetOperationsByCursorResponse\x12\x88\x01\n\x13GetSandboxPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x87\x01\n\x0cSandboxPayIn\x12:.tinkoff.public.invest.api.contract.v1.SandboxPayInRequest\x1a;.tinkoff.public.invest.api.contract.v1.SandboxPayInResponse\x12\x97\x01\n\x18GetSandboxWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3')
 
-_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tinkoff.invest.grpc.sandbox_pb2', globals())
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tinkoff.invest.grpc.sandbox_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1'
   _CLOSESANDBOXACCOUNTREQUEST.fields_by_name['account_id']._options = None
-  _CLOSESANDBOXACCOUNTREQUEST.fields_by_name['account_id']._serialized_options = b'\340A\002'
+  _CLOSESANDBOXACCOUNTREQUEST.fields_by_name['account_id']._serialized_options = b'\342A\001\002'
   _SANDBOXPAYINREQUEST.fields_by_name['account_id']._options = None
-  _SANDBOXPAYINREQUEST.fields_by_name['account_id']._serialized_options = b'\340A\002'
+  _SANDBOXPAYINREQUEST.fields_by_name['account_id']._serialized_options = b'\342A\001\002'
   _SANDBOXPAYINREQUEST.fields_by_name['amount']._options = None
-  _SANDBOXPAYINREQUEST.fields_by_name['amount']._serialized_options = b'\340A\002'
-  _OPENSANDBOXACCOUNTREQUEST._serialized_start=268
-  _OPENSANDBOXACCOUNTREQUEST._serialized_end=295
-  _OPENSANDBOXACCOUNTRESPONSE._serialized_start=297
-  _OPENSANDBOXACCOUNTRESPONSE._serialized_end=345
-  _CLOSESANDBOXACCOUNTREQUEST._serialized_start=347
-  _CLOSESANDBOXACCOUNTREQUEST._serialized_end=400
-  _CLOSESANDBOXACCOUNTRESPONSE._serialized_start=402
-  _CLOSESANDBOXACCOUNTRESPONSE._serialized_end=431
-  _SANDBOXPAYINREQUEST._serialized_start=433
-  _SANDBOXPAYINREQUEST._serialized_end=551
-  _SANDBOXPAYINRESPONSE._serialized_start=553
-  _SANDBOXPAYINRESPONSE._serialized_end=643
-  _SANDBOXSERVICE._serialized_start=646
-  _SANDBOXSERVICE._serialized_end=2696
+  _SANDBOXPAYINREQUEST.fields_by_name['amount']._serialized_options = b'\342A\001\002'
+  _globals['_OPENSANDBOXACCOUNTREQUEST']._serialized_start=268
+  _globals['_OPENSANDBOXACCOUNTREQUEST']._serialized_end=295
+  _globals['_OPENSANDBOXACCOUNTRESPONSE']._serialized_start=297
+  _globals['_OPENSANDBOXACCOUNTRESPONSE']._serialized_end=345
+  _globals['_CLOSESANDBOXACCOUNTREQUEST']._serialized_start=347
+  _globals['_CLOSESANDBOXACCOUNTREQUEST']._serialized_end=401
+  _globals['_CLOSESANDBOXACCOUNTRESPONSE']._serialized_start=403
+  _globals['_CLOSESANDBOXACCOUNTRESPONSE']._serialized_end=432
+  _globals['_SANDBOXPAYINREQUEST']._serialized_start=434
+  _globals['_SANDBOXPAYINREQUEST']._serialized_end=554
+  _globals['_SANDBOXPAYINRESPONSE']._serialized_start=556
+  _globals['_SANDBOXPAYINRESPONSE']._serialized_end=646
+  _globals['_SANDBOXSERVICE']._serialized_start=649
+  _globals['_SANDBOXSERVICE']._serialized_end=2699
 # @@protoc_insertion_point(module_scope)
