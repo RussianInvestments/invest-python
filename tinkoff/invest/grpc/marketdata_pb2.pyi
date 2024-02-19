@@ -1753,3 +1753,291 @@ class InstrumentClosePriceResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["evening_session_price", b"evening_session_price", "figi", b"figi", "instrument_uid", b"instrument_uid", "price", b"price", "time", b"time"]) -> None: ...
 
 global___InstrumentClosePriceResponse = InstrumentClosePriceResponse
+
+@typing_extensions.final
+class GetTechAnalysisRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _IndicatorInterval:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _IndicatorIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetTechAnalysisRequest._IndicatorInterval.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        INDICATOR_INTERVAL_UNSPECIFIED: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 0
+        """Интервал не определён."""
+        INDICATOR_INTERVAL_ONE_MINUTE: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 1
+        """1 минута."""
+        INDICATOR_INTERVAL_FIVE_MINUTES: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 2
+        """5 минут."""
+        INDICATOR_INTERVAL_FIFTEEN_MINUTES: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 3
+        """15 минут."""
+        INDICATOR_INTERVAL_ONE_HOUR: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 4
+        """1 час."""
+        INDICATOR_INTERVAL_ONE_DAY: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 5
+        """1 день."""
+        INDICATOR_INTERVAL_2_MIN: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 6
+        """2 минуты."""
+        INDICATOR_INTERVAL_3_MIN: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 7
+        """3 минуты."""
+        INDICATOR_INTERVAL_10_MIN: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 8
+        """10 минут."""
+        INDICATOR_INTERVAL_30_MIN: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 9
+        """30 минут."""
+        INDICATOR_INTERVAL_2_HOUR: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 10
+        """2 часа."""
+        INDICATOR_INTERVAL_4_HOUR: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 11
+        """4 часа."""
+        INDICATOR_INTERVAL_WEEK: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 12
+        """Неделя"""
+        INDICATOR_INTERVAL_MONTH: GetTechAnalysisRequest._IndicatorInterval.ValueType  # 13
+        """Месяц"""
+
+    class IndicatorInterval(_IndicatorInterval, metaclass=_IndicatorIntervalEnumTypeWrapper):
+        """Интервал свечи."""
+
+    INDICATOR_INTERVAL_UNSPECIFIED: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 0
+    """Интервал не определён."""
+    INDICATOR_INTERVAL_ONE_MINUTE: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 1
+    """1 минута."""
+    INDICATOR_INTERVAL_FIVE_MINUTES: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 2
+    """5 минут."""
+    INDICATOR_INTERVAL_FIFTEEN_MINUTES: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 3
+    """15 минут."""
+    INDICATOR_INTERVAL_ONE_HOUR: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 4
+    """1 час."""
+    INDICATOR_INTERVAL_ONE_DAY: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 5
+    """1 день."""
+    INDICATOR_INTERVAL_2_MIN: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 6
+    """2 минуты."""
+    INDICATOR_INTERVAL_3_MIN: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 7
+    """3 минуты."""
+    INDICATOR_INTERVAL_10_MIN: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 8
+    """10 минут."""
+    INDICATOR_INTERVAL_30_MIN: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 9
+    """30 минут."""
+    INDICATOR_INTERVAL_2_HOUR: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 10
+    """2 часа."""
+    INDICATOR_INTERVAL_4_HOUR: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 11
+    """4 часа."""
+    INDICATOR_INTERVAL_WEEK: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 12
+    """Неделя"""
+    INDICATOR_INTERVAL_MONTH: GetTechAnalysisRequest.IndicatorInterval.ValueType  # 13
+    """Месяц"""
+
+    class _TypeOfPrice:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _TypeOfPriceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetTechAnalysisRequest._TypeOfPrice.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        TYPE_OF_PRICE_UNSPECIFIED: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 0
+        """Не указано."""
+        TYPE_OF_PRICE_CLOSE: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 1
+        """Цена закрытия."""
+        TYPE_OF_PRICE_OPEN: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 2
+        """Цена открытия."""
+        TYPE_OF_PRICE_HIGH: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 3
+        """Максимальное значение за выбранный интервал."""
+        TYPE_OF_PRICE_LOW: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 4
+        """Минимальное значение за выбранный интервал."""
+        TYPE_OF_PRICE_AVG: GetTechAnalysisRequest._TypeOfPrice.ValueType  # 5
+        """Среднее значение по показателям [ (close + open + high + low) / 4 ]."""
+
+    class TypeOfPrice(_TypeOfPrice, metaclass=_TypeOfPriceEnumTypeWrapper): ...
+    TYPE_OF_PRICE_UNSPECIFIED: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 0
+    """Не указано."""
+    TYPE_OF_PRICE_CLOSE: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 1
+    """Цена закрытия."""
+    TYPE_OF_PRICE_OPEN: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 2
+    """Цена открытия."""
+    TYPE_OF_PRICE_HIGH: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 3
+    """Максимальное значение за выбранный интервал."""
+    TYPE_OF_PRICE_LOW: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 4
+    """Минимальное значение за выбранный интервал."""
+    TYPE_OF_PRICE_AVG: GetTechAnalysisRequest.TypeOfPrice.ValueType  # 5
+    """Среднее значение по показателям [ (close + open + high + low) / 4 ]."""
+
+    class _IndicatorType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _IndicatorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetTechAnalysisRequest._IndicatorType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        INDICATOR_TYPE_UNSPECIFIED: GetTechAnalysisRequest._IndicatorType.ValueType  # 0
+        """Не определен."""
+        INDICATOR_TYPE_BB: GetTechAnalysisRequest._IndicatorType.ValueType  # 1
+        """Bollinger Bands (Линия Боллинжера)."""
+        INDICATOR_TYPE_EMA: GetTechAnalysisRequest._IndicatorType.ValueType  # 2
+        """Exponential Moving Average (EMA, Экспоненциальная скользящая средняя)."""
+        INDICATOR_TYPE_RSI: GetTechAnalysisRequest._IndicatorType.ValueType  # 3
+        """Relative Strength Index (Индекс относительной силы)."""
+        INDICATOR_TYPE_MACD: GetTechAnalysisRequest._IndicatorType.ValueType  # 4
+        """Moving Average Convergence/Divergence (Схождение/Расхождение скользящих средних)."""
+        INDICATOR_TYPE_SMA: GetTechAnalysisRequest._IndicatorType.ValueType  # 5
+        """Simple Moving Average (Простое скользящее среднее)."""
+
+    class IndicatorType(_IndicatorType, metaclass=_IndicatorTypeEnumTypeWrapper): ...
+    INDICATOR_TYPE_UNSPECIFIED: GetTechAnalysisRequest.IndicatorType.ValueType  # 0
+    """Не определен."""
+    INDICATOR_TYPE_BB: GetTechAnalysisRequest.IndicatorType.ValueType  # 1
+    """Bollinger Bands (Линия Боллинжера)."""
+    INDICATOR_TYPE_EMA: GetTechAnalysisRequest.IndicatorType.ValueType  # 2
+    """Exponential Moving Average (EMA, Экспоненциальная скользящая средняя)."""
+    INDICATOR_TYPE_RSI: GetTechAnalysisRequest.IndicatorType.ValueType  # 3
+    """Relative Strength Index (Индекс относительной силы)."""
+    INDICATOR_TYPE_MACD: GetTechAnalysisRequest.IndicatorType.ValueType  # 4
+    """Moving Average Convergence/Divergence (Схождение/Расхождение скользящих средних)."""
+    INDICATOR_TYPE_SMA: GetTechAnalysisRequest.IndicatorType.ValueType  # 5
+    """Simple Moving Average (Простое скользящее среднее)."""
+
+    @typing_extensions.final
+    class Smoothing(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        FAST_LENGTH_FIELD_NUMBER: builtins.int
+        SLOW_LENGTH_FIELD_NUMBER: builtins.int
+        SIGNAL_SMOOTHING_FIELD_NUMBER: builtins.int
+        fast_length: builtins.int
+        """Короткий период сглаживания для первой экспоненциальной скользящей средней (EMA)."""
+        slow_length: builtins.int
+        """Длинный период сглаживания для второй экспоненциальной скользящей средней (EMA)."""
+        signal_smoothing: builtins.int
+        """Период сглаживания для третьей экспоненциальной скользящей средней (EMA)"""
+        def __init__(
+            self,
+            *,
+            fast_length: builtins.int = ...,
+            slow_length: builtins.int = ...,
+            signal_smoothing: builtins.int = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["fast_length", b"fast_length", "signal_smoothing", b"signal_smoothing", "slow_length", b"slow_length"]) -> None: ...
+
+    @typing_extensions.final
+    class Deviation(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        DEVIATION_MULTIPLIER_FIELD_NUMBER: builtins.int
+        @property
+        def deviation_multiplier(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Кол-во стандартных отклонений, на которые отступает верхняя и нижняя граница"""
+        def __init__(
+            self,
+            *,
+            deviation_multiplier: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["deviation_multiplier", b"deviation_multiplier"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["deviation_multiplier", b"deviation_multiplier"]) -> None: ...
+
+    INDICATOR_TYPE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    INTERVAL_FIELD_NUMBER: builtins.int
+    TYPE_OF_PRICE_FIELD_NUMBER: builtins.int
+    LENGTH_FIELD_NUMBER: builtins.int
+    DEVIATION_FIELD_NUMBER: builtins.int
+    SMOOTHING_FIELD_NUMBER: builtins.int
+    indicator_type: global___GetTechAnalysisRequest.IndicatorType.ValueType
+    """Тип технического индикатора."""
+    instrument_uid: builtins.str
+    """Uid инструмента."""
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
+    interval: global___GetTechAnalysisRequest.IndicatorInterval.ValueType
+    """Интервал, за который рассчитывается индикатор."""
+    type_of_price: global___GetTechAnalysisRequest.TypeOfPrice.ValueType
+    """Тип цены, используемый при расчёте индикатора."""
+    length: builtins.int
+    """Торговый период, за который рассчитывается индикатор."""
+    @property
+    def deviation(self) -> global___GetTechAnalysisRequest.Deviation:
+        """Параметры отклонения."""
+    @property
+    def smoothing(self) -> global___GetTechAnalysisRequest.Smoothing:
+        """Параметры сглаживания."""
+    def __init__(
+        self,
+        *,
+        indicator_type: global___GetTechAnalysisRequest.IndicatorType.ValueType = ...,
+        instrument_uid: builtins.str = ...,
+        to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        interval: global___GetTechAnalysisRequest.IndicatorInterval.ValueType = ...,
+        type_of_price: global___GetTechAnalysisRequest.TypeOfPrice.ValueType = ...,
+        length: builtins.int = ...,
+        deviation: global___GetTechAnalysisRequest.Deviation | None = ...,
+        smoothing: global___GetTechAnalysisRequest.Smoothing | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["deviation", b"deviation", "from", b"from", "smoothing", b"smoothing", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deviation", b"deviation", "from", b"from", "indicator_type", b"indicator_type", "instrument_uid", b"instrument_uid", "interval", b"interval", "length", b"length", "smoothing", b"smoothing", "to", b"to", "type_of_price", b"type_of_price"]) -> None: ...
+
+global___GetTechAnalysisRequest = GetTechAnalysisRequest
+
+@typing_extensions.final
+class GetTechAnalysisResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class TechAnalysisItem(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        TIMESTAMP_FIELD_NUMBER: builtins.int
+        MIDDLE_BAND_FIELD_NUMBER: builtins.int
+        UPPER_BAND_FIELD_NUMBER: builtins.int
+        LOWER_BAND_FIELD_NUMBER: builtins.int
+        SIGNAL_FIELD_NUMBER: builtins.int
+        MACD_FIELD_NUMBER: builtins.int
+        @property
+        def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Временная метка по UTC, для которой были рассчитаны значения индикатора."""
+        @property
+        def middle_band(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение простого скользящего среднего (средней линии)."""
+        @property
+        def upper_band(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение верхней линии Боллинджера."""
+        @property
+        def lower_band(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение нижней линии Боллинджера."""
+        @property
+        def signal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение сигнальной линии."""
+        @property
+        def macd(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение линии MACD."""
+        def __init__(
+            self,
+            *,
+            timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            middle_band: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            upper_band: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            lower_band: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            signal: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            macd: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["_lower_band", b"_lower_band", "_macd", b"_macd", "_middle_band", b"_middle_band", "_signal", b"_signal", "_upper_band", b"_upper_band", "lower_band", b"lower_band", "macd", b"macd", "middle_band", b"middle_band", "signal", b"signal", "timestamp", b"timestamp", "upper_band", b"upper_band"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["_lower_band", b"_lower_band", "_macd", b"_macd", "_middle_band", b"_middle_band", "_signal", b"_signal", "_upper_band", b"_upper_band", "lower_band", b"lower_band", "macd", b"macd", "middle_band", b"middle_band", "signal", b"signal", "timestamp", b"timestamp", "upper_band", b"upper_band"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_lower_band", b"_lower_band"]) -> typing_extensions.Literal["lower_band"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_macd", b"_macd"]) -> typing_extensions.Literal["macd"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_middle_band", b"_middle_band"]) -> typing_extensions.Literal["middle_band"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_signal", b"_signal"]) -> typing_extensions.Literal["signal"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_upper_band", b"_upper_band"]) -> typing_extensions.Literal["upper_band"] | None: ...
+
+    TECHNICAL_INDICATORS_FIELD_NUMBER: builtins.int
+    @property
+    def technical_indicators(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetTechAnalysisResponse.TechAnalysisItem]:
+        """Массив значений результатов тех. анализа"""
+    def __init__(
+        self,
+        *,
+        technical_indicators: collections.abc.Iterable[global___GetTechAnalysisResponse.TechAnalysisItem] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["technical_indicators", b"technical_indicators"]) -> None: ...
+
+global___GetTechAnalysisResponse = GetTechAnalysisResponse

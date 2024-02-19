@@ -1907,7 +1907,7 @@ class Etf(google.protobuf.message.Message):
         """Дата выпуска в часовом поясе UTC."""
     @property
     def num_shares(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Количество акций фонда в обращении."""
+        """Количество паев фонда в обращении."""
     country_of_risk: builtins.str
     """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
     country_of_risk_name: builtins.str
