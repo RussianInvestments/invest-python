@@ -1352,6 +1352,16 @@ message TradingInterval {
   }
 }
 
+message TradingInterval {
+  string type = 1; //Название интервала
+  TimeInterval interval = 2; //Интервал
+
+  message TimeInterval {
+    google.protobuf.Timestamp start_ts = 1; // Время начала интервала
+    google.protobuf.Timestamp end_ts = 2; // Время окончания интервала
+  }
+}
+
 //Уровень риска облигации.
 enum RiskLevel {
   RISK_LEVEL_UNSPECIFIED = 0; //не указан

@@ -116,6 +116,8 @@ from .schemas import (
     GetOrderStateRequest,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetTechAnalysisRequest,
+    GetTechAnalysisResponse,
     GetTradingStatusesRequest,
     GetTradingStatusesResponse,
     GetTradingStatusRequest,
@@ -1000,6 +1002,21 @@ class MarketDataService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetClosePrices")
         return _grpc_helpers.protobuf_to_dataclass(response, GetClosePricesResponse)
+
+    @handle_request_error("GetTechAnalysis")
+    def get_tech_analysis(
+        self,
+        *,
+        request: GetTechAnalysisRequest,
+    ) -> GetTechAnalysisResponse:
+        response, call = self.stub.GetTechAnalysis.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetTechAnalysisRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetTechAnalysis")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetTechAnalysisResponse)
 
 
 class MarketDataStreamService(_grpc_helpers.Service):
