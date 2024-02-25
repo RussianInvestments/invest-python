@@ -643,6 +643,7 @@ class OrderStage(google.protobuf.message.Message):
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
     TRADE_ID_FIELD_NUMBER: builtins.int
+    EXECUTION_TIME_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
@@ -650,15 +651,19 @@ class OrderStage(google.protobuf.message.Message):
     """Количество лотов."""
     trade_id: builtins.str
     """Идентификатор сделки."""
+    @property
+    def execution_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время исполнения сделки"""
     def __init__(
         self,
         *,
         price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         quantity: builtins.int = ...,
         trade_id: builtins.str = ...,
+        execution_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["price", b"price", "quantity", b"quantity", "trade_id", b"trade_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["execution_time", b"execution_time", "price", b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["execution_time", b"execution_time", "price", b"price", "quantity", b"quantity", "trade_id", b"trade_id"]) -> None: ...
 
 global___OrderStage = OrderStage
 

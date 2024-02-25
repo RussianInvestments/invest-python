@@ -1796,6 +1796,81 @@ class InstrumentClosePriceResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class Smoothing(_grpc_helpers.Message):
+    fast_length: int = _grpc_helpers.int32_field(1)
+    slow_length: int = _grpc_helpers.int32_field(2)
+    signal_smoothing: int = _grpc_helpers.int32_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class Deviation(_grpc_helpers.Message):
+    deviation_multiplier: "Quotation" = _grpc_helpers.message_field(1)
+
+
+class IndicatorInterval(_grpc_helpers.Enum):
+    INDICATOR_INTERVAL_UNSPECIFIED = 0
+    INDICATOR_INTERVAL_ONE_MINUTE = 1
+    INDICATOR_INTERVAL_FIVE_MINUTES = 2
+    INDICATOR_INTERVAL_FIFTEEN_MINUTES = 3
+    INDICATOR_INTERVAL_ONE_HOUR = 4
+    INDICATOR_INTERVAL_ONE_DAY = 5
+    INDICATOR_INTERVAL_2_MIN = 6
+    INDICATOR_INTERVAL_3_MIN = 7
+    INDICATOR_INTERVAL_10_MIN = 8
+    INDICATOR_INTERVAL_30_MIN = 9
+    INDICATOR_INTERVAL_2_HOUR = 10
+    INDICATOR_INTERVAL_4_HOUR = 11
+    INDICATOR_INTERVAL_WEEK = 12
+    INDICATOR_INTERVAL_MONTH = 13
+
+
+class TypeOfPrice(_grpc_helpers.Enum):
+    TYPE_OF_PRICE_UNSPECIFIED = 0
+    TYPE_OF_PRICE_CLOSE = 1
+    TYPE_OF_PRICE_OPEN = 2
+    TYPE_OF_PRICE_HIGH = 3
+    TYPE_OF_PRICE_LOW = 4
+    TYPE_OF_PRICE_AVG = 5
+
+
+class IndicatorType(_grpc_helpers.Enum):
+    INDICATOR_TYPE_UNSPECIFIED = 0
+    INDICATOR_TYPE_BB = 1
+    INDICATOR_TYPE_EMA = 2
+    INDICATOR_TYPE_RSI = 3
+    INDICATOR_TYPE_MACD = 4
+    INDICATOR_TYPE_SMA = 5
+
+
+@dataclass(eq=False, repr=True)
+class GetTechAnalysisRequest(_grpc_helpers.Message):
+    indicator_type: "IndicatorType" = _grpc_helpers.enum_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    from_: datetime = _grpc_helpers.message_field(3)
+    to: datetime = _grpc_helpers.message_field(4)
+    interval: "IndicatorInterval" = _grpc_helpers.enum_field(5)
+    type_of_price: "TypeOfPrice" = _grpc_helpers.enum_field(6)
+    length: int = _grpc_helpers.int32_field(7)
+    deviation: "Deviation" = _grpc_helpers.message_field(8)
+    smoothing: "Smoothing" = _grpc_helpers.message_field(9)
+
+
+@dataclass(eq=False, repr=True)
+class TechAnalysisItem(_grpc_helpers.Message):
+    timestamp: datetime = _grpc_helpers.message_field(1)
+    middle_band: Optional["Quotation"] = _grpc_helpers.message_field(2, optional=True)
+    upper_band: Optional["Quotation"] = _grpc_helpers.message_field(3, optional=True)
+    lower_band: Optional["Quotation"] = _grpc_helpers.message_field(4, optional=True)
+    signal: Optional["Quotation"] = _grpc_helpers.message_field(5, optional=True)
+    macd: Optional["Quotation"] = _grpc_helpers.message_field(6, optional=True)
+
+
+@dataclass(eq=False, repr=True)
+class GetTechAnalysisResponse(_grpc_helpers.Message):
+    technical_indicators: List["TechAnalysisItem"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
 class OperationsRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     from_: Optional[datetime] = _grpc_helpers.message_field(2)
@@ -2069,6 +2144,7 @@ class OrderStage(_grpc_helpers.Message):
     price: "MoneyValue" = _grpc_helpers.message_field(1)
     quantity: int = _grpc_helpers.int64_field(2)
     trade_id: str = _grpc_helpers.string_field(3)
+    execution_time: datetime = _grpc_helpers.message_field(5)
 
 
 class ReplaceOrderRequest(_grpc_helpers.Message):

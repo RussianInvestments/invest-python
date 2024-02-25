@@ -335,6 +335,25 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
                 field_value = [ts_to_datetime(item) for item in pb_value]
             elif issubclass(field_type, Enum):
                 field_value = [field_type(item) for item in pb_value]
+        if origin == Union:
+            args = get_args(field_type)
+            if len(args) > 2:
+                raise NotImplementedError(
+                    "Union of more than 2 args is not supported yet."
+                )
+            first_arg, second_arg = args[0], args[1]
+            if second_arg == NoneType and str(pb_value) == "":
+                field_value = None
+            elif first_arg in PRIMITIVE_TYPES:
+                field_value = pb_value
+            elif first_arg == Decimal:
+                field_value = Decimal(str(pb_value))
+            elif issubclass(first_arg, datetime):
+                field_value = ts_to_datetime(pb_value)
+            elif dataclasses.is_dataclass(first_arg):
+                field_value = protobuf_to_dataclass(pb_value, first_arg)
+            elif issubclass(first_arg, Enum):
+                field_value = first_arg(pb_value)
 
         if field_value is _UNKNOWN:
             raise UnknownType(f'type "{field_type}" unknown')
