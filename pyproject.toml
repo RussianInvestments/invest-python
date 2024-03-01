@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tinkoff-investments"
-version = "0.2.0-beta77"
+version = "0.2.0-beta78"
 description = "Tinkoff Python SDK"
 authors = ["Tinkoff Team <python@tinkoff.ru>"]
 license = "Apache-2.0"
