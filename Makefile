@@ -58,6 +58,7 @@ next-version:
 .PHONY: bump-version
 bump-version:
 	poetry version $(v)
+	$(POETRY_RUN) python -m scripts.update_package_version $(v)
 	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
 	git add . && git commit -m "chore(release): bump version to $(v)"
 	git tag -a $(v) -m ""
