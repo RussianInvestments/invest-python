@@ -5,6 +5,7 @@ from datetime import datetime
 
 import pytest
 
+from tests.utils import skip_when
 from tinkoff.invest import (
     Account,
     CloseSandboxAccountResponse,
@@ -13,8 +14,10 @@ from tinkoff.invest import (
     OrderDirection,
     OrderType,
     Quotation,
+    RequestError,
 )
 from tinkoff.invest.sandbox.client import SandboxClient
+from tinkoff.invest.utils import money_to_decimal
 
 
 @pytest.fixture()
@@ -24,8 +27,17 @@ def sandbox_service():
 
 
 @pytest.fixture()
-def account_id(sandbox_service):
+def initial_balance_pay_in() -> MoneyValue:
+    return MoneyValue(currency="rub", units=1000000, nano=0)
+
+
+@pytest.fixture()
+def account_id(sandbox_service, initial_balance_pay_in: MoneyValue):
     response = sandbox_service.sandbox.open_sandbox_account()
+    sandbox_service.sandbox.sandbox_pay_in(
+        account_id=response.account_id,
+        amount=initial_balance_pay_in,
+    )
     yield response.account_id
     sandbox_service.sandbox.close_sandbox_account(
         account_id=response.account_id,
@@ -35,6 +47,11 @@ def account_id(sandbox_service):
 @pytest.fixture()
 def figi() -> str:
     return "BBG333333333"
+
+
+@pytest.fixture()
+def instrument_id() -> str:
+    return "9654c2dd-6993-427e-80fa-04e80a1cf4da"
 
 
 @pytest.fixture()
@@ -63,9 +80,9 @@ def order_id() -> str:
 
 
 @pytest.fixture()
-def order(figi, quantity, price, direction, account_id, order_type, order_id):
+def order(instrument_id, quantity, price, direction, account_id, order_type, order_id):
     return {
-        "figi": figi,
+        "instrument_id": instrument_id,
         "quantity": quantity,
         "price": price,
         "direction": direction,
@@ -73,6 +90,13 @@ def order(figi, quantity, price, direction, account_id, order_type, order_id):
         "order_type": order_type,
         "order_id": order_id,
     }
+
+
+skip_when_exchange_closed = skip_when(
+    RequestError,
+    lambda msg: "instrument is not available for trading" in msg,
+    reason="Skipping during closed exchange",
+)
 
 
 @pytest.mark.skipif(
@@ -109,15 +133,17 @@ class TestSandboxOperations:
         )
         assert isinstance(response, CloseSandboxAccountResponse)
 
+    @skip_when_exchange_closed
     def test_post_sandbox_order(
-        self, sandbox_service, order, figi, direction, quantity
+        self, sandbox_service, order, instrument_id, direction, quantity
     ):
         response = sandbox_service.orders.post_order(**order)
         assert isinstance(response.order_id, str)
-        assert response.figi == figi
+        assert response.instrument_uid == instrument_id
         assert response.direction == direction
         assert response.lots_requested == quantity
 
+    @skip_when_exchange_closed
     def test_get_sandbox_orders(self, sandbox_service, order, account_id):
         _ = sandbox_service.orders.post_order(**order)
         response = sandbox_service.orders.get_orders(
@@ -126,6 +152,7 @@ class TestSandboxOperations:
         assert isinstance(response.orders, list)
         assert len(response.orders) == 1
 
+    @skip_when_exchange_closed
     def test_cancel_sandbox_order(self, sandbox_service, order, account_id):
         response = sandbox_service.orders.post_order(**order)
         response = sandbox_service.orders.cancel_order(
@@ -134,8 +161,9 @@ class TestSandboxOperations:
         )
         assert isinstance(response.time, datetime)
 
+    @skip_when_exchange_closed
     def test_get_sandbox_order_state(
-        self, sandbox_service, order, account_id, figi, direction, quantity
+        self, sandbox_service, order, account_id, instrument_id, direction, quantity
     ):
         response = sandbox_service.orders.post_order(**order)
 
@@ -143,11 +171,12 @@ class TestSandboxOperations:
             account_id=account_id,
             order_id=response.order_id,
         )
-        assert response.figi == figi
+        assert response.instrument_uid == instrument_id
         assert response.direction == direction
         assert response.lots_requested == quantity
 
     @pytest.mark.parametrize("order_type", [OrderType.ORDER_TYPE_MARKET])
+    @skip_when_exchange_closed
     def test_get_sandbox_positions(self, sandbox_service, account_id, order):
         _ = sandbox_service.orders.post_order(**order)
 
@@ -166,7 +195,9 @@ class TestSandboxOperations:
         )
         assert isinstance(response.operations, list)
 
-    def test_get_sandbox_portfolio(self, sandbox_service, account_id):
+    def test_get_sandbox_portfolio(
+        self, sandbox_service, account_id, initial_balance_pay_in: MoneyValue
+    ):
         response = sandbox_service.operations.get_portfolio(
             account_id=account_id,
         )
@@ -174,23 +205,27 @@ class TestSandboxOperations:
             MoneyValue(currency="rub", units=0, nano=0)
         )
         assert str(response.total_amount_currencies) == str(
-            MoneyValue(currency="rub", units=0, nano=0)
+            initial_balance_pay_in,
         )
         assert str(response.total_amount_etf) == str(
             MoneyValue(currency="rub", units=0, nano=0)
         )
         assert str(response.total_amount_futures) == str(
-            MoneyValue(currency="pt.", units=0, nano=0)
+            MoneyValue(currency="rub", units=0, nano=0)
         )
         assert str(response.total_amount_shares) == str(
             MoneyValue(currency="rub", units=0, nano=0)
         )
 
-    def test_sandbox_pay_in(self, sandbox_service, account_id):
-        units_to_add = 10000
-        nano_to_add = 100
+    def test_sandbox_pay_in(
+        self, sandbox_service, account_id, initial_balance_pay_in: MoneyValue
+    ):
+        amount = MoneyValue(currency="rub", units=1234, nano=0)
         response = sandbox_service.sandbox.sandbox_pay_in(
             account_id=account_id,
-            amount=MoneyValue(currency="RUB", units=units_to_add, nano=nano_to_add),
+            amount=amount,
         )
-        assert response.balance.units == units_to_add
+
+        assert money_to_decimal(response.balance) == (
+            money_to_decimal(initial_balance_pay_in) + money_to_decimal(amount)
+        )

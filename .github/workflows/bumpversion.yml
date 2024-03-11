@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "tinkoff/**"
+    paths-ignore:
+      - "tinkoff/invest/__init__.py"
+      - "tinkoff/invest/constants.py"
   workflow_dispatch:
 
 jobs:
