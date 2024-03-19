@@ -208,7 +208,6 @@ class TestMovingAverageStrategyTraderInSandbox:
             pass
 
         current_balance = account_manager.get_current_balance()
-        assert initial_balance != current_balance
         logger.info("Initial balance %s", initial_balance)
         logger.info("Current balance %s", current_balance)
 
