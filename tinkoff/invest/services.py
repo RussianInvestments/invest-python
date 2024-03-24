@@ -42,6 +42,7 @@ from .schemas import (
     CancelStopOrderRequest,
     CancelStopOrderResponse,
     CandleInterval,
+    CandleSource,
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
     CurrenciesResponse,
@@ -180,7 +181,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, CandleSource,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -1448,7 +1449,9 @@ class SandboxService(_grpc_helpers.Service):
     _stub_factory = sandbox_pb2_grpc.SandboxServiceStub
 
     @handle_request_error("OpenSandboxAccount")
-    def open_sandbox_account(self, name: Optional[str] = None) -> OpenSandboxAccountResponse:
+    def open_sandbox_account(
+        self, name: Optional[str] = None
+    ) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
         request.name = name
         response, call = self.stub.OpenSandboxAccount.with_call(
