@@ -1448,8 +1448,9 @@ class SandboxService(_grpc_helpers.Service):
     _stub_factory = sandbox_pb2_grpc.SandboxServiceStub
 
     @handle_request_error("OpenSandboxAccount")
-    def open_sandbox_account(self) -> OpenSandboxAccountResponse:
+    def open_sandbox_account(self, name: Optional[str] = None) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
+        request.name = name
         response, call = self.stub.OpenSandboxAccount.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, sandbox_pb2.OpenSandboxAccountRequest()
