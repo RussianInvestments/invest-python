@@ -398,7 +398,10 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
             if second_arg != NoneType:
                 raise UnknownType(f"type {field_type} unknown")
 
-            _update_field(first_arg, protobuff_obj, field_name, field_value)
+            if field_value is None:
+                pass  # just skip setting the field, since its set to None by default
+            else:
+                _update_field(first_arg, protobuff_obj, field_name, field_value)
         else:
             raise UnknownType(f"type {field_type} unknown")
 
