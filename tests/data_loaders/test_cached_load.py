@@ -3,7 +3,7 @@ import tempfile
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 import pytest
 
@@ -23,6 +23,7 @@ from tinkoff.invest.caching.market_data_cache.cache_settings import (
 from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
+from tinkoff.invest.schemas import CandleSource
 from tinkoff.invest.services import MarketDataService
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
@@ -45,6 +46,7 @@ def get_historical_candle(time: datetime, is_complete: bool = True):
         volume=100,
         time=time,
         is_complete=is_complete,
+        candle_source=CandleSource.CANDLE_SOURCE_EXCHANGE,
     )
 
 
@@ -74,6 +76,7 @@ def market_data_service(mocker) -> MarketDataService:
         to: datetime,
         interval: CandleInterval = CandleInterval(0),
         instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> GetCandlesResponse:
         return get_candles_response(start=from_, end=to, interval=interval)
 
