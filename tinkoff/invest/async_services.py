@@ -181,7 +181,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse,
+    WithdrawLimitsResponse, CandleSource,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -259,6 +259,7 @@ class AsyncServices:
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
         instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> AsyncGenerator[HistoricCandle, None]:
         to = to or now()
 
@@ -269,6 +270,7 @@ class AsyncServices:
                 from_=local_from_,
                 to=local_to,
                 instrument_id=instrument_id,
+                candle_source_type=candle_source_type,
             )
             for candle in candles_response.candles:
                 yield candle
@@ -910,10 +912,12 @@ class MarketDataService(_grpc_helpers.Service):
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
         request.instrument_id = instrument_id
+        request.candle_source_type = candle_source_type
         if from_ is not None:
             request.from_ = from_
         if to is not None:
