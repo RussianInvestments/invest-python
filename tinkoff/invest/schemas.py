@@ -2250,7 +2250,7 @@ class GetInfoResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class OpenSandboxAccountRequest(_grpc_helpers.Message):
-    name: Optional[str] = _grpc_helpers.message_field(1, optional=True)
+    name: Optional[str] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
