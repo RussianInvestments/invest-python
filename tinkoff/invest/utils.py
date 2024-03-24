@@ -7,7 +7,12 @@ from typing import Any, Callable, Generator, Iterable, List, Protocol, Tuple
 
 import dateutil.parser
 
-from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval, CandleSource
+from .schemas import (
+    CandleInterval,
+    HistoricCandle,
+    Quotation,
+    SubscriptionInterval,
+)
 
 __all__ = (
     "get_intervals",
