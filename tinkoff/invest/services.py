@@ -1450,7 +1450,7 @@ class SandboxService(_grpc_helpers.Service):
 
     @handle_request_error("OpenSandboxAccount")
     def open_sandbox_account(
-        self, name: Optional[str] = None
+        self, name: Optional[str] = ""
     ) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
         request.name = name

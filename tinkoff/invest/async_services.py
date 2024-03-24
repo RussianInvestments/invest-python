@@ -1505,7 +1505,7 @@ class SandboxService(_grpc_helpers.Service):
 
     @handle_aio_request_error("OpenSandboxAccount")
     async def open_sandbox_account(
-        self, name: Optional[str] = None
+        self, name: Optional[str] = ""
     ) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
         request.name = name
