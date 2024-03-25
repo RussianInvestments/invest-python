@@ -36,8 +36,11 @@ class MarketDataCache:
         ] = {}
 
     def _get_candles_from_net(
-        self, figi: str, interval: CandleInterval, from_: datetime, to: datetime,
-
+        self,
+        figi: str,
+        interval: CandleInterval,
+        from_: datetime,
+        to: datetime,
         instrument_id: str = "",
         candle_source_type: Optional[CandleSource] = None,
     ) -> Iterable[HistoricCandle]:
@@ -47,7 +50,7 @@ class MarketDataCache:
             from_=from_,
             to=to,
             instrument_id=instrument_id,
-            candle_source_type=candle_source_type
+            candle_source_type=candle_source_type,
         )
 
     def _with_saving_into_cache(
