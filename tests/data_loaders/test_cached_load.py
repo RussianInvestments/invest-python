@@ -36,8 +36,14 @@ logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=loggin
 logger = logging.getLogger(__name__)
 
 
-def get_historical_candle(time: datetime, is_complete: bool = True):
+def get_historical_candle(
+    time: datetime,
+    is_complete: bool = True,
+    candle_source_type: Optional[CandleSource] = None,
+):
     quotation = Quotation(units=100, nano=0)
+    if candle_source_type is None:
+        candle_source_type = CandleSource.CANDLE_SOURCE_EXCHANGE
     return HistoricCandle(
         open=quotation,
         high=quotation,
@@ -46,17 +52,24 @@ def get_historical_candle(time: datetime, is_complete: bool = True):
         volume=100,
         time=time,
         is_complete=is_complete,
-        candle_source=CandleSource.CANDLE_SOURCE_EXCHANGE,
+        candle_source=candle_source_type.value,
     )
 
 
-def get_candles_response(start: datetime, end: datetime, interval: CandleInterval):
+def get_candles_response(
+    start: datetime,
+    end: datetime,
+    interval: CandleInterval,
+    candle_source_type: Optional[CandleSource] = None,
+):
     delta = candle_interval_to_timedelta(interval)
     start_ceil = ceil_datetime(start.replace(second=0, microsecond=0), delta)
     current_time = start_ceil
     candles = []
     while current_time <= end:
-        candles.append(get_historical_candle(current_time))
+        candles.append(
+            get_historical_candle(current_time, candle_source_type=candle_source_type)
+        )
         current_time += delta
         current_time.replace(second=0, microsecond=0)
 
@@ -78,7 +91,12 @@ def market_data_service(mocker) -> MarketDataService:
         instrument_id: str = "",
         candle_source_type: Optional[CandleSource] = None,
     ) -> GetCandlesResponse:
-        return get_candles_response(start=from_, end=to, interval=interval)
+        return get_candles_response(
+            start=from_,
+            end=to,
+            interval=interval,
+            candle_source_type=candle_source_type,
+        )
 
     service.get_candles = _get_candles
     service.get_candles = mocker.Mock(wraps=service.get_candles)
