@@ -112,6 +112,12 @@ class CandleInterval(_grpc_helpers.Enum):
     CANDLE_INTERVAL_MONTH = 13
 
 
+class CandleSource(_grpc_helpers.Enum):
+    CANDLE_SOURCE_UNSPECIFIED = 0
+    CANDLE_SOURCE_EXCHANGE = 1
+    CANDLE_SOURCE_DEALER_WEEKEND = 2
+
+
 class OperationState(_grpc_helpers.Enum):
     OPERATION_STATE_UNSPECIFIED = 0
     OPERATION_STATE_EXECUTED = 1
@@ -1664,6 +1670,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     to: datetime = _grpc_helpers.message_field(3)
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
     instrument_id: Optional[str] = _grpc_helpers.string_field(5)
+    candle_source_type: Optional[CandleSource] = _grpc_helpers.string_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1680,6 +1687,7 @@ class HistoricCandle(_grpc_helpers.Message):
     volume: int = _grpc_helpers.int64_field(5)
     time: datetime = _grpc_helpers.message_field(6)
     is_complete: bool = _grpc_helpers.bool_field(7)
+    candle_source: CandleSource = _grpc_helpers.message_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -2242,7 +2250,7 @@ class GetInfoResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class OpenSandboxAccountRequest(_grpc_helpers.Message):
-    pass
+    name: Optional[str] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)

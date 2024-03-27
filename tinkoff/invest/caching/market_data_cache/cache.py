@@ -13,6 +13,7 @@ from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data 
 from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
+from tinkoff.invest.schemas import CandleSource
 from tinkoff.invest.services import Services
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
@@ -35,13 +36,21 @@ class MarketDataCache:
         ] = {}
 
     def _get_candles_from_net(
-        self, figi: str, interval: CandleInterval, from_: datetime, to: datetime
+        self,
+        figi: str,
+        interval: CandleInterval,
+        from_: datetime,
+        to: datetime,
+        instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> Iterable[HistoricCandle]:
         yield from self._services.get_all_candles(
             figi=figi,
             interval=interval,
             from_=from_,
             to=to,
+            instrument_id=instrument_id,
+            candle_source_type=candle_source_type,
         )
 
     def _with_saving_into_cache(
@@ -81,6 +90,8 @@ class MarketDataCache:
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
+        instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> Generator[HistoricCandle, None, None]:
         interval_delta = candle_interval_to_timedelta(interval)
         to = to or now()
@@ -98,7 +109,12 @@ class MarketDataCache:
                 yield from self._with_saving_into_cache(
                     storage=figi_cache_storage,
                     from_net=self._get_candles_from_net(
-                        figi, interval, processed_time, cached_start
+                        figi=figi,
+                        interval=interval,
+                        from_=processed_time,
+                        to=cached_start,
+                        instrument_id=instrument_id,
+                        candle_source_type=candle_source_type,
                     ),
                 )
 

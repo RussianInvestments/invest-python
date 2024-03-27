@@ -256,6 +256,29 @@ CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
 """от 1 месяца до 10 лет."""
 global___CandleInterval = CandleInterval
 
+class _CandleSource:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _CandleSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CandleSource.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    CANDLE_SOURCE_UNSPECIFIED: _CandleSource.ValueType  # 0
+    """Источник свечей не определён."""
+    CANDLE_SOURCE_EXCHANGE: _CandleSource.ValueType  # 1
+    """Биржевые свечи."""
+    CANDLE_SOURCE_DEALER_WEEKEND: _CandleSource.ValueType  # 2
+    """Свечи  дилера в результате торговли по выходным."""
+
+class CandleSource(_CandleSource, metaclass=_CandleSourceEnumTypeWrapper): ...
+
+CANDLE_SOURCE_UNSPECIFIED: CandleSource.ValueType  # 0
+"""Источник свечей не определён."""
+CANDLE_SOURCE_EXCHANGE: CandleSource.ValueType  # 1
+"""Биржевые свечи."""
+CANDLE_SOURCE_DEALER_WEEKEND: CandleSource.ValueType  # 2
+"""Свечи  дилера в результате торговли по выходным."""
+global___CandleSource = CandleSource
+
 class _OrderBookType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -1208,11 +1231,29 @@ class GetCandlesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _CandleSource:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CandleSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetCandlesRequest._CandleSource.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        CANDLE_SOURCE_UNSPECIFIED: GetCandlesRequest._CandleSource.ValueType  # 0
+        """Все свечи."""
+        CANDLE_SOURCE_EXCHANGE: GetCandlesRequest._CandleSource.ValueType  # 1
+        """Биржевые свечи."""
+
+    class CandleSource(_CandleSource, metaclass=_CandleSourceEnumTypeWrapper): ...
+    CANDLE_SOURCE_UNSPECIFIED: GetCandlesRequest.CandleSource.ValueType  # 0
+    """Все свечи."""
+    CANDLE_SOURCE_EXCHANGE: GetCandlesRequest.CandleSource.ValueType  # 1
+    """Биржевые свечи."""
+
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    CANDLE_SOURCE_TYPE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     @property
@@ -1222,6 +1263,8 @@ class GetCandlesRequest(google.protobuf.message.Message):
     """Интервал запрошенных свечей."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid."""
+    candle_source_type: global___GetCandlesRequest.CandleSource.ValueType
+    """Тип источника свечи"""
     def __init__(
         self,
         *,
@@ -1229,9 +1272,12 @@ class GetCandlesRequest(google.protobuf.message.Message):
         to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         interval: global___CandleInterval.ValueType = ...,
         instrument_id: builtins.str | None = ...,
+        candle_source_type: global___GetCandlesRequest.CandleSource.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_figi", b"_figi", "_instrument_id", b"_instrument_id", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "interval", b"interval", "to", b"to"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_candle_source_type", b"_candle_source_type", "_figi", b"_figi", "_instrument_id", b"_instrument_id", "candle_source_type", b"candle_source_type", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "to", b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_candle_source_type", b"_candle_source_type", "_figi", b"_figi", "_instrument_id", b"_instrument_id", "candle_source_type", b"candle_source_type", "figi", b"figi", "from", b"from", "instrument_id", b"instrument_id", "interval", b"interval", "to", b"to"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_candle_source_type", b"_candle_source_type"]) -> typing_extensions.Literal["candle_source_type"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_figi", b"_figi"]) -> typing_extensions.Literal["figi"] | None: ...
     @typing.overload
@@ -1271,6 +1317,7 @@ class HistoricCandle(google.protobuf.message.Message):
     VOLUME_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     IS_COMPLETE_FIELD_NUMBER: builtins.int
+    CANDLE_SOURCE_FIELD_NUMBER: builtins.int
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)"""
@@ -1290,6 +1337,8 @@ class HistoricCandle(google.protobuf.message.Message):
         """Время свечи в часовом поясе UTC."""
     is_complete: builtins.bool
     """Признак завершённости свечи. **false** значит, свеча за текущие интервал ещё сформирована не полностью."""
+    candle_source: global___CandleSource.ValueType
+    """Тип источника свечи"""
     def __init__(
         self,
         *,
@@ -1300,9 +1349,10 @@ class HistoricCandle(google.protobuf.message.Message):
         volume: builtins.int = ...,
         time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         is_complete: builtins.bool = ...,
+        candle_source: global___CandleSource.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close", b"close", "high", b"high", "low", b"low", "open", b"open", "time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["close", b"close", "high", b"high", "is_complete", b"is_complete", "low", b"low", "open", b"open", "time", b"time", "volume", b"volume"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["candle_source", b"candle_source", "close", b"close", "high", b"high", "is_complete", b"is_complete", "low", b"low", "open", b"open", "time", b"time", "volume", b"volume"]) -> None: ...
 
 global___HistoricCandle = HistoricCandle
 
