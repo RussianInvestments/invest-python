@@ -2908,7 +2908,6 @@ class GetOrderPriceResponse(_grpc_helpers.Message):
     executed_commission_rub: "MoneyValue" = _grpc_helpers.message_field(8)
     service_commission: "MoneyValue" = _grpc_helpers.message_field(9)
     deal_commission: "MoneyValue" = _grpc_helpers.message_field(10)
-
     extra_bond: "ExtraBond" = _grpc_helpers.message_field(12, group="instrument_extra")
     extra_future: "ExtraFuture" = _grpc_helpers.message_field(
         13, group="instrument_extra"
