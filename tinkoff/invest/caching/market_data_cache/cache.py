@@ -109,7 +109,12 @@ class MarketDataCache:
                 yield from self._with_saving_into_cache(
                     storage=figi_cache_storage,
                     from_net=self._get_candles_from_net(
-                        figi, interval, processed_time, cached_start
+                        figi=figi,
+                        interval=interval,
+                        from_=processed_time,
+                        to=cached_start,
+                        instrument_id=instrument_id,
+                        candle_source_type=candle_source_type,
                     ),
                 )
 

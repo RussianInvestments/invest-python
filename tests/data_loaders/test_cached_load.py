@@ -52,7 +52,7 @@ def get_historical_candle(
         volume=100,
         time=time,
         is_complete=is_complete,
-        candle_source=candle_source_type.value,
+        candle_source=candle_source_type,
     )
 
 
