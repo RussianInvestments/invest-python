@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "tinkoff/**"
+      - "!tinkoff/invest/__init__.py"
+      - "!tinkoff/invest/constants.py"
   workflow_dispatch:
 
 jobs:

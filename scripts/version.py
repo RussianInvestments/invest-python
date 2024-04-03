@@ -7,12 +7,17 @@ Version = Tuple[str, str, str, str, str]
 
 
 def main() -> None:
-    with open("pyproject.toml", "r", encoding="utf-8") as f:
-        pyproject = loads(f.read())
-    current_version: str = pyproject["tool"]["poetry"]["version"]  # type:ignore
+    current_version = get_current_version()
     print(  # noqa:T201,T001
         version_to_str(next_beta_version(parse_version(version=current_version)))
     )
+
+
+def get_current_version():
+    with open("pyproject.toml", "r", encoding="utf-8") as f:
+        pyproject = loads(f.read())
+    current_version: str = pyproject["tool"]["poetry"]["version"]  # type:ignore
+    return current_version
 
 
 def parse_version(version: str) -> Version:

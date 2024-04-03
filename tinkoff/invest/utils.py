@@ -2,6 +2,7 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
+from enum import Enum
 from typing import Any, Callable, Generator, Iterable, List, Protocol, Tuple
 
 import dateutil.parser
@@ -138,6 +139,9 @@ def dataclass_from_dict(klass, d):
         return dateutil.parser.parse(d).replace(tzinfo=timezone.utc)
     if issubclass(klass, Quotation):
         d = ast.literal_eval(d)
+    if issubclass(klass, Enum):
+        return klass(int(d))
+
     fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
     return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})
 

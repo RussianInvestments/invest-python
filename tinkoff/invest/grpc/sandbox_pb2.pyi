@@ -17,15 +17,21 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing_extensions.final
 class OpenSandboxAccountRequest(google.protobuf.message.Message):
-    """Запрос открытия счёта в песочнице.
-    пустой запрос
-    """
+    """Запрос открытия счёта в песочнице."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    NAME_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Название счёта"""
     def __init__(
         self,
+        *,
+        name: builtins.str | None = ...,
     ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_name", b"_name", "name", b"name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_name", b"_name", "name", b"name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_name", b"_name"]) -> typing_extensions.Literal["name"] | None: ...
 
 global___OpenSandboxAccountRequest = OpenSandboxAccountRequest
 

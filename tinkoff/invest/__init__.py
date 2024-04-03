@@ -248,7 +248,10 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 
+__version__ = "0.2.0-beta97"
+
 __all__ = (
+    "__version__",
     "AccessLevel",
     "Account",
     "AccountStatus",

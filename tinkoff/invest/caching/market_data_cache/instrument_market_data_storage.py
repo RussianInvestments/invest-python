@@ -19,6 +19,7 @@ from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data 
 from tinkoff.invest.caching.market_data_cache.interface import (
     IInstrumentMarketDataStorage,
 )
+from tinkoff.invest.caching.market_data_cache.serialization import custom_asdict_factory
 from tinkoff.invest.schemas import CandleInterval, HistoricCandle
 from tinkoff.invest.utils import dataclass_from_dict
 
@@ -159,7 +160,9 @@ class InstrumentMarketDataStorage(
             writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
             writer.writeheader()
             for candle in data.historic_candles:
-                writer.writerow(dataclasses.asdict(candle))
+                writer.writerow(
+                    dataclasses.asdict(candle, dict_factory=custom_asdict_factory)
+                )
         return file
 
     def _candle_from_row(self, row: Dict[str, str]) -> HistoricCandle:

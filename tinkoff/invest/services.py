@@ -42,6 +42,7 @@ from .schemas import (
     CancelStopOrderRequest,
     CancelStopOrderResponse,
     CandleInterval,
+    CandleSource,
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
     CurrenciesResponse,
@@ -252,6 +253,7 @@ class Services:
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
         instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
 
@@ -263,6 +265,7 @@ class Services:
                 from_=current_from,
                 to=current_to,
                 instrument_id=instrument_id,
+                candle_source_type=candle_source_type,
             )
 
             for candle in candles_response.candles:
@@ -871,10 +874,12 @@ class MarketDataService(_grpc_helpers.Service):
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         instrument_id: str = "",
+        candle_source_type: Optional[CandleSource] = None,
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
         request.instrument_id = instrument_id
+        request.candle_source_type = candle_source_type
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -1444,8 +1449,11 @@ class SandboxService(_grpc_helpers.Service):
     _stub_factory = sandbox_pb2_grpc.SandboxServiceStub
 
     @handle_request_error("OpenSandboxAccount")
-    def open_sandbox_account(self) -> OpenSandboxAccountResponse:
+    def open_sandbox_account(
+        self, name: Optional[str] = ""
+    ) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
+        request.name = name
         response, call = self.stub.OpenSandboxAccount.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, sandbox_pb2.OpenSandboxAccountRequest()
