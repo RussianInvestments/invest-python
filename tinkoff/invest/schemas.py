@@ -423,6 +423,16 @@ class OrderBookType(_grpc_helpers.Enum):
     ORDERBOOK_TYPE_DEALER = 2
 
 
+class BondType(_grpc_helpers.Enum):
+    BOND_TYPE_UNSPECIFIED = 0
+    BOND_TYPE_REPLACED = 1
+
+
+class InstrumentExchangeType(_grpc_helpers.Enum):
+    INSTRUMENT_EXCHANGE_UNSPECIFIED = 0
+    INSTRUMENT_EXCHANGE_DEALER = 1
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -539,6 +549,9 @@ class InstrumentRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class InstrumentsRequest(_grpc_helpers.Message):
     instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(1)
+    instrument_exchange: Optional["InstrumentExchangeType"] = _grpc_helpers.enum_field(
+        2
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -779,6 +792,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
     risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
     brand: "BrandData" = _grpc_helpers.message_field(64)
+    bond_type: "BondType" = _grpc_helpers.message_field(65)
 
 
 @dataclass(eq=False, repr=True)
@@ -855,6 +869,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
     asset_uid: str = _grpc_helpers.string_field(34)
+    instrument_exchange: "InstrumentExchangeType" = _grpc_helpers.message_field(35)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     weekend_flag: bool = _grpc_helpers.bool_field(43)
@@ -949,6 +964,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
     asset_uid: str = _grpc_helpers.string_field(36)
+    instrument_exchange: "InstrumentExchangeType" = _grpc_helpers.message_field(37)
     for_iis_flag: bool = _grpc_helpers.bool_field(46)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(47)
     weekend_flag: bool = _grpc_helpers.bool_field(48)
