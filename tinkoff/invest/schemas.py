@@ -433,6 +433,13 @@ class InstrumentExchangeType(_grpc_helpers.Enum):
     INSTRUMENT_EXCHANGE_DEALER = 1
 
 
+class TradeSourceType(_grpc_helpers.Enum):
+    TRADE_SOURCE_UNSPECIFIED = 0
+    TRADE_SOURCE_EXCHANGE = 1
+    TRADE_SOURCE_DEALER = 2
+    TRADE_SOURCE_ALL = 3
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -1546,6 +1553,7 @@ class OrderBookSubscription(_grpc_helpers.Message):
 class SubscribeTradesRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["TradeInstrument"] = _grpc_helpers.message_field(2)
+    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1587,6 +1595,7 @@ class TradeInstrument(_grpc_helpers.Message):
 class SubscribeTradesResponse(_grpc_helpers.Message):
     tracking_id: str = _grpc_helpers.string_field(1)
     trade_subscriptions: List["TradeSubscription"] = _grpc_helpers.message_field(2)
+    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1667,6 +1676,7 @@ class Trade(_grpc_helpers.Message):
     quantity: int = _grpc_helpers.int64_field(4)
     time: datetime = _grpc_helpers.message_field(5)
     instrument_uid: str = _grpc_helpers.string_field(6)
+    tradeSource: TradeSourceType = _grpc_helpers.message_field(7)
 
 
 @dataclass(eq=False, repr=True)
