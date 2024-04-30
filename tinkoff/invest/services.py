@@ -149,6 +149,8 @@ from .schemas import (
     OptionsResponse,
     OrderDirection,
     OrderState,
+    OrderStateStreamRequest,
+    OrderStateStreamResponse,
     OrderType,
     Page,
     PortfolioRequest,
@@ -1288,6 +1290,20 @@ class OrdersStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, TradesStreamResponse)
+
+    @handle_request_error_gen("OrderStateStream")
+    def order_state_stream(
+        self, *, request: OrderStateStreamRequest
+    ) -> Iterable[OrderStateStreamResponse]:
+        for response in self.stub.OrderStateStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.OrderStateStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(
+                response, OrderStateStreamResponse
+            )
 
 
 class OrdersService(_grpc_helpers.Service):

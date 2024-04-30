@@ -21,6 +21,11 @@ class OrdersStreamServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamResponse.FromString,
                 )
+        self.OrderStateStream = channel.unary_stream(
+                '/tinkoff.public.invest.api.contract.v1.OrdersStreamService/OrderStateStream',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamResponse.FromString,
+                )
 
 
 class OrdersStreamServiceServicer(object):
@@ -33,6 +38,13 @@ class OrdersStreamServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def OrderStateStream(self, request, context):
+        """Stream поручений пользователя
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OrdersStreamServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -40,6 +52,11 @@ def add_OrdersStreamServiceServicer_to_server(servicer, server):
                     servicer.TradesStream,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamResponse.SerializeToString,
+            ),
+            'OrderStateStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.OrderStateStream,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,6 +82,23 @@ class OrdersStreamService(object):
         return grpc.experimental.unary_stream(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersStreamService/TradesStream',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.TradesStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def OrderStateStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersStreamService/OrderStateStream',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.OrderStateStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

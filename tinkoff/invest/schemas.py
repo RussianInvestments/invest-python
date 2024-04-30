@@ -440,6 +440,35 @@ class TradeSourceType(_grpc_helpers.Enum):
     TRADE_SOURCE_ALL = 3
 
 
+class OrderStateStreamSubscriptionStatus(_grpc_helpers.Enum):
+    SUBSCRIPTION_STATUS_UNSPECIFIED = 0
+    SUBSCRIPTION_STATUS_OK = 1
+    SUBSCRIPTION_STATUS_ERROR = 13
+
+
+class MarkerType(_grpc_helpers.Enum):
+    MARKER_UNKNOWN = 0
+    MARKER_BROKER = 1
+    MARKER_CHAT = 2
+    MARKER_PAPER = 3
+    MARKER_MARGIN = 4
+    MARKER_TKBNM = 5
+    MARKER_SHORT = 6
+    MARKER_SPECMM = 7
+    MARKER_PO = 8
+
+
+class StatusCauseInfo(_grpc_helpers.Enum):
+    CAUSE_UNSPECIFIED = 0
+    CAUSE_CANCELLED_BY_CLIENT = 15
+    CAUSE_CANCELLED_BY_EXCHANGE = 1
+    CAUSE_CANCELLED_NOT_ENOUGH_POSITION = 2
+    CAUSE_CANCELLED_BY_CLIENT_BLOCK = 3
+    CAUSE_REJECTED_BY_BROKER = 4
+    CAUSE_REJECTED_BY_EXCHANGE = 5
+    CAUSE_CANCELLED_BY_BROKER = 6
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -2937,6 +2966,69 @@ class GetOrderPriceResponse(_grpc_helpers.Message):
     extra_bond: "ExtraBond" = _grpc_helpers.message_field(12, group="instrument_extra")
     extra_future: "ExtraFuture" = _grpc_helpers.message_field(
         13, group="instrument_extra"
+    )
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.message_field(1)
+    ping_delay_millis: Optional[int] = _grpc_helpers.int32_field(15)
+
+
+@dataclass(eq=False, repr=True)
+class ErrorDetail(_grpc_helpers.Message):
+    code: str = _grpc_helpers.string_field(1)
+    message: str = _grpc_helpers.string_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class SubscriptionResponse(_grpc_helpers.Message):
+    tracking_id: str = _grpc_helpers.string_field(1)
+    status: OrderStateStreamSubscriptionStatus = _grpc_helpers.message_field(2)
+    stream_id: str = _grpc_helpers.message_field(4)
+    accounts: List[str] = _grpc_helpers.message_field(5)
+    error: Optional[ErrorDetail] = _grpc_helpers.message_field(7)
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamOrderState(_grpc_helpers.Message):
+    order_id: str = _grpc_helpers.string_field(1)
+    order_request_id: Optional[str] = _grpc_helpers.string_field(2)
+    client_code: str = _grpc_helpers.string_field(3)
+    created_at: datetime = _grpc_helpers.message_field(4)
+    execution_report_status: OrderExecutionReportStatus = _grpc_helpers.message_field(5)
+    status_info: Optional[StatusCauseInfo] = _grpc_helpers.message_field(6)
+    ticker: str = _grpc_helpers.string_field(7)
+    class_code: str = _grpc_helpers.string_field(8)
+    lot_size: int = _grpc_helpers.int32_field(9)
+    direction: OrderDirection = _grpc_helpers.message_field(10)
+    time_in_force: TimeInForceType = _grpc_helpers.message_field(11)
+    order_type: OrderType = _grpc_helpers.message_field(12)
+    account_id: str = _grpc_helpers.string_field(13)
+    initial_order_price: MoneyValue = _grpc_helpers.message_field(22)
+    order_price: MoneyValue = _grpc_helpers.message_field(23)
+    amount: Optional[MoneyValue] = _grpc_helpers.message_field(24)
+    executed_order_price: MoneyValue = _grpc_helpers.message_field(25)
+    currency: str = _grpc_helpers.string_field(26)
+    lots_requested: int = _grpc_helpers.int64_field(27)
+    lots_executed: int = _grpc_helpers.int64_field(28)
+    lots_left: int = _grpc_helpers.int64_field(29)
+    lots_cancelled: int = _grpc_helpers.int64_field(30)
+    marker: Optional[MarkerType] = _grpc_helpers.message_field(31)
+    trades: List[OrderTrade] = _grpc_helpers.message_field(33)
+    completion_time: datetime = _grpc_helpers.message_field(35)
+    exchange: str = _grpc_helpers.string_field(36)
+    instrument_uid: str = _grpc_helpers.string_field(41)
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamResponse(_grpc_helpers.Message):
+    order_state: "OrderStateStreamOrderState" = _grpc_helpers.message_field(
+        1, group="payload"
+    )
+    ping: "Ping" = _grpc_helpers.message_field(2, group="payload")
+    subscription: "SubscriptionResponse" = _grpc_helpers.message_field(
+        3, group="payload"
     )
 
 
