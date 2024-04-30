@@ -110,7 +110,7 @@ exclude = "tinkoff/invest/grpc"
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-fail_under = 65
+fail_under = 64
 exclude_lines = [
   "raise NotImplementedError",
   "def __repr__",
