@@ -1139,7 +1139,9 @@
     <span class="n">AsyncClient</span><span class="p">,</span>
     <span class="n">CandleInstrument</span><span class="p">,</span>
     <span class="n">InfoInstrument</span><span class="p">,</span>
+    <span class="n">MarketDataResponse</span><span class="p">,</span>
     <span class="n">SubscriptionInterval</span><span class="p">,</span>
+    <span class="n">TradeInstrument</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">tinkoff.invest.async_services</span> <span class="kn">import</span> <span class="n">AsyncMarketDataStreamManager</span>
 
@@ -1159,7 +1161,15 @@
                 <span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
+        <span class="n">market_data_stream</span><span class="o">.</span><span class="n">trades</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">TradeInstrument</span><span class="p">(</span>
+                    <span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">async</span> <span class="k">for</span> <span class="n">marketdata</span> <span class="ow">in</span> <span class="n">market_data_stream</span><span class="p">:</span>
+            <span class="n">marketdata</span><span class="p">:</span> <span class="n">MarketDataResponse</span> <span class="o">=</span> <span class="n">marketdata</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
             <span class="n">market_data_stream</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="n">InfoInstrument</span><span class="p">(</span><span class="n">figi</span><span class="o">=</span><span class="s2">&quot;BBG004730N88&quot;</span><span class="p">)])</span>
             <span class="k">if</span> <span class="n">marketdata</span><span class="o">.</span><span class="n">subscribe_info_response</span><span class="p">:</span>
