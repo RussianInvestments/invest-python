@@ -423,6 +423,52 @@ class OrderBookType(_grpc_helpers.Enum):
     ORDERBOOK_TYPE_DEALER = 2
 
 
+class BondType(_grpc_helpers.Enum):
+    BOND_TYPE_UNSPECIFIED = 0
+    BOND_TYPE_REPLACED = 1
+
+
+class InstrumentExchangeType(_grpc_helpers.Enum):
+    INSTRUMENT_EXCHANGE_UNSPECIFIED = 0
+    INSTRUMENT_EXCHANGE_DEALER = 1
+
+
+class TradeSourceType(_grpc_helpers.Enum):
+    TRADE_SOURCE_UNSPECIFIED = 0
+    TRADE_SOURCE_EXCHANGE = 1
+    TRADE_SOURCE_DEALER = 2
+    TRADE_SOURCE_ALL = 3
+
+
+class OrderStateStreamSubscriptionStatus(_grpc_helpers.Enum):
+    SUBSCRIPTION_STATUS_UNSPECIFIED = 0
+    SUBSCRIPTION_STATUS_OK = 1
+    SUBSCRIPTION_STATUS_ERROR = 13
+
+
+class MarkerType(_grpc_helpers.Enum):
+    MARKER_UNKNOWN = 0
+    MARKER_BROKER = 1
+    MARKER_CHAT = 2
+    MARKER_PAPER = 3
+    MARKER_MARGIN = 4
+    MARKER_TKBNM = 5
+    MARKER_SHORT = 6
+    MARKER_SPECMM = 7
+    MARKER_PO = 8
+
+
+class StatusCauseInfo(_grpc_helpers.Enum):
+    CAUSE_UNSPECIFIED = 0
+    CAUSE_CANCELLED_BY_CLIENT = 15
+    CAUSE_CANCELLED_BY_EXCHANGE = 1
+    CAUSE_CANCELLED_NOT_ENOUGH_POSITION = 2
+    CAUSE_CANCELLED_BY_CLIENT_BLOCK = 3
+    CAUSE_REJECTED_BY_BROKER = 4
+    CAUSE_REJECTED_BY_EXCHANGE = 5
+    CAUSE_CANCELLED_BY_BROKER = 6
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -539,6 +585,9 @@ class InstrumentRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class InstrumentsRequest(_grpc_helpers.Message):
     instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(1)
+    instrument_exchange: Optional["InstrumentExchangeType"] = _grpc_helpers.enum_field(
+        2
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -779,6 +828,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
     risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
     brand: "BrandData" = _grpc_helpers.message_field(64)
+    bond_type: "BondType" = _grpc_helpers.message_field(65)
 
 
 @dataclass(eq=False, repr=True)
@@ -855,6 +905,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
     asset_uid: str = _grpc_helpers.string_field(34)
+    instrument_exchange: "InstrumentExchangeType" = _grpc_helpers.message_field(35)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     weekend_flag: bool = _grpc_helpers.bool_field(43)
@@ -949,6 +1000,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
     asset_uid: str = _grpc_helpers.string_field(36)
+    instrument_exchange: "InstrumentExchangeType" = _grpc_helpers.message_field(37)
     for_iis_flag: bool = _grpc_helpers.bool_field(46)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(47)
     weekend_flag: bool = _grpc_helpers.bool_field(48)
@@ -1530,6 +1582,7 @@ class OrderBookSubscription(_grpc_helpers.Message):
 class SubscribeTradesRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["TradeInstrument"] = _grpc_helpers.message_field(2)
+    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1571,6 +1624,7 @@ class TradeInstrument(_grpc_helpers.Message):
 class SubscribeTradesResponse(_grpc_helpers.Message):
     tracking_id: str = _grpc_helpers.string_field(1)
     trade_subscriptions: List["TradeSubscription"] = _grpc_helpers.message_field(2)
+    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1651,6 +1705,7 @@ class Trade(_grpc_helpers.Message):
     quantity: int = _grpc_helpers.int64_field(4)
     time: datetime = _grpc_helpers.message_field(5)
     instrument_uid: str = _grpc_helpers.string_field(6)
+    tradeSource: TradeSourceType = _grpc_helpers.message_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -2354,6 +2409,7 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     take_profit_type: "TakeProfitType" = _grpc_helpers.message_field(13)
     trailing_data: "StopOrderTrailingData" = _grpc_helpers.message_field(14)
     status: "StopOrderStatusOption" = _grpc_helpers.message_field(15)
+    exchange_order_type: "ExchangeOrderType" = _grpc_helpers.message_field(16)
 
 
 @dataclass(eq=False, repr=True)
@@ -2911,6 +2967,69 @@ class GetOrderPriceResponse(_grpc_helpers.Message):
     extra_bond: "ExtraBond" = _grpc_helpers.message_field(12, group="instrument_extra")
     extra_future: "ExtraFuture" = _grpc_helpers.message_field(
         13, group="instrument_extra"
+    )
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.message_field(1)
+    ping_delay_millis: Optional[int] = _grpc_helpers.int32_field(15)
+
+
+@dataclass(eq=False, repr=True)
+class ErrorDetail(_grpc_helpers.Message):
+    code: str = _grpc_helpers.string_field(1)
+    message: str = _grpc_helpers.string_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class SubscriptionResponse(_grpc_helpers.Message):
+    tracking_id: str = _grpc_helpers.string_field(1)
+    status: OrderStateStreamSubscriptionStatus = _grpc_helpers.message_field(2)
+    stream_id: str = _grpc_helpers.message_field(4)
+    accounts: List[str] = _grpc_helpers.message_field(5)
+    error: Optional[ErrorDetail] = _grpc_helpers.message_field(7)
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamOrderState(_grpc_helpers.Message):
+    order_id: str = _grpc_helpers.string_field(1)
+    order_request_id: Optional[str] = _grpc_helpers.string_field(2)
+    client_code: str = _grpc_helpers.string_field(3)
+    created_at: datetime = _grpc_helpers.message_field(4)
+    execution_report_status: OrderExecutionReportStatus = _grpc_helpers.message_field(5)
+    status_info: Optional[StatusCauseInfo] = _grpc_helpers.message_field(6)
+    ticker: str = _grpc_helpers.string_field(7)
+    class_code: str = _grpc_helpers.string_field(8)
+    lot_size: int = _grpc_helpers.int32_field(9)
+    direction: OrderDirection = _grpc_helpers.message_field(10)
+    time_in_force: TimeInForceType = _grpc_helpers.message_field(11)
+    order_type: OrderType = _grpc_helpers.message_field(12)
+    account_id: str = _grpc_helpers.string_field(13)
+    initial_order_price: MoneyValue = _grpc_helpers.message_field(22)
+    order_price: MoneyValue = _grpc_helpers.message_field(23)
+    amount: Optional[MoneyValue] = _grpc_helpers.message_field(24)
+    executed_order_price: MoneyValue = _grpc_helpers.message_field(25)
+    currency: str = _grpc_helpers.string_field(26)
+    lots_requested: int = _grpc_helpers.int64_field(27)
+    lots_executed: int = _grpc_helpers.int64_field(28)
+    lots_left: int = _grpc_helpers.int64_field(29)
+    lots_cancelled: int = _grpc_helpers.int64_field(30)
+    marker: Optional[MarkerType] = _grpc_helpers.message_field(31)
+    trades: List[OrderTrade] = _grpc_helpers.message_field(33)
+    completion_time: datetime = _grpc_helpers.message_field(35)
+    exchange: str = _grpc_helpers.string_field(36)
+    instrument_uid: str = _grpc_helpers.string_field(41)
+
+
+@dataclass(eq=False, repr=True)
+class OrderStateStreamResponse(_grpc_helpers.Message):
+    order_state: "OrderStateStreamOrderState" = _grpc_helpers.message_field(
+        1, group="payload"
+    )
+    ping: "Ping" = _grpc_helpers.message_field(2, group="payload")
+    subscription: "SubscriptionResponse" = _grpc_helpers.message_field(
+        3, group="payload"
     )
 
 

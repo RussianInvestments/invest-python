@@ -5,7 +5,9 @@ from tinkoff.invest import (
     AsyncClient,
     CandleInstrument,
     InfoInstrument,
+    MarketDataResponse,
     SubscriptionInterval,
+    TradeInstrument,
 )
 from tinkoff.invest.async_services import AsyncMarketDataStreamManager
 
@@ -25,7 +27,15 @@ async def main():
                 )
             ]
         )
+        market_data_stream.trades.subscribe(
+            [
+                TradeInstrument(
+                    figi="BBG004730N88",
+                )
+            ]
+        )
         async for marketdata in market_data_stream:
+            marketdata: MarketDataResponse = marketdata
             print(marketdata)
             market_data_stream.info.subscribe([InfoInstrument(figi="BBG004730N88")])
             if marketdata.subscribe_info_response:

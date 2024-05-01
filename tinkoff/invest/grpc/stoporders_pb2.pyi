@@ -526,6 +526,7 @@ class StopOrder(google.protobuf.message.Message):
     TAKE_PROFIT_TYPE_FIELD_NUMBER: builtins.int
     TRAILING_DATA_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
+    EXCHANGE_ORDER_TYPE_FIELD_NUMBER: builtins.int
     stop_order_id: builtins.str
     """Идентификатор-идентификатор стоп-заявки"""
     lots_requested: builtins.int
@@ -562,6 +563,8 @@ class StopOrder(google.protobuf.message.Message):
         """Параметры трейлинг-стопа"""
     status: global___StopOrderStatusOption.ValueType
     """Статус заявки"""
+    exchange_order_type: global___ExchangeOrderType.ValueType
+    """Тип дочерней биржевой заявки для тейкпрофита"""
     def __init__(
         self,
         *,
@@ -580,8 +583,9 @@ class StopOrder(google.protobuf.message.Message):
         take_profit_type: global___TakeProfitType.ValueType = ...,
         trailing_data: global___StopOrder.TrailingData | None = ...,
         status: global___StopOrderStatusOption.ValueType = ...,
+        exchange_order_type: global___ExchangeOrderType.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "expiration_time", b"expiration_time", "price", b"price", "stop_price", b"stop_price", "trailing_data", b"trailing_data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "expiration_time", b"expiration_time", "figi", b"figi", "instrument_uid", b"instrument_uid", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "status", b"status", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_time", b"expiration_time", "figi", b"figi", "instrument_uid", b"instrument_uid", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "status", b"status", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
 
 global___StopOrder = StopOrder

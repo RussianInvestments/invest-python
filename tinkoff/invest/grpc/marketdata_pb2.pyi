@@ -164,6 +164,34 @@ SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND: SubscriptionStatus.ValueType  # 9
 """Активная подписка не найдена. Ошибка может возникнуть только при отписке от не существующей отписки"""
 global___SubscriptionStatus = SubscriptionStatus
 
+class _TradeSourceType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _TradeSourceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TradeSourceType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    TRADE_SOURCE_UNSPECIFIED: _TradeSourceType.ValueType  # 0
+    """Тип сделки не определён."""
+    TRADE_SOURCE_EXCHANGE: _TradeSourceType.ValueType  # 1
+    """биржевые сделки"""
+    TRADE_SOURCE_DEALER: _TradeSourceType.ValueType  # 2
+    """сделки дилера"""
+    TRADE_SOURCE_ALL: _TradeSourceType.ValueType  # 3
+    """все сделки"""
+
+class TradeSourceType(_TradeSourceType, metaclass=_TradeSourceTypeEnumTypeWrapper):
+    """Источники сделок"""
+
+TRADE_SOURCE_UNSPECIFIED: TradeSourceType.ValueType  # 0
+"""Тип сделки не определён."""
+TRADE_SOURCE_EXCHANGE: TradeSourceType.ValueType  # 1
+"""биржевые сделки"""
+TRADE_SOURCE_DEALER: TradeSourceType.ValueType  # 2
+"""сделки дилера"""
+TRADE_SOURCE_ALL: TradeSourceType.ValueType  # 3
+"""все сделки"""
+global___TradeSourceType = TradeSourceType
+
 class _TradeDirection:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -701,18 +729,22 @@ class SubscribeTradesRequest(google.protobuf.message.Message):
 
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
+    TRADE_TYPE_FIELD_NUMBER: builtins.int
     subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradeInstrument]:
         """Массив инструментов для подписки на поток обезличенных сделок."""
+    trade_type: global___TradeSourceType.ValueType
+    """Источник сделок"""
     def __init__(
         self,
         *,
         subscription_action: global___SubscriptionAction.ValueType = ...,
         instruments: collections.abc.Iterable[global___TradeInstrument] | None = ...,
+        trade_type: global___TradeSourceType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["instruments", b"instruments", "subscription_action", b"subscription_action"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments", b"instruments", "subscription_action", b"subscription_action", "trade_type", b"trade_type"]) -> None: ...
 
 global___SubscribeTradesRequest = SubscribeTradesRequest
 
@@ -746,18 +778,22 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
 
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
+    TRADE_TYPE_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
     @property
     def trade_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradeSubscription]:
         """Массив статусов подписки на поток сделок."""
+    trade_type: global___TradeSourceType.ValueType
+    """Источник сделок"""
     def __init__(
         self,
         *,
         tracking_id: builtins.str = ...,
         trade_subscriptions: collections.abc.Iterable[global___TradeSubscription] | None = ...,
+        trade_type: global___TradeSourceType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["tracking_id", b"tracking_id", "trade_subscriptions", b"trade_subscriptions"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["tracking_id", b"tracking_id", "trade_subscriptions", b"trade_subscriptions", "trade_type", b"trade_type"]) -> None: ...
 
 global___SubscribeTradesResponse = SubscribeTradesResponse
 
@@ -1156,6 +1192,7 @@ class Trade(google.protobuf.message.Message):
     QUANTITY_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    TRADESOURCE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     direction: global___TradeDirection.ValueType
@@ -1170,6 +1207,8 @@ class Trade(google.protobuf.message.Message):
         """Время сделки в часовом поясе UTC по времени биржи."""
     instrument_uid: builtins.str
     """Uid инструмента"""
+    tradeSource: global___TradeSourceType.ValueType
+    """Источник сделки"""
     def __init__(
         self,
         *,
@@ -1179,9 +1218,10 @@ class Trade(google.protobuf.message.Message):
         quantity: builtins.int = ...,
         time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         instrument_uid: builtins.str = ...,
+        tradeSource: global___TradeSourceType.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price", b"price", "time", b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["direction", b"direction", "figi", b"figi", "instrument_uid", b"instrument_uid", "price", b"price", "quantity", b"quantity", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["direction", b"direction", "figi", b"figi", "instrument_uid", b"instrument_uid", "price", b"price", "quantity", b"quantity", "time", b"time", "tradeSource", b"tradeSource"]) -> None: ...
 
 global___Trade = Trade
 
@@ -1700,7 +1740,7 @@ global___GetLastTradesResponse = GetLastTradesResponse
 
 @typing_extensions.final
 class GetMySubscriptions(google.protobuf.message.Message):
-    """Запрос активных подписок."""
+    """Запрос активных подписок. Запрос вернет по одному сообщению на каждый тип активных подписок (SubscribeLastPriceResponse, SubscribeInfoResponse, SubscribeTradesResponse, SubscribeOrderBookResponse, SubscribeCandlesResponse)"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

@@ -121,7 +121,8 @@ class _TimeInForceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     TIME_IN_FORCE_FILL_OR_KILL: _TimeInForceType.ValueType  # 3
     """Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным"""
 
-class TimeInForceType(_TimeInForceType, metaclass=_TimeInForceTypeEnumTypeWrapper): ...
+class TimeInForceType(_TimeInForceType, metaclass=_TimeInForceTypeEnumTypeWrapper):
+    """Алгоритм исполнения заявки"""
 
 TIME_IN_FORCE_UNSPECIFIED: TimeInForceType.ValueType  # 0
 """Значение не определено см. TIME_IN_FORCE_DAY"""
@@ -819,6 +820,8 @@ global___GetMaxLotsResponse = GetMaxLotsResponse
 
 @typing_extensions.final
 class GetOrderPriceRequest(google.protobuf.message.Message):
+    """Запрос получения предварительной стоимости заявки"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
@@ -853,6 +856,8 @@ global___GetOrderPriceRequest = GetOrderPriceRequest
 
 @typing_extensions.final
 class GetOrderPriceResponse(google.protobuf.message.Message):
+    """Предварительная стоимость заявки"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     @typing_extensions.final
@@ -945,3 +950,355 @@ class GetOrderPriceResponse(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing_extensions.Literal["instrument_extra", b"instrument_extra"]) -> typing_extensions.Literal["extra_bond", "extra_future"] | None: ...
 
 global___GetOrderPriceResponse = GetOrderPriceResponse
+
+@typing_extensions.final
+class OrderStateStreamRequest(google.protobuf.message.Message):
+    """Запрос установки стрим-соединения торговых поручений"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACCOUNTS_FIELD_NUMBER: builtins.int
+    PING_DELAY_MILLIS_FIELD_NUMBER: builtins.int
+    @property
+    def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Идентификаторы счетов."""
+    ping_delay_millis: builtins.int
+    """Задержка пинг сообщений milliseconds 1000-120000, default 120000"""
+    def __init__(
+        self,
+        *,
+        accounts: collections.abc.Iterable[builtins.str] | None = ...,
+        ping_delay_millis: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_ping_delay_millis", b"_ping_delay_millis", "ping_delay_millis", b"ping_delay_millis"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ping_delay_millis", b"_ping_delay_millis", "accounts", b"accounts", "ping_delay_millis", b"ping_delay_millis"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_ping_delay_millis", b"_ping_delay_millis"]) -> typing_extensions.Literal["ping_delay_millis"] | None: ...
+
+global___OrderStateStreamRequest = OrderStateStreamRequest
+
+@typing_extensions.final
+class OrderStateStreamResponse(google.protobuf.message.Message):
+    """Информация по заявкам"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _MarkerType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _MarkerTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OrderStateStreamResponse._MarkerType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        MARKER_UNKNOWN: OrderStateStreamResponse._MarkerType.ValueType  # 0
+        """не определено"""
+        MARKER_BROKER: OrderStateStreamResponse._MarkerType.ValueType  # 1
+        """сделки брокера"""
+        MARKER_CHAT: OrderStateStreamResponse._MarkerType.ValueType  # 2
+        """исполнение поручение, полученного от клиента через каналы связи"""
+        MARKER_PAPER: OrderStateStreamResponse._MarkerType.ValueType  # 3
+        """исполнение поручение, полученного от клиента в бумажной форме"""
+        MARKER_MARGIN: OrderStateStreamResponse._MarkerType.ValueType  # 4
+        """принудительное закрытие позиций"""
+        MARKER_TKBNM: OrderStateStreamResponse._MarkerType.ValueType  # 5
+        """сделки по управлению ликвидностью"""
+        MARKER_SHORT: OrderStateStreamResponse._MarkerType.ValueType  # 6
+        """сделки РЕПО по привлечению у клиентов бумаг"""
+        MARKER_SPECMM: OrderStateStreamResponse._MarkerType.ValueType  # 7
+        """перенос временно непокрытых позиций"""
+        MARKER_PO: OrderStateStreamResponse._MarkerType.ValueType  # 8
+
+    class MarkerType(_MarkerType, metaclass=_MarkerTypeEnumTypeWrapper):
+        """Маркер"""
+
+    MARKER_UNKNOWN: OrderStateStreamResponse.MarkerType.ValueType  # 0
+    """не определено"""
+    MARKER_BROKER: OrderStateStreamResponse.MarkerType.ValueType  # 1
+    """сделки брокера"""
+    MARKER_CHAT: OrderStateStreamResponse.MarkerType.ValueType  # 2
+    """исполнение поручение, полученного от клиента через каналы связи"""
+    MARKER_PAPER: OrderStateStreamResponse.MarkerType.ValueType  # 3
+    """исполнение поручение, полученного от клиента в бумажной форме"""
+    MARKER_MARGIN: OrderStateStreamResponse.MarkerType.ValueType  # 4
+    """принудительное закрытие позиций"""
+    MARKER_TKBNM: OrderStateStreamResponse.MarkerType.ValueType  # 5
+    """сделки по управлению ликвидностью"""
+    MARKER_SHORT: OrderStateStreamResponse.MarkerType.ValueType  # 6
+    """сделки РЕПО по привлечению у клиентов бумаг"""
+    MARKER_SPECMM: OrderStateStreamResponse.MarkerType.ValueType  # 7
+    """перенос временно непокрытых позиций"""
+    MARKER_PO: OrderStateStreamResponse.MarkerType.ValueType  # 8
+
+    class _StatusCauseInfo:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _StatusCauseInfoEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OrderStateStreamResponse._StatusCauseInfo.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        CAUSE_UNSPECIFIED: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 0
+        """Не определено"""
+        CAUSE_CANCELLED_BY_CLIENT: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 15
+        """Отменено клиентом"""
+        CAUSE_CANCELLED_BY_EXCHANGE: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 1
+        """Отменено биржей"""
+        CAUSE_CANCELLED_NOT_ENOUGH_POSITION: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 2
+        """Заявка не выставлена из-за нехватки средств"""
+        CAUSE_CANCELLED_BY_CLIENT_BLOCK: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 3
+        """Отменено из-за блокировки клиента"""
+        CAUSE_REJECTED_BY_BROKER: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 4
+        """Отклонено брокером"""
+        CAUSE_REJECTED_BY_EXCHANGE: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 5
+        """Отклонено биржей"""
+        CAUSE_CANCELLED_BY_BROKER: OrderStateStreamResponse._StatusCauseInfo.ValueType  # 6
+        """Отменено брокером"""
+
+    class StatusCauseInfo(_StatusCauseInfo, metaclass=_StatusCauseInfoEnumTypeWrapper):
+        """Дополнительная информация по статусу заявки"""
+
+    CAUSE_UNSPECIFIED: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 0
+    """Не определено"""
+    CAUSE_CANCELLED_BY_CLIENT: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 15
+    """Отменено клиентом"""
+    CAUSE_CANCELLED_BY_EXCHANGE: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 1
+    """Отменено биржей"""
+    CAUSE_CANCELLED_NOT_ENOUGH_POSITION: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 2
+    """Заявка не выставлена из-за нехватки средств"""
+    CAUSE_CANCELLED_BY_CLIENT_BLOCK: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 3
+    """Отменено из-за блокировки клиента"""
+    CAUSE_REJECTED_BY_BROKER: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 4
+    """Отклонено брокером"""
+    CAUSE_REJECTED_BY_EXCHANGE: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 5
+    """Отклонено биржей"""
+    CAUSE_CANCELLED_BY_BROKER: OrderStateStreamResponse.StatusCauseInfo.ValueType  # 6
+    """Отменено брокером"""
+
+    @typing_extensions.final
+    class SubscriptionResponse(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        class _SubscriptionStatus:
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
+
+        class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+            SUBSCRIPTION_STATUS_UNSPECIFIED: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 0
+            """Статус подписки не определен."""
+            SUBSCRIPTION_STATUS_OK: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 1
+            """Подписка успешно установлена."""
+            SUBSCRIPTION_STATUS_ERROR: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 13
+            """Ошибка подписки"""
+
+        class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper): ...
+        SUBSCRIPTION_STATUS_UNSPECIFIED: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 0
+        """Статус подписки не определен."""
+        SUBSCRIPTION_STATUS_OK: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 1
+        """Подписка успешно установлена."""
+        SUBSCRIPTION_STATUS_ERROR: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 13
+        """Ошибка подписки"""
+
+        @typing_extensions.final
+        class ErrorDetail(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            CODE_FIELD_NUMBER: builtins.int
+            MESSAGE_FIELD_NUMBER: builtins.int
+            code: builtins.str
+            """Код ошибки."""
+            message: builtins.str
+            """Описание ошибки."""
+            def __init__(
+                self,
+                *,
+                code: builtins.str = ...,
+                message: builtins.str = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["code", b"code", "message", b"message"]) -> None: ...
+
+        TRACKING_ID_FIELD_NUMBER: builtins.int
+        STATUS_FIELD_NUMBER: builtins.int
+        STREAM_ID_FIELD_NUMBER: builtins.int
+        ACCOUNTS_FIELD_NUMBER: builtins.int
+        ERROR_FIELD_NUMBER: builtins.int
+        tracking_id: builtins.str
+        """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
+        status: global___OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType
+        """Статус подписки."""
+        stream_id: builtins.str
+        """Идентификатор открытого соединения"""
+        @property
+        def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Идентификаторы счетов."""
+        @property
+        def error(self) -> global___OrderStateStreamResponse.SubscriptionResponse.ErrorDetail: ...
+        def __init__(
+            self,
+            *,
+            tracking_id: builtins.str = ...,
+            status: global___OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType = ...,
+            stream_id: builtins.str = ...,
+            accounts: collections.abc.Iterable[builtins.str] | None = ...,
+            error: global___OrderStateStreamResponse.SubscriptionResponse.ErrorDetail | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["_error", b"_error", "error", b"error"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["_error", b"_error", "accounts", b"accounts", "error", b"error", "status", b"status", "stream_id", b"stream_id", "tracking_id", b"tracking_id"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_error", b"_error"]) -> typing_extensions.Literal["error"] | None: ...
+
+    @typing_extensions.final
+    class OrderState(google.protobuf.message.Message):
+        """Заявка"""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ORDER_ID_FIELD_NUMBER: builtins.int
+        ORDER_REQUEST_ID_FIELD_NUMBER: builtins.int
+        CLIENT_CODE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        EXECUTION_REPORT_STATUS_FIELD_NUMBER: builtins.int
+        STATUS_INFO_FIELD_NUMBER: builtins.int
+        TICKER_FIELD_NUMBER: builtins.int
+        CLASS_CODE_FIELD_NUMBER: builtins.int
+        LOT_SIZE_FIELD_NUMBER: builtins.int
+        DIRECTION_FIELD_NUMBER: builtins.int
+        TIME_IN_FORCE_FIELD_NUMBER: builtins.int
+        ORDER_TYPE_FIELD_NUMBER: builtins.int
+        ACCOUNT_ID_FIELD_NUMBER: builtins.int
+        INITIAL_ORDER_PRICE_FIELD_NUMBER: builtins.int
+        ORDER_PRICE_FIELD_NUMBER: builtins.int
+        AMOUNT_FIELD_NUMBER: builtins.int
+        EXECUTED_ORDER_PRICE_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        LOTS_REQUESTED_FIELD_NUMBER: builtins.int
+        LOTS_EXECUTED_FIELD_NUMBER: builtins.int
+        LOTS_LEFT_FIELD_NUMBER: builtins.int
+        LOTS_CANCELLED_FIELD_NUMBER: builtins.int
+        MARKER_FIELD_NUMBER: builtins.int
+        TRADES_FIELD_NUMBER: builtins.int
+        COMPLETION_TIME_FIELD_NUMBER: builtins.int
+        EXCHANGE_FIELD_NUMBER: builtins.int
+        INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+        order_id: builtins.str
+        """Биржевой идентификатор заявки"""
+        order_request_id: builtins.str
+        """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
+        client_code: builtins.str
+        """Код клиента на бирже"""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата создания заявки"""
+        execution_report_status: global___OrderExecutionReportStatus.ValueType
+        """Статус заявки"""
+        status_info: global___OrderStateStreamResponse.StatusCauseInfo.ValueType
+        """Дополнительная информация по статусу"""
+        ticker: builtins.str
+        """Тикер инструмента"""
+        class_code: builtins.str
+        """Класс-код (секция торгов)"""
+        lot_size: builtins.int
+        """Лотность инструмента заявки"""
+        direction: global___OrderDirection.ValueType
+        """Направление заявки"""
+        time_in_force: global___TimeInForceType.ValueType
+        """Алгоритм исполнения поручения"""
+        order_type: global___OrderType.ValueType
+        """Тип заявки"""
+        account_id: builtins.str
+        """Номер счета"""
+        @property
+        def initial_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Начальная цена заявки"""
+        @property
+        def order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Цена выставления заявки"""
+        @property
+        def amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Предрассчитанная стоимость полной заявки"""
+        @property
+        def executed_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+            """Исполненная средняя цена одного инструмента в заявке"""
+        currency: builtins.str
+        """Валюта исполнения"""
+        lots_requested: builtins.int
+        """Запрошено лотов"""
+        lots_executed: builtins.int
+        """Исполнено лотов"""
+        lots_left: builtins.int
+        """Число неисполненных лотов по заявке"""
+        lots_cancelled: builtins.int
+        """Отмененные лоты"""
+        marker: global___OrderStateStreamResponse.MarkerType.ValueType
+        """Спецсимвол"""
+        @property
+        def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderTrade]:
+            """	Список сделок"""
+        @property
+        def completion_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Время исполнения заявки"""
+        exchange: builtins.str
+        """Код биржи"""
+        instrument_uid: builtins.str
+        """UID идентификатор инструмента"""
+        def __init__(
+            self,
+            *,
+            order_id: builtins.str = ...,
+            order_request_id: builtins.str | None = ...,
+            client_code: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            execution_report_status: global___OrderExecutionReportStatus.ValueType = ...,
+            status_info: global___OrderStateStreamResponse.StatusCauseInfo.ValueType | None = ...,
+            ticker: builtins.str = ...,
+            class_code: builtins.str = ...,
+            lot_size: builtins.int = ...,
+            direction: global___OrderDirection.ValueType = ...,
+            time_in_force: global___TimeInForceType.ValueType = ...,
+            order_type: global___OrderType.ValueType = ...,
+            account_id: builtins.str = ...,
+            initial_order_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            order_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            amount: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            executed_order_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+            currency: builtins.str = ...,
+            lots_requested: builtins.int = ...,
+            lots_executed: builtins.int = ...,
+            lots_left: builtins.int = ...,
+            lots_cancelled: builtins.int = ...,
+            marker: global___OrderStateStreamResponse.MarkerType.ValueType | None = ...,
+            trades: collections.abc.Iterable[global___OrderTrade] | None = ...,
+            completion_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            exchange: builtins.str = ...,
+            instrument_uid: builtins.str = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["_amount", b"_amount", "_marker", b"_marker", "_order_request_id", b"_order_request_id", "_status_info", b"_status_info", "amount", b"amount", "completion_time", b"completion_time", "created_at", b"created_at", "executed_order_price", b"executed_order_price", "initial_order_price", b"initial_order_price", "marker", b"marker", "order_price", b"order_price", "order_request_id", b"order_request_id", "status_info", b"status_info"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["_amount", b"_amount", "_marker", b"_marker", "_order_request_id", b"_order_request_id", "_status_info", b"_status_info", "account_id", b"account_id", "amount", b"amount", "class_code", b"class_code", "client_code", b"client_code", "completion_time", b"completion_time", "created_at", b"created_at", "currency", b"currency", "direction", b"direction", "exchange", b"exchange", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "initial_order_price", b"initial_order_price", "instrument_uid", b"instrument_uid", "lot_size", b"lot_size", "lots_cancelled", b"lots_cancelled", "lots_executed", b"lots_executed", "lots_left", b"lots_left", "lots_requested", b"lots_requested", "marker", b"marker", "order_id", b"order_id", "order_price", b"order_price", "order_request_id", b"order_request_id", "order_type", b"order_type", "status_info", b"status_info", "ticker", b"ticker", "time_in_force", b"time_in_force", "trades", b"trades"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_amount", b"_amount"]) -> typing_extensions.Literal["amount"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_marker", b"_marker"]) -> typing_extensions.Literal["marker"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_order_request_id", b"_order_request_id"]) -> typing_extensions.Literal["order_request_id"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["_status_info", b"_status_info"]) -> typing_extensions.Literal["status_info"] | None: ...
+
+    ORDER_STATE_FIELD_NUMBER: builtins.int
+    PING_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_FIELD_NUMBER: builtins.int
+    @property
+    def order_state(self) -> global___OrderStateStreamResponse.OrderState:
+        """Информация об исполнении торгового поручения."""
+    @property
+    def ping(self) -> tinkoff.invest.grpc.common_pb2.Ping:
+        """Проверка активности стрима."""
+    @property
+    def subscription(self) -> global___OrderStateStreamResponse.SubscriptionResponse:
+        """Ответ на запрос на подписку."""
+    def __init__(
+        self,
+        *,
+        order_state: global___OrderStateStreamResponse.OrderState | None = ...,
+        ping: tinkoff.invest.grpc.common_pb2.Ping | None = ...,
+        subscription: global___OrderStateStreamResponse.SubscriptionResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["order_state", b"order_state", "payload", b"payload", "ping", b"ping", "subscription", b"subscription"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["order_state", b"order_state", "payload", b"payload", "ping", b"ping", "subscription", b"subscription"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload", b"payload"]) -> typing_extensions.Literal["order_state", "ping", "subscription"] | None: ...
+
+global___OrderStateStreamResponse = OrderStateStreamResponse

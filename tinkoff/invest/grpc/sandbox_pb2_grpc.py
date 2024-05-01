@@ -11,7 +11,7 @@ from tinkoff.invest.grpc import (
 
 
 class SandboxServiceStub(object):
-    """Сервис для работы с песочницей TINKOFF INVEST API
+    """Методы для работы с песочницей Tinkoff Invest API
     """
 
     def __init__(self, channel):
@@ -90,105 +90,117 @@ class SandboxServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
                 )
+        self.GetSandboxMaxLots = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxMaxLots',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
+                )
 
 
 class SandboxServiceServicer(object):
-    """Сервис для работы с песочницей TINKOFF INVEST API
+    """Методы для работы с песочницей Tinkoff Invest API
     """
 
     def OpenSandboxAccount(self, request, context):
-        """Метод регистрации счёта в песочнице.
+        """Зарегистрировать счёт.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxAccounts(self, request, context):
-        """Метод получения счетов в песочнице.
+        """Получить счета.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CloseSandboxAccount(self, request, context):
-        """Метод закрытия счёта в песочнице.
+        """Закрыть счёт.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def PostSandboxOrder(self, request, context):
-        """Метод выставления торгового поручения в песочнице.
+        """Выставить торговое поручение.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ReplaceSandboxOrder(self, request, context):
-        """Метод изменения выставленной заявки.
+        """Изменить выставленную заявку.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrders(self, request, context):
-        """Метод получения списка активных заявок по счёту в песочнице.
+        """Получить список активных заявок по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CancelSandboxOrder(self, request, context):
-        """Метод отмены торгового поручения в песочнице.
+        """Отменить торговое поручение.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrderState(self, request, context):
-        """Метод получения статуса заявки в песочнице. Заявки хранятся в таблице 7 дней.
+        """Поулчить статус заявки в песочнице. Заявки хранятся в таблице 7 дней.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxPositions(self, request, context):
-        """Метод получения позиций по виртуальному счёту песочницы.
+        """Получить позиции по виртуальному счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOperations(self, request, context):
-        """Метод получения операций в песочнице по номеру счёта.
+        """Получить операции по номеру счёта.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOperationsByCursor(self, request, context):
-        """Метод получения операций в песочнице по номеру счета с пагинацией.
+        """Получить операции по номеру счёта с пагинацией.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxPortfolio(self, request, context):
-        """Метод получения портфолио в песочнице.
+        """Получить портфель.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SandboxPayIn(self, request, context):
-        """Метод пополнения счёта в песочнице.
+        """Пополнить счёт.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxWithdrawLimits(self, request, context):
-        """Метод получения доступного остатка для вывода средств в песочнице.
+        """Получить доступный остаток для вывода средств.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSandboxMaxLots(self, request, context):
+        """Расчёт количества доступных для покупки/продажи лотов в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -267,6 +279,11 @@ def add_SandboxServiceServicer_to_server(servicer, server):
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.SerializeToString,
             ),
+            'GetSandboxMaxLots': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSandboxMaxLots,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'tinkoff.public.invest.api.contract.v1.SandboxService', rpc_method_handlers)
@@ -275,7 +292,7 @@ def add_SandboxServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class SandboxService(object):
-    """Сервис для работы с песочницей TINKOFF INVEST API
+    """Методы для работы с песочницей Tinkoff Invest API
     """
 
     @staticmethod
@@ -513,5 +530,22 @@ class SandboxService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxWithdrawLimits',
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSandboxMaxLots(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxMaxLots',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

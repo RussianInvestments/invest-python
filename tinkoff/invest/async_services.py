@@ -131,6 +131,7 @@ from .schemas import (
     IndicativesRequest,
     IndicativesResponse,
     InstrumentClosePriceRequest,
+    InstrumentExchangeType,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -149,6 +150,8 @@ from .schemas import (
     OptionsResponse,
     OrderDirection,
     OrderState,
+    OrderStateStreamRequest,
+    OrderStateStreamResponse,
     OrderType,
     Page,
     PortfolioRequest,
@@ -328,10 +331,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("Bonds")
     async def bonds(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> BondsResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Bonds(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -366,10 +373,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("Currencies")
     async def currencies(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> CurrenciesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Currencies(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -404,10 +415,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("Etfs")
     async def etfs(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> EtfsResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Etfs(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -442,10 +457,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("Futures")
     async def futures(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> FuturesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Futures(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -536,10 +555,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("Shares")
     async def shares(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> SharesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Shares(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -1303,6 +1326,20 @@ class OrdersStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, TradesStreamResponse)
+
+    @handle_aio_request_error_gen("OrderStateStream")
+    async def order_state_stream(
+        self, *, request: OrderStateStreamRequest
+    ) -> AsyncIterable[OrderStateStreamResponse]:
+        async for response in self.stub.OrderStateStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.OrderStateStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(
+                response, OrderStateStreamResponse
+            )
 
 
 class OrdersService(_grpc_helpers.Service):

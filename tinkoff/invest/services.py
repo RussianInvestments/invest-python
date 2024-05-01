@@ -129,6 +129,7 @@ from .schemas import (
     IndicativesRequest,
     IndicativesResponse,
     InstrumentClosePriceRequest,
+    InstrumentExchangeType,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -148,6 +149,8 @@ from .schemas import (
     OptionsResponse,
     OrderDirection,
     OrderState,
+    OrderStateStreamRequest,
+    OrderStateStreamResponse,
     OrderType,
     Page,
     PortfolioRequest,
@@ -325,10 +328,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_request_error("Bonds")
     def bonds(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> BondsResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Bonds.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -361,10 +368,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_request_error("Currencies")
     def currencies(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> CurrenciesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Currencies.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -397,10 +408,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_request_error("Etfs")
     def etfs(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> EtfsResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Etfs.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -433,10 +448,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_request_error("Futures")
     def futures(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> FuturesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Futures.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -470,10 +489,14 @@ class InstrumentsService(_grpc_helpers.Service):
     @deprecated(details="Use `Client.instruments.options_by(...)` method instead")
     @handle_request_error("Options")
     def options(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> OptionsResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Options.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -522,10 +545,14 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_request_error("Shares")
     def shares(
-        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+        self,
+        *,
+        instrument_status: InstrumentStatus = InstrumentStatus(0),
+        instrument_exchange: InstrumentExchangeType = InstrumentExchangeType(0),
     ) -> SharesResponse:
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
+        request.instrument_exchange = instrument_exchange
         response, call = self.stub.Shares.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.InstrumentsRequest()
@@ -1263,6 +1290,20 @@ class OrdersStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, TradesStreamResponse)
+
+    @handle_request_error_gen("OrderStateStream")
+    def order_state_stream(
+        self, *, request: OrderStateStreamRequest
+    ) -> Iterable[OrderStateStreamResponse]:
+        for response in self.stub.OrderStateStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.OrderStateStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(
+                response, OrderStateStreamResponse
+            )
 
 
 class OrdersService(_grpc_helpers.Service):
