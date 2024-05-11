@@ -1804,6 +1804,22 @@ class SandboxService(_grpc_helpers.Service):
         )
         return _grpc_helpers.protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
+    @handle_aio_request_error("GetSandboxMaxLots")
+    async def get_sandbox_max_lots(
+        self,
+        *,
+        request: GetMaxLotsRequest,
+    ) -> GetMaxLotsResponse:
+        response_coro = self.stub.GetSandboxMaxLots(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetMaxLotsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetSandboxMaxLots")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetMaxLotsResponse)
+
 
 class StopOrdersService(_grpc_helpers.Service):
     _stub_factory = stoporders_pb2_grpc.StopOrdersServiceStub
