@@ -6,8 +6,8 @@ from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_use
 
 
 class UsersServiceStub(object):
-    """Сервис предназначен для получения: </br> **1**.
-    списка счетов пользователя; </br> **2**. маржинальных показателей по счёту.
+    """С помощью сервиса можно получить: </br> 1.
+    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
     """
 
     def __init__(self, channel):
@@ -39,33 +39,33 @@ class UsersServiceStub(object):
 
 
 class UsersServiceServicer(object):
-    """Сервис предназначен для получения: </br> **1**.
-    списка счетов пользователя; </br> **2**. маржинальных показателей по счёту.
+    """С помощью сервиса можно получить: </br> 1.
+    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
     """
 
     def GetAccounts(self, request, context):
-        """Метод получения счетов пользователя.
+        """Получить счета пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetMarginAttributes(self, request, context):
-        """Расчёт маржинальных показателей по счёту.
+        """Рассчитать маржинальные показатели по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserTariff(self, request, context):
-        """Запрос тарифа пользователя.
+        """Запросить тариф пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInfo(self, request, context):
-        """Метод получения информации о пользователе.
+        """Получить информацию о пользователе.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -102,8 +102,8 @@ def add_UsersServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class UsersService(object):
-    """Сервис предназначен для получения: </br> **1**.
-    списка счетов пользователя; </br> **2**. маржинальных показателей по счёту.
+    """С помощью сервиса можно получить: </br> 1.
+    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
     """
 
     @staticmethod

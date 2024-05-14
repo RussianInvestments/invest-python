@@ -1074,45 +1074,6 @@ class OrderStateStreamResponse(google.protobuf.message.Message):
     class SubscriptionResponse(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        class _SubscriptionStatus:
-            ValueType = typing.NewType("ValueType", builtins.int)
-            V: typing_extensions.TypeAlias = ValueType
-
-        class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType], builtins.type):
-            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-            SUBSCRIPTION_STATUS_UNSPECIFIED: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 0
-            """Статус подписки не определен."""
-            SUBSCRIPTION_STATUS_OK: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 1
-            """Подписка успешно установлена."""
-            SUBSCRIPTION_STATUS_ERROR: OrderStateStreamResponse.SubscriptionResponse._SubscriptionStatus.ValueType  # 13
-            """Ошибка подписки"""
-
-        class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper): ...
-        SUBSCRIPTION_STATUS_UNSPECIFIED: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 0
-        """Статус подписки не определен."""
-        SUBSCRIPTION_STATUS_OK: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 1
-        """Подписка успешно установлена."""
-        SUBSCRIPTION_STATUS_ERROR: OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType  # 13
-        """Ошибка подписки"""
-
-        @typing_extensions.final
-        class ErrorDetail(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-            CODE_FIELD_NUMBER: builtins.int
-            MESSAGE_FIELD_NUMBER: builtins.int
-            code: builtins.str
-            """Код ошибки."""
-            message: builtins.str
-            """Описание ошибки."""
-            def __init__(
-                self,
-                *,
-                code: builtins.str = ...,
-                message: builtins.str = ...,
-            ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["code", b"code", "message", b"message"]) -> None: ...
-
         TRACKING_ID_FIELD_NUMBER: builtins.int
         STATUS_FIELD_NUMBER: builtins.int
         STREAM_ID_FIELD_NUMBER: builtins.int
@@ -1120,7 +1081,7 @@ class OrderStateStreamResponse(google.protobuf.message.Message):
         ERROR_FIELD_NUMBER: builtins.int
         tracking_id: builtins.str
         """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
-        status: global___OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType
+        status: tinkoff.invest.grpc.common_pb2.ResultSubscriptionStatus.ValueType
         """Статус подписки."""
         stream_id: builtins.str
         """Идентификатор открытого соединения"""
@@ -1128,15 +1089,15 @@ class OrderStateStreamResponse(google.protobuf.message.Message):
         def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """Идентификаторы счетов."""
         @property
-        def error(self) -> global___OrderStateStreamResponse.SubscriptionResponse.ErrorDetail: ...
+        def error(self) -> tinkoff.invest.grpc.common_pb2.ErrorDetail: ...
         def __init__(
             self,
             *,
             tracking_id: builtins.str = ...,
-            status: global___OrderStateStreamResponse.SubscriptionResponse.SubscriptionStatus.ValueType = ...,
+            status: tinkoff.invest.grpc.common_pb2.ResultSubscriptionStatus.ValueType = ...,
             stream_id: builtins.str = ...,
             accounts: collections.abc.Iterable[builtins.str] | None = ...,
-            error: global___OrderStateStreamResponse.SubscriptionResponse.ErrorDetail | None = ...,
+            error: tinkoff.invest.grpc.common_pb2.ErrorDetail | None = ...,
         ) -> None: ...
         def HasField(self, field_name: typing_extensions.Literal["_error", b"_error", "error", b"error"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["_error", b"_error", "accounts", b"accounts", "error", b"error", "status", b"status", "stream_id", b"stream_id", "tracking_id", b"tracking_id"]) -> None: ...

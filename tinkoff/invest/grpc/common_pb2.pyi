@@ -78,77 +78,77 @@ class _SecurityTradingStatus:
 class _SecurityTradingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SecurityTradingStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SECURITY_TRADING_STATUS_UNSPECIFIED: _SecurityTradingStatus.ValueType  # 0
-    """Торговый статус не определён"""
+    """Торговый статус не определён."""
     SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING: _SecurityTradingStatus.ValueType  # 1
-    """Недоступен для торгов"""
+    """Недоступен для торгов."""
     SECURITY_TRADING_STATUS_OPENING_PERIOD: _SecurityTradingStatus.ValueType  # 2
-    """Период открытия торгов"""
+    """Период открытия торгов."""
     SECURITY_TRADING_STATUS_CLOSING_PERIOD: _SecurityTradingStatus.ValueType  # 3
-    """Период закрытия торгов"""
+    """Период закрытия торгов."""
     SECURITY_TRADING_STATUS_BREAK_IN_TRADING: _SecurityTradingStatus.ValueType  # 4
-    """Перерыв в торговле"""
+    """Перерыв в торговле."""
     SECURITY_TRADING_STATUS_NORMAL_TRADING: _SecurityTradingStatus.ValueType  # 5
-    """Нормальная торговля"""
+    """Нормальная торговля."""
     SECURITY_TRADING_STATUS_CLOSING_AUCTION: _SecurityTradingStatus.ValueType  # 6
-    """Аукцион закрытия"""
+    """Аукцион закрытия."""
     SECURITY_TRADING_STATUS_DARK_POOL_AUCTION: _SecurityTradingStatus.ValueType  # 7
-    """Аукцион крупных пакетов"""
+    """Аукцион крупных пакетов."""
     SECURITY_TRADING_STATUS_DISCRETE_AUCTION: _SecurityTradingStatus.ValueType  # 8
-    """Дискретный аукцион"""
+    """Дискретный аукцион."""
     SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD: _SecurityTradingStatus.ValueType  # 9
-    """Аукцион открытия"""
+    """Аукцион открытия."""
     SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE: _SecurityTradingStatus.ValueType  # 10
-    """Период торгов по цене аукциона закрытия"""
+    """Период торгов по цене аукциона закрытия."""
     SECURITY_TRADING_STATUS_SESSION_ASSIGNED: _SecurityTradingStatus.ValueType  # 11
-    """Сессия назначена"""
+    """Сессия назначена."""
     SECURITY_TRADING_STATUS_SESSION_CLOSE: _SecurityTradingStatus.ValueType  # 12
-    """Сессия закрыта"""
+    """Сессия закрыта."""
     SECURITY_TRADING_STATUS_SESSION_OPEN: _SecurityTradingStatus.ValueType  # 13
-    """Сессия открыта"""
+    """Сессия открыта."""
     SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING: _SecurityTradingStatus.ValueType  # 14
-    """Доступна торговля в режиме внутренней ликвидности брокера"""
+    """Доступна торговля в режиме внутренней ликвидности брокера."""
     SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING: _SecurityTradingStatus.ValueType  # 15
-    """Перерыв торговли в режиме внутренней ликвидности брокера"""
+    """Перерыв торговли в режиме внутренней ликвидности брокера."""
     SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING: _SecurityTradingStatus.ValueType  # 16
-    """Недоступна торговля в режиме внутренней ликвидности брокера"""
+    """Недоступна торговля в режиме внутренней ликвидности брокера."""
 
 class SecurityTradingStatus(_SecurityTradingStatus, metaclass=_SecurityTradingStatusEnumTypeWrapper):
     """Режим торгов инструмента"""
 
 SECURITY_TRADING_STATUS_UNSPECIFIED: SecurityTradingStatus.ValueType  # 0
-"""Торговый статус не определён"""
+"""Торговый статус не определён."""
 SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.ValueType  # 1
-"""Недоступен для торгов"""
+"""Недоступен для торгов."""
 SECURITY_TRADING_STATUS_OPENING_PERIOD: SecurityTradingStatus.ValueType  # 2
-"""Период открытия торгов"""
+"""Период открытия торгов."""
 SECURITY_TRADING_STATUS_CLOSING_PERIOD: SecurityTradingStatus.ValueType  # 3
-"""Период закрытия торгов"""
+"""Период закрытия торгов."""
 SECURITY_TRADING_STATUS_BREAK_IN_TRADING: SecurityTradingStatus.ValueType  # 4
-"""Перерыв в торговле"""
+"""Перерыв в торговле."""
 SECURITY_TRADING_STATUS_NORMAL_TRADING: SecurityTradingStatus.ValueType  # 5
-"""Нормальная торговля"""
+"""Нормальная торговля."""
 SECURITY_TRADING_STATUS_CLOSING_AUCTION: SecurityTradingStatus.ValueType  # 6
-"""Аукцион закрытия"""
+"""Аукцион закрытия."""
 SECURITY_TRADING_STATUS_DARK_POOL_AUCTION: SecurityTradingStatus.ValueType  # 7
-"""Аукцион крупных пакетов"""
+"""Аукцион крупных пакетов."""
 SECURITY_TRADING_STATUS_DISCRETE_AUCTION: SecurityTradingStatus.ValueType  # 8
-"""Дискретный аукцион"""
+"""Дискретный аукцион."""
 SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD: SecurityTradingStatus.ValueType  # 9
-"""Аукцион открытия"""
+"""Аукцион открытия."""
 SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE: SecurityTradingStatus.ValueType  # 10
-"""Период торгов по цене аукциона закрытия"""
+"""Период торгов по цене аукциона закрытия."""
 SECURITY_TRADING_STATUS_SESSION_ASSIGNED: SecurityTradingStatus.ValueType  # 11
-"""Сессия назначена"""
+"""Сессия назначена."""
 SECURITY_TRADING_STATUS_SESSION_CLOSE: SecurityTradingStatus.ValueType  # 12
-"""Сессия закрыта"""
+"""Сессия закрыта."""
 SECURITY_TRADING_STATUS_SESSION_OPEN: SecurityTradingStatus.ValueType  # 13
-"""Сессия открыта"""
+"""Сессия открыта."""
 SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING: SecurityTradingStatus.ValueType  # 14
-"""Доступна торговля в режиме внутренней ликвидности брокера"""
+"""Доступна торговля в режиме внутренней ликвидности брокера."""
 SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING: SecurityTradingStatus.ValueType  # 15
-"""Перерыв торговли в режиме внутренней ликвидности брокера"""
+"""Перерыв торговли в режиме внутренней ликвидности брокера."""
 SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.ValueType  # 16
-"""Недоступна торговля в режиме внутренней ликвидности брокера"""
+"""Недоступна торговля в режиме внутренней ликвидности брокера."""
 global___SecurityTradingStatus = SecurityTradingStatus
 
 class _PriceType:
@@ -175,9 +175,32 @@ PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
 """Цена в валюте расчётов по инструменту."""
 global___PriceType = PriceType
 
+class _ResultSubscriptionStatus:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ResultSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ResultSubscriptionStatus.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RESULT_SUBSCRIPTION_STATUS_UNSPECIFIED: _ResultSubscriptionStatus.ValueType  # 0
+    """Статус подписки не определен."""
+    RESULT_SUBSCRIPTION_STATUS_OK: _ResultSubscriptionStatus.ValueType  # 1
+    """Подписка успешно установлена."""
+    RESULT_SUBSCRIPTION_STATUS_ERROR: _ResultSubscriptionStatus.ValueType  # 13
+    """Ошибка подписки"""
+
+class ResultSubscriptionStatus(_ResultSubscriptionStatus, metaclass=_ResultSubscriptionStatusEnumTypeWrapper): ...
+
+RESULT_SUBSCRIPTION_STATUS_UNSPECIFIED: ResultSubscriptionStatus.ValueType  # 0
+"""Статус подписки не определен."""
+RESULT_SUBSCRIPTION_STATUS_OK: ResultSubscriptionStatus.ValueType  # 1
+"""Подписка успешно установлена."""
+RESULT_SUBSCRIPTION_STATUS_ERROR: ResultSubscriptionStatus.ValueType  # 13
+"""Ошибка подписки"""
+global___ResultSubscriptionStatus = ResultSubscriptionStatus
+
 @typing_extensions.final
 class MoneyValue(google.protobuf.message.Message):
-    """Денежная сумма в определенной валюте"""
+    """Денежная сумма в определённой валюте."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -185,11 +208,11 @@ class MoneyValue(google.protobuf.message.Message):
     UNITS_FIELD_NUMBER: builtins.int
     NANO_FIELD_NUMBER: builtins.int
     currency: builtins.str
-    """строковый ISO-код валюты"""
+    """Строковый ISO-код валюты."""
     units: builtins.int
-    """целая часть суммы, может быть отрицательным числом"""
+    """Целая часть суммы, может быть отрицательным числом."""
     nano: builtins.int
-    """дробная часть суммы, может быть отрицательным числом"""
+    """Дробная часть суммы, может быть отрицательным числом."""
     def __init__(
         self,
         *,
@@ -203,16 +226,16 @@ global___MoneyValue = MoneyValue
 
 @typing_extensions.final
 class Quotation(google.protobuf.message.Message):
-    """Котировка — денежная сумма без указания валюты"""
+    """Котировка — денежная сумма без указания валюты."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     UNITS_FIELD_NUMBER: builtins.int
     NANO_FIELD_NUMBER: builtins.int
     units: builtins.int
-    """целая часть суммы, может быть отрицательным числом"""
+    """Целая часть суммы, может быть отрицательным числом."""
     nano: builtins.int
-    """дробная часть суммы, может быть отрицательным числом"""
+    """Дробная часть суммы, может быть отрицательным числом."""
     def __init__(
         self,
         *,
@@ -235,7 +258,7 @@ class Ping(google.protobuf.message.Message):
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время проверки."""
     stream_id: builtins.str
-    """Идентификатор соединения"""
+    """Идентификатор соединения."""
     def __init__(
         self,
         *,
@@ -298,10 +321,10 @@ class ResponseMetadata(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     SERVER_TIME_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Идентификатор трекинга"""
+    """Идентификатор трекинга."""
     @property
     def server_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Серверное время"""
+        """Серверное время."""
     def __init__(
         self,
         *,
@@ -336,3 +359,23 @@ class BrandData(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["logo_base_color", b"logo_base_color", "logo_name", b"logo_name", "text_color", b"text_color"]) -> None: ...
 
 global___BrandData = BrandData
+
+@typing_extensions.final
+class ErrorDetail(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CODE_FIELD_NUMBER: builtins.int
+    MESSAGE_FIELD_NUMBER: builtins.int
+    code: builtins.str
+    """Код ошибки."""
+    message: builtins.str
+    """Описание ошибки."""
+    def __init__(
+        self,
+        *,
+        code: builtins.str = ...,
+        message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code", b"code", "message", b"message"]) -> None: ...
+
+global___ErrorDetail = ErrorDetail
