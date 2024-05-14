@@ -152,6 +152,7 @@ class AccountType(_grpc_helpers.Enum):
     ACCOUNT_TYPE_TINKOFF = 1
     ACCOUNT_TYPE_TINKOFF_IIS = 2
     ACCOUNT_TYPE_INVEST_BOX = 3
+    ACCOUNT_TYPE_INVEST_FUND = 4
 
 
 class AccountStatus(_grpc_helpers.Enum):

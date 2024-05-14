@@ -31,9 +31,11 @@ class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     ACCOUNT_TYPE_TINKOFF: _AccountType.ValueType  # 1
     """Брокерский счёт Тинькофф."""
     ACCOUNT_TYPE_TINKOFF_IIS: _AccountType.ValueType  # 2
-    """ИИС счёт."""
+    """ИИС."""
     ACCOUNT_TYPE_INVEST_BOX: _AccountType.ValueType  # 3
     """Инвесткопилка."""
+    ACCOUNT_TYPE_INVEST_FUND: _AccountType.ValueType  # 4
+    """Фонд денежного рынка."""
 
 class AccountType(_AccountType, metaclass=_AccountTypeEnumTypeWrapper):
     """Тип счёта."""
@@ -43,9 +45,11 @@ ACCOUNT_TYPE_UNSPECIFIED: AccountType.ValueType  # 0
 ACCOUNT_TYPE_TINKOFF: AccountType.ValueType  # 1
 """Брокерский счёт Тинькофф."""
 ACCOUNT_TYPE_TINKOFF_IIS: AccountType.ValueType  # 2
-"""ИИС счёт."""
+"""ИИС."""
 ACCOUNT_TYPE_INVEST_BOX: AccountType.ValueType  # 3
 """Инвесткопилка."""
+ACCOUNT_TYPE_INVEST_FUND: AccountType.ValueType  # 4
+"""Фонд денежного рынка."""
 global___AccountType = AccountType
 
 class _AccountStatus:
@@ -87,9 +91,9 @@ class _AccessLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     ACCOUNT_ACCESS_LEVEL_FULL_ACCESS: _AccessLevel.ValueType  # 1
     """Полный доступ к счёту."""
     ACCOUNT_ACCESS_LEVEL_READ_ONLY: _AccessLevel.ValueType  # 2
-    """Доступ с уровнем прав "только чтение"."""
+    """Доступ с уровнем прав «только чтение»."""
     ACCOUNT_ACCESS_LEVEL_NO_ACCESS: _AccessLevel.ValueType  # 3
-    """Доступ отсутствует."""
+    """Доступа нет."""
 
 class AccessLevel(_AccessLevel, metaclass=_AccessLevelEnumTypeWrapper):
     """Уровень доступа к счёту."""
@@ -99,9 +103,9 @@ ACCOUNT_ACCESS_LEVEL_UNSPECIFIED: AccessLevel.ValueType  # 0
 ACCOUNT_ACCESS_LEVEL_FULL_ACCESS: AccessLevel.ValueType  # 1
 """Полный доступ к счёту."""
 ACCOUNT_ACCESS_LEVEL_READ_ONLY: AccessLevel.ValueType  # 2
-"""Доступ с уровнем прав "только чтение"."""
+"""Доступ с уровнем прав «только чтение»."""
 ACCOUNT_ACCESS_LEVEL_NO_ACCESS: AccessLevel.ValueType  # 3
-"""Доступ отсутствует."""
+"""Доступа нет."""
 global___AccessLevel = AccessLevel
 
 @typing_extensions.final
@@ -182,7 +186,7 @@ global___Account = Account
 
 @typing_extensions.final
 class GetMarginAttributesRequest(google.protobuf.message.Message):
-    """Запрос маржинальных показателей по счёту"""
+    """Запрос маржинальных показателей по счёту."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -212,13 +216,13 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
     CORRECTED_MARGIN_FIELD_NUMBER: builtins.int
     @property
     def liquid_portfolio(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Ликвидная стоимость портфеля. Подробнее: [что такое ликвидный портфель?](https://help.tinkoff.ru/margin-trade/short/liquid-portfolio/)."""
+        """Ликвидная стоимость портфеля. [Подробнее про ликвидный портфель](https://help.tinkoff.ru/margin-trade/short/liquid-portfolio/)."""
     @property
     def starting_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Начальная маржа — начальное обеспечение для совершения новой сделки. Подробнее: [начальная и минимальная маржа](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Начальная маржа — начальное обеспечение для совершения новой сделки. [Подробнее про начальную и минимальную маржу](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
     @property
     def minimal_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. Подробнее: [начальная и минимальная маржа](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. [Подробнее про начальную и минимальную маржу](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
     @property
     def funds_sufficiency_level(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Уровень достаточности средств. Соотношение стоимости ликвидного портфеля к начальной марже."""
@@ -227,7 +231,7 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
         """Объем недостающих средств. Разница между стартовой маржой и ликвидной стоимости портфеля."""
     @property
     def corrected_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Скорректированная маржа.Начальная маржа, в которой плановые позиции рассчитываются с учётом активных заявок на покупку позиций лонг или продажу позиций шорт."""
+        """Скорректированная маржа. Начальная маржа, в которой плановые позиции рассчитываются с учётом активных заявок на покупку позиций лонг или продажу позиций шорт."""
     def __init__(
         self,
         *,
