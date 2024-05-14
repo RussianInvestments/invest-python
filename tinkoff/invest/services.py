@@ -1759,6 +1759,21 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetSandboxWithdrawLimits")
         return _grpc_helpers.protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
+    @handle_request_error("GetSandboxMaxLots")
+    def get_sandbox_max_lots(
+        self,
+        *,
+        request: GetMaxLotsRequest,
+    ) -> GetMaxLotsResponse:
+        response, call = self.stub.GetSandboxMaxLots.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetMaxLotsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetSandboxMaxLots")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetMaxLotsResponse)
+
 
 class StopOrdersService(_grpc_helpers.Service):
     _stub_factory = stoporders_pb2_grpc.StopOrdersServiceStub
