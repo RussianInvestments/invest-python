@@ -440,10 +440,10 @@ class TradeSourceType(_grpc_helpers.Enum):
     TRADE_SOURCE_ALL = 3
 
 
-class OrderStateStreamSubscriptionStatus(_grpc_helpers.Enum):
-    SUBSCRIPTION_STATUS_UNSPECIFIED = 0
-    SUBSCRIPTION_STATUS_OK = 1
-    SUBSCRIPTION_STATUS_ERROR = 13
+class ResultSubscriptionStatus(_grpc_helpers.Enum):
+    RESULT_SUBSCRIPTION_STATUS_UNSPECIFIED = 0
+    RESULT_SUBSCRIPTION_STATUS_OK = 1
+    RESULT_SUBSCRIPTION_STATUS_ERROR = 13
 
 
 class MarkerType(_grpc_helpers.Enum):
@@ -2985,7 +2985,7 @@ class ErrorDetail(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class SubscriptionResponse(_grpc_helpers.Message):
     tracking_id: str = _grpc_helpers.string_field(1)
-    status: OrderStateStreamSubscriptionStatus = _grpc_helpers.message_field(2)
+    status: ResultSubscriptionStatus = _grpc_helpers.message_field(2)
     stream_id: str = _grpc_helpers.message_field(4)
     accounts: List[str] = _grpc_helpers.message_field(5)
     error: Optional[ErrorDetail] = _grpc_helpers.message_field(7)
