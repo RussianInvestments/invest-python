@@ -39,7 +39,7 @@ class OrdersStreamServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def OrderStateStream(self, request, context):
-        """Stream поручений пользователя
+        """Stream поручений пользователя. Перед работой прочитайте [статью](https://russianinvestments.github.io/investAPI/orders_state_stream/).
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
