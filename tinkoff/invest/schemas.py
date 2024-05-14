@@ -243,6 +243,7 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_OVER_COM = 62
     OPERATION_TYPE_OVER_INCOME = 63
     OPERATION_TYPE_OPTION_EXPIRATION = 64
+    OPERATION_TYPE_FUTURE_EXPIRATION = 65
 
 
 class AccessLevel(_grpc_helpers.Enum):

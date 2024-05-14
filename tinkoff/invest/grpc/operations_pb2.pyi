@@ -177,7 +177,9 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_OVER_INCOME: _OperationType.ValueType  # 63
     """ Доход от оверанайта"""
     OPERATION_TYPE_OPTION_EXPIRATION: _OperationType.ValueType  # 64
-    """Экспирация"""
+    """Экспирация опциона"""
+    OPERATION_TYPE_FUTURE_EXPIRATION: _OperationType.ValueType  # 65
+    """Экспирация фьючерса"""
 
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции."""
@@ -305,7 +307,9 @@ OPERATION_TYPE_OVER_COM: OperationType.ValueType  # 62
 OPERATION_TYPE_OVER_INCOME: OperationType.ValueType  # 63
 """ Доход от оверанайта"""
 OPERATION_TYPE_OPTION_EXPIRATION: OperationType.ValueType  # 64
-"""Экспирация"""
+"""Экспирация опциона"""
+OPERATION_TYPE_FUTURE_EXPIRATION: OperationType.ValueType  # 65
+"""Экспирация фьючерса"""
 global___OperationType = OperationType
 
 class _PortfolioSubscriptionStatus:
