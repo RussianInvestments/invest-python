@@ -9,7 +9,7 @@ TOKEN = os.environ["INVEST_TOKEN"]
 def main():
     with Client(TOKEN) as client:
         request = GetAssetFundamentalsRequest(
-            assets=["TCS00A105GE2"],
+            assets=["40d89385-a03a-4659-bf4e-d3ecba011782"],
         )
         print(client.instruments.get_asset_fundamentals(request=request))
 
