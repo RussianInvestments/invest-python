@@ -104,7 +104,7 @@ enum SubscriptionInterval {
   SUBSCRIPTION_INTERVAL_UNSPECIFIED = 0; //Интервал свечи не определён.
   SUBSCRIPTION_INTERVAL_ONE_MINUTE = 1; //Минутные свечи.
   SUBSCRIPTION_INTERVAL_FIVE_MINUTES = 2; //Пятиминутные свечи.
-  SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES = 3; //Пятнадцатиминутные свечи
+  SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES = 3; //Пятнадцатиминутные свечи.
   SUBSCRIPTION_INTERVAL_ONE_HOUR = 4; //Часовые свечи
   SUBSCRIPTION_INTERVAL_ONE_DAY = 5; //Дневные свечи
   SUBSCRIPTION_INTERVAL_2_MIN = 6; //Двухминутные свечи
