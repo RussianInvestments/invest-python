@@ -346,11 +346,12 @@ message GetCandlesRequest {
   google.protobuf.Timestamp to = 3 [(google.api.field_behavior) = REQUIRED]; //Окончание запрашиваемого периода в часовом поясе UTC.
   CandleInterval interval = 4 [(google.api.field_behavior) = REQUIRED]; //Интервал запрошенных свечей.
   optional string instrument_id = 5; //Идентификатор инструмента, принимает значение figi или instrument_uid.
-  optional CandleSource candle_source_type = 7; //Тип источника свечи
+  optional CandleSource candle_source_type = 7; //Тип источника свечи.
 
   enum CandleSource {
     CANDLE_SOURCE_UNSPECIFIED = 0; //Все свечи.
     CANDLE_SOURCE_EXCHANGE = 1;  //Биржевые свечи.
+    CANDLE_SOURCE_INCLUDE_WEEKEND = 3; //Все свечи с учетом торговли по выходным.
   }
 }
 
