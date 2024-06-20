@@ -301,8 +301,8 @@ message OrderBook {
   google.protobuf.Timestamp time = 6; //Время формирования стакана в часовом поясе UTC по времени биржи.
   Quotation limit_up = 7; //Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)
   Quotation limit_down = 8; //Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)
-  string instrument_uid = 9; //Uid инструмента
-  OrderBookType order_book_type = 10; //Тип стакана
+  string instrument_uid = 9; //Uid инструмента.
+  OrderBookType order_book_type = 10; //Тип стакана.
 }
 
 //Массив предложений/спроса.
@@ -318,7 +318,7 @@ message Trade {
   Quotation price = 3; //Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://russianinvestments.github.io/investAPI/faq_marketdata/)
   int64 quantity = 4; //Количество лотов.
   google.protobuf.Timestamp time = 5; //Время сделки в часовом поясе UTC по времени биржи.
-  string instrument_uid = 6; //Uid инструмента
+  string instrument_uid = 6; //Uid инструмента.
   TradeSourceType tradeSource = 7; //Источник сделки
 }
 
@@ -336,7 +336,7 @@ message TradingStatus {
   google.protobuf.Timestamp time = 3; //Время изменения торгового статуса в часовом поясе UTC.
   bool limit_order_available_flag = 4; //Признак доступности выставления лимитной заявки по инструменту.
   bool market_order_available_flag = 5; //Признак доступности выставления рыночной заявки по инструменту.
-  string instrument_uid = 6; //Uid инструмента
+  string instrument_uid = 6; //Uid инструмента.
 }
 
 //Запрос исторических свечей.
@@ -346,7 +346,7 @@ message GetCandlesRequest {
   google.protobuf.Timestamp to = 3 [(google.api.field_behavior) = REQUIRED]; //Окончание запрашиваемого периода в часовом поясе UTC.
   CandleInterval interval = 4 [(google.api.field_behavior) = REQUIRED]; //Интервал запрошенных свечей.
   optional string instrument_id = 5; //Идентификатор инструмента, принимает значение figi или instrument_uid.
-  optional CandleSource candle_source_type = 7; //Тип источника свечи
+  optional CandleSource candle_source_type = 7; //Тип источника свечи.
 
   enum CandleSource {
     CANDLE_SOURCE_UNSPECIFIED = 0; //Все свечи.
