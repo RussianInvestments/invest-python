@@ -351,6 +351,7 @@ message GetCandlesRequest {
   enum CandleSource {
     CANDLE_SOURCE_UNSPECIFIED = 0; //Все свечи.
     CANDLE_SOURCE_EXCHANGE = 1;  //Биржевые свечи.
+    CANDLE_SOURCE_INCLUDE_WEEKEND = 3; //Все свечи с учетом торговли по выходным.
   }
 }
 
