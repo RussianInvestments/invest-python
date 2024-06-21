@@ -290,6 +290,7 @@ class RealExchange(_grpc_helpers.Enum):
     REAL_EXCHANGE_MOEX = 1
     REAL_EXCHANGE_RTS = 2
     REAL_EXCHANGE_OTC = 3
+    REAL_EXCHANGE_DEALER = 4
 
 
 class PortfolioSubscriptionStatus(_grpc_helpers.Enum):
