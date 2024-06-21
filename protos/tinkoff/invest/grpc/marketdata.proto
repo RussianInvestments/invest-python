@@ -104,7 +104,7 @@ enum SubscriptionInterval {
   SUBSCRIPTION_INTERVAL_UNSPECIFIED = 0; //Интервал свечи не определён.
   SUBSCRIPTION_INTERVAL_ONE_MINUTE = 1; //Минутные свечи.
   SUBSCRIPTION_INTERVAL_FIVE_MINUTES = 2; //Пятиминутные свечи.
-  SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES = 3; //Пятнадцатиминутные свечи.
+  SUBSCRIPTION_INTERVAL_FIFTEEN_MINUTES = 3; //Пятнадцатиминутные свечи
   SUBSCRIPTION_INTERVAL_ONE_HOUR = 4; //Часовые свечи
   SUBSCRIPTION_INTERVAL_ONE_DAY = 5; //Дневные свечи
   SUBSCRIPTION_INTERVAL_2_MIN = 6; //Двухминутные свечи
@@ -346,12 +346,11 @@ message GetCandlesRequest {
   google.protobuf.Timestamp to = 3 [(google.api.field_behavior) = REQUIRED]; //Окончание запрашиваемого периода в часовом поясе UTC.
   CandleInterval interval = 4 [(google.api.field_behavior) = REQUIRED]; //Интервал запрошенных свечей.
   optional string instrument_id = 5; //Идентификатор инструмента, принимает значение figi или instrument_uid.
-  optional CandleSource candle_source_type = 7; //Тип источника свечи.
+  optional CandleSource candle_source_type = 7; //Тип источника свечи
 
   enum CandleSource {
     CANDLE_SOURCE_UNSPECIFIED = 0; //Все свечи.
     CANDLE_SOURCE_EXCHANGE = 1;  //Биржевые свечи.
-    CANDLE_SOURCE_INCLUDE_WEEKEND = 3; //Все свечи с учетом торговли по выходным.
   }
 }
 

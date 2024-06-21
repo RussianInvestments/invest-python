@@ -201,7 +201,7 @@ class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INSTRUMENT_STATUS_UNSPECIFIED: _InstrumentStatus.ValueType  # 0
     """Значение не определено."""
     INSTRUMENT_STATUS_BASE: _InstrumentStatus.ValueType  # 1
-    """Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через Tinkoff Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+    """Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
     INSTRUMENT_STATUS_ALL: _InstrumentStatus.ValueType  # 2
     """Список всех инструментов."""
 
@@ -211,7 +211,7 @@ class InstrumentStatus(_InstrumentStatus, metaclass=_InstrumentStatusEnumTypeWra
 INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType  # 0
 """Значение не определено."""
 INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType  # 1
-"""Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через Tinkoff Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+"""Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
 INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType  # 2
 """Список всех инструментов."""
 global___InstrumentStatus = InstrumentStatus
@@ -358,6 +358,8 @@ class _RealExchangeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._E
     """Санкт-Петербургская биржа."""
     REAL_EXCHANGE_OTC: _RealExchange.ValueType  # 3
     """Внебиржевой инструмент."""
+    REAL_EXCHANGE_DEALER: _RealExchange.ValueType  # 4
+    """Инструменты, торгуемые у дилера."""
 
 class RealExchange(_RealExchange, metaclass=_RealExchangeEnumTypeWrapper):
     """Реальная площадка исполнения расчётов."""
@@ -370,6 +372,8 @@ REAL_EXCHANGE_RTS: RealExchange.ValueType  # 2
 """Санкт-Петербургская биржа."""
 REAL_EXCHANGE_OTC: RealExchange.ValueType  # 3
 """Внебиржевой инструмент."""
+REAL_EXCHANGE_DEALER: RealExchange.ValueType  # 4
+"""Инструменты, торгуемые у дилера."""
 global___RealExchange = RealExchange
 
 class _Recommendation:
@@ -1312,16 +1316,16 @@ class Option(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Минимальный шаг цены."""
@@ -1533,16 +1537,16 @@ class Bond(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -1759,16 +1763,16 @@ class Currency(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -1932,16 +1936,16 @@ class Etf(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -2128,16 +2132,16 @@ class Future(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт ](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт ](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций шорт."""
     name: builtins.str
@@ -2337,16 +2341,16 @@ class Share(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -2689,16 +2693,16 @@ class Instrument(google.protobuf.message.Message):
         """Коэффициент ставки риска короткой позиции по клиенту. 2 – клиент со стандартным уровнем риска (КСУР); 1 – клиент с повышенным уровнем риска (КПУР)."""
     @property
     def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КСУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     @property
     def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР лонг. [Подробнее про ставки риска в лонг](https://help.tbank.ru/margin-trade/long/risk-rate/)."""
     @property
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)."""
+        """Ставка риска начальной маржи для КПУР шорт. [Подробнее про ставки риска в шорт](https://help.tbank.ru/margin-trade/short/risk-rate/)."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str

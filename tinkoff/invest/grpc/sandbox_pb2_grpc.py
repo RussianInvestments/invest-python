@@ -2,16 +2,14 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from tinkoff.invest.grpc import (
-    operations_pb2 as tinkoff_dot_invest_dot_grpc_dot_operations__pb2,
-    orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2,
-    sandbox_pb2 as tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2,
-    users_pb2 as tinkoff_dot_invest_dot_grpc_dot_users__pb2,
-)
+from tinkoff.invest.grpc import operations_pb2 as tinkoff_dot_invest_dot_grpc_dot_operations__pb2
+from tinkoff.invest.grpc import orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2
+from tinkoff.invest.grpc import sandbox_pb2 as tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2
+from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_users__pb2
 
 
 class SandboxServiceStub(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     def __init__(self, channel):
@@ -98,7 +96,7 @@ class SandboxServiceStub(object):
 
 
 class SandboxServiceServicer(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     def OpenSandboxAccount(self, request, context):
@@ -292,7 +290,7 @@ def add_SandboxServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class SandboxService(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     @staticmethod

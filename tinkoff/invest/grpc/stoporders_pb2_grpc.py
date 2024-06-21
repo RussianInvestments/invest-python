@@ -2,9 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from tinkoff.invest.grpc import (
-    stoporders_pb2 as tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2,
-)
+from tinkoff.invest.grpc import stoporders_pb2 as tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2
 
 
 class StopOrdersServiceStub(object):
