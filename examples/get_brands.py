@@ -1,4 +1,5 @@
 """Example - How to get Brands"""
+
 import os
 
 from tinkoff.invest import Client
