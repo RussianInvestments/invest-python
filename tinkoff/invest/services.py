@@ -162,6 +162,8 @@ from .schemas import (
     PositionsResponse,
     PositionsStreamRequest,
     PositionsStreamResponse,
+    PostOrderAsyncRequest,
+    PostOrderAsyncResponse,
     PostOrderRequest,
     PostOrderResponse,
     PostStopOrderRequest,
@@ -1347,6 +1349,19 @@ class OrdersService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "PostOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+
+    @handle_request_error("PostOrderAsync")
+    def post_order_async(
+        self, request: PostOrderAsyncRequest
+    ) -> PostOrderAsyncResponse:
+        response, call = self.stub.PostOrderAsync.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.PostOrderAsyncRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "PostOrderAsync")
+        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderAsyncResponse)
 
     @handle_request_error("CancelOrder")
     def cancel_order(

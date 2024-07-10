@@ -120,6 +120,11 @@ class OrdersServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
                 )
+        self.PostOrderAsync = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OrdersService/PostOrderAsync',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncResponse.FromString,
+                )
         self.CancelOrder = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.OrdersService/CancelOrder',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.CancelOrderRequest.SerializeToString,
@@ -161,6 +166,12 @@ class OrdersServiceServicer(object):
     def PostOrder(self, request, context):
         """Метод выставления заявки.
         """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostOrderAsync(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -214,6 +225,11 @@ def add_OrdersServiceServicer_to_server(servicer, server):
                     servicer.PostOrder,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.SerializeToString,
+            ),
+            'PostOrderAsync': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostOrderAsync,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncResponse.SerializeToString,
             ),
             'CancelOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.CancelOrder,
@@ -272,6 +288,23 @@ class OrdersService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/PostOrder',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostOrderAsync(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/PostOrderAsync',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderAsyncResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

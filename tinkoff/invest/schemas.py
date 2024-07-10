@@ -2102,6 +2102,9 @@ class TradesStreamRequest(_grpc_helpers.Message):
 class TradesStreamResponse(_grpc_helpers.Message):
     order_trades: "OrderTrades" = _grpc_helpers.message_field(1, group="payload")
     ping: "Ping" = _grpc_helpers.message_field(2, group="payload")
+    subscription: "SubscriptionResponse" = _grpc_helpers.message_field(
+        3, group="payload"
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -2160,6 +2163,28 @@ class PostOrderResponse(  # pylint:disable=too-many-instance-attributes
     instrument_uid: str = _grpc_helpers.string_field(17)
     order_request_id: str = _grpc_helpers.string_field(20)
     response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
+
+
+@dataclass(eq=False, repr=True)
+class PostOrderAsyncRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+    quantity: int = _grpc_helpers.int64_field(2)
+    price: "Quotation" = _grpc_helpers.message_field(3)
+    direction: "OrderDirection" = _grpc_helpers.message_field(4)
+    account_id: str = _grpc_helpers.string_field(5)
+    order_type: "OrderType" = _grpc_helpers.message_field(6)
+    order_id: str = _grpc_helpers.string_field(7)
+    time_in_force: TimeInForceType = _grpc_helpers.string_field(8)
+    price_type: PriceType = _grpc_helpers.string_field(9)
+
+
+@dataclass(eq=False, repr=True)
+class PostOrderAsyncResponse(_grpc_helpers.Message):
+    order_request_id: str = _grpc_helpers.string_field(1)
+    execution_report_status: "OrderExecutionReportStatus" = _grpc_helpers.message_field(
+        2
+    )
+    trade_intent_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
