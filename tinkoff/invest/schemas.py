@@ -2615,6 +2615,8 @@ class PortfolioStreamResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PortfolioSubscriptionResult(_grpc_helpers.Message):
     accounts: List["AccountSubscriptionStatus"] = _grpc_helpers.message_field(1)
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -2708,6 +2710,8 @@ class PositionsStreamResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PositionsSubscriptionResult(_grpc_helpers.Message):
     accounts: List["PositionsSubscriptionStatus"] = _grpc_helpers.message_field(1)
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)
