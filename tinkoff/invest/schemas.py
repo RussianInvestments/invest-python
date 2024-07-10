@@ -473,6 +473,12 @@ class StatusCauseInfo(_grpc_helpers.Enum):
     CAUSE_CANCELLED_BY_BROKER = 6
 
 
+class LastPriceType(_grpc_helpers.Enum):
+    LAST_PRICE_UNSPECIFIED = 0
+    LAST_PRICE_EXCHANGE = 1
+    LAST_PRICE_DEALER = 2
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -1730,6 +1736,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
     instrument_id: Optional[str] = _grpc_helpers.string_field(5)
     candle_source_type: Optional[CandleSource] = _grpc_helpers.string_field(7)
+    limit: Optional[int] = _grpc_helpers.int32_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -1753,6 +1760,7 @@ class HistoricCandle(_grpc_helpers.Message):
 class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
     instrument_id: List[str] = _grpc_helpers.string_field(2)
+    last_price_type: LastPriceType = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1766,6 +1774,7 @@ class LastPrice(_grpc_helpers.Message):
     price: "Quotation" = _grpc_helpers.message_field(2)
     time: datetime = _grpc_helpers.message_field(3)
     instrument_uid: str = _grpc_helpers.string_field(11)
+    last_price_type: LastPriceType = _grpc_helpers.message_field(12)
 
 
 @dataclass(eq=False, repr=True)

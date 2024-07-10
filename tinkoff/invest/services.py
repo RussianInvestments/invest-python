@@ -184,7 +184,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse,
+    WithdrawLimitsResponse, LastPriceType,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -927,6 +927,7 @@ class MarketDataService(_grpc_helpers.Service):
         *,
         figi: Optional[List[str]] = None,
         instrument_id: Optional[List[str]] = None,
+        last_price_type: LastPriceType = LastPriceType.LAST_PRICE_UNSPECIFIED,
     ) -> GetLastPricesResponse:
         figi = figi or []
         instrument_id = instrument_id or []
@@ -934,6 +935,7 @@ class MarketDataService(_grpc_helpers.Service):
         request = GetLastPricesRequest()
         request.figi = figi
         request.instrument_id = instrument_id
+        request.last_price_type = last_price_type
         response, call = self.stub.GetLastPrices.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()
