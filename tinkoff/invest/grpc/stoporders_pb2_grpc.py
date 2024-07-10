@@ -8,8 +8,7 @@ from tinkoff.invest.grpc import (
 
 
 class StopOrdersServiceStub(object):
-    """Сервис предназначен для работы со стоп-заявками:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение списка стоп-заявок.
+    """Сервис для работы со стоп-заявками: выставление, отмена, получение списка стоп-заявок.
     """
 
     def __init__(self, channel):
@@ -36,26 +35,25 @@ class StopOrdersServiceStub(object):
 
 
 class StopOrdersServiceServicer(object):
-    """Сервис предназначен для работы со стоп-заявками:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение списка стоп-заявок.
+    """Сервис для работы со стоп-заявками: выставление, отмена, получение списка стоп-заявок.
     """
 
     def PostStopOrder(self, request, context):
-        """Метод выставления стоп-заявки.
+        """Выставить стоп-заявку.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetStopOrders(self, request, context):
-        """Метод получения списка активных стоп заявок по счёту.
+        """Получить список активных стоп-заявок по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CancelStopOrder(self, request, context):
-        """Метод отмены стоп-заявки.
+        """Отменить стоп-заявку.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -87,8 +85,7 @@ def add_StopOrdersServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class StopOrdersService(object):
-    """Сервис предназначен для работы со стоп-заявками:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение списка стоп-заявок.
+    """Сервис для работы со стоп-заявками: выставление, отмена, получение списка стоп-заявок.
     """
 
     @staticmethod
