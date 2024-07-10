@@ -138,6 +138,7 @@ from .schemas import (
     InstrumentsRequest,
     InstrumentStatus,
     InstrumentType,
+    LastPriceType,
     MarketDataRequest,
     MarketDataResponse,
     MoneyValue,
@@ -185,7 +186,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, LastPriceType,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now

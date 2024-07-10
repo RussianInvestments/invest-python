@@ -10,5 +10,5 @@ def main():
         print(client.market_data.get_last_prices(figi=["BBG004730ZJ9"]))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
