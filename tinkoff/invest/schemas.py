@@ -473,6 +473,12 @@ class StatusCauseInfo(_grpc_helpers.Enum):
     CAUSE_CANCELLED_BY_BROKER = 6
 
 
+class LastPriceType(_grpc_helpers.Enum):
+    LAST_PRICE_UNSPECIFIED = 0
+    LAST_PRICE_EXCHANGE = 1
+    LAST_PRICE_DEALER = 2
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -1730,6 +1736,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
     instrument_id: Optional[str] = _grpc_helpers.string_field(5)
     candle_source_type: Optional[CandleSource] = _grpc_helpers.string_field(7)
+    limit: Optional[int] = _grpc_helpers.int32_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -1753,6 +1760,7 @@ class HistoricCandle(_grpc_helpers.Message):
 class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
     instrument_id: List[str] = _grpc_helpers.string_field(2)
+    last_price_type: LastPriceType = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1766,6 +1774,7 @@ class LastPrice(_grpc_helpers.Message):
     price: "Quotation" = _grpc_helpers.message_field(2)
     time: datetime = _grpc_helpers.message_field(3)
     instrument_uid: str = _grpc_helpers.string_field(11)
+    last_price_type: LastPriceType = _grpc_helpers.message_field(12)
 
 
 @dataclass(eq=False, repr=True)
@@ -2093,6 +2102,9 @@ class TradesStreamRequest(_grpc_helpers.Message):
 class TradesStreamResponse(_grpc_helpers.Message):
     order_trades: "OrderTrades" = _grpc_helpers.message_field(1, group="payload")
     ping: "Ping" = _grpc_helpers.message_field(2, group="payload")
+    subscription: "SubscriptionResponse" = _grpc_helpers.message_field(
+        3, group="payload"
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -2151,6 +2163,28 @@ class PostOrderResponse(  # pylint:disable=too-many-instance-attributes
     instrument_uid: str = _grpc_helpers.string_field(17)
     order_request_id: str = _grpc_helpers.string_field(20)
     response_metadata: "ResponseMetadata" = _grpc_helpers.message_field(254)
+
+
+@dataclass(eq=False, repr=True)
+class PostOrderAsyncRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+    quantity: int = _grpc_helpers.int64_field(2)
+    price: "Quotation" = _grpc_helpers.message_field(3)
+    direction: "OrderDirection" = _grpc_helpers.message_field(4)
+    account_id: str = _grpc_helpers.string_field(5)
+    order_type: "OrderType" = _grpc_helpers.message_field(6)
+    order_id: str = _grpc_helpers.string_field(7)
+    time_in_force: TimeInForceType = _grpc_helpers.string_field(8)
+    price_type: PriceType = _grpc_helpers.string_field(9)
+
+
+@dataclass(eq=False, repr=True)
+class PostOrderAsyncResponse(_grpc_helpers.Message):
+    order_request_id: str = _grpc_helpers.string_field(1)
+    execution_report_status: "OrderExecutionReportStatus" = _grpc_helpers.message_field(
+        2
+    )
+    trade_intent_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -2606,6 +2640,8 @@ class PortfolioStreamResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PortfolioSubscriptionResult(_grpc_helpers.Message):
     accounts: List["AccountSubscriptionStatus"] = _grpc_helpers.message_field(1)
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -2699,6 +2735,8 @@ class PositionsStreamResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PositionsSubscriptionResult(_grpc_helpers.Message):
     accounts: List["PositionsSubscriptionStatus"] = _grpc_helpers.message_field(1)
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)

@@ -11,7 +11,7 @@ from tinkoff.invest.grpc import (
 
 
 class SandboxServiceStub(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     def __init__(self, channel):
@@ -98,7 +98,7 @@ class SandboxServiceStub(object):
 
 
 class SandboxServiceServicer(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     def OpenSandboxAccount(self, request, context):
@@ -292,7 +292,7 @@ def add_SandboxServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class SandboxService(object):
-    """Методы для работы с песочницей Tinkoff Invest API
+    """Методы для работы с песочницей T-Invest API
     """
 
     @staticmethod

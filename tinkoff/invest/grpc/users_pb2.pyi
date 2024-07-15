@@ -29,7 +29,7 @@ class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     ACCOUNT_TYPE_UNSPECIFIED: _AccountType.ValueType  # 0
     """Тип аккаунта не определён."""
     ACCOUNT_TYPE_TINKOFF: _AccountType.ValueType  # 1
-    """Брокерский счёт Тинькофф."""
+    """Брокерский счёт Т-Инвестиций."""
     ACCOUNT_TYPE_TINKOFF_IIS: _AccountType.ValueType  # 2
     """ИИС."""
     ACCOUNT_TYPE_INVEST_BOX: _AccountType.ValueType  # 3
@@ -43,7 +43,7 @@ class AccountType(_AccountType, metaclass=_AccountTypeEnumTypeWrapper):
 ACCOUNT_TYPE_UNSPECIFIED: AccountType.ValueType  # 0
 """Тип аккаунта не определён."""
 ACCOUNT_TYPE_TINKOFF: AccountType.ValueType  # 1
-"""Брокерский счёт Тинькофф."""
+"""Брокерский счёт Т-Инвестиций."""
 ACCOUNT_TYPE_TINKOFF_IIS: AccountType.ValueType  # 2
 """ИИС."""
 ACCOUNT_TYPE_INVEST_BOX: AccountType.ValueType  # 3
@@ -216,13 +216,13 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
     CORRECTED_MARGIN_FIELD_NUMBER: builtins.int
     @property
     def liquid_portfolio(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Ликвидная стоимость портфеля. [Подробнее про ликвидный портфель](https://help.tinkoff.ru/margin-trade/short/liquid-portfolio/)."""
+        """Ликвидная стоимость портфеля. [Подробнее про ликвидный портфель](https://help.tbank.ru/margin-trade/short/liquid-portfolio/)."""
     @property
     def starting_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Начальная маржа — начальное обеспечение для совершения новой сделки. [Подробнее про начальную и минимальную маржу](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Начальная маржа — начальное обеспечение для совершения новой сделки. [Подробнее про начальную и минимальную маржу](https://help.tbank.ru/margin-trade/short/initial-and-maintenance-margin/)."""
     @property
     def minimal_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. [Подробнее про начальную и минимальную маржу](https://help.tinkoff.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. [Подробнее про начальную и минимальную маржу](https://help.tbank.ru/margin-trade/short/initial-and-maintenance-margin/)."""
     @property
     def funds_sufficiency_level(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Уровень достаточности средств. Соотношение стоимости ликвидного портфеля к начальной марже."""
