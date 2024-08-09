@@ -527,6 +527,7 @@ class StopOrder(google.protobuf.message.Message):
     TRAILING_DATA_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     EXCHANGE_ORDER_TYPE_FIELD_NUMBER: builtins.int
+    EXCHANGE_ORDER_ID_FIELD_NUMBER: builtins.int
     stop_order_id: builtins.str
     """Идентификатор-идентификатор стоп-заявки."""
     lots_requested: builtins.int
@@ -565,6 +566,8 @@ class StopOrder(google.protobuf.message.Message):
     """Статус заявки."""
     exchange_order_type: global___ExchangeOrderType.ValueType
     """Тип дочерней биржевой заявки для тейкпрофита."""
+    exchange_order_id: builtins.str
+    """Идентификатор биржевой заявки."""
     def __init__(
         self,
         *,
@@ -584,8 +587,10 @@ class StopOrder(google.protobuf.message.Message):
         trailing_data: global___StopOrder.TrailingData | None = ...,
         status: global___StopOrderStatusOption.ValueType = ...,
         exchange_order_type: global___ExchangeOrderType.ValueType = ...,
+        exchange_order_id: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "expiration_time", b"expiration_time", "price", b"price", "stop_price", b"stop_price", "trailing_data", b"trailing_data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_time", b"expiration_time", "figi", b"figi", "instrument_uid", b"instrument_uid", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "status", b"status", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_exchange_order_id", b"_exchange_order_id", "activation_date_time", b"activation_date_time", "create_date", b"create_date", "exchange_order_id", b"exchange_order_id", "expiration_time", b"expiration_time", "price", b"price", "stop_price", b"stop_price", "trailing_data", b"trailing_data"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_exchange_order_id", b"_exchange_order_id", "activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "exchange_order_id", b"exchange_order_id", "exchange_order_type", b"exchange_order_type", "expiration_time", b"expiration_time", "figi", b"figi", "instrument_uid", b"instrument_uid", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "status", b"status", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_exchange_order_id", b"_exchange_order_id"]) -> typing_extensions.Literal["exchange_order_id"] | None: ...
 
 global___StopOrder = StopOrder

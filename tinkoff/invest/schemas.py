@@ -2463,6 +2463,7 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     trailing_data: "StopOrderTrailingData" = _grpc_helpers.message_field(14)
     status: "StopOrderStatusOption" = _grpc_helpers.message_field(15)
     exchange_order_type: "ExchangeOrderType" = _grpc_helpers.message_field(16)
+    exchange_order_id: Optional[str] = _grpc_helpers.string_field(17)
 
 
 @dataclass(eq=False, repr=True)
