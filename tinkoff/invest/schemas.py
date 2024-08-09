@@ -1969,6 +1969,12 @@ class OperationTrade(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class ChildOperationItem(_grpc_helpers.Message):
+    instrument_uid: str = _grpc_helpers.string_field(1)
+    payment: "MoneyValue" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
 class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     id: str = _grpc_helpers.string_field(1)
     parent_operation_id: str = _grpc_helpers.string_field(2)
@@ -1987,6 +1993,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     asset_uid: str = _grpc_helpers.string_field(16)
     position_uid: str = _grpc_helpers.string_field(17)
     instrument_uid: str = _grpc_helpers.string_field(18)
+    child_operations: List["ChildOperationItem"] = _grpc_helpers.message_field(19)
 
 
 class CurrencyRequest(_grpc_helpers.Enum):
@@ -2701,6 +2708,7 @@ class OperationItem(_grpc_helpers.Message):
     cancel_reason: str = _grpc_helpers.string_field(57)
     trades_info: "OperationItemTrades" = _grpc_helpers.message_field(61)
     asset_uid: str = _grpc_helpers.string_field(64)
+    child_operations: List["ChildOperationItem"] = _grpc_helpers.message_field(65)
 
 
 @dataclass(eq=False, repr=True)
