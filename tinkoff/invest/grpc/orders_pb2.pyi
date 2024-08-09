@@ -134,6 +134,30 @@ TIME_IN_FORCE_FILL_OR_KILL: TimeInForceType.ValueType  # 3
 """Если в момент выставления возможно полное исполнение заявки, заявка будет исполнена или отменена сразу после выставления, недоступно для срочного рынка и торговли по выходным"""
 global___TimeInForceType = TimeInForceType
 
+class _OrderIdType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _OrderIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrderIdType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    ORDER_ID_TYPE_UNSPECIFIED: _OrderIdType.ValueType  # 0
+    """Тип идентификатора не указан."""
+    ORDER_ID_TYPE_EXCHANGE: _OrderIdType.ValueType  # 1
+    """Биржевой идентификатор"""
+    ORDER_ID_TYPE_REQUEST: _OrderIdType.ValueType  # 2
+    """Ключ идемпотентности, переданный клиентом"""
+
+class OrderIdType(_OrderIdType, metaclass=_OrderIdTypeEnumTypeWrapper):
+    """Тип идентификатора заявки"""
+
+ORDER_ID_TYPE_UNSPECIFIED: OrderIdType.ValueType  # 0
+"""Тип идентификатора не указан."""
+ORDER_ID_TYPE_EXCHANGE: OrderIdType.ValueType  # 1
+"""Биржевой идентификатор"""
+ORDER_ID_TYPE_REQUEST: OrderIdType.ValueType  # 2
+"""Ключ идемпотентности, переданный клиентом"""
+global___OrderIdType = OrderIdType
+
 @typing_extensions.final
 class TradesStreamRequest(google.protobuf.message.Message):
     """Запрос установки соединения."""
@@ -517,17 +541,23 @@ class CancelOrderRequest(google.protobuf.message.Message):
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
+    ORDER_ID_TYPE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Номер счёта."""
     order_id: builtins.str
     """Идентификатор заявки."""
+    order_id_type: global___OrderIdType.ValueType
+    """Тип идентификатора заявки."""
     def __init__(
         self,
         *,
         account_id: builtins.str = ...,
         order_id: builtins.str = ...,
+        order_id_type: global___OrderIdType.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "order_id", b"order_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_order_id_type", b"_order_id_type", "order_id_type", b"order_id_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_order_id_type", b"_order_id_type", "account_id", b"account_id", "order_id", b"order_id", "order_id_type", b"order_id_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_order_id_type", b"_order_id_type"]) -> typing_extensions.Literal["order_id_type"] | None: ...
 
 global___CancelOrderRequest = CancelOrderRequest
 
@@ -565,20 +595,26 @@ class GetOrderStateRequest(google.protobuf.message.Message):
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
+    ORDER_ID_TYPE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Номер счёта."""
     order_id: builtins.str
     """Идентификатор заявки."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены."""
+    order_id_type: global___OrderIdType.ValueType
+    """Тип идентификатора заявки."""
     def __init__(
         self,
         *,
         account_id: builtins.str = ...,
         order_id: builtins.str = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
+        order_id_type: global___OrderIdType.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "order_id", b"order_id", "price_type", b"price_type"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_order_id_type", b"_order_id_type", "order_id_type", b"order_id_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_order_id_type", b"_order_id_type", "account_id", b"account_id", "order_id", b"order_id", "order_id_type", b"order_id_type", "price_type", b"price_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_order_id_type", b"_order_id_type"]) -> typing_extensions.Literal["order_id_type"] | None: ...
 
 global___GetOrderStateRequest = GetOrderStateRequest
 
