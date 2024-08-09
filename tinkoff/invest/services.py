@@ -149,6 +149,7 @@ from .schemas import (
     OptionResponse,
     OptionsResponse,
     OrderDirection,
+    OrderIdType,
     OrderState,
     OrderStateStreamRequest,
     OrderStateStreamResponse,
@@ -1365,11 +1366,16 @@ class OrdersService(_grpc_helpers.Service):
 
     @handle_request_error("CancelOrder")
     def cancel_order(
-        self, *, account_id: str = "", order_id: str = ""
+        self,
+        *,
+        account_id: str = "",
+        order_id: str = "",
+        order_id_type: Optional["OrderIdType"] = None,
     ) -> CancelOrderResponse:
         request = CancelOrderRequest()
         request.account_id = account_id
         request.order_id = order_id
+        request.order_id_type = order_id_type
         response, call = self.stub.CancelOrder.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.CancelOrderRequest()
@@ -1386,11 +1392,13 @@ class OrdersService(_grpc_helpers.Service):
         account_id: str = "",
         order_id: str = "",
         price_type: PriceType = PriceType(0),
+        order_id_type: Optional["OrderIdType"] = None,
     ) -> OrderState:
         request = GetOrderStateRequest()
         request.account_id = account_id
         request.order_id = order_id
         request.price_type = price_type
+        request.order_id_type = order_id_type
         response, call = self.stub.GetOrderState.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrderStateRequest()
@@ -1621,11 +1629,16 @@ class SandboxService(_grpc_helpers.Service):
     @deprecated(details="Use `SandboxClient.orders.cancel_order(...)` method instead")
     @handle_request_error("CancelSandboxOrder")
     def cancel_sandbox_order(
-        self, *, account_id: str = "", order_id: str = ""
+        self,
+        *,
+        account_id: str = "",
+        order_id: str = "",
+        order_id_type: Optional["OrderIdType"] = None,
     ) -> CancelOrderResponse:
         request = CancelOrderRequest()
         request.account_id = account_id
         request.order_id = order_id
+        request.order_id_type = order_id_type
         response, call = self.stub.CancelSandboxOrder.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.CancelOrderRequest()
@@ -1645,11 +1658,13 @@ class SandboxService(_grpc_helpers.Service):
         account_id: str = "",
         order_id: str = "",
         price_type: PriceType = PriceType(0),
+        order_id_type: Optional["OrderIdType"] = None,
     ) -> OrderState:
         request = GetOrderStateRequest()
         request.account_id = account_id
         request.order_id = order_id
         request.price_type = price_type
+        request.order_id_type = order_id_type
         response, call = self.stub.GetSandboxOrderState.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrderStateRequest()

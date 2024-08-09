@@ -399,6 +399,12 @@ class TimeInForceType(_grpc_helpers.Enum):
     TIME_IN_FORCE_FILL_OR_KILL = 3
 
 
+class OrderIdType(_grpc_helpers.Enum):
+    ORDER_ID_TYPE_UNSPECIFIED = 0
+    ORDER_ID_TYPE_EXCHANGE = 1
+    ORDER_ID_TYPE_REQUEST = 2
+
+
 class EventType(_grpc_helpers.Enum):
     EVENT_TYPE_UNSPECIFIED = 0
     EVENT_TYPE_CPN = 1
@@ -2198,6 +2204,7 @@ class PostOrderAsyncResponse(_grpc_helpers.Message):
 class CancelOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(2)
+    order_id_type: Optional["OrderIdType"] = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -2211,6 +2218,7 @@ class GetOrderStateRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(2)
     price_type: "PriceType" = _grpc_helpers.message_field(3)
+    order_id_type: Optional["OrderIdType"] = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
