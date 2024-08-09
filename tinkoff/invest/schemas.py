@@ -2274,7 +2274,7 @@ class ReplaceOrderRequest(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetAccountsRequest(_grpc_helpers.Message):
-    pass
+    status: Optional["AccountStatus"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)

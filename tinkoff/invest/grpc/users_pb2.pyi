@@ -66,6 +66,8 @@ class _AccountStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Открытый и активный счёт."""
     ACCOUNT_STATUS_CLOSED: _AccountStatus.ValueType  # 3
     """Закрытый счёт."""
+    ACCOUNT_STATUS_ALL: _AccountStatus.ValueType  # 4
+    """Все счета."""
 
 class AccountStatus(_AccountStatus, metaclass=_AccountStatusEnumTypeWrapper):
     """Статус счёта."""
@@ -78,6 +80,8 @@ ACCOUNT_STATUS_OPEN: AccountStatus.ValueType  # 2
 """Открытый и активный счёт."""
 ACCOUNT_STATUS_CLOSED: AccountStatus.ValueType  # 3
 """Закрытый счёт."""
+ACCOUNT_STATUS_ALL: AccountStatus.ValueType  # 4
+"""Все счета."""
 global___AccountStatus = AccountStatus
 
 class _AccessLevel:
@@ -114,9 +118,17 @@ class GetAccountsRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    STATUS_FIELD_NUMBER: builtins.int
+    status: global___AccountStatus.ValueType
+    """Статус счета."""
     def __init__(
         self,
+        *,
+        status: global___AccountStatus.ValueType | None = ...,
     ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_status", b"_status", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_status", b"_status", "status", b"status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_status", b"_status"]) -> typing_extensions.Literal["status"] | None: ...
 
 global___GetAccountsRequest = GetAccountsRequest
 
