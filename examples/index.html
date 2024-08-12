@@ -1218,6 +1218,7 @@
 <h2 id="_11">Получение списка операций и их постраничный вывод</h2>
 <p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/get_operations_by_cursor.py">examples/get_operations_by_cursor.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">GetOperationsByCursorRequest</span>
 
@@ -1238,10 +1239,12 @@
 
     <span class="n">operations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations_by_cursor</span><span class="p">(</span><span class="n">get_request</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">operations</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">while</span> <span class="n">operations</span><span class="o">.</span><span class="n">has_next</span> <span class="ow">and</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">get_request</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">operations</span><span class="o">.</span><span class="n">next_cursor</span><span class="p">)</span>
         <span class="n">operations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations_by_cursor</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+        <span class="n">depth</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></div></p>
 <h2 id="_12">Функция кэширования инструментов</h2>
 <p><a href="https://github.com/RussianInvestments/invest-python/blob/main/examples/instrument_cache.py">examples/instrument_cache.py</a>
