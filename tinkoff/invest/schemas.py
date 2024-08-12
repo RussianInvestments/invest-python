@@ -399,6 +399,12 @@ class TimeInForceType(_grpc_helpers.Enum):
     TIME_IN_FORCE_FILL_OR_KILL = 3
 
 
+class OrderIdType(_grpc_helpers.Enum):
+    ORDER_ID_TYPE_UNSPECIFIED = 0
+    ORDER_ID_TYPE_EXCHANGE = 1
+    ORDER_ID_TYPE_REQUEST = 2
+
+
 class EventType(_grpc_helpers.Enum):
     EVENT_TYPE_UNSPECIFIED = 0
     EVENT_TYPE_CPN = 1
@@ -1969,6 +1975,12 @@ class OperationTrade(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class ChildOperationItem(_grpc_helpers.Message):
+    instrument_uid: str = _grpc_helpers.string_field(1)
+    payment: "MoneyValue" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
 class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     id: str = _grpc_helpers.string_field(1)
     parent_operation_id: str = _grpc_helpers.string_field(2)
@@ -1987,6 +1999,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     asset_uid: str = _grpc_helpers.string_field(16)
     position_uid: str = _grpc_helpers.string_field(17)
     instrument_uid: str = _grpc_helpers.string_field(18)
+    child_operations: List["ChildOperationItem"] = _grpc_helpers.message_field(19)
 
 
 class CurrencyRequest(_grpc_helpers.Enum):
@@ -2191,6 +2204,7 @@ class PostOrderAsyncResponse(_grpc_helpers.Message):
 class CancelOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(2)
+    order_id_type: Optional["OrderIdType"] = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -2204,6 +2218,7 @@ class GetOrderStateRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(2)
     price_type: "PriceType" = _grpc_helpers.message_field(3)
+    order_id_type: Optional["OrderIdType"] = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -2259,7 +2274,7 @@ class ReplaceOrderRequest(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetAccountsRequest(_grpc_helpers.Message):
-    pass
+    status: Optional["AccountStatus"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -2448,6 +2463,7 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     trailing_data: "StopOrderTrailingData" = _grpc_helpers.message_field(14)
     status: "StopOrderStatusOption" = _grpc_helpers.message_field(15)
     exchange_order_type: "ExchangeOrderType" = _grpc_helpers.message_field(16)
+    exchange_order_id: Optional[str] = _grpc_helpers.string_field(17)
 
 
 @dataclass(eq=False, repr=True)
@@ -2701,6 +2717,7 @@ class OperationItem(_grpc_helpers.Message):
     cancel_reason: str = _grpc_helpers.string_field(57)
     trades_info: "OperationItemTrades" = _grpc_helpers.message_field(61)
     asset_uid: str = _grpc_helpers.string_field(64)
+    child_operations: List["ChildOperationItem"] = _grpc_helpers.message_field(65)
 
 
 @dataclass(eq=False, repr=True)

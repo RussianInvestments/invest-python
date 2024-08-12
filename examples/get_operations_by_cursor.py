@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 from tinkoff.invest import Client, GetOperationsByCursorRequest
 
@@ -19,7 +20,9 @@ with Client(token) as client:
 
     operations = client.operations.get_operations_by_cursor(get_request())
     print(operations)
-    while operations.has_next:
+    depth = 10
+    while operations.has_next and depth > 0:
         request = get_request(cursor=operations.next_cursor)
         operations = client.operations.get_operations_by_cursor(request)
-        print(operations)
+        pprint(operations)
+        depth -= 1

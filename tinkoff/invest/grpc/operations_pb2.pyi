@@ -451,6 +451,7 @@ class Operation(google.protobuf.message.Message):
     ASSET_UID_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    CHILD_OPERATIONS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Идентификатор операции."""
     parent_operation_id: builtins.str
@@ -489,6 +490,9 @@ class Operation(google.protobuf.message.Message):
     """Уникальный идентификатор позиции."""
     instrument_uid: builtins.str
     """Уникальный идентификатор инструмента."""
+    @property
+    def child_operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ChildOperationItem]:
+        """Массив дочерних операций."""
     def __init__(
         self,
         *,
@@ -509,9 +513,10 @@ class Operation(google.protobuf.message.Message):
         asset_uid: builtins.str = ...,
         position_uid: builtins.str = ...,
         instrument_uid: builtins.str = ...,
+        child_operations: collections.abc.Iterable[global___ChildOperationItem] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date", b"date", "payment", b"payment", "price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "child_operations", b"child_operations", "currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
 
 global___Operation = Operation
 
@@ -1748,6 +1753,7 @@ class OperationItem(google.protobuf.message.Message):
     CANCEL_REASON_FIELD_NUMBER: builtins.int
     TRADES_INFO_FIELD_NUMBER: builtins.int
     ASSET_UID_FIELD_NUMBER: builtins.int
+    CHILD_OPERATIONS_FIELD_NUMBER: builtins.int
     cursor: builtins.str
     """Курсор."""
     broker_account_id: builtins.str
@@ -1808,6 +1814,9 @@ class OperationItem(google.protobuf.message.Message):
         """Массив сделок."""
     asset_uid: builtins.str
     """Идентификатор актива."""
+    @property
+    def child_operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ChildOperationItem]:
+        """Массив дочерних операций."""
     def __init__(
         self,
         *,
@@ -1837,9 +1846,10 @@ class OperationItem(google.protobuf.message.Message):
         cancel_reason: builtins.str = ...,
         trades_info: global___OperationItemTrades | None = ...,
         asset_uid: builtins.str = ...,
+        child_operations: collections.abc.Iterable[global___ChildOperationItem] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "cancel_date_time", b"cancel_date_time", "commission", b"commission", "date", b"date", "payment", b"payment", "price", b"price", "trades_info", b"trades_info", "yield", b"yield", "yield_relative", b"yield_relative"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "asset_uid", b"asset_uid", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "asset_uid", b"asset_uid", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "child_operations", b"child_operations", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
 
 global___OperationItem = OperationItem
 
@@ -2067,3 +2077,25 @@ class PositionsMoney(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["available_value", b"available_value", "blocked_value", b"blocked_value"]) -> None: ...
 
 global___PositionsMoney = PositionsMoney
+
+@typing_extensions.final
+class ChildOperationItem(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    PAYMENT_FIELD_NUMBER: builtins.int
+    instrument_uid: builtins.str
+    """Уникальный идентификатор инструмента."""
+    @property
+    def payment(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сумма операции."""
+    def __init__(
+        self,
+        *,
+        instrument_uid: builtins.str = ...,
+        payment: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["payment", b"payment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument_uid", b"instrument_uid", "payment", b"payment"]) -> None: ...
+
+global___ChildOperationItem = ChildOperationItem
