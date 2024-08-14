@@ -24,7 +24,6 @@ __all__ = (
 
 DAYS_IN_YEAR = 365
 
-
 MAX_INTERVALS = {
     CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(days=1),
     CandleInterval.CANDLE_INTERVAL_2_MIN: timedelta(days=1),
