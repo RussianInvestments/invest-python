@@ -313,7 +313,12 @@ def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
         if use_default_enum_if_error:
             return enum_class(0)
         raise ValueError(
-            f"Unknown value {value} for enum {enum_class.__name__}"
+            f"Неизвестное значение '{value}' для enum '{enum_class.__name__}' "
+            f"доступные значния: {list(enum_class)}. "
+            f"Возможно сервер стал отдавать новые значения, "
+            f"в то время как sdk еще не обновлен. "
+            f"Для игнорирования ошибки установите "
+            f"переменную окружения USE_DEFAULT_ENUM_IF_ERROR=true"
         ) from error
 
 
