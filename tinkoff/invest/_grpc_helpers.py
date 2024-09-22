@@ -312,10 +312,9 @@ def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
     except ValueError as error:
         if use_default_enum_if_error:
             return enum_class(0)
-        else:
-            raise ValueError(
-                f"Unknown value {value} for enum {enum_class.__name__}"
-            ) from error
+        raise ValueError(
+            f"Unknown value {value} for enum {enum_class.__name__}"
+        ) from error
 
 
 # pylint:disable=too-many-nested-blocks
