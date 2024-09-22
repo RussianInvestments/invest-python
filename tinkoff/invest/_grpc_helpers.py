@@ -314,7 +314,7 @@ def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
             return enum_class(0)
         raise ValueError(
             f"Неизвестное значение '{value}' для enum '{enum_class.__name__}' "
-            f"доступные значния: {list(enum_class)}. "
+            f"доступные значения: {list(enum_class)}. "
             f"Возможно сервер стал отдавать новые значения, "
             f"в то время как sdk еще не обновлен. "
             f"Для игнорирования ошибки установите "
