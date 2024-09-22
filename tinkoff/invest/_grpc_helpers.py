@@ -1,6 +1,7 @@
 # pylint:disable=no-name-in-module
 import dataclasses
 import enum
+import os
 from abc import ABC
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -290,6 +291,33 @@ def to_unsafe_field_name(field_name: str) -> str:
     return field_name
 
 
+TEnum = TypeVar("TEnum", bound=Enum)
+
+
+def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
+    """Defaults when value is not yet supported.
+
+    Use USE_DEFAULT_ENUM_IF_ERROR to use default enum when value is not yet supported.
+    """
+    # todo may be true by default
+    use_default_enum_if_error = os.environ.get("USE_DEFAULT_ENUM_IF_ERROR") in (
+        "true",
+        "True",
+        "1",
+    )
+    # todo think about using pydantic settings to parse env vars
+
+    try:
+        return enum_class(value)
+    except ValueError as error:
+        if use_default_enum_if_error:
+            return enum_class(0)
+        else:
+            raise ValueError(
+                f"Unknown value {value} for enum {enum_class.__name__}"
+            ) from error
+
+
 # pylint:disable=too-many-nested-blocks
 # pylint:disable=too-many-branches
 # pylint:disable=too-many-locals
@@ -319,7 +347,7 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
             elif dataclasses.is_dataclass(field_type):
                 field_value = protobuf_to_dataclass(pb_value, field_type)
             elif issubclass(field_type, Enum):
-                field_value = field_type(pb_value)
+                field_value = _init_enum(enum_class=field_type, value=pb_value)
         elif origin == list:
             args = get_args(field_type)
             first_arg = args[0]
@@ -334,7 +362,9 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
             elif first_arg == datetime:
                 field_value = [ts_to_datetime(item) for item in pb_value]
             elif issubclass(field_type, Enum):
-                field_value = [field_type(item) for item in pb_value]
+                field_value = [
+                    _init_enum(enum_class=field_type, value=item) for item in pb_value
+                ]
         if origin == Union:
             args = get_args(field_type)
             if len(args) > 2:
@@ -353,7 +383,7 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
             elif dataclasses.is_dataclass(first_arg):
                 field_value = protobuf_to_dataclass(pb_value, first_arg)
             elif issubclass(first_arg, Enum):
-                field_value = first_arg(pb_value)
+                field_value = _init_enum(enum_class=first_arg, value=pb_value)
 
         if field_value is _UNKNOWN:
             raise UnknownType(f'type "{field_type}" unknown')
