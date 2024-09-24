@@ -1,3 +1,4 @@
+import logging
 import os
 
 import pytest
@@ -9,6 +10,8 @@ from tinkoff.invest import (
 from tinkoff.invest._grpc_helpers import protobuf_to_dataclass
 from tinkoff.invest.grpc.instruments_pb2 import EditFavoritesRequest as ProtoModel
 
+logging.basicConfig(level=logging.DEBUG)
+
 
 @pytest.fixture()
 def unsupported_model() -> ProtoModel:
@@ -18,13 +21,16 @@ def unsupported_model() -> ProtoModel:
 
 
 class TestProtobufToDataclass:
-    def test_protobuf_to_dataclass_raises_by_default(
-        self, unsupported_model: ProtoModel
+    def test_protobuf_to_dataclass_does_not_raise_by_default(
+        self, unsupported_model: ProtoModel, caplog
     ):
-        with pytest.raises(ValueError):
-            _ = protobuf_to_dataclass(
-                pb_obj=unsupported_model, dataclass_type=DataclassModel
-            ).action_type
+        expected = EditFavoritesActionType.EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED
+
+        actual = protobuf_to_dataclass(
+            pb_obj=unsupported_model, dataclass_type=DataclassModel
+        ).action_type
+
+        assert expected == actual
 
     @pytest.mark.parametrize("use_default_enum_if_error", ["True", "true", "1"])
     def test_protobuf_to_dataclass_does_not_raise_when_set_true(
