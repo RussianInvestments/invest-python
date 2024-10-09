@@ -1,10 +1,12 @@
 # pylint:disable=no-name-in-module
 import dataclasses
 import enum
+import logging
 import os
 from abc import ABC
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
+from textwrap import dedent
 from typing import (
     Any,
     Dict,
@@ -23,7 +25,7 @@ from google.protobuf.timestamp_pb2 import Timestamp
 
 _sym_db = symbol_database.Default()
 NoneType = type(None)
-
+logger = logging.getLogger(__name__)
 T = TypeVar("T")
 
 
@@ -292,6 +294,7 @@ def to_unsafe_field_name(field_name: str) -> str:
 
 
 TEnum = TypeVar("TEnum", bound=Enum)
+USE_DEFAULT_ENUM_IF_ERROR_ENV = "USE_DEFAULT_ENUM_IF_ERROR"
 
 
 def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
@@ -299,8 +302,9 @@ def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
 
     Use USE_DEFAULT_ENUM_IF_ERROR to use default enum when value is not yet supported.
     """
-    # todo may be true by default
-    use_default_enum_if_error = os.environ.get("USE_DEFAULT_ENUM_IF_ERROR") in (
+    use_default_enum_if_error = os.environ.get(
+        USE_DEFAULT_ENUM_IF_ERROR_ENV, "true"
+    ) in (
         "true",
         "True",
         "1",
@@ -310,16 +314,35 @@ def _init_enum(enum_class: Type[TEnum], value: Any) -> TEnum:
     try:
         return enum_class(value)
     except ValueError as error:
-        if use_default_enum_if_error:
-            return enum_class(0)
-        raise ValueError(
-            f"Неизвестное значение '{value}' для enum '{enum_class.__name__}' "
-            f"доступные значения: {list(enum_class)}. "
-            f"Возможно сервер стал отдавать новые значения, "
-            f"в то время как sdk еще не обновлен. "
-            f"Для игнорирования ошибки установите "
-            f"переменную окружения USE_DEFAULT_ENUM_IF_ERROR=true"
-        ) from error
+        if not use_default_enum_if_error:
+            raise ValueError(
+                f"Неизвестное значение '{value}' для enum '{enum_class.__name__}' "
+                f"доступные значения: {list(enum_class)}. "
+                f"Возможно сервер стал отдавать новые значения, "
+                f"в то время как sdk еще не обновлен. "
+                f"Для игнорирования ошибки установите "
+                f"переменную окружения {USE_DEFAULT_ENUM_IF_ERROR_ENV}=true"
+            ) from error
+        default_enum = enum_class(0)
+        logger.warning(
+            dedent(
+                """\
+            Было получено неизвестное значение '%s' для enum '%s'
+            Доступные значения: %s.
+            Возможно сервер стал отдавать новые значения,
+            в то время как sdk еще не обновлен.
+            Сообщите об этой проблеме разработчикам библиотеки.
+            Установлено значение по умолчанию %s, ошибка проигнорирована
+            Для вызова ошибки установите переменную окружения %s=false
+            """  # noqa: RUF001
+            ),
+            value,
+            enum_class.__name__,
+            list(enum_class),
+            default_enum,
+            USE_DEFAULT_ENUM_IF_ERROR_ENV,
+        )
+        return default_enum
 
 
 # pylint:disable=too-many-nested-blocks
