@@ -1,9 +1,9 @@
 import os
 import time
 
-from tinkoff.invest import (
+from tinkoff.invest import Client
+from tinkoff.invest.grpc.marketdata import (
     CandleInstrument,
-    Client,
     MarketDataRequest,
     SubscribeCandlesRequest,
     SubscriptionAction,
@@ -23,6 +23,7 @@ def main():
                     CandleInstrument(
                         figi="BBG004730N88",
                         interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+                        instrument_id="BBG004730N88",
                     )
                 ],
             )
@@ -31,7 +32,7 @@ def main():
             time.sleep(1)
 
     with Client(TOKEN) as client:
-        for marketdata in client.market_data_stream.market_data_stream(
+        for marketdata in client.market_data_stream.MarketDataStream(
             request_iterator()
         ):
             print(marketdata)

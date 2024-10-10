@@ -6,6 +6,10 @@ from typing import Generator, Iterable, Iterator, List, Optional
 import grpc
 from deprecation import deprecated
 
+from tinkoff.invest.grpc.marketdata import (
+    MarketDataStreamService as NewMarketDataStreamService,
+)
+
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
 from .grpc import (
@@ -221,7 +225,7 @@ class Services:
         sandbox_metadata = get_metadata(sandbox_token or token, app_name)
         self.instruments = InstrumentsService(channel, metadata)
         self.market_data = MarketDataService(channel, metadata)
-        self.market_data_stream = MarketDataStreamService(channel, metadata)
+        self.market_data_stream = NewMarketDataStreamService(channel, metadata)
         self.operations = OperationsService(channel, metadata)
         self.operations_stream = OperationsStreamService(channel, metadata)
         self.orders_stream = OrdersStreamService(channel, metadata)
