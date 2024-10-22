@@ -431,6 +431,7 @@ class OrderBookType(_grpc_helpers.Enum):
     ORDERBOOK_TYPE_UNSPECIFIED = 0
     ORDERBOOK_TYPE_EXCHANGE = 1
     ORDERBOOK_TYPE_DEALER = 2
+    ORDERBOOK_TYPE_ALL = 3
 
 
 class BondType(_grpc_helpers.Enum):
