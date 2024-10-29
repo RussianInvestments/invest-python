@@ -87,6 +87,7 @@ class SubscriptionStatus(_grpc_helpers.Enum):
     SUBSCRIPTION_STATUS_INTERNAL_ERROR = 7
     SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS = 8
     SUBSCRIPTION_STATUS_SUBSCRIPTION_NOT_FOUND = 9
+    SUBSCRIPTION_STATUS_SOURCE_IS_INVALID = 10
 
 
 class TradeDirection(_grpc_helpers.Enum):
@@ -431,6 +432,7 @@ class OrderBookType(_grpc_helpers.Enum):
     ORDERBOOK_TYPE_UNSPECIFIED = 0
     ORDERBOOK_TYPE_EXCHANGE = 1
     ORDERBOOK_TYPE_DEALER = 2
+    ORDERBOOK_TYPE_ALL = 3
 
 
 class BondType(_grpc_helpers.Enum):
@@ -547,9 +549,22 @@ class Quotation(_grpc_helpers.Message, SupportsAbs):
 
 
 @dataclass(eq=False, repr=True)
+class PingRequest(_grpc_helpers.Message):
+    time: Optional[datetime] = _grpc_helpers.message_field(1, optional=True)
+
+
+@dataclass(eq=False, repr=True)
+class PingDelaySettings(_grpc_helpers.Message):
+    ping_delay_ms: Optional[int] = _grpc_helpers.int32_field(1, optional=True)
+
+
+@dataclass(eq=False, repr=True)
 class Ping(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.int64_field(1)
     stream_id: str = _grpc_helpers.string_field(2)
+    ping_request_time: Optional[datetime] = _grpc_helpers.message_field(
+        4, optional=True
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -1448,6 +1463,7 @@ class InstrumentShort(_grpc_helpers.Message):
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(28)
     weekend_flag: bool = _grpc_helpers.bool_field(29)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(30)
+    lot: int = _grpc_helpers.int32_field(31)
 
 
 @dataclass(eq=False, repr=True)
@@ -1486,6 +1502,10 @@ class MarketDataRequest(_grpc_helpers.Message):
     get_my_subscriptions: "GetMySubscriptions" = _grpc_helpers.message_field(
         6, group="payload"
     )
+    ping: "PingRequest" = _grpc_helpers.message_field(7, group="payload")
+    ping_settings: "PingDelaySettings" = _grpc_helpers.message_field(
+        15, group="payload"
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -1501,6 +1521,7 @@ class MarketDataServerSideStreamRequest(_grpc_helpers.Message):
     subscribe_last_price_request: "SubscribeLastPriceRequest" = (
         _grpc_helpers.message_field(5)
     )
+    ping_settings: "PingDelaySettings" = _grpc_helpers.message_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -1535,6 +1556,7 @@ class SubscribeCandlesRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["CandleInstrument"] = _grpc_helpers.message_field(2)
     waiting_close: bool = _grpc_helpers.bool_field(3)
+    candle_source_type: "CandleSource" = _grpc_helpers.enum_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -1559,6 +1581,9 @@ class CandleSubscription(_grpc_helpers.Message):
     waiting_close: bool = _grpc_helpers.bool_field(5)
     stream_id: str = _grpc_helpers.string_field(6)
     subscription_id: str = _grpc_helpers.string_field(7)
+    candle_source_type: Optional["CandleSource"] = _grpc_helpers.enum_field(
+        9, optional=True
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -1598,7 +1623,7 @@ class OrderBookSubscription(_grpc_helpers.Message):
 class SubscribeTradesRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["TradeInstrument"] = _grpc_helpers.message_field(2)
-    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
+    trade_source: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1640,7 +1665,7 @@ class TradeInstrument(_grpc_helpers.Message):
 class SubscribeTradesResponse(_grpc_helpers.Message):
     tracking_id: str = _grpc_helpers.string_field(1)
     trade_subscriptions: List["TradeSubscription"] = _grpc_helpers.message_field(2)
-    trade_type: "TradeSourceType" = _grpc_helpers.message_field(3)
+    trade_source: "TradeSourceType" = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1691,6 +1716,7 @@ class Candle(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.message_field(8)
     last_trade_ts: datetime = _grpc_helpers.message_field(9)
     instrument_uid: str = _grpc_helpers.string_field(10)
+    candle_source_type: "CandleSource" = _grpc_helpers.enum_field(19)
 
 
 @dataclass(eq=False, repr=True)
@@ -1721,7 +1747,7 @@ class Trade(_grpc_helpers.Message):
     quantity: int = _grpc_helpers.int64_field(4)
     time: datetime = _grpc_helpers.message_field(5)
     instrument_uid: str = _grpc_helpers.string_field(6)
-    tradeSource: TradeSourceType = _grpc_helpers.message_field(7)
+    trade_source: TradeSourceType = _grpc_helpers.message_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1759,7 +1785,7 @@ class HistoricCandle(_grpc_helpers.Message):
     volume: int = _grpc_helpers.int64_field(5)
     time: datetime = _grpc_helpers.message_field(6)
     is_complete: bool = _grpc_helpers.bool_field(7)
-    candle_source: CandleSource = _grpc_helpers.message_field(9)
+    candle_source_type: CandleSource = _grpc_helpers.message_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -1841,6 +1867,7 @@ class GetLastTradesRequest(_grpc_helpers.Message):
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
     instrument_id: Optional[str] = _grpc_helpers.string_field(4)
+    trade_source: TradeSourceType = _grpc_helpers.enum_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -2109,6 +2136,7 @@ class PositionsSecurities(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class TradesStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.string_field(1)
+    ping_delay_ms: Optional[int] = _grpc_helpers.int32_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -2642,6 +2670,7 @@ class DividendsForeignIssuerReport(  # pylint:disable=too-many-instance-attribut
 @dataclass(eq=False, repr=True)
 class PortfolioStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.message_field(1)
+    ping_settings: "PingDelaySettings" = _grpc_helpers.message_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -2738,6 +2767,7 @@ class OperationItemTrade(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PositionsStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.string_field(1)
+    ping_settings: "PingDelaySettings" = _grpc_helpers.message_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -3032,7 +3062,7 @@ class GetOrderPriceResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class OrderStateStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.message_field(1)
-    ping_delay_millis: Optional[int] = _grpc_helpers.int32_field(15)
+    ping_delay_ms: Optional[int] = _grpc_helpers.int32_field(15)
 
 
 @dataclass(eq=False, repr=True)
