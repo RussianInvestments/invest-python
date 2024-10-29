@@ -17,7 +17,7 @@ packages = [
 exclude = ["tinkoff/__init__.py"]
 
 [tool.poetry.dependencies]
-python = "^3.8.1"
+python = "^3.9.0"
 cachetools = "^5.2.0"
 grpcio = "^1.59.3"
 protobuf = "^4.25.1"
@@ -59,11 +59,12 @@ types-PyYAML = "^6.0.7"
 types-requests = "^2.27.7"
 
 [tool.poetry.group.docs.dependencies]
-mkdocs = "^1.5"
+mkdocs = "1.5.3"
 mkdocs-include-markdown-plugin = "^6.0.4"
 mkdocs-material = "^9.4.14"
-mkdocstrings = {version = "^0.24.0", extras = ["python"]}
+mkdocstrings = {version = "0.24.0", extras = ["python"]}
 termynal = "^0.11.1"
+griffe = "0.38.0"
 
 [tool.pytest.ini_options]
 testpaths = "tests"
