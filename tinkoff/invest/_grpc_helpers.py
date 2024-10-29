@@ -372,7 +372,10 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
             elif issubclass(field_type, datetime):
                 field_value = ts_to_datetime(pb_value)
             elif dataclasses.is_dataclass(field_type):
-                field_value = protobuf_to_dataclass(pb_value, field_type)
+                field_value = protobuf_to_dataclass(
+                    pb_value,
+                    field_type if isinstance(field_type, type) else type(field_type),
+                )
             elif issubclass(field_type, Enum):
                 field_value = _init_enum(enum_class=field_type, value=pb_value)
         elif origin == list:
@@ -382,7 +385,11 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
                 field_value = pb_value
             elif dataclasses.is_dataclass(first_arg):
                 field_value = [
-                    protobuf_to_dataclass(item, first_arg) for item in pb_value
+                    protobuf_to_dataclass(
+                        item,
+                        first_arg if isinstance(first_arg, type) else type(first_arg),
+                    )
+                    for item in pb_value
                 ]
             elif first_arg == Decimal:
                 field_value = [Decimal(str(item)) for item in pb_value]
@@ -408,7 +415,10 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
             elif issubclass(first_arg, datetime):
                 field_value = ts_to_datetime(pb_value)
             elif dataclasses.is_dataclass(first_arg):
-                field_value = protobuf_to_dataclass(pb_value, first_arg)
+                field_value = protobuf_to_dataclass(
+                    pb_value,
+                    first_arg if isinstance(first_arg, type) else type(first_arg),
+                )
             elif issubclass(first_arg, Enum):
                 field_value = _init_enum(enum_class=first_arg, value=pb_value)
 
