@@ -183,12 +183,13 @@ from .schemas import (
     StopOrderType,
     TakeProfitType,
     TimeInForceType,
+    TradeSourceType,
     TradesStreamRequest,
     TradesStreamResponse,
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse,
+    WithdrawLimitsResponse, PingDelaySettings,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -1006,6 +1007,7 @@ class MarketDataService(_grpc_helpers.Service):
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         instrument_id: str = "",
+        trade_source: "TradeSourceType" = None
     ) -> GetLastTradesResponse:
         request = GetLastTradesRequest()
         request.figi = figi
@@ -1014,6 +1016,8 @@ class MarketDataService(_grpc_helpers.Service):
             request.from_ = from_
         if to is not None:
             request.to = to
+        if trade_source is not None:
+            request.trade_source = trade_source
         response, call = self.stub.GetLastTrades.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastTradesRequest()
@@ -1244,9 +1248,14 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_request_error_gen("PortfolioStream")
     def portfolio_stream(
-        self, *, accounts: Optional[List[str]] = None
+        self, *, accounts: Optional[List[str]] = None,
+            ping_delay_ms: int = None,
     ) -> Iterable[PortfolioStreamResponse]:
         request = PortfolioStreamRequest()
+        ping_settings = PingDelaySettings()
+        if ping_delay_ms is not None:
+            ping_settings.ping_delay_ms = ping_delay_ms
+        request.ping_settings = ping_settings
         if accounts:
             request.accounts = accounts
         else:
@@ -1261,7 +1270,7 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_request_error_gen("PositionsStream")
     def positions_stream(
-        self, *, accounts: Optional[List[str]] = None
+        self, *, accounts: Optional[List[str]] = None,
     ) -> Iterable[PositionsStreamResponse]:
         request = PositionsStreamRequest()
         if accounts:
@@ -1282,9 +1291,12 @@ class OrdersStreamService(_grpc_helpers.Service):
 
     @handle_request_error_gen("TradesStream")
     def trades_stream(
-        self, *, accounts: Optional[List[str]] = None
+        self, *, accounts: Optional[List[str]] = None,
+            ping_delay_ms: int = None,
     ) -> Iterable[TradesStreamResponse]:
         request = TradesStreamRequest()
+        if ping_delay_ms is not None:
+            request.ping_delay_ms = ping_delay_ms
         if accounts:
             request.accounts = accounts
         else:
