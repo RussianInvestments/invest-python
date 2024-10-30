@@ -4,7 +4,7 @@
 выставляем рыночный ордер по дешевой бумаге
 если он не исполнен - возвращаем ошибку (код и message)
 если он исполнен и вернулся его идентификатор,
-то выставляем тейпрофит на цену +5% к цене покупки
+то выставляем тейкпрофит на цену +5% к цене покупки
 и стоплосс на -2% к цене покупки.
 Контур выбираем: песочница или боевой.
 
@@ -106,6 +106,7 @@ def post_stop_orders(
         instrument_id=INSTRUMENT_ID,
         expire_date=now() + STOP_ORDER_EXPIRE_DURATION,
         expiration_type=EXPIRATION_TYPE,
+        order_id=str(uuid.uuid4()),
     )
     logger.info(
         "Take profit order was placed stop_order_id=%s. Price: %s",
@@ -123,6 +124,7 @@ def post_stop_orders(
         instrument_id=INSTRUMENT_ID,
         expire_date=now() + STOP_ORDER_EXPIRE_DURATION,
         expiration_type=EXPIRATION_TYPE,
+        order_id=str(uuid.uuid4()),
     )
     logger.info(
         "Stop loss order was placed stop_order_id=%s. Price: %s",

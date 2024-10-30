@@ -23,6 +23,7 @@ def test_post_stop_order(stop_orders_service):
         expiration_type=mock.Mock(),
         stop_order_type=mock.Mock(),
         expire_date=mock.Mock(),
+        order_id=mock.Mock(),
     )
     stop_orders_service.post_stop_order.assert_called_once()
 
