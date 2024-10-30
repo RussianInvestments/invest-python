@@ -17,7 +17,7 @@ packages = [
 exclude = ["tinkoff/__init__.py"]
 
 [tool.poetry.dependencies]
-python = "^3.9.0"
+python = "^3.8.1"
 cachetools = "^5.2.0"
 grpcio = "^1.59.3"
 protobuf = "^4.25.1"
