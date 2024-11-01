@@ -347,7 +347,7 @@ class InstrumentsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAssets(self, request, context):
-        """Получить список активов. Метод работает для всех инструментов, кроме срочных — опционов и фьючерсов.
+        """Получить список активов. Метод работает для всех инструментов, кроме срочных — фьючерсов и опционов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

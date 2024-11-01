@@ -193,6 +193,7 @@ def round_datetime_range(
         2023-09-11 00:00:00+00:00
         2023-09-15 00:00:00+00:00
     ].
+
     """
     floor = _datetime_range_replace_floor_by_interval[interval]
     start, end = date_range

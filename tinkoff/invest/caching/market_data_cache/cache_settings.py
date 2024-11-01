@@ -28,7 +28,7 @@ class MarketDataCacheSettings:
         "close",
         "volume",
         "is_complete",
-        "candle_source",
+        "candle_source_type",
     )
     meta_extension: str = "meta"
 

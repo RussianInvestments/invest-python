@@ -9,6 +9,7 @@ from tinkoff.invest import (
     SubscriptionAction,
     SubscriptionInterval,
 )
+from tinkoff.invest.schemas import CandleSource
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -19,6 +20,7 @@ def main():
             subscribe_candles_request=SubscribeCandlesRequest(
                 waiting_close=True,
                 subscription_action=SubscriptionAction.SUBSCRIPTION_ACTION_SUBSCRIBE,
+                candle_source_type=CandleSource.CANDLE_SOURCE_EXCHANGE,
                 instruments=[
                     CandleInstrument(
                         figi="BBG004730N88",
