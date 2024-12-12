@@ -44,11 +44,11 @@ class TestOrdersCanceler:
         "orders",
         [
             [
-                OrderState(order_id=uuid.uuid4().hex),
-                OrderState(order_id=uuid.uuid4().hex),
-                OrderState(order_id=uuid.uuid4().hex),
+                OrderState(order_id=str(uuid.uuid4())),
+                OrderState(order_id=str(uuid.uuid4())),
+                OrderState(order_id=str(uuid.uuid4())),
             ],
-            [OrderState(order_id=uuid.uuid4().hex)],
+            [OrderState(order_id=str(uuid.uuid4()))],
             [],
         ],
     )
@@ -56,12 +56,12 @@ class TestOrdersCanceler:
         "stop_orders",
         [
             [
-                StopOrder(stop_order_id=uuid.uuid4().hex),
-                StopOrder(stop_order_id=uuid.uuid4().hex),
-                StopOrder(stop_order_id=uuid.uuid4().hex),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
             ],
             [
-                StopOrder(stop_order_id=uuid.uuid4().hex),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
             ],
             [],
         ],

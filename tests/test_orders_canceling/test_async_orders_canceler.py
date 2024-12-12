@@ -3,6 +3,7 @@ from typing import List
 from unittest.mock import call
 
 import pytest
+import pytest_asyncio
 
 from tinkoff.invest import (
     GetOrdersResponse,
@@ -18,18 +19,18 @@ from tinkoff.invest.async_services import (
 from tinkoff.invest.typedefs import AccountId
 
 
-@pytest.fixture()
-def orders_service(mocker) -> OrdersService:
+@pytest_asyncio.fixture()
+async def orders_service(mocker) -> OrdersService:
     return mocker.create_autospec(OrdersService)
 
 
-@pytest.fixture()
-def stop_orders_service(mocker) -> StopOrdersService:
+@pytest_asyncio.fixture()
+async def stop_orders_service(mocker) -> StopOrdersService:
     return mocker.create_autospec(StopOrdersService)
 
 
-@pytest.fixture()
-def async_services(
+@pytest_asyncio.fixture()
+async def async_services(
     mocker, orders_service: OrdersService, stop_orders_service: StopOrdersService
 ) -> AsyncServices:
     async_services = mocker.create_autospec(AsyncServices)
@@ -44,15 +45,16 @@ def account_id() -> AccountId:
 
 
 class TestAsyncOrdersCanceling:
+    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         "orders",
         [
             [
-                OrderState(order_id=uuid.uuid4().hex),
-                OrderState(order_id=uuid.uuid4().hex),
-                OrderState(order_id=uuid.uuid4().hex),
+                OrderState(order_id=str(uuid.uuid4())),
+                OrderState(order_id=str(uuid.uuid4())),
+                OrderState(order_id=str(uuid.uuid4())),
             ],
-            [OrderState(order_id=uuid.uuid4().hex)],
+            [OrderState(order_id=str(uuid.uuid4()))],
             [],
         ],
     )
@@ -60,12 +62,12 @@ class TestAsyncOrdersCanceling:
         "stop_orders",
         [
             [
-                StopOrder(stop_order_id=uuid.uuid4().hex),
-                StopOrder(stop_order_id=uuid.uuid4().hex),
-                StopOrder(stop_order_id=uuid.uuid4().hex),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
             ],
             [
-                StopOrder(stop_order_id=uuid.uuid4().hex),
+                StopOrder(stop_order_id=str(uuid.uuid4())),
             ],
             [],
         ],
