@@ -156,6 +156,7 @@ from .schemas import (
     OrderStateStreamResponse,
     OrderType,
     Page,
+    PingDelaySettings,
     PortfolioRequest,
     PortfolioResponse,
     PortfolioStreamRequest,
@@ -189,7 +190,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, PingDelaySettings,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -745,7 +746,7 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetAssets")
     async def get_assets(
         self,
-        request: AssetsRequest = None,
+        request: AssetsRequest,
     ) -> AssetsResponse:
         if request is None:
             request = AssetsRequest()
@@ -1288,8 +1289,10 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_aio_request_error_gen("PortfolioStream")
     async def portfolio_stream(
-        self, *, accounts: Optional[List[str]] = None,
-            ping_delay_ms: Optional[int] = None,
+        self,
+        *,
+        accounts: Optional[List[str]] = None,
+        ping_delay_ms: Optional[int] = None,
     ) -> AsyncIterable[PortfolioStreamResponse]:
         request = PortfolioStreamRequest()
         if accounts:
@@ -1310,9 +1313,11 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_aio_request_error_gen("PositionsStream")
     async def positions_stream(
-        self, *, accounts: Optional[List[str]] = None,
-            ping_delay_ms: Optional[int] = None,
-            with_initial_positions: Optional[bool] = None,
+        self,
+        *,
+        accounts: Optional[List[str]] = None,
+        ping_delay_ms: Optional[int] = None,
+        with_initial_positions: Optional[bool] = None,
     ) -> AsyncIterable[PositionsStreamResponse]:
         request = PositionsStreamRequest()
         if accounts:
