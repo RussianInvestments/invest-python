@@ -778,6 +778,9 @@ class Option(_grpc_helpers.Message):
     min_price_increment: "Quotation" = _grpc_helpers.message_field(231)
     strike_price: "MoneyValue" = _grpc_helpers.message_field(241)
 
+    dlong_client: "Quotation" = _grpc_helpers.message_field(290)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(291)
+
     expiration_date: datetime = _grpc_helpers.message_field(301)
     first_trade_date: datetime = _grpc_helpers.message_field(311)
     last_trade_date: datetime = _grpc_helpers.message_field(312)
@@ -860,6 +863,9 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
     brand: "BrandData" = _grpc_helpers.message_field(64)
     bond_type: "BondType" = _grpc_helpers.message_field(65)
+    call_date: datetime = _grpc_helpers.message_field(69)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(90)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(91)
 
 
 @dataclass(eq=False, repr=True)
@@ -899,6 +905,8 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
     brand: "BrandData" = _grpc_helpers.message_field(60)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(90)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(91)
 
 
 @dataclass(eq=False, repr=True)
@@ -945,6 +953,8 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
     brand: "BrandData" = _grpc_helpers.message_field(60)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(90)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(91)
 
 
 @dataclass(eq=False, repr=True)
@@ -993,6 +1003,8 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     initial_margin_on_sell: "MoneyValue" = _grpc_helpers.message_field(62)
     min_price_increment_amount: "Quotation" = _grpc_helpers.message_field(63)
     brand: "BrandData" = _grpc_helpers.message_field(64)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(90)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(91)
 
 
 @dataclass(eq=False, repr=True)
@@ -1040,6 +1052,8 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
     brand: "BrandData" = _grpc_helpers.message_field(60)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(90)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(91)
 
 
 @dataclass(eq=False, repr=True)
@@ -1120,6 +1134,8 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
     brand: "BrandData" = _grpc_helpers.message_field(60)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(490)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(491)
 
 
 @dataclass(eq=False, repr=True)
@@ -1162,6 +1178,7 @@ class AssetResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class AssetsRequest(_grpc_helpers.Message):
     instrument_type: Optional["InstrumentType"] = _grpc_helpers.enum_field(1)
+    instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1793,6 +1810,7 @@ class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
     instrument_id: List[str] = _grpc_helpers.string_field(2)
     last_price_type: LastPriceType = _grpc_helpers.message_field(3)
+    instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -1883,6 +1901,7 @@ class GetMySubscriptions(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetClosePricesRequest(_grpc_helpers.Message):
     instruments: List["InstrumentClosePriceRequest"] = _grpc_helpers.message_field(1)
+    instrument_status: Optional["InstrumentStatus"] = _grpc_helpers.enum_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -2054,6 +2073,7 @@ class VirtualPortfolioPosition(_grpc_helpers.Message):
     expire_date: datetime = _grpc_helpers.message_field(9)
     current_price: "MoneyValue" = _grpc_helpers.message_field(10)
     average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(11)
+    daily_yield: "MoneyValue" = _grpc_helpers.message_field(31)
 
 
 @dataclass(eq=False, repr=True)
@@ -2073,6 +2093,8 @@ class PortfolioResponse(_grpc_helpers.Message):
     virtual_positions: List["VirtualPortfolioPosition"] = _grpc_helpers.message_field(
         12
     )
+    daily_yield: MoneyValue = _grpc_helpers.message_field(16)
+    daily_yield_relative: Quotation = _grpc_helpers.message_field(17)
 
 
 @dataclass(eq=False, repr=True)
@@ -2088,6 +2110,7 @@ class PositionsResponse(_grpc_helpers.Message):
     limits_loading_in_progress: bool = _grpc_helpers.bool_field(4)
     futures: List["PositionsFutures"] = _grpc_helpers.bool_field(5)
     options: List["PositionsOptions"] = _grpc_helpers.bool_field(6)
+    account_id: str = _grpc_helpers.string_field(15)
 
 
 @dataclass(eq=False, repr=True)
@@ -2120,6 +2143,7 @@ class PortfolioPosition(_grpc_helpers.Message):
     instrument_uid: str = _grpc_helpers.string_field(25)
     var_margin: "MoneyValue" = _grpc_helpers.message_field(26)
     expected_yield_fifo: "Quotation" = _grpc_helpers.message_field(27)
+    daily_yield: "MoneyValue" = _grpc_helpers.message_field(31)
 
 
 @dataclass(eq=False, repr=True)
@@ -2768,6 +2792,7 @@ class OperationItemTrade(_grpc_helpers.Message):
 class PositionsStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.string_field(1)
     ping_settings: "PingDelaySettings" = _grpc_helpers.message_field(15)
+    with_initial_positions: bool = _grpc_helpers.bool_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -2777,6 +2802,8 @@ class PositionsStreamResponse(_grpc_helpers.Message):
     )
     position: "PositionData" = _grpc_helpers.message_field(2, group="payload")
     ping: "Ping" = _grpc_helpers.message_field(3, group="payload")
+    initial_positions: "PositionsResponse" = \
+        _grpc_helpers.message_field(5, group="payload")
 
 
 @dataclass(eq=False, repr=True)
