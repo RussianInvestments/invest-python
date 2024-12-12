@@ -2802,8 +2802,9 @@ class PositionsStreamResponse(_grpc_helpers.Message):
     )
     position: "PositionData" = _grpc_helpers.message_field(2, group="payload")
     ping: "Ping" = _grpc_helpers.message_field(3, group="payload")
-    initial_positions: "PositionsResponse" = \
-        _grpc_helpers.message_field(5, group="payload")
+    initial_positions: "PositionsResponse" = _grpc_helpers.message_field(
+        5, group="payload"
+    )
 
 
 @dataclass(eq=False, repr=True)

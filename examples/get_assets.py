@@ -1,7 +1,7 @@
 import os
 
 from tinkoff.invest import Client
-from tinkoff.invest.schemas import AssetsRequest, InstrumentType, InstrumentStatus
+from tinkoff.invest.schemas import AssetsRequest, InstrumentStatus, InstrumentType
 
 TOKEN = os.environ["INVEST_TOKEN"]
 

@@ -727,7 +727,7 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_request_error("GetAssets")
     def get_assets(
         self,
-        request: AssetsRequest = None,
+        request: AssetsRequest,
     ) -> AssetsResponse:
         if request is None:
             request = AssetsRequest()

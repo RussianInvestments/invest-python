@@ -9,8 +9,9 @@ def main():
     with Client(TOKEN) as client:
         response = client.users.get_accounts()
         accounts = [account.id for account in response.accounts]
-        for response in client.operations_stream.positions_stream(accounts=accounts,
-                                                                  with_initial_positions=True):  # noqa # pylint: disable=line-too-long
+        for response in client.operations_stream.positions_stream(
+            accounts=accounts, with_initial_positions=True
+        ):  # noqa:E501 # pylint:disable=line-too-long
             print(response)
 
 
