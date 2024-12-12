@@ -727,8 +727,10 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_request_error("GetAssets")
     def get_assets(
         self,
+        request: AssetsRequest = None,
     ) -> AssetsResponse:
-        request = AssetsRequest()
+        if request is None:
+            request = AssetsRequest()
         response, call = self.stub.GetAssets.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.AssetsRequest()
@@ -934,6 +936,7 @@ class MarketDataService(_grpc_helpers.Service):
         figi: Optional[List[str]] = None,
         instrument_id: Optional[List[str]] = None,
         last_price_type: LastPriceType = LastPriceType.LAST_PRICE_UNSPECIFIED,
+        instrument_status: Optional[InstrumentStatus] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
         instrument_id = instrument_id or []
@@ -942,6 +945,8 @@ class MarketDataService(_grpc_helpers.Service):
         request.figi = figi
         request.instrument_id = instrument_id
         request.last_price_type = last_price_type
+        if instrument_status:
+            request.instrument_status = instrument_status
         response, call = self.stub.GetLastPrices.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()
@@ -1033,10 +1038,13 @@ class MarketDataService(_grpc_helpers.Service):
         self,
         *,
         instruments: Optional[List[InstrumentClosePriceRequest]] = None,
+        instrument_status: Optional[InstrumentStatus] = None,
     ) -> GetClosePricesResponse:
         request = GetClosePricesRequest()
         if instruments:
             request.instruments = instruments
+        if instrument_status:
+            request.instrument_status = instrument_status
         response, call = self.stub.GetClosePrices.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetClosePricesRequest()
@@ -1276,12 +1284,20 @@ class OperationsStreamService(_grpc_helpers.Service):
         self,
         *,
         accounts: Optional[List[str]] = None,
+        ping_delay_ms: Optional[int] = None,
+        with_initial_positions: Optional[bool] = None,
     ) -> Iterable[PositionsStreamResponse]:
         request = PositionsStreamRequest()
         if accounts:
             request.accounts = accounts
         else:
             raise ValueError("accounts can not be empty")
+        ping_settings = PingDelaySettings()
+        if ping_delay_ms is not None:
+            ping_settings.ping_delay_ms = ping_delay_ms
+        request.ping_settings = ping_settings
+        if with_initial_positions:
+            request.with_initial_positions = with_initial_positions
         for response in self.stub.PositionsStream(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.PositionsStreamRequest()

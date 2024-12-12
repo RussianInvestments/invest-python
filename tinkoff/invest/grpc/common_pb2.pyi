@@ -72,6 +72,30 @@ INSTRUMENT_TYPE_COMMODITY: InstrumentType.ValueType  # 10
 """Товар."""
 global___InstrumentType = InstrumentType
 
+class _InstrumentStatus:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentStatus.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_STATUS_UNSPECIFIED: _InstrumentStatus.ValueType  # 0
+    """Значение не определено."""
+    INSTRUMENT_STATUS_BASE: _InstrumentStatus.ValueType  # 1
+    """Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+    INSTRUMENT_STATUS_ALL: _InstrumentStatus.ValueType  # 2
+    """Список всех инструментов."""
+
+class InstrumentStatus(_InstrumentStatus, metaclass=_InstrumentStatusEnumTypeWrapper):
+    """Статус запрашиваемых инструментов."""
+
+INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType  # 0
+"""Значение не определено."""
+INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType  # 1
+"""Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType  # 2
+"""Список всех инструментов."""
+global___InstrumentStatus = InstrumentStatus
+
 class _SecurityTradingStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType

@@ -230,63 +230,63 @@ class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     CANDLE_INTERVAL_UNSPECIFIED: _CandleInterval.ValueType  # 0
     """Интервал не определён."""
     CANDLE_INTERVAL_1_MIN: _CandleInterval.ValueType  # 1
-    """От 1 минуты до 1 дня."""
+    """От 1 минуты до 1 дня (лимит 2400)."""
     CANDLE_INTERVAL_5_MIN: _CandleInterval.ValueType  # 2
-    """От 5 минут до 1 дня."""
+    """От 5 минут до недели (лимит 2400)."""
     CANDLE_INTERVAL_15_MIN: _CandleInterval.ValueType  # 3
-    """От 15 минут до 1 дня."""
+    """От 15 минут до 3 недель (лимит 2400)."""
     CANDLE_INTERVAL_HOUR: _CandleInterval.ValueType  # 4
-    """От 1 часа до 1 недели."""
+    """От 1 часа до 3 месяцев (лимит 2400)."""
     CANDLE_INTERVAL_DAY: _CandleInterval.ValueType  # 5
-    """От 1 дня до 1 года."""
+    """От 1 дня до 6 лет (лимит 2400)."""
     CANDLE_INTERVAL_2_MIN: _CandleInterval.ValueType  # 6
-    """От 2 минут до 1 дня."""
+    """От 2 минут до 1 дня (лимит 1200)."""
     CANDLE_INTERVAL_3_MIN: _CandleInterval.ValueType  # 7
-    """От 3 минут до 1 дня."""
+    """От 3 минут до 1 дня (лимит 750)."""
     CANDLE_INTERVAL_10_MIN: _CandleInterval.ValueType  # 8
-    """От 10 минут до 1 дня."""
+    """От 10 минут до недели (лимит 1200)."""
     CANDLE_INTERVAL_30_MIN: _CandleInterval.ValueType  # 9
-    """От 30 минут до 2 дней."""
+    """От 30 минут до 3 недель (лимит 1200)."""
     CANDLE_INTERVAL_2_HOUR: _CandleInterval.ValueType  # 10
-    """От 2 часов до 1 месяца."""
+    """От 2 часов до 3 месяцев (лимит 2400)."""
     CANDLE_INTERVAL_4_HOUR: _CandleInterval.ValueType  # 11
-    """От 4 часов до 1 месяца."""
+    """От 4 часов до 3 месяцев (лимит 700)."""
     CANDLE_INTERVAL_WEEK: _CandleInterval.ValueType  # 12
-    """От 1 недели до 2 лет."""
+    """От 1 недели до 5 лет (лимит 300)."""
     CANDLE_INTERVAL_MONTH: _CandleInterval.ValueType  # 13
-    """От 1 месяца до 10 лет."""
+    """От 1 месяца до 10 лет (лимит 120)."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
-    """Интервал свечей."""
+    """Интервал свечей. Максимальное значение интервала приведено ориентировочно, может отличаться в большую сторону в зависимости от параметров запроса."""
 
 CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType  # 0
 """Интервал не определён."""
 CANDLE_INTERVAL_1_MIN: CandleInterval.ValueType  # 1
-"""От 1 минуты до 1 дня."""
+"""От 1 минуты до 1 дня (лимит 2400)."""
 CANDLE_INTERVAL_5_MIN: CandleInterval.ValueType  # 2
-"""От 5 минут до 1 дня."""
+"""От 5 минут до недели (лимит 2400)."""
 CANDLE_INTERVAL_15_MIN: CandleInterval.ValueType  # 3
-"""От 15 минут до 1 дня."""
+"""От 15 минут до 3 недель (лимит 2400)."""
 CANDLE_INTERVAL_HOUR: CandleInterval.ValueType  # 4
-"""От 1 часа до 1 недели."""
+"""От 1 часа до 3 месяцев (лимит 2400)."""
 CANDLE_INTERVAL_DAY: CandleInterval.ValueType  # 5
-"""От 1 дня до 1 года."""
+"""От 1 дня до 6 лет (лимит 2400)."""
 CANDLE_INTERVAL_2_MIN: CandleInterval.ValueType  # 6
-"""От 2 минут до 1 дня."""
+"""От 2 минут до 1 дня (лимит 1200)."""
 CANDLE_INTERVAL_3_MIN: CandleInterval.ValueType  # 7
-"""От 3 минут до 1 дня."""
+"""От 3 минут до 1 дня (лимит 750)."""
 CANDLE_INTERVAL_10_MIN: CandleInterval.ValueType  # 8
-"""От 10 минут до 1 дня."""
+"""От 10 минут до недели (лимит 1200)."""
 CANDLE_INTERVAL_30_MIN: CandleInterval.ValueType  # 9
-"""От 30 минут до 2 дней."""
+"""От 30 минут до 3 недель (лимит 1200)."""
 CANDLE_INTERVAL_2_HOUR: CandleInterval.ValueType  # 10
-"""От 2 часов до 1 месяца."""
+"""От 2 часов до 3 месяцев (лимит 2400)."""
 CANDLE_INTERVAL_4_HOUR: CandleInterval.ValueType  # 11
-"""От 4 часов до 1 месяца."""
+"""От 4 часов до 3 месяцев (лимит 700)."""
 CANDLE_INTERVAL_WEEK: CandleInterval.ValueType  # 12
-"""От 1 недели до 2 лет."""
+"""От 1 недели до 5 лет (лимит 300)."""
 CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
-"""От 1 месяца до 10 лет."""
+"""От 1 месяца до 10 лет (лимит 120)."""
 global___CandleInterval = CandleInterval
 
 class _CandleSource:
@@ -1536,8 +1536,11 @@ class GetLastPricesRequest(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     LAST_PRICE_TYPE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_STATUS_FIELD_NUMBER: builtins.int
     last_price_type: global___LastPriceType.ValueType
     """Тип запрашиваемой последней цены."""
+    instrument_status: tinkoff.invest.grpc.common_pb2.InstrumentStatus.ValueType
+    """Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus)."""
     @property
     def figi(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`."""
@@ -1552,8 +1555,11 @@ class GetLastPricesRequest(google.protobuf.message.Message):
         figi: collections.abc.Iterable[builtins.str] | None = ...,
         instrument_id: collections.abc.Iterable[builtins.str] | None = ...,
         last_price_type: global___LastPriceType.ValueType = ...,
+        instrument_status: tinkoff.invest.grpc.common_pb2.InstrumentStatus.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["figi", b"figi", "instrument_id", b"instrument_id", "last_price_type", b"last_price_type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_instrument_status", b"_instrument_status", "instrument_status", b"instrument_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_instrument_status", b"_instrument_status", "figi", b"figi", "instrument_id", b"instrument_id", "instrument_status", b"instrument_status", "last_price_type", b"last_price_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_instrument_status", b"_instrument_status"]) -> typing.Literal["instrument_status"] | None: ...
 
 global___GetLastPricesRequest = GetLastPricesRequest
 
@@ -1918,6 +1924,9 @@ class GetClosePricesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     INSTRUMENTS_FIELD_NUMBER: builtins.int
+    INSTRUMENT_STATUS_FIELD_NUMBER: builtins.int
+    instrument_status: tinkoff.invest.grpc.common_pb2.InstrumentStatus.ValueType
+    """Статус запрашиваемых инструментов. [Возможные значения](#instrumentstatus)."""
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstrumentClosePriceRequest]:
         """Массив по инструментам."""
@@ -1926,8 +1935,11 @@ class GetClosePricesRequest(google.protobuf.message.Message):
         self,
         *,
         instruments: collections.abc.Iterable[global___InstrumentClosePriceRequest] | None = ...,
+        instrument_status: tinkoff.invest.grpc.common_pb2.InstrumentStatus.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["instruments", b"instruments"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_instrument_status", b"_instrument_status", "instrument_status", b"instrument_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_instrument_status", b"_instrument_status", "instrument_status", b"instrument_status", "instruments", b"instruments"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_instrument_status", b"_instrument_status"]) -> typing.Literal["instrument_status"] | None: ...
 
 global___GetClosePricesRequest = GetClosePricesRequest
 

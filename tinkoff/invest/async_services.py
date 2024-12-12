@@ -189,7 +189,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse,
+    WithdrawLimitsResponse, PingDelaySettings,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -745,8 +745,10 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetAssets")
     async def get_assets(
         self,
+        request: AssetsRequest = None,
     ) -> AssetsResponse:
-        request = AssetsRequest()
+        if request is None:
+            request = AssetsRequest()
         response_coro = self.stub.GetAssets(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.AssetsRequest()
@@ -968,6 +970,7 @@ class MarketDataService(_grpc_helpers.Service):
         figi: Optional[List[str]] = None,
         instrument_id: Optional[List[str]] = None,
         last_price_type: LastPriceType = LastPriceType.LAST_PRICE_UNSPECIFIED,
+        instrument_status: Optional[InstrumentStatus] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
         instrument_id = instrument_id or []
@@ -976,6 +979,8 @@ class MarketDataService(_grpc_helpers.Service):
         request.figi = figi
         request.instrument_id = instrument_id
         request.last_price_type = last_price_type
+        if instrument_status:
+            request.instrument_status = instrument_status
         response_coro = self.stub.GetLastPrices(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()
@@ -1071,10 +1076,13 @@ class MarketDataService(_grpc_helpers.Service):
         self,
         *,
         instruments: Optional[List[InstrumentClosePriceRequest]] = None,
+        instrument_status: Optional[InstrumentStatus] = None,
     ) -> GetClosePricesResponse:
         request = GetClosePricesRequest()
         if instruments:
             request.instruments = instruments
+        if instrument_status:
+            request.instrument_status = instrument_status
         response_coro = self.stub.GetClosePrices(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetClosePricesRequest()
@@ -1280,13 +1288,18 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_aio_request_error_gen("PortfolioStream")
     async def portfolio_stream(
-        self, *, accounts: Optional[List[str]] = None
+        self, *, accounts: Optional[List[str]] = None,
+            ping_delay_ms: Optional[int] = None,
     ) -> AsyncIterable[PortfolioStreamResponse]:
         request = PortfolioStreamRequest()
         if accounts:
             request.accounts = accounts
         else:
             raise ValueError("accounts can not be empty")
+        ping_settings = PingDelaySettings()
+        if ping_delay_ms is not None:
+            ping_settings.ping_delay_ms = ping_delay_ms
+        request.ping_settings = ping_settings
         async for response in self.stub.PortfolioStream(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.PortfolioStreamRequest()
@@ -1297,13 +1310,21 @@ class OperationsStreamService(_grpc_helpers.Service):
 
     @handle_aio_request_error_gen("PositionsStream")
     async def positions_stream(
-        self, *, accounts: Optional[List[str]] = None
+        self, *, accounts: Optional[List[str]] = None,
+            ping_delay_ms: Optional[int] = None,
+            with_initial_positions: Optional[bool] = None,
     ) -> AsyncIterable[PositionsStreamResponse]:
         request = PositionsStreamRequest()
         if accounts:
             request.accounts = accounts
         else:
             raise ValueError("accounts can not be empty")
+        ping_settings = PingDelaySettings()
+        if ping_delay_ms is not None:
+            ping_settings.ping_delay_ms = ping_delay_ms
+        request.ping_settings = ping_settings
+        if with_initial_positions:
+            request.with_initial_positions = with_initial_positions
         async for response in self.stub.PositionsStream(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.PositionsStreamRequest()
