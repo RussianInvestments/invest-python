@@ -54,7 +54,7 @@ def main():
         account, *_ = response.accounts
         account_id = account.id
 
-        order_id = uuid.uuid4().hex
+        order_id = str(uuid.uuid4())
 
         logger.info(
             "Placing order for %s security of %s, with order_id=%s",
