@@ -4,7 +4,7 @@ from datetime import datetime
 import pytest
 
 from tinkoff.invest.schemas import CandleInterval
-from tinkoff.invest.utils import get_intervals
+from tinkoff.invest.utils import empty_or_uuid, get_intervals
 
 
 @pytest.mark.parametrize(
@@ -55,3 +55,17 @@ def test_get_intervals(candle_interval, interval, intervals):
     )
 
     assert result == intervals
+
+
+@pytest.mark.parametrize(
+    "s, expected",
+    [
+        ("", True),
+        ("123", False),
+        ("1234567890", False),
+        ("12345678-1234-1234-1234-abcdabcdabcd", True),
+        ("12345678-12g4-1234-1234-abcdabcdabcd", False),
+    ],
+)
+def test_is_empty_or_uuid(s: str, expected: bool):
+    assert expected == empty_or_uuid(s)

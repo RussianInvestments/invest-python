@@ -6,8 +6,9 @@ from typing import AsyncGenerator, AsyncIterable, List, Optional
 import grpc
 from deprecation import deprecated
 
-from . import _grpc_helpers
+from . import _grpc_helpers, utils
 from ._errors import handle_aio_request_error, handle_aio_request_error_gen
+from .exceptions import RequestError
 from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -1401,6 +1402,12 @@ class OrdersService(_grpc_helpers.Service):
         request.direction = direction
         request.account_id = account_id
         request.order_type = order_type
+        if not utils.empty_or_uuid(order_id):
+            raise RequestError(
+                grpc.StatusCode.INVALID_ARGUMENT,
+                "order_id should be empty or uuid",
+                None,
+            )
         request.order_id = order_id
         request.time_in_force = time_in_force
         request.price_type = price_type
@@ -1418,6 +1425,12 @@ class OrdersService(_grpc_helpers.Service):
     async def post_order_async(
         self, request: PostOrderAsyncRequest
     ) -> PostOrderAsyncResponse:
+        if not utils.empty_or_uuid(request.order_id):
+            raise RequestError(
+                grpc.StatusCode.INVALID_ARGUMENT,
+                "order_id should be empty or uuid",
+                None,
+            )
         response_coro = self.stub.PostOrderAsync(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.PostOrderAsyncRequest()
@@ -1670,6 +1683,12 @@ class SandboxService(_grpc_helpers.Service):
         request.direction = direction
         request.account_id = account_id
         request.order_type = order_type
+        if not utils.empty_or_uuid(order_id):
+            raise RequestError(
+                grpc.StatusCode.INVALID_ARGUMENT,
+                "order_id should be empty or uuid",
+                None,
+            )
         request.order_id = order_id
         request.time_in_force = time_in_force
         request.price_type = price_type
