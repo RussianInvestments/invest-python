@@ -1,5 +1,6 @@
 import ast
 import dataclasses
+import re
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from enum import Enum
@@ -20,6 +21,7 @@ __all__ = (
     "floor_datetime",
     "dataclass_from_dict",
     "round_datetime_range",
+    "empty_or_uuid",
 )
 
 DAYS_IN_YEAR = 365
@@ -217,3 +219,13 @@ def with_filtering_distinct_candles(f: Callable[[Any], Iterable[HistoricCandle]]
         yield from filter_distinct_candles(list(f(*args, **kwargs)))
 
     return _
+
+
+def empty_or_uuid(s: str) -> bool:
+    return (
+        s == ""
+        or re.fullmatch(
+            r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", s
+        )
+        is not None
+    )
