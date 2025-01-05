@@ -1,4 +1,4 @@
-# Contributing
+# Contributing change
 
 Спасибо за участие в проекте Tinkoff Invest!
 
