@@ -232,15 +232,15 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
     CORRECTED_MARGIN_FIELD_NUMBER: builtins.int
     @property
     def liquid_portfolio(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Ликвидная стоимость портфеля. [Подробнее про ликвидный портфель](https://help.tbank.ru/margin-trade/short/liquid-portfolio/)."""
+        """Ликвидная стоимость портфеля. [Подробнее про ликвидный портфель](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q4)."""
 
     @property
     def starting_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Начальная маржа — начальное обеспечение для совершения новой сделки. [Подробнее про начальную и минимальную маржу](https://help.tbank.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Начальная маржа — начальное обеспечение для совершения новой сделки. [Подробнее про начальную и минимальную маржу](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q6)."""
 
     @property
     def minimal_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. [Подробнее про начальную и минимальную маржу](https://help.tbank.ru/margin-trade/short/initial-and-maintenance-margin/)."""
+        """Минимальная маржа — это минимальное обеспечение для поддержания позиции, которую вы уже открыли. [Подробнее про начальную и минимальную маржу](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q6)."""
 
     @property
     def funds_sufficiency_level(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -381,15 +381,21 @@ class GetInfoResponse(google.protobuf.message.Message):
     QUAL_STATUS_FIELD_NUMBER: builtins.int
     QUALIFIED_FOR_WORK_WITH_FIELD_NUMBER: builtins.int
     TARIFF_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    RISK_LEVEL_CODE_FIELD_NUMBER: builtins.int
     prem_status: builtins.bool
     """Признак премиум клиента."""
     qual_status: builtins.bool
     """Признак квалифицированного инвестора."""
     tariff: builtins.str
     """Наименование тарифа пользователя."""
+    user_id: builtins.str
+    """Идентификатор пользователя."""
+    risk_level_code: builtins.str
+    """Категория риска."""
     @property
     def qualified_for_work_with(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](https://russianinvestments.github.io/investAPI/faq_users/)."""
+        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](/invest/services/accounts/faq_users)."""
 
     def __init__(
         self,
@@ -398,7 +404,9 @@ class GetInfoResponse(google.protobuf.message.Message):
         qual_status: builtins.bool = ...,
         qualified_for_work_with: collections.abc.Iterable[builtins.str] | None = ...,
         tariff: builtins.str = ...,
+        user_id: builtins.str = ...,
+        risk_level_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["prem_status", b"prem_status", "qual_status", b"qual_status", "qualified_for_work_with", b"qualified_for_work_with", "tariff", b"tariff"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["prem_status", b"prem_status", "qual_status", b"qual_status", "qualified_for_work_with", b"qualified_for_work_with", "risk_level_code", b"risk_level_code", "tariff", b"tariff", "user_id", b"user_id"]) -> None: ...
 
 global___GetInfoResponse = GetInfoResponse

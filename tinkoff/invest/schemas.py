@@ -2406,6 +2406,8 @@ class GetInfoResponse(_grpc_helpers.Message):
     qual_status: bool = _grpc_helpers.bool_field(2)
     qualified_for_work_with: List[str] = _grpc_helpers.string_field(3)
     tariff: str = _grpc_helpers.string_field(4)
+    user_id: str = _grpc_helpers.string_field(9)
+    risk_level_code: str = _grpc_helpers.string_field(12)
 
 
 @dataclass(eq=False, repr=True)
