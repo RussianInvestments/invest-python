@@ -1369,12 +1369,13 @@ class InstrumentLink(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class GetFavoritesRequest(_grpc_helpers.Message):
-    pass
+    group_id: Optional[str] = _grpc_helpers.string_field(1)
 
 
 @dataclass(eq=False, repr=True)
 class GetFavoritesResponse(_grpc_helpers.Message):
     favorite_instruments: List["FavoriteInstrument"] = _grpc_helpers.message_field(1)
+    group_id: Optional[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1395,6 +1396,7 @@ class FavoriteInstrument(_grpc_helpers.Message):
 class EditFavoritesRequest(_grpc_helpers.Message):
     instruments: List["EditFavoritesRequestInstrument"] = _grpc_helpers.message_field(1)
     action_type: "EditFavoritesActionType" = _grpc_helpers.enum_field(6)
+    group_id: Optional[str] = _grpc_helpers.string_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1406,6 +1408,50 @@ class EditFavoritesRequestInstrument(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class EditFavoritesResponse(_grpc_helpers.Message):
     favorite_instruments: List["FavoriteInstrument"] = _grpc_helpers.message_field(1)
+    group_id: Optional[str] = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class CreateFavoriteGroupRequest(_grpc_helpers.Message):
+    group_name: str = _grpc_helpers.string_field(1)
+    group_color: str = _grpc_helpers.string_field(2)
+    note: Optional[str] = _grpc_helpers.string_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class CreateFavoriteGroupResponse(_grpc_helpers.Message):
+    group_id: str = _grpc_helpers.string_field(1)
+    group_name: str = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class DeleteFavoriteGroupRequest(_grpc_helpers.Message):
+    group_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class DeleteFavoriteGroupResponse(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class GetFavoriteGroupsRequest(_grpc_helpers.Message):
+    instrument_id: List[str] = _grpc_helpers.string_field(1)
+    excluded_group_id: List[str] = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class GetFavoriteGroupsResponse(_grpc_helpers.Message):
+    groups: List["FavoriteGroup"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class FavoriteGroup(_grpc_helpers.Message):
+    group_id: str = _grpc_helpers.string_field(1)
+    group_name: str = _grpc_helpers.string_field(2)
+    color: str = _grpc_helpers.string_field(3)
+    size: int = _grpc_helpers.int32_field(4)
+    contains_instrument: Optional[bool] = _grpc_helpers.message_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -3023,6 +3069,32 @@ class ConsensusItem(_grpc_helpers.Message):
 class GetForecastResponse(_grpc_helpers.Message):
     targets: List["TargetItem"] = _grpc_helpers.message_field(1)
     consensus: "ConsensusItem" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class RiskRatesRequest(_grpc_helpers.Message):
+    instrument_id: List[str] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class RiskRatesResponse(_grpc_helpers.Message):
+    instrument_risk_rates: List["RiskRateResult"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class RiskRateResult(_grpc_helpers.Message):
+    instrument_uid: str = _grpc_helpers.string_field(1)
+    short_risk_rate: Optional["RiskRate"] = _grpc_helpers.message_field(2)
+    long_risk_rate: Optional["RiskRate"] = _grpc_helpers.message_field(3)
+    short_risk_rates: List["RiskRate"] = _grpc_helpers.message_field(5)
+    long_risk_rates: List["RiskRate"] = _grpc_helpers.message_field(6)
+    error: Optional[str] = _grpc_helpers.string_field(9)
+
+
+@dataclass(eq=False, repr=True)
+class RiskRate(_grpc_helpers.Message):
+    risk_level_code: str = _grpc_helpers.string_field(2)
+    value: Quotation = _grpc_helpers.message_field(5)
 
 
 @dataclass(eq=False, repr=True)

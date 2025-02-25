@@ -46,8 +46,12 @@ from .schemas import (
     CandleSource,
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
+    CreateFavoriteGroupRequest,
+    CreateFavoriteGroupResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    DeleteFavoriteGroupRequest,
+    DeleteFavoriteGroupResponse,
     EditFavoritesActionType,
     EditFavoritesRequest,
     EditFavoritesRequestInstrument,
@@ -91,6 +95,8 @@ from .schemas import (
     GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
+    GetFavoriteGroupsRequest,
+    GetFavoriteGroupsResponse,
     GetFavoritesRequest,
     GetFavoritesResponse,
     GetForecastRequest,
@@ -175,6 +181,8 @@ from .schemas import (
     PriceType,
     Quotation,
     ReplaceOrderRequest,
+    RiskRatesRequest,
+    RiskRatesResponse,
     SandboxPayInRequest,
     SandboxPayInResponse,
     ShareResponse,
@@ -744,8 +752,12 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_request_error("GetFavorites")
     def get_favorites(
         self,
+        *,
+        group_id: Optional[str] = None,
     ) -> GetFavoritesResponse:
         request = GetFavoritesRequest()
+        if group_id is not None:
+            request.group_id = group_id
         response, call = self.stub.GetFavorites.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetFavoritesRequest()
@@ -761,12 +773,15 @@ class InstrumentsService(_grpc_helpers.Service):
         *,
         instruments: Optional[List[EditFavoritesRequestInstrument]] = None,
         action_type: Optional[EditFavoritesActionType] = None,
+        group_id: Optional[str] = None,
     ) -> EditFavoritesResponse:
         request = EditFavoritesRequest()
         if action_type is not None:
             request.action_type = action_type
         if instruments is not None:
             request.instruments = instruments
+        if group_id is not None:
+            request.group_id = group_id
         response, call = self.stub.EditFavorites.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.EditFavoritesRequest()
@@ -775,6 +790,52 @@ class InstrumentsService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "EditFavorites")
         return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
+
+    @handle_request_error("CreateFavoriteGroup")
+    def create_favorite_group(
+        self,
+        request: CreateFavoriteGroupRequest,
+    ) -> CreateFavoriteGroupResponse:
+        response, call = self.stub.CreateFavoriteGroup.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.CreateFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "CreateFavoriteGroup")
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, CreateFavoriteGroupResponse
+        )
+
+    @handle_request_error("DeleteFavoriteGroup")
+    def delete_favorite_group(
+        self,
+        request: DeleteFavoriteGroupRequest,
+    ) -> DeleteFavoriteGroupResponse:
+        response, call = self.stub.DeleteFavoriteGroup.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.DeleteFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "DeleteFavoriteGroup")
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, DeleteFavoriteGroupResponse
+        )
+
+    @handle_request_error("GetFavoriteGroups")
+    def get_favorite_groups(
+        self,
+        request: GetFavoriteGroupsRequest,
+    ) -> GetFavoriteGroupsResponse:
+        response, call = self.stub.GetFavoriteGroups.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetFavoriteGroupsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetFavoriteGroups")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetFavoriteGroupsResponse)
 
     @handle_request_error("GetCountries")
     def get_countries(
@@ -896,6 +957,17 @@ class InstrumentsService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetForecastBy")
         return _grpc_helpers.protobuf_to_dataclass(response, GetForecastResponse)
+
+    @handle_request_error("GetRiskRates")
+    def get_risk_rates(self, request: RiskRatesRequest) -> RiskRatesResponse:
+        response, call = self.stub.GetRiskRates.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.RiskRatesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetRiskRates")
+        return _grpc_helpers.protobuf_to_dataclass(response, RiskRatesResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):

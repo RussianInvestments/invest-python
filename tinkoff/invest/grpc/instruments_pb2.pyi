@@ -28,7 +28,7 @@ class _CouponType:
 class _CouponTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CouponType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     COUPON_TYPE_UNSPECIFIED: _CouponType.ValueType  # 0
-    """Неопределённое значение."""
+    """Неопределенное значение."""
     COUPON_TYPE_CONSTANT: _CouponType.ValueType  # 1
     """Постоянный."""
     COUPON_TYPE_FLOATING: _CouponType.ValueType  # 2
@@ -48,7 +48,7 @@ class CouponType(_CouponType, metaclass=_CouponTypeEnumTypeWrapper):
     """Тип купонов."""
 
 COUPON_TYPE_UNSPECIFIED: CouponType.ValueType  # 0
-"""Неопределённое значение."""
+"""Неопределенное значение."""
 COUPON_TYPE_CONSTANT: CouponType.ValueType  # 1
 """Постоянный."""
 COUPON_TYPE_FLOATING: CouponType.ValueType  # 2
@@ -72,7 +72,7 @@ class _OptionDirection:
 class _OptionDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionDirection.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_DIRECTION_UNSPECIFIED: _OptionDirection.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     OPTION_DIRECTION_PUT: _OptionDirection.ValueType  # 1
     """Опцион на продажу."""
     OPTION_DIRECTION_CALL: _OptionDirection.ValueType  # 2
@@ -82,7 +82,7 @@ class OptionDirection(_OptionDirection, metaclass=_OptionDirectionEnumTypeWrappe
     """Тип опциона по направлению сделки."""
 
 OPTION_DIRECTION_UNSPECIFIED: OptionDirection.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 OPTION_DIRECTION_PUT: OptionDirection.ValueType  # 1
 """Опцион на продажу."""
 OPTION_DIRECTION_CALL: OptionDirection.ValueType  # 2
@@ -96,19 +96,19 @@ class _OptionPaymentType:
 class _OptionPaymentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionPaymentType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_PAYMENT_TYPE_UNSPECIFIED: _OptionPaymentType.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     OPTION_PAYMENT_TYPE_PREMIUM: _OptionPaymentType.ValueType  # 1
-    """Опционы с использованием премии в расчётах."""
+    """Опционы с использованием премии в расчетах."""
     OPTION_PAYMENT_TYPE_MARGINAL: _OptionPaymentType.ValueType  # 2
     """Маржируемые опционы."""
 
 class OptionPaymentType(_OptionPaymentType, metaclass=_OptionPaymentTypeEnumTypeWrapper):
-    """Тип расчётов по опциону."""
+    """Тип расчетов по опциону."""
 
 OPTION_PAYMENT_TYPE_UNSPECIFIED: OptionPaymentType.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 OPTION_PAYMENT_TYPE_PREMIUM: OptionPaymentType.ValueType  # 1
-"""Опционы с использованием премии в расчётах."""
+"""Опционы с использованием премии в расчетах."""
 OPTION_PAYMENT_TYPE_MARGINAL: OptionPaymentType.ValueType  # 2
 """Маржируемые опционы."""
 global___OptionPaymentType = OptionPaymentType
@@ -120,7 +120,7 @@ class _OptionStyle:
 class _OptionStyleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionStyle.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_STYLE_UNSPECIFIED: _OptionStyle.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     OPTION_STYLE_AMERICAN: _OptionStyle.ValueType  # 1
     """Американский опцион."""
     OPTION_STYLE_EUROPEAN: _OptionStyle.ValueType  # 2
@@ -130,7 +130,7 @@ class OptionStyle(_OptionStyle, metaclass=_OptionStyleEnumTypeWrapper):
     """Тип опциона по стилю."""
 
 OPTION_STYLE_UNSPECIFIED: OptionStyle.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 OPTION_STYLE_AMERICAN: OptionStyle.ValueType  # 1
 """Американский опцион."""
 OPTION_STYLE_EUROPEAN: OptionStyle.ValueType  # 2
@@ -144,21 +144,21 @@ class _OptionSettlementType:
 class _OptionSettlementTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionSettlementType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_EXECUTION_TYPE_UNSPECIFIED: _OptionSettlementType.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: _OptionSettlementType.ValueType  # 1
     """Поставочный тип опциона."""
     OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: _OptionSettlementType.ValueType  # 2
-    """Расчётный тип опциона."""
+    """Расчетный тип опциона."""
 
 class OptionSettlementType(_OptionSettlementType, metaclass=_OptionSettlementTypeEnumTypeWrapper):
     """Тип опциона по способу исполнения."""
 
 OPTION_EXECUTION_TYPE_UNSPECIFIED: OptionSettlementType.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: OptionSettlementType.ValueType  # 1
 """Поставочный тип опциона."""
 OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: OptionSettlementType.ValueType  # 2
-"""Расчётный тип опциона."""
+"""Расчетный тип опциона."""
 global___OptionSettlementType = OptionSettlementType
 
 class _InstrumentIdType:
@@ -179,7 +179,7 @@ class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Идентификатор позиции."""
 
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
-    """Тип идентификатора инструмента. [Подробнее об идентификации инструментов](https://russianinvestments.github.io/investAPI/faq_identification/)."""
+    """Тип идентификатора инструмента. [Подробнее об идентификации инструментов](./faq_identification/)."""
 
 INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType  # 0
 """Значение не определено."""
@@ -248,7 +248,7 @@ class _AssetType:
 class _AssetTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AssetType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ASSET_TYPE_UNSPECIFIED: _AssetType.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     ASSET_TYPE_CURRENCY: _AssetType.ValueType  # 1
     """Валюта."""
     ASSET_TYPE_COMMODITY: _AssetType.ValueType  # 2
@@ -262,7 +262,7 @@ class AssetType(_AssetType, metaclass=_AssetTypeEnumTypeWrapper):
     """Тип актива."""
 
 ASSET_TYPE_UNSPECIFIED: AssetType.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 ASSET_TYPE_CURRENCY: AssetType.ValueType  # 1
 """Валюта."""
 ASSET_TYPE_COMMODITY: AssetType.ValueType  # 2
@@ -280,7 +280,7 @@ class _StructuredProductType:
 class _StructuredProductTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StructuredProductType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SP_TYPE_UNSPECIFIED: _StructuredProductType.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     SP_TYPE_DELIVERABLE: _StructuredProductType.ValueType  # 1
     """Поставочный."""
     SP_TYPE_NON_DELIVERABLE: _StructuredProductType.ValueType  # 2
@@ -290,7 +290,7 @@ class StructuredProductType(_StructuredProductType, metaclass=_StructuredProduct
     """Тип структурной ноты."""
 
 SP_TYPE_UNSPECIFIED: StructuredProductType.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 SP_TYPE_DELIVERABLE: StructuredProductType.ValueType  # 1
 """Поставочный."""
 SP_TYPE_NON_DELIVERABLE: StructuredProductType.ValueType  # 2
@@ -304,7 +304,7 @@ class _EditFavoritesActionType:
 class _EditFavoritesActionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EditFavoritesActionType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED: _EditFavoritesActionType.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     EDIT_FAVORITES_ACTION_TYPE_ADD: _EditFavoritesActionType.ValueType  # 1
     """Добавить в список."""
     EDIT_FAVORITES_ACTION_TYPE_DEL: _EditFavoritesActionType.ValueType  # 2
@@ -314,7 +314,7 @@ class EditFavoritesActionType(_EditFavoritesActionType, metaclass=_EditFavorites
     """Тип действия со списком избранных инструментов."""
 
 EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED: EditFavoritesActionType.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 EDIT_FAVORITES_ACTION_TYPE_ADD: EditFavoritesActionType.ValueType  # 1
 """Добавить в список."""
 EDIT_FAVORITES_ACTION_TYPE_DEL: EditFavoritesActionType.ValueType  # 2
@@ -328,7 +328,7 @@ class _RealExchange:
 class _RealExchangeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RealExchange.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     REAL_EXCHANGE_UNSPECIFIED: _RealExchange.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     REAL_EXCHANGE_MOEX: _RealExchange.ValueType  # 1
     """Московская биржа."""
     REAL_EXCHANGE_RTS: _RealExchange.ValueType  # 2
@@ -339,10 +339,10 @@ class _RealExchangeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._E
     """Инструмент, торгуемый на площадке брокера."""
 
 class RealExchange(_RealExchange, metaclass=_RealExchangeEnumTypeWrapper):
-    """Реальная площадка исполнения расчётов."""
+    """Реальная площадка исполнения расчетов."""
 
 REAL_EXCHANGE_UNSPECIFIED: RealExchange.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 REAL_EXCHANGE_MOEX: RealExchange.ValueType  # 1
 """Московская биржа."""
 REAL_EXCHANGE_RTS: RealExchange.ValueType  # 2
@@ -415,14 +415,14 @@ class _BondType:
 class _BondTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_BondType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     BOND_TYPE_UNSPECIFIED: _BondType.ValueType  # 0
-    """Тип облигации не определён."""
+    """Тип облигации не определен."""
     BOND_TYPE_REPLACED: _BondType.ValueType  # 1
     """Замещающая облигация."""
 
 class BondType(_BondType, metaclass=_BondTypeEnumTypeWrapper): ...
 
 BOND_TYPE_UNSPECIFIED: BondType.ValueType  # 0
-"""Тип облигации не определён."""
+"""Тип облигации не определен."""
 BOND_TYPE_REPLACED: BondType.ValueType  # 1
 """Замещающая облигация."""
 global___BondType = BondType
@@ -457,7 +457,7 @@ class TradingSchedulesRequest(google.protobuf.message.Message):
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     exchange: builtins.str
-    """Наименование биржи или расчетного календаря. </br>Если не передаётся, возвращается информация по всем доступным торговым площадкам."""
+    """Наименование биржи или расчетного календаря. <br/>Если не передается, возвращается информация по всем доступным торговым площадкам."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание периода по UTC."""
@@ -642,7 +642,7 @@ class InstrumentRequest(google.protobuf.message.Message):
     CLASS_CODE_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     id_type: global___InstrumentIdType.ValueType
-    """Тип идентификатора инструмента. Возможные значения — `figi`, `ticker`. [Подробнее об идентификации инструментов](https://russianinvestments.github.io/investAPI/faq_identification/)."""
+    """Тип идентификатора инструмента. Возможные значения — `figi`, `ticker`. [Подробнее об идентификации инструментов](./faq_identification/)."""
     class_code: builtins.str
     """Идентификатор `class_code`. Обязательный, если `id_type = ticker`."""
     id: builtins.str
@@ -820,7 +820,7 @@ class GetBondEventsRequest(google.protobuf.message.Message):
     class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetBondEventsRequest._EventType.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         EVENT_TYPE_UNSPECIFIED: GetBondEventsRequest._EventType.ValueType  # 0
-        """Неопределённое значение."""
+        """Неопределенное значение."""
         EVENT_TYPE_CPN: GetBondEventsRequest._EventType.ValueType  # 1
         """Купон."""
         EVENT_TYPE_CALL: GetBondEventsRequest._EventType.ValueType  # 2
@@ -832,7 +832,7 @@ class GetBondEventsRequest(google.protobuf.message.Message):
 
     class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
     EVENT_TYPE_UNSPECIFIED: GetBondEventsRequest.EventType.ValueType  # 0
-    """Неопределённое значение."""
+    """Неопределенное значение."""
     EVENT_TYPE_CPN: GetBondEventsRequest.EventType.ValueType  # 1
     """Купон."""
     EVENT_TYPE_CALL: GetBondEventsRequest.EventType.ValueType  # 2
@@ -1300,11 +1300,11 @@ class Option(google.protobuf.message.Message):
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     direction: global___OptionDirection.ValueType
     """Направление опциона."""
     payment_type: global___OptionPaymentType.ValueType
-    """Тип расчётов по опциону."""
+    """Тип расчетов по опциону."""
     style: global___OptionStyle.ValueType
     """Стиль опциона."""
     settlement_type: global___OptionSettlementType.ValueType
@@ -1389,11 +1389,11 @@ class Option(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def expiration_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1583,9 +1583,9 @@ class Bond(google.protobuf.message.Message):
     isin: builtins.str
     """ISIN-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)."""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -1595,13 +1595,13 @@ class Bond(google.protobuf.message.Message):
     coupon_quantity_per_year: builtins.int
     """Количество выплат по купонам в год."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     sector: builtins.str
     """Сектор экономики."""
     issue_kind: builtins.str
-    """Форма выпуска. Возможные значения: </br>**documentary** — документарная; </br>**non_documentary** — бездокументарная."""
+    """Форма выпуска. Возможные значения: <br/>**documentary** — документарная; <br/>**non_documentary** — бездокументарная."""
     issue_size: builtins.int
     """Размер выпуска."""
     issue_size_plan: builtins.int
@@ -1625,7 +1625,7 @@ class Bond(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов. (биржа)"""
+    """Реальная площадка исполнения расчетов. (биржа)"""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     asset_uid: builtins.str
@@ -1720,11 +1720,11 @@ class Bond(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -1843,9 +1843,9 @@ class Currency(google.protobuf.message.Message):
     isin: builtins.str
     """ISIN-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)."""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -1853,9 +1853,9 @@ class Currency(google.protobuf.message.Message):
     exchange: builtins.str
     """Tорговая площадка (секция биржи)."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
     otc_flag: builtins.bool
@@ -1871,7 +1871,7 @@ class Currency(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     for_iis_flag: builtins.bool
@@ -1928,11 +1928,11 @@ class Currency(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -2039,9 +2039,9 @@ class Etf(google.protobuf.message.Message):
     isin: builtins.str
     """ISIN-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)."""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -2049,11 +2049,11 @@ class Etf(google.protobuf.message.Message):
     exchange: builtins.str
     """Tорговая площадка (секция биржи)."""
     focus_type: builtins.str
-    """Возможные значения: </br>**equity** — акции;</br>**fixed_income** — облигации;</br>**mixed_allocation** — смешанный;</br>**money_market** — денежный рынок;</br>**real_estate** — недвижимость;</br>**commodity** — товары;</br>**specialty** — специальный;</br>**private_equity** — private equity;</br>**alternative_investment** — альтернативные инвестиции."""
+    """Возможные значения: <br/>**equity** — акции;<br/>**fixed_income** — облигации;<br/>**mixed_allocation** — смешанный;<br/>**money_market** — денежный рынок;<br/>**real_estate** — недвижимость;<br/>**commodity** — товары;<br/>**specialty** — специальный;<br/>**private_equity** — private equity;<br/>**alternative_investment** — альтернативные инвестиции."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     sector: builtins.str
     """Сектор экономики."""
     rebalancing_freq: builtins.str
@@ -2071,7 +2071,7 @@ class Etf(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     asset_uid: builtins.str
@@ -2142,11 +2142,11 @@ class Etf(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -2260,9 +2260,9 @@ class Future(google.protobuf.message.Message):
     class_code: builtins.str
     """Класс-код (секция торгов)."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)."""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций шорт."""
     name: builtins.str
@@ -2270,15 +2270,15 @@ class Future(google.protobuf.message.Message):
     exchange: builtins.str
     """Tорговая площадка (секция биржи)."""
     futures_type: builtins.str
-    """Тип фьючерса. Возможные значения: </br>**physical_delivery** — физические поставки; </br>**cash_settlement** — денежный эквивалент."""
+    """Тип фьючерса. Возможные значения: <br/>**physical_delivery** — физические поставки; <br/>**cash_settlement** — денежный эквивалент."""
     asset_type: builtins.str
-    """Тип актива. Возможные значения: </br>**commodity** — товар; </br>**currency** — валюта; </br>**security** — ценная бумага; </br>**index** — индекс."""
+    """Тип актива. Возможные значения: <br/>**commodity** — товар; <br/>**currency** — валюта; <br/>**security** — ценная бумага; <br/>**index** — индекс."""
     basic_asset: builtins.str
     """Основной актив."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     sector: builtins.str
     """Сектор экономики."""
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
@@ -2294,7 +2294,7 @@ class Future(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     basic_asset_position_uid: builtins.str
@@ -2377,11 +2377,11 @@ class Future(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -2498,9 +2498,9 @@ class Share(google.protobuf.message.Message):
     isin: builtins.str
     """ISIN-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)"""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -2510,9 +2510,9 @@ class Share(google.protobuf.message.Message):
     issue_size: builtins.int
     """Размер выпуска."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     sector: builtins.str
     """Сектор экономики."""
     issue_size_plan: builtins.int
@@ -2528,13 +2528,13 @@ class Share(google.protobuf.message.Message):
     div_yield_flag: builtins.bool
     """Признак наличия дивидендной доходности."""
     share_type: global___ShareType.ValueType
-    """Тип акции. Возможные значения — `[ShareType](https://russianinvestments.github.io/investAPI/instruments#sharetype)`."""
+    """Тип акции. Возможные значения — `[ShareType](./instruments#sharetype)`."""
     api_trade_available_flag: builtins.bool
     """Возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     asset_uid: builtins.str
@@ -2601,11 +2601,11 @@ class Share(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -2885,9 +2885,9 @@ class Instrument(google.protobuf.message.Message):
     isin: builtins.str
     """ISIN-идентификатор инструмента."""
     lot: builtins.int
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](https://russianinvestments.github.io/investAPI/glossary#lot)."""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру `lot`. [Подробнее](./glossary#lot)."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
     name: builtins.str
@@ -2895,9 +2895,9 @@ class Instrument(google.protobuf.message.Message):
     exchange: builtins.str
     """Tорговая площадка (секция биржи)."""
     country_of_risk: builtins.str
-    """Код страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Код страны риска — то есть страны, в которой компания ведет основной бизнес."""
     country_of_risk_name: builtins.str
-    """Наименование страны риска — то есть страны, в которой компания ведёт основной бизнес."""
+    """Наименование страны риска — то есть страны, в которой компания ведет основной бизнес."""
     instrument_type: builtins.str
     """Тип инструмента."""
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
@@ -2913,7 +2913,7 @@ class Instrument(google.protobuf.message.Message):
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
-    """Реальная площадка исполнения расчётов (биржа)."""
+    """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     asset_uid: builtins.str
@@ -2970,11 +2970,11 @@ class Instrument(google.protobuf.message.Message):
 
     @property
     def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в лонг, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в лонг с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     @property
     def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка риска в шорт, с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
+        """Ставка риска в шорт с учетом текущего уровня риска портфеля клиента. [Подробнее про ставки риска](https://www.tbank.ru/invest/help/brokerage/account/margin/about/#q5)."""
 
     def __init__(
         self,
@@ -3665,7 +3665,7 @@ class AssetStructuredProduct(google.protobuf.message.Message):
     PLACEMENT_DATE_FIELD_NUMBER: builtins.int
     ISSUE_KIND_FIELD_NUMBER: builtins.int
     borrow_name: builtins.str
-    """Наименование заёмщика."""
+    """Наименование заемщика."""
     nominal_currency: builtins.str
     """Валюта номинала."""
     type: global___StructuredProductType.ValueType
@@ -3696,7 +3696,7 @@ class AssetStructuredProduct(google.protobuf.message.Message):
 
     @property
     def issue_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Объём размещения."""
+        """Объем размещения."""
 
     @property
     def placement_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -4036,19 +4036,30 @@ class GetFavoritesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    GROUP_ID_FIELD_NUMBER: builtins.int
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
     def __init__(
         self,
+        *,
+        group_id: builtins.str | None = ...,
     ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_group_id", b"_group_id", "group_id", b"group_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_group_id", b"_group_id", "group_id", b"group_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_group_id", b"_group_id"]) -> typing.Literal["group_id"] | None: ...
 
 global___GetFavoritesRequest = GetFavoritesRequest
 
 @typing.final
 class GetFavoritesResponse(google.protobuf.message.Message):
-    """В ответ передаётся список избранных инструментов в качестве массива."""
+    """В ответ передается список избранных инструментов в качестве массива."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     FAVORITE_INSTRUMENTS_FIELD_NUMBER: builtins.int
+    GROUP_ID_FIELD_NUMBER: builtins.int
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
     @property
     def favorite_instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FavoriteInstrument]:
         """Массив инструментов."""
@@ -4057,8 +4068,11 @@ class GetFavoritesResponse(google.protobuf.message.Message):
         self,
         *,
         favorite_instruments: collections.abc.Iterable[global___FavoriteInstrument] | None = ...,
+        group_id: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["favorite_instruments", b"favorite_instruments"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_group_id", b"_group_id", "group_id", b"group_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_group_id", b"_group_id", "favorite_instruments", b"favorite_instruments", "group_id", b"group_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_group_id", b"_group_id"]) -> typing.Literal["group_id"] | None: ...
 
 global___GetFavoritesResponse = GetFavoritesResponse
 
@@ -4124,8 +4138,11 @@ class EditFavoritesRequest(google.protobuf.message.Message):
 
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     ACTION_TYPE_FIELD_NUMBER: builtins.int
+    GROUP_ID_FIELD_NUMBER: builtins.int
     action_type: global___EditFavoritesActionType.ValueType
     """Тип действия со списком."""
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EditFavoritesRequestInstrument]:
         """Массив инструментов."""
@@ -4135,8 +4152,11 @@ class EditFavoritesRequest(google.protobuf.message.Message):
         *,
         instruments: collections.abc.Iterable[global___EditFavoritesRequestInstrument] | None = ...,
         action_type: global___EditFavoritesActionType.ValueType = ...,
+        group_id: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["action_type", b"action_type", "instruments", b"instruments"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_group_id", b"_group_id", "group_id", b"group_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_group_id", b"_group_id", "action_type", b"action_type", "group_id", b"group_id", "instruments", b"instruments"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_group_id", b"_group_id"]) -> typing.Literal["group_id"] | None: ...
 
 global___EditFavoritesRequest = EditFavoritesRequest
 
@@ -4171,6 +4191,9 @@ class EditFavoritesResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     FAVORITE_INSTRUMENTS_FIELD_NUMBER: builtins.int
+    GROUP_ID_FIELD_NUMBER: builtins.int
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
     @property
     def favorite_instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FavoriteInstrument]:
         """Массив инструментов."""
@@ -4179,10 +4202,161 @@ class EditFavoritesResponse(google.protobuf.message.Message):
         self,
         *,
         favorite_instruments: collections.abc.Iterable[global___FavoriteInstrument] | None = ...,
+        group_id: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["favorite_instruments", b"favorite_instruments"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_group_id", b"_group_id", "group_id", b"group_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_group_id", b"_group_id", "favorite_instruments", b"favorite_instruments", "group_id", b"group_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_group_id", b"_group_id"]) -> typing.Literal["group_id"] | None: ...
 
 global___EditFavoritesResponse = EditFavoritesResponse
+
+@typing.final
+class CreateFavoriteGroupRequest(google.protobuf.message.Message):
+    """Запрос создания новой группы избранных инструментов."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    GROUP_NAME_FIELD_NUMBER: builtins.int
+    GROUP_COLOR_FIELD_NUMBER: builtins.int
+    NOTE_FIELD_NUMBER: builtins.int
+    group_name: builtins.str
+    """Название группы, не более 255 символов."""
+    group_color: builtins.str
+    """Цвет группы. Принимает значения в HEX-формате, от "000000" до "FFFFFF" """
+    note: builtins.str
+    """Описание"""
+    def __init__(
+        self,
+        *,
+        group_name: builtins.str = ...,
+        group_color: builtins.str = ...,
+        note: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_note", b"_note", "note", b"note"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_note", b"_note", "group_color", b"group_color", "group_name", b"group_name", "note", b"note"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_note", b"_note"]) -> typing.Literal["note"] | None: ...
+
+global___CreateFavoriteGroupRequest = CreateFavoriteGroupRequest
+
+@typing.final
+class CreateFavoriteGroupResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    GROUP_ID_FIELD_NUMBER: builtins.int
+    GROUP_NAME_FIELD_NUMBER: builtins.int
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
+    group_name: builtins.str
+    """Название группы."""
+    def __init__(
+        self,
+        *,
+        group_id: builtins.str = ...,
+        group_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["group_id", b"group_id", "group_name", b"group_name"]) -> None: ...
+
+global___CreateFavoriteGroupResponse = CreateFavoriteGroupResponse
+
+@typing.final
+class DeleteFavoriteGroupRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    GROUP_ID_FIELD_NUMBER: builtins.int
+    group_id: builtins.str
+    """Уникальный идентификатор группы."""
+    def __init__(
+        self,
+        *,
+        group_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["group_id", b"group_id"]) -> None: ...
+
+global___DeleteFavoriteGroupRequest = DeleteFavoriteGroupRequest
+
+@typing.final
+class DeleteFavoriteGroupResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___DeleteFavoriteGroupResponse = DeleteFavoriteGroupResponse
+
+@typing.final
+class GetFavoriteGroupsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    EXCLUDED_GROUP_ID_FIELD_NUMBER: builtins.int
+    @property
+    def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Массив идентификаторов инструментов. Принимает значение `figi` или `instrument_uid`. Если в группе будет хотя бы один из инструментов массива, то в ответе у группы вернется признак `containsInstrument = true`."""
+
+    @property
+    def excluded_group_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Массив идентификаторов групп, которые необходимо исключить из ответа."""
+
+    def __init__(
+        self,
+        *,
+        instrument_id: collections.abc.Iterable[builtins.str] | None = ...,
+        excluded_group_id: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["excluded_group_id", b"excluded_group_id", "instrument_id", b"instrument_id"]) -> None: ...
+
+global___GetFavoriteGroupsRequest = GetFavoriteGroupsRequest
+
+@typing.final
+class GetFavoriteGroupsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class FavoriteGroup(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        GROUP_ID_FIELD_NUMBER: builtins.int
+        GROUP_NAME_FIELD_NUMBER: builtins.int
+        COLOR_FIELD_NUMBER: builtins.int
+        SIZE_FIELD_NUMBER: builtins.int
+        CONTAINS_INSTRUMENT_FIELD_NUMBER: builtins.int
+        group_id: builtins.str
+        """Уникальный идентификатор группы."""
+        group_name: builtins.str
+        """Название группы."""
+        color: builtins.str
+        """Цвет группы в HEX-формате."""
+        size: builtins.int
+        """Количество инструментов в группе."""
+        contains_instrument: builtins.bool
+        """Признак наличия в группе хотя бы одного инструмента из запроса."""
+        def __init__(
+            self,
+            *,
+            group_id: builtins.str = ...,
+            group_name: builtins.str = ...,
+            color: builtins.str = ...,
+            size: builtins.int = ...,
+            contains_instrument: builtins.bool | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["_contains_instrument", b"_contains_instrument", "contains_instrument", b"contains_instrument"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_contains_instrument", b"_contains_instrument", "color", b"color", "contains_instrument", b"contains_instrument", "group_id", b"group_id", "group_name", b"group_name", "size", b"size"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["_contains_instrument", b"_contains_instrument"]) -> typing.Literal["contains_instrument"] | None: ...
+
+    GROUPS_FIELD_NUMBER: builtins.int
+    @property
+    def groups(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetFavoriteGroupsResponse.FavoriteGroup]:
+        """Массив групп избранных списков инструментов."""
+
+    def __init__(
+        self,
+        *,
+        groups: collections.abc.Iterable[global___GetFavoriteGroupsResponse.FavoriteGroup] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["groups", b"groups"]) -> None: ...
+
+global___GetFavoriteGroupsResponse = GetFavoriteGroupsResponse
 
 @typing.final
 class GetCountriesRequest(google.protobuf.message.Message):
@@ -4271,7 +4445,7 @@ class IndicativeResponse(google.protobuf.message.Message):
     class_code: builtins.str
     """Класс-код инструмента."""
     currency: builtins.str
-    """Валюта расчётов."""
+    """Валюта расчетов."""
     instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType
     """Тип инструмента."""
     name: builtins.str
@@ -4315,7 +4489,7 @@ class CountryResponse(google.protobuf.message.Message):
     alfa_two: builtins.str
     """Двухбуквенный код страны."""
     alfa_three: builtins.str
-    """Трёхбуквенный код страны."""
+    """Трехбуквенный код страны."""
     name: builtins.str
     """Наименование страны."""
     name_brief: builtins.str
@@ -4635,9 +4809,9 @@ class GetAssetFundamentalsResponse(google.protobuf.message.Message):
         low_price_last_52_weeks: builtins.float
         """Минимум за год."""
         average_daily_volume_last_10_days: builtins.float
-        """Средний объём торгов за 10 дней."""
+        """Средний объем торгов за 10 дней."""
         average_daily_volume_last_4_weeks: builtins.float
-        """Средний объём торгов за месяц."""
+        """Средний объем торгов за месяц."""
         beta: builtins.float
         free_float: builtins.float
         """Доля акций в свободном обращении."""
@@ -4662,13 +4836,13 @@ class GetAssetFundamentalsResponse(google.protobuf.message.Message):
         three_year_annual_revenue_growth_rate: builtins.float
         """Среднегодовой  рocт выручки за 3 года."""
         pe_ratio_ttm: builtins.float
-        """Соотношение рыночной капитализации компании к её чистой прибыли."""
+        """Соотношение рыночной капитализации компании к ее чистой прибыли."""
         price_to_sales_ttm: builtins.float
-        """Соотношение рыночной капитализации компании к её выручке."""
+        """Соотношение рыночной капитализации компании к ее выручке."""
         price_to_book_ttm: builtins.float
-        """Соотношение рыночной капитализации компании к её балансовой стоимости."""
+        """Соотношение рыночной капитализации компании к ее балансовой стоимости."""
         price_to_free_cash_flow_ttm: builtins.float
-        """Соотношение рыночной капитализации компании к её свободному денежному потоку."""
+        """Соотношение рыночной капитализации компании к ее свободному денежному потоку."""
         total_enterprise_value_mrq: builtins.float
         """Рыночная стоимость компании."""
         ev_to_ebitda_mrq: builtins.float
@@ -4894,10 +5068,10 @@ class GetAssetReportsResponse(google.protobuf.message.Message):
         period_num: builtins.int
         """Номер периода."""
         period_type: global___GetAssetReportsResponse.AssetReportPeriodType.ValueType
-        """Тип отчёта."""
+        """Тип отчета."""
         @property
         def report_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Дата публикации отчёта."""
+            """Дата публикации отчета."""
 
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -5226,6 +5400,109 @@ class GetForecastResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["consensus", b"consensus", "targets", b"targets"]) -> None: ...
 
 global___GetForecastResponse = GetForecastResponse
+
+@typing.final
+class RiskRatesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    @property
+    def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Идентификаторы инструментов."""
+
+    def __init__(
+        self,
+        *,
+        instrument_id: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instrument_id", b"instrument_id"]) -> None: ...
+
+global___RiskRatesRequest = RiskRatesRequest
+
+@typing.final
+class RiskRatesResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class RiskRateResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+        SHORT_RISK_RATE_FIELD_NUMBER: builtins.int
+        LONG_RISK_RATE_FIELD_NUMBER: builtins.int
+        SHORT_RISK_RATES_FIELD_NUMBER: builtins.int
+        LONG_RISK_RATES_FIELD_NUMBER: builtins.int
+        ERROR_FIELD_NUMBER: builtins.int
+        instrument_uid: builtins.str
+        error: builtins.str
+        """Ошибка."""
+        @property
+        def short_risk_rate(self) -> global___RiskRatesResponse.RiskRate:
+            """Ставка риска пользователя  в шорт"""
+
+        @property
+        def long_risk_rate(self) -> global___RiskRatesResponse.RiskRate:
+            """Ставка риска пользователя в лонг"""
+
+        @property
+        def short_risk_rates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RiskRatesResponse.RiskRate]:
+            """Доступные ставки риска в шорт"""
+
+        @property
+        def long_risk_rates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RiskRatesResponse.RiskRate]:
+            """Доступные ставки риска в лонг"""
+
+        def __init__(
+            self,
+            *,
+            instrument_uid: builtins.str = ...,
+            short_risk_rate: global___RiskRatesResponse.RiskRate | None = ...,
+            long_risk_rate: global___RiskRatesResponse.RiskRate | None = ...,
+            short_risk_rates: collections.abc.Iterable[global___RiskRatesResponse.RiskRate] | None = ...,
+            long_risk_rates: collections.abc.Iterable[global___RiskRatesResponse.RiskRate] | None = ...,
+            error: builtins.str | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["_error", b"_error", "_long_risk_rate", b"_long_risk_rate", "_short_risk_rate", b"_short_risk_rate", "error", b"error", "long_risk_rate", b"long_risk_rate", "short_risk_rate", b"short_risk_rate"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_error", b"_error", "_long_risk_rate", b"_long_risk_rate", "_short_risk_rate", b"_short_risk_rate", "error", b"error", "instrument_uid", b"instrument_uid", "long_risk_rate", b"long_risk_rate", "long_risk_rates", b"long_risk_rates", "short_risk_rate", b"short_risk_rate", "short_risk_rates", b"short_risk_rates"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_error", b"_error"]) -> typing.Literal["error"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_long_risk_rate", b"_long_risk_rate"]) -> typing.Literal["long_risk_rate"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_short_risk_rate", b"_short_risk_rate"]) -> typing.Literal["short_risk_rate"] | None: ...
+
+    @typing.final
+    class RiskRate(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        RISK_LEVEL_CODE_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        risk_level_code: builtins.str
+        """Категория риска."""
+        @property
+        def value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение ставки риска."""
+
+        def __init__(
+            self,
+            *,
+            risk_level_code: builtins.str = ...,
+            value: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["risk_level_code", b"risk_level_code", "value", b"value"]) -> None: ...
+
+    INSTRUMENT_RISK_RATES_FIELD_NUMBER: builtins.int
+    @property
+    def instrument_risk_rates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RiskRatesResponse.RiskRateResult]: ...
+    def __init__(
+        self,
+        *,
+        instrument_risk_rates: collections.abc.Iterable[global___RiskRatesResponse.RiskRateResult] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instrument_risk_rates", b"instrument_risk_rates"]) -> None: ...
+
+global___RiskRatesResponse = RiskRatesResponse
 
 @typing.final
 class TradingInterval(google.protobuf.message.Message):

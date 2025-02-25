@@ -48,8 +48,12 @@ from .schemas import (
     CandleSource,
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
+    CreateFavoriteGroupRequest,
+    CreateFavoriteGroupResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    DeleteFavoriteGroupRequest,
+    DeleteFavoriteGroupResponse,
     EditFavoritesActionType,
     EditFavoritesRequest,
     EditFavoritesRequestInstrument,
@@ -93,6 +97,8 @@ from .schemas import (
     GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
+    GetFavoriteGroupsRequest,
+    GetFavoriteGroupsResponse,
     GetFavoritesRequest,
     GetFavoritesResponse,
     GetForecastRequest,
@@ -176,6 +182,8 @@ from .schemas import (
     PriceType,
     Quotation,
     ReplaceOrderRequest,
+    RiskRatesRequest,
+    RiskRatesResponse,
     SandboxPayInRequest,
     SandboxPayInResponse,
     ShareResponse,
@@ -764,8 +772,12 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetFavorites")
     async def get_favorites(
         self,
+        *,
+        group_id: Optional[str] = None,
     ) -> GetFavoritesResponse:
         request = GetFavoritesRequest()
+        if group_id is not None:
+            request.group_id = group_id
         response_coro = self.stub.GetFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetFavoritesRequest()
@@ -782,12 +794,15 @@ class InstrumentsService(_grpc_helpers.Service):
         *,
         instruments: Optional[List[EditFavoritesRequestInstrument]] = None,
         action_type: Optional[EditFavoritesActionType] = None,
+        group_id: Optional[str] = None,
     ) -> EditFavoritesResponse:
         request = EditFavoritesRequest()
         if action_type is not None:
             request.action_type = action_type
         if instruments is not None:
             request.instruments = instruments
+        if group_id is not None:
+            request.group_id = group_id
         response_coro = self.stub.EditFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.EditFavoritesRequest()
@@ -797,6 +812,59 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "EditFavorites")
         return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
+
+    @handle_aio_request_error("CreateFavoriteGroup")
+    async def create_favorite_group(
+        self,
+        request: CreateFavoriteGroupRequest,
+    ) -> CreateFavoriteGroupResponse:
+        response_coro = self.stub.CreateFavoriteGroup(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.CreateFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "CreateFavoriteGroup"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, CreateFavoriteGroupResponse
+        )
+
+    @handle_aio_request_error("DeleteFavoriteGroup")
+    async def delete_favorite_group(
+        self,
+        request: DeleteFavoriteGroupRequest,
+    ) -> DeleteFavoriteGroupResponse:
+        response_coro = self.stub.DeleteFavoriteGroup(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.DeleteFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "DeleteFavoriteGroup"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, DeleteFavoriteGroupResponse
+        )
+
+    @handle_aio_request_error("GetFavoriteGroups")
+    async def get_favorite_groups(
+        self,
+        request: GetFavoriteGroupsRequest,
+    ) -> GetFavoriteGroupsResponse:
+        response_coro = self.stub.GetFavoriteGroups(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetFavoriteGroupsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetFavoriteGroups")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetFavoriteGroupsResponse)
 
     @handle_aio_request_error("GetCountries")
     async def get_countries(
@@ -930,6 +998,18 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetForecastBy")
         return _grpc_helpers.protobuf_to_dataclass(response, GetForecastResponse)
+
+    @handle_aio_request_error("GetRiskRates")
+    async def get_risk_rates(self, request: RiskRatesRequest) -> RiskRatesResponse:
+        response_coro = self.stub.GetRiskRates(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.RiskRatesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetRiskRates")
+        return _grpc_helpers.protobuf_to_dataclass(response, RiskRatesResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):

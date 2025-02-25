@@ -133,3 +133,53 @@ def test_get_dividends(instruments_service):
         to=mock.Mock(),
     )
     instruments_service.get_dividends.assert_called_once()
+
+
+def test_get_favorites(instruments_service):
+    response = instruments_service.get_favorites()  # noqa: F841
+    instruments_service.get_favorites.assert_called_once()
+
+
+def test_get_favorites_with_group(instruments_service):
+    response = instruments_service.get_favorites(group_id=mock.Mock())  # noqa: F841
+    instruments_service.get_favorites.assert_called_once()
+
+
+def test_edit_favorites(instruments_service):
+    response = instruments_service.edit_favorites(  # noqa: F841
+        instruments=mock.Mock(),
+        action_type=mock.Mock(),
+    )
+    instruments_service.edit_favorites.assert_called_once()
+
+
+def test_create_favorite_group(instruments_service):
+    request = mock.Mock()
+    response = instruments_service.create_favorite_group(  # noqa: F841
+        request=request,
+    )
+    instruments_service.create_favorite_group.assert_called_once_with(request=request)
+
+
+def test_delete_favorite_group(instruments_service):
+    request = mock.Mock()
+    response = instruments_service.delete_favorite_group(  # noqa: F841
+        request=request,
+    )
+    instruments_service.delete_favorite_group.assert_called_once_with(request=request)
+
+
+def test_get_favorite_groups(instruments_service):
+    request = mock.Mock()
+    response = instruments_service.get_favorite_groups(  # noqa: F841
+        request=request,
+    )
+    instruments_service.get_favorite_groups.assert_called_once_with(request=request)
+
+
+def test_get_risk_rates(instruments_service):
+    request = mock.Mock()
+    response = instruments_service.get_risk_rates(  # noqa: F841
+        request=request,
+    )
+    instruments_service.get_risk_rates.assert_called_once_with(request=request)
