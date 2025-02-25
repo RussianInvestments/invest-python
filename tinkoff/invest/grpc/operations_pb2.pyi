@@ -28,7 +28,7 @@ class _OperationState:
 class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationState.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPERATION_STATE_UNSPECIFIED: _OperationState.ValueType  # 0
-    """Статус операции не определён."""
+    """Статус операции не определен."""
     OPERATION_STATE_EXECUTED: _OperationState.ValueType  # 1
     """Исполнена частично или полностью."""
     OPERATION_STATE_CANCELED: _OperationState.ValueType  # 2
@@ -40,7 +40,7 @@ class OperationState(_OperationState, metaclass=_OperationStateEnumTypeWrapper):
     """Статус запрашиваемых операций."""
 
 OPERATION_STATE_UNSPECIFIED: OperationState.ValueType  # 0
-"""Статус операции не определён."""
+"""Статус операции не определен."""
 OPERATION_STATE_EXECUTED: OperationState.ValueType  # 1
 """Исполнена частично или полностью."""
 OPERATION_STATE_CANCELED: OperationState.ValueType  # 2
@@ -56,9 +56,9 @@ class _OperationType:
 class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPERATION_TYPE_UNSPECIFIED: _OperationType.ValueType  # 0
-    """Тип операции не определён."""
+    """Тип операции не определен."""
     OPERATION_TYPE_INPUT: _OperationType.ValueType  # 1
-    """Пополнение брокерского счёта."""
+    """Пополнение брокерского счета."""
     OPERATION_TYPE_BOND_TAX: _OperationType.ValueType  # 2
     """Удержание НДФЛ по купонам."""
     OPERATION_TYPE_OUTPUT_SECURITIES: _OperationType.ValueType  # 3
@@ -80,7 +80,7 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_TAX_CORRECTION: _OperationType.ValueType  # 11
     """Корректировка налога."""
     OPERATION_TYPE_SERVICE_FEE: _OperationType.ValueType  # 12
-    """Удержание комиссии за обслуживание брокерского счёта."""
+    """Удержание комиссии за обслуживание брокерского счета."""
     OPERATION_TYPE_BENEFIT_TAX: _OperationType.ValueType  # 13
     """Удержание налога за материальную выгоду."""
     OPERATION_TYPE_MARGIN_FEE: _OperationType.ValueType  # 14
@@ -116,9 +116,9 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_DELIVERY_SELL: _OperationType.ValueType  # 29
     """Продажа в рамках экспирации фьючерсного контракта."""
     OPERATION_TYPE_TRACK_MFEE: _OperationType.ValueType  # 30
-    """Комиссия за управление по счёту автоследования."""
+    """Комиссия за управление по счету автоследования."""
     OPERATION_TYPE_TRACK_PFEE: _OperationType.ValueType  # 31
-    """Комиссия за результат по счёту автоследования."""
+    """Комиссия за результат по счету автоследования."""
     OPERATION_TYPE_TAX_PROGRESSIVE: _OperationType.ValueType  # 32
     """Удержание налога по ставке 15%."""
     OPERATION_TYPE_BOND_TAX_PROGRESSIVE: _OperationType.ValueType  # 33
@@ -148,7 +148,7 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_CASH_FEE: _OperationType.ValueType  # 45
     """Комиссия за валютный остаток."""
     OPERATION_TYPE_OUT_FEE: _OperationType.ValueType  # 46
-    """Комиссия за вывод валюты с брокерского счёта."""
+    """Комиссия за вывод валюты с брокерского счета."""
     OPERATION_TYPE_OUT_STAMP_DUTY: _OperationType.ValueType  # 47
     """Гербовый сбор."""
     OPERATION_TYPE_OUTPUT_SWIFT: _OperationType.ValueType  # 50
@@ -164,13 +164,13 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_ADVICE_FEE: _OperationType.ValueType  # 56
     """	Списание оплаты за сервис Советов."""
     OPERATION_TYPE_TRANS_IIS_BS: _OperationType.ValueType  # 57
-    """ Перевод ценных бумаг с ИИС на брокерский счёт."""
+    """ Перевод ценных бумаг с ИИС на брокерский счет."""
     OPERATION_TYPE_TRANS_BS_BS: _OperationType.ValueType  # 58
-    """ Перевод ценных бумаг с одного брокерского счёта на другой."""
+    """ Перевод ценных бумаг с одного брокерского счета на другой."""
     OPERATION_TYPE_OUT_MULTI: _OperationType.ValueType  # 59
-    """ Вывод денежных средств со счёта."""
+    """ Вывод денежных средств со счета."""
     OPERATION_TYPE_INP_MULTI: _OperationType.ValueType  # 60
-    """ Пополнение денежных средств со счёта."""
+    """ Пополнение денежных средств со счета."""
     OPERATION_TYPE_OVER_PLACEMENT: _OperationType.ValueType  # 61
     """ Размещение биржевого овернайта."""
     OPERATION_TYPE_OVER_COM: _OperationType.ValueType  # 62
@@ -186,9 +186,9 @@ class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции."""
 
 OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType  # 0
-"""Тип операции не определён."""
+"""Тип операции не определен."""
 OPERATION_TYPE_INPUT: OperationType.ValueType  # 1
-"""Пополнение брокерского счёта."""
+"""Пополнение брокерского счета."""
 OPERATION_TYPE_BOND_TAX: OperationType.ValueType  # 2
 """Удержание НДФЛ по купонам."""
 OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType  # 3
@@ -210,7 +210,7 @@ OPERATION_TYPE_BOND_REPAYMENT: OperationType.ValueType  # 10
 OPERATION_TYPE_TAX_CORRECTION: OperationType.ValueType  # 11
 """Корректировка налога."""
 OPERATION_TYPE_SERVICE_FEE: OperationType.ValueType  # 12
-"""Удержание комиссии за обслуживание брокерского счёта."""
+"""Удержание комиссии за обслуживание брокерского счета."""
 OPERATION_TYPE_BENEFIT_TAX: OperationType.ValueType  # 13
 """Удержание налога за материальную выгоду."""
 OPERATION_TYPE_MARGIN_FEE: OperationType.ValueType  # 14
@@ -246,9 +246,9 @@ OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType  # 28
 OPERATION_TYPE_DELIVERY_SELL: OperationType.ValueType  # 29
 """Продажа в рамках экспирации фьючерсного контракта."""
 OPERATION_TYPE_TRACK_MFEE: OperationType.ValueType  # 30
-"""Комиссия за управление по счёту автоследования."""
+"""Комиссия за управление по счету автоследования."""
 OPERATION_TYPE_TRACK_PFEE: OperationType.ValueType  # 31
-"""Комиссия за результат по счёту автоследования."""
+"""Комиссия за результат по счету автоследования."""
 OPERATION_TYPE_TAX_PROGRESSIVE: OperationType.ValueType  # 32
 """Удержание налога по ставке 15%."""
 OPERATION_TYPE_BOND_TAX_PROGRESSIVE: OperationType.ValueType  # 33
@@ -278,7 +278,7 @@ OPERATION_TYPE_TAX_CORRECTION_COUPON: OperationType.ValueType  # 44
 OPERATION_TYPE_CASH_FEE: OperationType.ValueType  # 45
 """Комиссия за валютный остаток."""
 OPERATION_TYPE_OUT_FEE: OperationType.ValueType  # 46
-"""Комиссия за вывод валюты с брокерского счёта."""
+"""Комиссия за вывод валюты с брокерского счета."""
 OPERATION_TYPE_OUT_STAMP_DUTY: OperationType.ValueType  # 47
 """Гербовый сбор."""
 OPERATION_TYPE_OUTPUT_SWIFT: OperationType.ValueType  # 50
@@ -294,13 +294,13 @@ OPERATION_TYPE_OUTPUT_PENALTY: OperationType.ValueType  # 55
 OPERATION_TYPE_ADVICE_FEE: OperationType.ValueType  # 56
 """	Списание оплаты за сервис Советов."""
 OPERATION_TYPE_TRANS_IIS_BS: OperationType.ValueType  # 57
-""" Перевод ценных бумаг с ИИС на брокерский счёт."""
+""" Перевод ценных бумаг с ИИС на брокерский счет."""
 OPERATION_TYPE_TRANS_BS_BS: OperationType.ValueType  # 58
-""" Перевод ценных бумаг с одного брокерского счёта на другой."""
+""" Перевод ценных бумаг с одного брокерского счета на другой."""
 OPERATION_TYPE_OUT_MULTI: OperationType.ValueType  # 59
-""" Вывод денежных средств со счёта."""
+""" Вывод денежных средств со счета."""
 OPERATION_TYPE_INP_MULTI: OperationType.ValueType  # 60
-""" Пополнение денежных средств со счёта."""
+""" Пополнение денежных средств со счета."""
 OPERATION_TYPE_OVER_PLACEMENT: OperationType.ValueType  # 61
 """ Размещение биржевого овернайта."""
 OPERATION_TYPE_OVER_COM: OperationType.ValueType  # 62
@@ -320,11 +320,11 @@ class _PortfolioSubscriptionStatus:
 class _PortfolioSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PortfolioSubscriptionStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED: _PortfolioSubscriptionStatus.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS: _PortfolioSubscriptionStatus.ValueType  # 1
     """Успешно."""
     PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: _PortfolioSubscriptionStatus.ValueType  # 2
-    """Счёт не найден или недостаточно прав."""
+    """Счет не найден или недостаточно прав."""
     PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR: _PortfolioSubscriptionStatus.ValueType  # 3
     """Произошла ошибка."""
 
@@ -332,11 +332,11 @@ class PortfolioSubscriptionStatus(_PortfolioSubscriptionStatus, metaclass=_Portf
     """Результат подписки."""
 
 PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED: PortfolioSubscriptionStatus.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS: PortfolioSubscriptionStatus.ValueType  # 1
 """Успешно."""
 PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: PortfolioSubscriptionStatus.ValueType  # 2
-"""Счёт не найден или недостаточно прав."""
+"""Счет не найден или недостаточно прав."""
 PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PortfolioSubscriptionStatus.ValueType  # 3
 """Произошла ошибка."""
 global___PortfolioSubscriptionStatus = PortfolioSubscriptionStatus
@@ -348,11 +348,11 @@ class _PositionsAccountSubscriptionStatus:
 class _PositionsAccountSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PositionsAccountSubscriptionStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED: _PositionsAccountSubscriptionStatus.ValueType  # 0
-    """Тип не определён."""
+    """Тип не определен."""
     POSITIONS_SUBSCRIPTION_STATUS_SUCCESS: _PositionsAccountSubscriptionStatus.ValueType  # 1
     """Успешно."""
     POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: _PositionsAccountSubscriptionStatus.ValueType  # 2
-    """Счёт не найден или недостаточно прав."""
+    """Счет не найден или недостаточно прав."""
     POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR: _PositionsAccountSubscriptionStatus.ValueType  # 3
     """Произошла ошибка."""
 
@@ -360,18 +360,18 @@ class PositionsAccountSubscriptionStatus(_PositionsAccountSubscriptionStatus, me
     """Результат подписки."""
 
 POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED: PositionsAccountSubscriptionStatus.ValueType  # 0
-"""Тип не определён."""
+"""Тип не определен."""
 POSITIONS_SUBSCRIPTION_STATUS_SUCCESS: PositionsAccountSubscriptionStatus.ValueType  # 1
 """Успешно."""
 POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: PositionsAccountSubscriptionStatus.ValueType  # 2
-"""Счёт не найден или недостаточно прав."""
+"""Счет не найден или недостаточно прав."""
 POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PositionsAccountSubscriptionStatus.ValueType  # 3
 """Произошла ошибка."""
 global___PositionsAccountSubscriptionStatus = PositionsAccountSubscriptionStatus
 
 @typing.final
 class OperationsRequest(google.protobuf.message.Message):
-    """Запрос получения списка операций по счёту."""
+    """Запрос получения списка операций по счету."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -381,7 +381,7 @@ class OperationsRequest(google.protobuf.message.Message):
     STATE_FIELD_NUMBER: builtins.int
     FIGI_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента."""
+    """Идентификатор счета клиента."""
     state: global___OperationState.ValueType
     """Статус запрашиваемых операций."""
     figi: builtins.str
@@ -470,7 +470,7 @@ class Operation(google.protobuf.message.Message):
     figi: builtins.str
     """FIGI-идентификатор инструмента, связанного с операцией."""
     instrument_type: builtins.str
-    """Тип инструмента. Возможные значения: </br></br>`bond` — облигация; </br>`share` — акция; </br>`currency` — валюта; </br>`etf` — фонд; </br>`futures` — фьючерс."""
+    """Тип инструмента. Возможные значения: <br/><br/>`bond` — облигация; <br/>`share` — акция; <br/>`currency` — валюта; <br/>`etf` — фонд; <br/>`futures` — фьючерс."""
     type: builtins.str
     """Текстовое описание типа операции."""
     operation_type: global___OperationType.ValueType
@@ -565,7 +565,7 @@ global___OperationTrade = OperationTrade
 
 @typing.final
 class PortfolioRequest(google.protobuf.message.Message):
-    """Запрос получения текущего портфеля по счёту."""
+    """Запрос получения текущего портфеля по счету."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -593,7 +593,7 @@ class PortfolioRequest(google.protobuf.message.Message):
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     CURRENCY_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта пользователя."""
+    """Идентификатор счета пользователя."""
     currency: global___PortfolioRequest.CurrencyRequest.ValueType
     """Валюта, в которой нужно рассчитать портфель."""
     def __init__(
@@ -610,7 +610,7 @@ global___PortfolioRequest = PortfolioRequest
 
 @typing.final
 class PortfolioResponse(google.protobuf.message.Message):
-    """Текущий портфель по счёту."""
+    """Текущий портфель по счету."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -629,7 +629,7 @@ class PortfolioResponse(google.protobuf.message.Message):
     DAILY_YIELD_FIELD_NUMBER: builtins.int
     DAILY_YIELD_RELATIVE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта пользователя."""
+    """Идентификатор счета пользователя."""
     @property
     def total_amount_shares(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Общая стоимость акций в портфеле."""
@@ -676,11 +676,11 @@ class PortfolioResponse(google.protobuf.message.Message):
 
     @property
     def daily_yield(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Рассчитанная доходность портфеля за день в рублях"""
+        """Рассчитанная доходность портфеля за день в рублях."""
 
     @property
     def daily_yield_relative(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Относительная доходность в день в %"""
+        """Относительная доходность в день в %."""
 
     def __init__(
         self,
@@ -707,13 +707,13 @@ global___PortfolioResponse = PortfolioResponse
 
 @typing.final
 class PositionsRequest(google.protobuf.message.Message):
-    """Запрос позиций портфеля по счёту."""
+    """Запрос позиций портфеля по счету."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта пользователя."""
+    """Идентификатор счета пользователя."""
     def __init__(
         self,
         *,
@@ -725,7 +725,7 @@ global___PositionsRequest = PositionsRequest
 
 @typing.final
 class PositionsResponse(google.protobuf.message.Message):
-    """Список позиций по счёту."""
+    """Список позиций по счету."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -783,7 +783,7 @@ class WithdrawLimitsRequest(google.protobuf.message.Message):
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта пользователя."""
+    """Идентификатор счета пользователя."""
     def __init__(
         self,
         *,
@@ -864,7 +864,7 @@ class PortfolioPosition(google.protobuf.message.Message):
 
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средневзвешенная цена позиции. Для пересчёта возможна задержка до одной секунды."""
+        """Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды."""
 
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -876,7 +876,7 @@ class PortfolioPosition(google.protobuf.message.Message):
 
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Deprecated Средняя цена позиции в пунктах (для фьючерсов). Для пересчёта возможна задержка до одной секунды."""
+        """Deprecated Средняя цена позиции в пунктах (для фьючерсов). Для пересчета возможна задержка до одной секунды."""
 
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -884,7 +884,7 @@ class PortfolioPosition(google.protobuf.message.Message):
 
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена позиции по методу FIFO. Для пересчёта возможна задержка до одной секунды."""
+        """Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды."""
 
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -904,7 +904,7 @@ class PortfolioPosition(google.protobuf.message.Message):
 
     @property
     def daily_yield(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Рассчитанная доходность портфеля за день"""
+        """Рассчитанная доходность портфеля за день."""
 
     def __init__(
         self,
@@ -962,7 +962,7 @@ class VirtualPortfolioPosition(google.protobuf.message.Message):
 
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средневзвешенная цена позиции. Для пересчёта возможна задержка до одной секунды."""
+        """Средневзвешенная цена позиции. Для пересчета возможна задержка до одной секунды."""
 
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -982,11 +982,11 @@ class VirtualPortfolioPosition(google.protobuf.message.Message):
 
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена позиции по методу FIFO. Для пересчёта возможна задержка до одной секунды."""
+        """Средняя цена позиции по методу FIFO. Для пересчета возможна задержка до одной секунды."""
 
     @property
     def daily_yield(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Рассчитанная доходность портфеля за день"""
+        """Рассчитанная доходность портфеля за день."""
 
     def __init__(
         self,
@@ -1167,7 +1167,7 @@ class GenerateBrokerReportRequest(google.protobuf.message.Message):
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента."""
+    """Идентификатор счета клиента."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание периода по UTC."""
@@ -1189,7 +1189,7 @@ class GenerateBrokerReportResponse(google.protobuf.message.Message):
 
     TASK_ID_FIELD_NUMBER: builtins.int
     task_id: builtins.str
-    """Идентификатор задачи формирования брокерского отчёта."""
+    """Идентификатор задачи формирования брокерского отчета."""
     def __init__(
         self,
         *,
@@ -1206,9 +1206,9 @@ class GetBrokerReportRequest(google.protobuf.message.Message):
     TASK_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     task_id: builtins.str
-    """Идентификатор задачи формирования брокерского отчёта."""
+    """Идентификатор задачи формирования брокерского отчета."""
     page: builtins.int
-    """Номер страницы отчёта, начинается с 1. Значение по умолчанию — 0."""
+    """Номер страницы отчета, начинается с 1. Значение по умолчанию — 0."""
     def __init__(
         self,
         *,
@@ -1230,9 +1230,9 @@ class GetBrokerReportResponse(google.protobuf.message.Message):
     PAGESCOUNT_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     itemsCount: builtins.int
-    """Количество записей в отчёте."""
+    """Количество записей в отчете."""
     pagesCount: builtins.int
-    """Количество страниц с данными отчёта, начинается с 0."""
+    """Количество страниц с данными отчета, начинается с 0."""
     page: builtins.int
     """Текущая страница, начинается с 0."""
     @property
@@ -1295,7 +1295,7 @@ class BrokerReport(google.protobuf.message.Message):
     direction: builtins.str
     """Вид сделки."""
     name: builtins.str
-    """Сокращённое наименование актива."""
+    """Сокращенное наименование актива."""
     ticker: builtins.str
     """Код актива."""
     quantity: builtins.int
@@ -1311,7 +1311,7 @@ class BrokerReport(google.protobuf.message.Message):
     separate_agreement_date: builtins.str
     """Дата договора."""
     delivery_type: builtins.str
-    """Тип расчёта по сделке."""
+    """Тип расчета по сделке."""
     @property
     def trade_datetime(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время заключения по UTC."""
@@ -1350,7 +1350,7 @@ class BrokerReport(google.protobuf.message.Message):
 
     @property
     def clear_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата расчётов по UTC."""
+        """Дата расчетов по UTC."""
 
     @property
     def sec_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1400,11 +1400,11 @@ class GetDividendsForeignIssuerRequest(google.protobuf.message.Message):
     GET_DIV_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
     @property
     def generate_div_foreign_issuer_report(self) -> global___GenerateDividendsForeignIssuerReportRequest:
-        """Объект запроса формирования отчёта."""
+        """Объект запроса формирования отчета."""
 
     @property
     def get_div_foreign_issuer_report(self) -> global___GetDividendsForeignIssuerReportRequest:
-        """Объект запроса сформированного отчёта."""
+        """Объект запроса сформированного отчета."""
 
     def __init__(
         self,
@@ -1426,11 +1426,11 @@ class GetDividendsForeignIssuerResponse(google.protobuf.message.Message):
     DIV_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
     @property
     def generate_div_foreign_issuer_report_response(self) -> global___GenerateDividendsForeignIssuerReportResponse:
-        """Объект результата задачи запуска формирования отчёта."""
+        """Объект результата задачи запуска формирования отчета."""
 
     @property
     def div_foreign_issuer_report(self) -> global___GetDividendsForeignIssuerReportResponse:
-        """Отчёт «Справка о доходах за пределами РФ»."""
+        """Отчет «Справка о доходах за пределами РФ»."""
 
     def __init__(
         self,
@@ -1446,7 +1446,7 @@ global___GetDividendsForeignIssuerResponse = GetDividendsForeignIssuerResponse
 
 @typing.final
 class GenerateDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
-    """Объект запроса формирования отчёта «Справка о доходах за пределами РФ»."""
+    """Объект запроса формирования отчета «Справка о доходах за пределами РФ»."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1454,10 +1454,10 @@ class GenerateDividendsForeignIssuerReportRequest(google.protobuf.message.Messag
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента."""
+    """Идентификатор счета клиента."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание периода по UTC. Как правило, можно сформировать отчёт по дату на несколько дней меньше текущей. Начало и окончание периода должны быть в рамках одного календарного года."""
+        """Окончание периода по UTC. Как правило, можно сформировать отчет по дату на несколько дней меньше текущей. Начало и окончание периода должны быть в рамках одного календарного года."""
 
     def __init__(
         self,
@@ -1472,14 +1472,14 @@ global___GenerateDividendsForeignIssuerReportRequest = GenerateDividendsForeignI
 
 @typing.final
 class GetDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
-    """Объект запроса сформированного отчёта «Справка о доходах за пределами РФ»."""
+    """Объект запроса сформированного отчета «Справка о доходах за пределами РФ»."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TASK_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     task_id: builtins.str
-    """Идентификатор задачи формирования отчёта."""
+    """Идентификатор задачи формирования отчета."""
     page: builtins.int
     """Номер страницы отчета (начинается с 0), значение по умолчанию: 0."""
     def __init__(
@@ -1496,13 +1496,13 @@ global___GetDividendsForeignIssuerReportRequest = GetDividendsForeignIssuerRepor
 
 @typing.final
 class GenerateDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
-    """Объект результата задачи запуска формирования отчёта «Справка о доходах за пределами РФ»."""
+    """Объект результата задачи запуска формирования отчета «Справка о доходах за пределами РФ»."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TASK_ID_FIELD_NUMBER: builtins.int
     task_id: builtins.str
-    """Идентификатор задачи формирования отчёта."""
+    """Идентификатор задачи формирования отчета."""
     def __init__(
         self,
         *,
@@ -1521,9 +1521,9 @@ class GetDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
     PAGESCOUNT_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     itemsCount: builtins.int
-    """Количество записей в отчёте."""
+    """Количество записей в отчете."""
     pagesCount: builtins.int
-    """Количество страниц с данными отчёта, начинается с 0."""
+    """Количество страниц с данными отчета, начинается с 0."""
     page: builtins.int
     """Текущая страница, начинается с 0."""
     @property
@@ -1542,7 +1542,7 @@ global___GetDividendsForeignIssuerReportResponse = GetDividendsForeignIssuerRepo
 
 @typing.final
 class DividendsForeignIssuerReport(google.protobuf.message.Message):
-    """Отчёт «Справка о доходах за пределами РФ»."""
+    """Отчет «Справка о доходах за пределами РФ»."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1582,7 +1582,7 @@ class DividendsForeignIssuerReport(google.protobuf.message.Message):
 
     @property
     def external_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Комиссия внешних платёжных агентов."""
+        """Комиссия внешних платежных агентов."""
 
     @property
     def dividend_gross(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -1627,7 +1627,7 @@ class PortfolioStreamRequest(google.protobuf.message.Message):
     PING_SETTINGS_FIELD_NUMBER: builtins.int
     @property
     def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Массив идентификаторов счётов пользователя."""
+        """Массив идентификаторов счетов пользователя."""
 
     @property
     def ping_settings(self) -> tinkoff.invest.grpc.common_pb2.PingDelaySettings:
@@ -1688,7 +1688,7 @@ class PortfolioSubscriptionResult(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     STREAM_ID_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id)."""
     stream_id: builtins.str
     """Идентификатор открытого соединения"""
     @property
@@ -1708,14 +1708,14 @@ global___PortfolioSubscriptionResult = PortfolioSubscriptionResult
 
 @typing.final
 class AccountSubscriptionStatus(google.protobuf.message.Message):
-    """Счёт клиента."""
+    """Счет клиента."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта."""
+    """Идентификатор счета."""
     subscription_status: global___PortfolioSubscriptionStatus.ValueType
     """Результат подписки."""
     def __init__(
@@ -1730,7 +1730,7 @@ global___AccountSubscriptionStatus = AccountSubscriptionStatus
 
 @typing.final
 class GetOperationsByCursorRequest(google.protobuf.message.Message):
-    """Запрос списка операций по счёту с пагинацией."""
+    """Запрос списка операций по счету с пагинацией."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1746,7 +1746,7 @@ class GetOperationsByCursorRequest(google.protobuf.message.Message):
     WITHOUT_TRADES_FIELD_NUMBER: builtins.int
     WITHOUT_OVERNIGHTS_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента, обязательный параметр. Остальные параметры опциональны."""
+    """Идентификатор счета клиента, обязательный параметр. Остальные параметры опциональны."""
     instrument_id: builtins.str
     """Идентификатор инструмента — FIGI или UID инструмента."""
     cursor: builtins.str
@@ -1808,7 +1808,7 @@ global___GetOperationsByCursorRequest = GetOperationsByCursorRequest
 
 @typing.final
 class GetOperationsByCursorResponse(google.protobuf.message.Message):
-    """Список операций по счёту с пагинацией."""
+    """Список операций по счету с пагинацией."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1871,7 +1871,7 @@ class OperationItem(google.protobuf.message.Message):
     cursor: builtins.str
     """Курсор."""
     broker_account_id: builtins.str
-    """Номер счёта клиента."""
+    """Номер счета клиента."""
     id: builtins.str
     """Идентификатор операции, может меняться с течением времени."""
     parent_operation_id: builtins.str
@@ -2049,7 +2049,7 @@ class PositionsStreamRequest(google.protobuf.message.Message):
     """Получение состояния позиций на момент подключения."""
     @property
     def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Массив идентификаторов счётов пользователя."""
+        """Массив идентификаторов счетов пользователя."""
 
     @property
     def ping_settings(self) -> tinkoff.invest.grpc.common_pb2.PingDelaySettings:
@@ -2117,7 +2117,7 @@ class PositionsSubscriptionResult(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     STREAM_ID_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](/invest/intro/developer/protocols/grpc#tracking-id)."""
     stream_id: builtins.str
     """Идентификатор открытого соединения"""
     @property
@@ -2137,14 +2137,14 @@ global___PositionsSubscriptionResult = PositionsSubscriptionResult
 
 @typing.final
 class PositionsSubscriptionStatus(google.protobuf.message.Message):
-    """Счёт клиента."""
+    """Счет клиента."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта."""
+    """Идентификатор счета."""
     subscription_status: global___PositionsAccountSubscriptionStatus.ValueType
     """Результат подписки."""
     def __init__(
@@ -2170,7 +2170,7 @@ class PositionData(google.protobuf.message.Message):
     OPTIONS_FIELD_NUMBER: builtins.int
     DATE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта."""
+    """Идентификатор счета."""
     @property
     def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsMoney]:
         """Массив валютных позиций портфеля."""
