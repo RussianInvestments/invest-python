@@ -102,7 +102,7 @@ class SandboxServiceServicer(object):
     """
 
     def OpenSandboxAccount(self, request, context):
-        """Зарегистрировать счёт.
+        """Зарегистрировать счет.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -116,7 +116,7 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CloseSandboxAccount(self, request, context):
-        """Закрыть счёт.
+        """Закрыть счет.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -137,7 +137,7 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrders(self, request, context):
-        """Получить список активных заявок по счёту.
+        """Получить список активных заявок по счету.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -151,28 +151,28 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrderState(self, request, context):
-        """Поулчить статус заявки в песочнице. Заявки хранятся в таблице 7 дней.
+        """Получить статус заявки в песочнице. Заявки хранятся в таблице 7 дней.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxPositions(self, request, context):
-        """Получить позиции по виртуальному счёту.
+        """Получить позиции по виртуальному счету.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOperations(self, request, context):
-        """Получить операции по номеру счёта.
+        """Получить операции по номеру счета.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOperationsByCursor(self, request, context):
-        """Получить операции по номеру счёта с пагинацией.
+        """Получить операции по номеру счета с пагинацией.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -186,7 +186,7 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def SandboxPayIn(self, request, context):
-        """Пополнить счёт.
+        """Пополнить счет.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -200,7 +200,7 @@ class SandboxServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxMaxLots(self, request, context):
-        """Расчёт количества доступных для покупки/продажи лотов в песочнице.
+        """Расчет количества доступных для покупки/продажи лотов в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
