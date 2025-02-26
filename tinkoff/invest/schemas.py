@@ -487,6 +487,25 @@ class LastPriceType(_grpc_helpers.Enum):
     LAST_PRICE_DEALER = 2
 
 
+class StrategyType(_grpc_helpers.Enum):
+    STRATEGY_TYPE_UNSPECIFIED = 0
+    STRATEGY_TYPE_TECHNICAL = 1
+    STRATEGY_TYPE_FUNDAMENTAL = 2
+
+
+class SignalDirection(_grpc_helpers.Enum):
+    SIGNAL_DIRECTION_UNSPECIFIED = 0
+    SIGNAL_DIRECTION_BUY = 1
+    SIGNAL_DIRECTION_SELL = 2
+
+
+class SignalState(_grpc_helpers.Enum):
+    SIGNAL_STATE_UNSPECIFIED = 0
+    SIGNAL_STATE_ACTIVE = 1
+    SIGNAL_STATE_CLOSED = 2
+    SIGNAL_STATE_ALL = 3
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -3233,3 +3252,67 @@ class ExtraBond(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class ExtraFuture(_grpc_helpers.Message):
     initial_margin: "MoneyValue" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class GetStrategiesRequest(_grpc_helpers.Message):
+    strategy_id: Optional[str] = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetStrategiesResponse(_grpc_helpers.Message):
+    strategies: List["Strategy"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class Strategy(_grpc_helpers.Message):
+    strategy_id: str = _grpc_helpers.string_field(1)
+    strategy_name: str = _grpc_helpers.string_field(2)
+    strategy_description: Optional[str] = _grpc_helpers.string_field(3)
+    strategy_url: Optional[str] = _grpc_helpers.string_field(4)
+    strategy_type: "StrategyType" = _grpc_helpers.message_field(5)
+    active_signals: int = _grpc_helpers.int32_field(6)
+    total_signals: int = _grpc_helpers.int32_field(7)
+    time_in_position: int = _grpc_helpers.int64_field(8)
+    average_signal_yield: "Quotation" = _grpc_helpers.string_field(9)
+    average_signal_yield_year: "Quotation" = _grpc_helpers.string_field(10)
+    yield_: "Quotation" = _grpc_helpers.string_field(11)
+    yield_year: "Quotation" = _grpc_helpers.string_field(12)
+
+
+@dataclass(eq=False, repr=True)
+class GetSignalsRequest(_grpc_helpers.Message):
+    signal_id: Optional[str] = _grpc_helpers.string_field(1)
+    strategy_id: Optional[str] = _grpc_helpers.string_field(2)
+    strategy_type: Optional["StrategyType"] = _grpc_helpers.message_field(3)
+    instrument_uid: Optional[str] = _grpc_helpers.string_field(4)
+    from_: Optional[datetime] = _grpc_helpers.message_field(5)
+    to: Optional[datetime] = _grpc_helpers.message_field(6)
+    direction: Optional["SignalDirection"] = _grpc_helpers.message_field(7)
+    active: Optional[SignalState] = _grpc_helpers.message_field(8)
+    paging: Optional["Page"] = _grpc_helpers.message_field(9)
+
+
+@dataclass(eq=False, repr=True)
+class GetSignalsResponse(_grpc_helpers.Message):
+    signals: List["Signal"] = _grpc_helpers.message_field(1)
+    paging: "PageResponse" = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class Signal(_grpc_helpers.Message):
+    signal_id: str = _grpc_helpers.string_field(1)
+    strategy_id: str = _grpc_helpers.string_field(2)
+    strategy_name: str = _grpc_helpers.string_field(3)
+    instrument_uid: str = _grpc_helpers.string_field(4)
+    create_dt: datetime = _grpc_helpers.message_field(5)
+    direction: "SignalDirection" = _grpc_helpers.message_field(6)
+    initial_price: "Quotation" = _grpc_helpers.message_field(7)
+    info: Optional[str] = _grpc_helpers.string_field(8)
+    name: str = _grpc_helpers.string_field(9)
+    target_price: "Quotation" = _grpc_helpers.message_field(10)
+    end_dt: datetime = _grpc_helpers.message_field(11)
+    probability: int = _grpc_helpers.int32_field(12)
+    stoploss: "Quotation" = _grpc_helpers.message_field(13)
+    close_price: "Quotation" = _grpc_helpers.message_field(14)
+    close_dt: Optional[datetime] = _grpc_helpers.message_field(15)

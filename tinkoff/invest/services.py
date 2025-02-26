@@ -20,6 +20,8 @@ from .grpc import (
     orders_pb2_grpc,
     sandbox_pb2,
     sandbox_pb2_grpc,
+    signals_pb2,
+    signals_pb2_grpc,
     stoporders_pb2,
     stoporders_pb2_grpc,
     users_pb2,
@@ -122,8 +124,12 @@ from .schemas import (
     GetOrdersRequest,
     GetOrdersResponse,
     GetOrderStateRequest,
+    GetSignalsRequest,
+    GetSignalsResponse,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetStrategiesRequest,
+    GetStrategiesResponse,
     GetTechAnalysisRequest,
     GetTechAnalysisResponse,
     GetTradingStatusesRequest,
@@ -216,6 +222,7 @@ __all__ = (
     "UsersService",
     "SandboxService",
     "StopOrdersService",
+    "SignalService",
 )
 logger = logging.getLogger(__name__)
 
@@ -240,6 +247,7 @@ class Services:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+        self.signals = SignalService(channel, metadata)
 
     def create_market_data_stream(self) -> MarketDataStreamManager:
         return MarketDataStreamManager(
@@ -2026,3 +2034,37 @@ class StopOrdersService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "CancelStopOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, CancelStopOrderResponse)
+
+
+class SignalService(_grpc_helpers.Service):
+    _stub_factory = signals_pb2_grpc.SignalServiceStub
+
+    @handle_request_error("GetStrategies")
+    def get_strategies(
+        self,
+        *,
+        request: GetStrategiesRequest,
+    ) -> GetStrategiesResponse:
+        response, call = self.stub.GetStrategies.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetStrategiesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetStrategies")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetStrategiesResponse)
+
+    @handle_request_error("GetSignals")
+    def get_signals(
+        self,
+        *,
+        request: GetSignalsRequest,
+    ) -> GetSignalsResponse:
+        response, call = self.stub.GetSignals.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetSignalsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetSignals")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetSignalsResponse)

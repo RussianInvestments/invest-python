@@ -20,6 +20,8 @@ from .grpc import (
     orders_pb2_grpc,
     sandbox_pb2,
     sandbox_pb2_grpc,
+    signals_pb2,
+    signals_pb2_grpc,
     stoporders_pb2,
     stoporders_pb2_grpc,
     users_pb2,
@@ -124,8 +126,12 @@ from .schemas import (
     GetOrdersRequest,
     GetOrdersResponse,
     GetOrderStateRequest,
+    GetSignalsRequest,
+    GetSignalsResponse,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetStrategiesRequest,
+    GetStrategiesResponse,
     GetTechAnalysisRequest,
     GetTechAnalysisResponse,
     GetTradingStatusesRequest,
@@ -216,6 +222,7 @@ __all__ = (
     "UsersService",
     "SandboxService",
     "StopOrdersService",
+    "SignalsService",
 )
 
 
@@ -239,6 +246,7 @@ class AsyncServices:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+        self.signals = SignalsService(channel, metadata)
 
     def create_market_data_stream(self) -> AsyncMarketDataStreamManager:
         return AsyncMarketDataStreamManager(market_data_stream=self.market_data_stream)
@@ -2075,3 +2083,39 @@ class StopOrdersService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "CancelStopOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, CancelStopOrderResponse)
+
+
+class SignalsService(_grpc_helpers.Service):
+    _stub_factory = signals_pb2_grpc.SignalServiceStub
+
+    @handle_aio_request_error("GetSignals")
+    async def get_signals(
+        self,
+        *,
+        request: GetSignalsRequest,
+    ) -> GetSignalsResponse:
+        response_coro = self.stub.GetSignals(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetSignalsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetSignals")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetSignalsResponse)
+
+    @handle_aio_request_error("GetStrategies")
+    async def get_strategies(
+        self,
+        *,
+        request: GetStrategiesRequest,
+    ) -> GetStrategiesResponse:
+        response_coro = self.stub.GetStrategies(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetStrategiesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetStrategies")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetStrategiesResponse)
