@@ -39,11 +39,11 @@ logger = logging.getLogger(__name__)
 def get_historical_candle(
     time: datetime,
     is_complete: bool = True,
-    candle_source_type: Optional[CandleSource] = None,
+    candle_source: Optional[CandleSource] = None,
 ):
     quotation = Quotation(units=100, nano=0)
-    if candle_source_type is None:
-        candle_source_type = CandleSource.CANDLE_SOURCE_EXCHANGE
+    if candle_source is None:
+        candle_source = CandleSource.CANDLE_SOURCE_EXCHANGE
     return HistoricCandle(
         open=quotation,
         high=quotation,
@@ -52,7 +52,7 @@ def get_historical_candle(
         volume=100,
         time=time,
         is_complete=is_complete,
-        candle_source_type=candle_source_type,
+        candle_source=candle_source,
     )
 
 
@@ -68,7 +68,7 @@ def get_candles_response(
     candles = []
     while current_time <= end:
         candles.append(
-            get_historical_candle(current_time, candle_source_type=candle_source_type)
+            get_historical_candle(current_time, candle_source=candle_source_type)
         )
         current_time += delta
         current_time.replace(second=0, microsecond=0)

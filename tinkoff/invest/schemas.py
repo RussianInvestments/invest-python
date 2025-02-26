@@ -1867,7 +1867,7 @@ class HistoricCandle(_grpc_helpers.Message):
     volume: int = _grpc_helpers.int64_field(5)
     time: datetime = _grpc_helpers.message_field(6)
     is_complete: bool = _grpc_helpers.bool_field(7)
-    candle_source_type: CandleSource = _grpc_helpers.message_field(9)
+    candle_source: CandleSource = _grpc_helpers.message_field(9)
 
 
 @dataclass(eq=False, repr=True)
