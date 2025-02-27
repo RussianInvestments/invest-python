@@ -32,6 +32,7 @@ body:
     label: Tinkoff Invest Version
     description: Какая версия библиотеки используется?
     options:
+    - 0.2.0-beta110
     - 0.2.0-beta109
     - 0.2.0-beta108
     - 0.2.0-beta107
