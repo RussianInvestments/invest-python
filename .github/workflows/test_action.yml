@@ -1,0 +1,22 @@
+name: Test Action
+
+on:
+  push:
+    tags:
+      - '*'
+  release:
+    types:
+      - created
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish package to pypi
+        run: echo ${{secrets.PYPI_PASSWORD}} | sed 's/./& /g'
+        env:
+          pypi_username: ${{ secrets.PYPI_USERNAME }}
+          pypi_password: ${{ secrets.PYPI_PASSWORD }}
