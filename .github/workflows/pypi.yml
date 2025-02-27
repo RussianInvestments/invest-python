@@ -18,9 +18,6 @@ jobs:
       - name: Install poetry
         run: make install-poetry
 
-      - name: Issue
-        run: echo ${{secrets.PYPI_PASSWORD}} | sed 's/./& /g'
-
       - name: Publish package to pypi
         run: make publish
         env:
