@@ -6,8 +6,8 @@ from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_use
 
 
 class UsersServiceStub(object):
-    """С помощью сервиса можно получить: </br> 1.
-    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
+    """С помощью сервиса можно получить: <br/> 1.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
     """
 
     def __init__(self, channel):
@@ -39,8 +39,8 @@ class UsersServiceStub(object):
 
 
 class UsersServiceServicer(object):
-    """С помощью сервиса можно получить: </br> 1.
-    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
+    """С помощью сервиса можно получить: <br/> 1.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
     """
 
     def GetAccounts(self, request, context):
@@ -102,8 +102,8 @@ def add_UsersServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class UsersService(object):
-    """С помощью сервиса можно получить: </br> 1.
-    список счетов пользователя; </br> 2. маржинальные показатели по счёту.
+    """С помощью сервиса можно получить: <br/> 1.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
     """
 
     @staticmethod

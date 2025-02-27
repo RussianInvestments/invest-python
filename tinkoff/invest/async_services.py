@@ -20,6 +20,8 @@ from .grpc import (
     orders_pb2_grpc,
     sandbox_pb2,
     sandbox_pb2_grpc,
+    signals_pb2,
+    signals_pb2_grpc,
     stoporders_pb2,
     stoporders_pb2_grpc,
     users_pb2,
@@ -48,8 +50,12 @@ from .schemas import (
     CandleSource,
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
+    CreateFavoriteGroupRequest,
+    CreateFavoriteGroupResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    DeleteFavoriteGroupRequest,
+    DeleteFavoriteGroupResponse,
     EditFavoritesActionType,
     EditFavoritesRequest,
     EditFavoritesRequestInstrument,
@@ -93,6 +99,8 @@ from .schemas import (
     GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
+    GetFavoriteGroupsRequest,
+    GetFavoriteGroupsResponse,
     GetFavoritesRequest,
     GetFavoritesResponse,
     GetForecastRequest,
@@ -118,8 +126,12 @@ from .schemas import (
     GetOrdersRequest,
     GetOrdersResponse,
     GetOrderStateRequest,
+    GetSignalsRequest,
+    GetSignalsResponse,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetStrategiesRequest,
+    GetStrategiesResponse,
     GetTechAnalysisRequest,
     GetTechAnalysisResponse,
     GetTradingStatusesRequest,
@@ -176,6 +188,8 @@ from .schemas import (
     PriceType,
     Quotation,
     ReplaceOrderRequest,
+    RiskRatesRequest,
+    RiskRatesResponse,
     SandboxPayInRequest,
     SandboxPayInResponse,
     ShareResponse,
@@ -208,6 +222,7 @@ __all__ = (
     "UsersService",
     "SandboxService",
     "StopOrdersService",
+    "SignalsService",
 )
 
 
@@ -231,6 +246,7 @@ class AsyncServices:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+        self.signals = SignalsService(channel, metadata)
 
     def create_market_data_stream(self) -> AsyncMarketDataStreamManager:
         return AsyncMarketDataStreamManager(market_data_stream=self.market_data_stream)
@@ -764,8 +780,12 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetFavorites")
     async def get_favorites(
         self,
+        *,
+        group_id: Optional[str] = None,
     ) -> GetFavoritesResponse:
         request = GetFavoritesRequest()
+        if group_id is not None:
+            request.group_id = group_id
         response_coro = self.stub.GetFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetFavoritesRequest()
@@ -782,12 +802,15 @@ class InstrumentsService(_grpc_helpers.Service):
         *,
         instruments: Optional[List[EditFavoritesRequestInstrument]] = None,
         action_type: Optional[EditFavoritesActionType] = None,
+        group_id: Optional[str] = None,
     ) -> EditFavoritesResponse:
         request = EditFavoritesRequest()
         if action_type is not None:
             request.action_type = action_type
         if instruments is not None:
             request.instruments = instruments
+        if group_id is not None:
+            request.group_id = group_id
         response_coro = self.stub.EditFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.EditFavoritesRequest()
@@ -797,6 +820,59 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "EditFavorites")
         return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
+
+    @handle_aio_request_error("CreateFavoriteGroup")
+    async def create_favorite_group(
+        self,
+        request: CreateFavoriteGroupRequest,
+    ) -> CreateFavoriteGroupResponse:
+        response_coro = self.stub.CreateFavoriteGroup(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.CreateFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "CreateFavoriteGroup"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, CreateFavoriteGroupResponse
+        )
+
+    @handle_aio_request_error("DeleteFavoriteGroup")
+    async def delete_favorite_group(
+        self,
+        request: DeleteFavoriteGroupRequest,
+    ) -> DeleteFavoriteGroupResponse:
+        response_coro = self.stub.DeleteFavoriteGroup(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.DeleteFavoriteGroupRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "DeleteFavoriteGroup"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, DeleteFavoriteGroupResponse
+        )
+
+    @handle_aio_request_error("GetFavoriteGroups")
+    async def get_favorite_groups(
+        self,
+        request: GetFavoriteGroupsRequest,
+    ) -> GetFavoriteGroupsResponse:
+        response_coro = self.stub.GetFavoriteGroups(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetFavoriteGroupsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetFavoriteGroups")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetFavoriteGroupsResponse)
 
     @handle_aio_request_error("GetCountries")
     async def get_countries(
@@ -930,6 +1006,18 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetForecastBy")
         return _grpc_helpers.protobuf_to_dataclass(response, GetForecastResponse)
+
+    @handle_aio_request_error("GetRiskRates")
+    async def get_risk_rates(self, request: RiskRatesRequest) -> RiskRatesResponse:
+        response_coro = self.stub.GetRiskRates(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.RiskRatesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetRiskRates")
+        return _grpc_helpers.protobuf_to_dataclass(response, RiskRatesResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):
@@ -1995,3 +2083,39 @@ class StopOrdersService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "CancelStopOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, CancelStopOrderResponse)
+
+
+class SignalsService(_grpc_helpers.Service):
+    _stub_factory = signals_pb2_grpc.SignalServiceStub
+
+    @handle_aio_request_error("GetSignals")
+    async def get_signals(
+        self,
+        *,
+        request: GetSignalsRequest,
+    ) -> GetSignalsResponse:
+        response_coro = self.stub.GetSignals(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetSignalsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetSignals")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetSignalsResponse)
+
+    @handle_aio_request_error("GetStrategies")
+    async def get_strategies(
+        self,
+        *,
+        request: GetStrategiesRequest,
+    ) -> GetStrategiesResponse:
+        response_coro = self.stub.GetStrategies(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, signals_pb2.GetStrategiesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetStrategies")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetStrategiesResponse)

@@ -112,9 +112,9 @@ class _StopOrderStatusOptionEnumTypeWrapper(google.protobuf.internal.enum_type_w
     STOP_ORDER_STATUS_EXECUTED: _StopOrderStatusOption.ValueType  # 3
     """Исполненные заявки."""
     STOP_ORDER_STATUS_CANCELED: _StopOrderStatusOption.ValueType  # 4
-    """Отменённые заявки."""
+    """Отмененные заявки."""
     STOP_ORDER_STATUS_EXPIRED: _StopOrderStatusOption.ValueType  # 5
-    """Истёкшие заявки."""
+    """Истекшие заявки."""
 
 class StopOrderStatusOption(_StopOrderStatusOption, metaclass=_StopOrderStatusOptionEnumTypeWrapper):
     """Статус стоп-заяки."""
@@ -128,9 +128,9 @@ STOP_ORDER_STATUS_ACTIVE: StopOrderStatusOption.ValueType  # 2
 STOP_ORDER_STATUS_EXECUTED: StopOrderStatusOption.ValueType  # 3
 """Исполненные заявки."""
 STOP_ORDER_STATUS_CANCELED: StopOrderStatusOption.ValueType  # 4
-"""Отменённые заявки."""
+"""Отмененные заявки."""
 STOP_ORDER_STATUS_EXPIRED: StopOrderStatusOption.ValueType  # 5
-"""Истёкшие заявки."""
+"""Истекшие заявки."""
 global___StopOrderStatusOption = StopOrderStatusOption
 
 class _ExchangeOrderType:
@@ -288,7 +288,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     direction: global___StopOrderDirection.ValueType
     """Направление операции."""
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     expiration_type: global___StopOrderExpirationType.ValueType
     """Тип экспирации заявки."""
     stop_order_type: global___StopOrderType.ValueType
@@ -296,7 +296,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     instrument_id: builtins.str
     """Идентификатор инструмента. Принимает значение `figi` или `instrument_uid`."""
     exchange_order_type: global___ExchangeOrderType.ValueType
-    """Тип дочерней биржевой заявки для тейкпрофита."""
+    """Тип дочерней биржевой заявки."""
     take_profit_type: global___TakeProfitType.ValueType
     """Подтип стоп-заявки — `TakeProfit`."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
@@ -391,7 +391,7 @@ class GetStopOrdersRequest(google.protobuf.message.Message):
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента."""
+    """Идентификатор счета клиента."""
     status: global___StopOrderStatusOption.ValueType
     """Статус заявок."""
     @property
@@ -419,7 +419,7 @@ class GetStopOrdersResponse(google.protobuf.message.Message):
     STOP_ORDERS_FIELD_NUMBER: builtins.int
     @property
     def stop_orders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StopOrder]:
-        """Массив стоп-заявок по счёту."""
+        """Массив стоп-заявок по счету."""
 
     def __init__(
         self,
@@ -439,7 +439,7 @@ class CancelStopOrderRequest(google.protobuf.message.Message):
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта клиента."""
+    """Идентификатор счета клиента."""
     stop_order_id: builtins.str
     """Уникальный идентификатор стоп-заявки."""
     def __init__(

@@ -46,7 +46,7 @@ class StopOrdersServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetStopOrders(self, request, context):
-        """Получить список активных стоп-заявок по счёту.
+        """Получить список активных стоп-заявок по счету.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

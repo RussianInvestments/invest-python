@@ -13,13 +13,13 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
 class OpenSandboxAccountRequest(google.protobuf.message.Message):
-    """Запрос открытия счёта в песочнице."""
+    """Запрос открытия счета в песочнице."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """Название счёта"""
+    """Название счета"""
     def __init__(
         self,
         *,
@@ -33,13 +33,13 @@ global___OpenSandboxAccountRequest = OpenSandboxAccountRequest
 
 @typing.final
 class OpenSandboxAccountResponse(google.protobuf.message.Message):
-    """Номер открытого счёта в песочнице."""
+    """Номер открытого счета в песочнице."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта"""
+    """Номер счета"""
     def __init__(
         self,
         *,
@@ -51,13 +51,13 @@ global___OpenSandboxAccountResponse = OpenSandboxAccountResponse
 
 @typing.final
 class CloseSandboxAccountRequest(google.protobuf.message.Message):
-    """Запрос закрытия счёта в песочнице."""
+    """Запрос закрытия счета в песочнице."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта"""
+    """Номер счета"""
     def __init__(
         self,
         *,
@@ -69,7 +69,7 @@ global___CloseSandboxAccountRequest = CloseSandboxAccountRequest
 
 @typing.final
 class CloseSandboxAccountResponse(google.protobuf.message.Message):
-    """Результат закрытия счёта в песочнице.
+    """Результат закрытия счета в песочнице.
     пустой ответ
     """
 
@@ -83,17 +83,17 @@ global___CloseSandboxAccountResponse = CloseSandboxAccountResponse
 
 @typing.final
 class SandboxPayInRequest(google.protobuf.message.Message):
-    """Запрос пополнения счёта в песочнице."""
+    """Запрос пополнения счета в песочнице."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     AMOUNT_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта"""
+    """Номер счета"""
     @property
     def amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма пополнения счёта в рублях"""
+        """Сумма пополнения счета в рублях"""
 
     def __init__(
         self,
@@ -108,14 +108,14 @@ global___SandboxPayInRequest = SandboxPayInRequest
 
 @typing.final
 class SandboxPayInResponse(google.protobuf.message.Message):
-    """Результат пополнения счёта, текущий баланс."""
+    """Результат пополнения счета, текущий баланс."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     BALANCE_FIELD_NUMBER: builtins.int
     @property
     def balance(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Текущий баланс счёта"""
+        """Текущий баланс счета"""
 
     def __init__(
         self,

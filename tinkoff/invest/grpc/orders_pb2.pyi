@@ -168,7 +168,7 @@ class TradesStreamRequest(google.protobuf.message.Message):
     ACCOUNTS_FIELD_NUMBER: builtins.int
     PING_DELAY_MS_FIELD_NUMBER: builtins.int
     ping_delay_ms: builtins.int
-    """Задержка пинг сообщений milliseconds 5000-180000, default 120000"""
+    """Задержка (пинг) сообщений: 5000–180 000 миллисекунд. Значение по умолчанию — 120 000."""
     @property
     def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Идентификаторы счетов."""
@@ -239,7 +239,7 @@ class OrderTrades(google.protobuf.message.Message):
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     account_id: builtins.str
-    """Идентификатор счёта."""
+    """Идентификатор счета."""
     instrument_uid: builtins.str
     """UID идентификатор инструмента."""
     @property
@@ -324,7 +324,7 @@ class PostOrderRequest(google.protobuf.message.Message):
     direction: global___OrderDirection.ValueType
     """Направление операции."""
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     order_type: global___OrderType.ValueType
     """Тип заявки."""
     order_id: builtins.str
@@ -364,7 +364,7 @@ global___PostOrderRequest = PostOrderRequest
 
 @typing.final
 class PostOrderResponse(google.protobuf.message.Message):
-    """Прочитайте  про ключ идемпотентности [здесь](https://russianinvestments.github.io/investAPI/head-orders/)
+    """Прочитайте  про ключ идемпотентности [здесь](./head-orders/)
 
     Информация о выставлении поручения.
     """
@@ -432,7 +432,7 @@ class PostOrderResponse(google.protobuf.message.Message):
 
     @property
     def aci_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](https://russianinvestments.github.io/investAPI/head-orders#coupon)"""
+        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](./head-orders#coupon)"""
 
     @property
     def initial_security_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -496,7 +496,7 @@ class PostOrderAsyncRequest(google.protobuf.message.Message):
     direction: global___OrderDirection.ValueType
     """Направление операции."""
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     order_type: global___OrderType.ValueType
     """Тип заявки."""
     order_id: builtins.str
@@ -571,7 +571,7 @@ class CancelOrderRequest(google.protobuf.message.Message):
     ORDER_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_TYPE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     order_id: builtins.str
     """Идентификатор заявки."""
     order_id_type: global___OrderIdType.ValueType
@@ -627,7 +627,7 @@ class GetOrderStateRequest(google.protobuf.message.Message):
     PRICE_TYPE_FIELD_NUMBER: builtins.int
     ORDER_ID_TYPE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     order_id: builtins.str
     """Идентификатор заявки."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
@@ -656,7 +656,7 @@ class GetOrdersRequest(google.protobuf.message.Message):
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Номер счёта."""
+    """Номер счета."""
     def __init__(
         self,
         *,
@@ -1145,9 +1145,9 @@ class OrderStateStreamRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNTS_FIELD_NUMBER: builtins.int
-    PING_DELAY_MS_FIELD_NUMBER: builtins.int
-    ping_delay_ms: builtins.int
-    """Задержка пинг сообщений milliseconds 5000-180000, default 120000"""
+    PING_DELAY_MILLIS_FIELD_NUMBER: builtins.int
+    ping_delay_millis: builtins.int
+    """Задержка (пинг) сообщений:  1000-120 000 миллисекунд. Значение по умолчанию — 120 000."""
     @property
     def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Идентификаторы счетов."""
@@ -1156,11 +1156,11 @@ class OrderStateStreamRequest(google.protobuf.message.Message):
         self,
         *,
         accounts: collections.abc.Iterable[builtins.str] | None = ...,
-        ping_delay_ms: builtins.int | None = ...,
+        ping_delay_millis: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ping_delay_ms", b"_ping_delay_ms", "ping_delay_ms", b"ping_delay_ms"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ping_delay_ms", b"_ping_delay_ms", "accounts", b"accounts", "ping_delay_ms", b"ping_delay_ms"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_ping_delay_ms", b"_ping_delay_ms"]) -> typing.Literal["ping_delay_ms"] | None: ...
+    def HasField(self, field_name: typing.Literal["_ping_delay_millis", b"_ping_delay_millis", "ping_delay_millis", b"ping_delay_millis"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ping_delay_millis", b"_ping_delay_millis", "accounts", b"accounts", "ping_delay_millis", b"ping_delay_millis"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_ping_delay_millis", b"_ping_delay_millis"]) -> typing.Literal["ping_delay_millis"] | None: ...
 
 global___OrderStateStreamRequest = OrderStateStreamRequest
 
@@ -1176,7 +1176,7 @@ class SubscriptionResponse(google.protobuf.message.Message):
     ACCOUNTS_FIELD_NUMBER: builtins.int
     ERROR_FIELD_NUMBER: builtins.int
     tracking_id: builtins.str
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://russianinvestments.github.io/investAPI/grpc#tracking-id)."""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](./grpc#tracking-id)."""
     status: tinkoff.invest.grpc.common_pb2.ResultSubscriptionStatus.ValueType
     """Статус подписки."""
     stream_id: builtins.str
@@ -1330,72 +1330,72 @@ class OrderStateStreamResponse(google.protobuf.message.Message):
         EXCHANGE_FIELD_NUMBER: builtins.int
         INSTRUMENT_UID_FIELD_NUMBER: builtins.int
         order_id: builtins.str
-        """Биржевой идентификатор заявки"""
+        """Биржевой идентификатор заявки."""
         order_request_id: builtins.str
         """Идентификатор ключа идемпотентности, переданный клиентом, в формате UID. Максимальная длина 36 символов."""
         client_code: builtins.str
-        """Код клиента на бирже"""
+        """Код клиента на бирже."""
         execution_report_status: global___OrderExecutionReportStatus.ValueType
-        """Статус заявки"""
+        """Статус заявки."""
         status_info: global___OrderStateStreamResponse.StatusCauseInfo.ValueType
-        """Дополнительная информация по статусу"""
+        """Дополнительная информация по статусу."""
         ticker: builtins.str
-        """Тикер инструмента"""
+        """Тикер инструмента."""
         class_code: builtins.str
-        """Класс-код (секция торгов)"""
+        """Класс-код (секция торгов)."""
         lot_size: builtins.int
-        """Лотность инструмента заявки"""
+        """Лотность инструмента заявки."""
         direction: global___OrderDirection.ValueType
-        """Направление заявки"""
+        """Направление заявки."""
         time_in_force: global___TimeInForceType.ValueType
-        """Алгоритм исполнения поручения"""
+        """Алгоритм исполнения поручения."""
         order_type: global___OrderType.ValueType
-        """Тип заявки"""
+        """Тип заявки."""
         account_id: builtins.str
-        """Номер счета"""
+        """Номер счета."""
         currency: builtins.str
-        """Валюта исполнения"""
+        """Валюта исполнения."""
         lots_requested: builtins.int
-        """Запрошено лотов"""
+        """Запрошено лотов."""
         lots_executed: builtins.int
-        """Исполнено лотов"""
+        """Исполнено лотов."""
         lots_left: builtins.int
-        """Число неисполненных лотов по заявке"""
+        """Число неисполненных лотов по заявке."""
         lots_cancelled: builtins.int
-        """Отмененные лоты"""
+        """Отмененные лоты."""
         marker: global___OrderStateStreamResponse.MarkerType.ValueType
-        """Спецсимвол"""
+        """Спецсимвол."""
         exchange: builtins.str
-        """Код биржи"""
+        """Код биржи."""
         instrument_uid: builtins.str
-        """UID идентификатор инструмента"""
+        """UID идентификатор инструмента."""
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Дата создания заявки"""
+            """Дата создания заявки."""
 
         @property
         def initial_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-            """Начальная цена заявки"""
+            """Начальная цена заявки."""
 
         @property
         def order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-            """Цена выставления заявки"""
+            """Цена выставления заявки."""
 
         @property
         def amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-            """Предрассчитанная стоимость полной заявки"""
+            """Предрассчитанная стоимость полной заявки."""
 
         @property
         def executed_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-            """Исполненная средняя цена одного инструмента в заявке"""
+            """Исполненная цена заявки."""
 
         @property
         def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderTrade]:
-            """	Список сделок"""
+            """	Список сделок."""
 
         @property
         def completion_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Время исполнения заявки"""
+            """Время исполнения заявки."""
 
         def __init__(
             self,

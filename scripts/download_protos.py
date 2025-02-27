@@ -23,6 +23,7 @@ FILES = [
     "operations.proto",
     "orders.proto",
     "sandbox.proto",
+    "signals.proto",
     "stoporders.proto",
     "users.proto",
 ]

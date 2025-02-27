@@ -81,7 +81,7 @@ class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INSTRUMENT_STATUS_UNSPECIFIED: _InstrumentStatus.ValueType  # 0
     """Значение не определено."""
     INSTRUMENT_STATUS_BASE: _InstrumentStatus.ValueType  # 1
-    """Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+    """По умолчанию — базовый список инструментов, которыми можно торговать через T-Invest API. Сейчас списки доступных бумаг в API и других интерфейсах совпадают — кроме внебиржевых бумаг, но в будущем списки могут различаться."""
     INSTRUMENT_STATUS_ALL: _InstrumentStatus.ValueType  # 2
     """Список всех инструментов."""
 
@@ -91,7 +91,7 @@ class InstrumentStatus(_InstrumentStatus, metaclass=_InstrumentStatusEnumTypeWra
 INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType  # 0
 """Значение не определено."""
 INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType  # 1
-"""Базовый список инструментов (по умолчанию). Инструменты, доступные для торговли через T-Invest API. Cейчас списки бумаг, которые доступны из API и других интерфейсах совпадают — кроме внебиржевых бумаг. Но в будущем возможны ситуации, когда списки инструментов будут отличаться."""
+"""По умолчанию — базовый список инструментов, которыми можно торговать через T-Invest API. Сейчас списки доступных бумаг в API и других интерфейсах совпадают — кроме внебиржевых бумаг, но в будущем списки могут различаться."""
 INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType  # 2
 """Список всех инструментов."""
 global___InstrumentStatus = InstrumentStatus
@@ -103,7 +103,7 @@ class _SecurityTradingStatus:
 class _SecurityTradingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SecurityTradingStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SECURITY_TRADING_STATUS_UNSPECIFIED: _SecurityTradingStatus.ValueType  # 0
-    """Торговый статус не определён."""
+    """Торговый статус не определен."""
     SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING: _SecurityTradingStatus.ValueType  # 1
     """Недоступен для торгов."""
     SECURITY_TRADING_STATUS_OPENING_PERIOD: _SecurityTradingStatus.ValueType  # 2
@@ -141,7 +141,7 @@ class SecurityTradingStatus(_SecurityTradingStatus, metaclass=_SecurityTradingSt
     """Режим торгов инструмента"""
 
 SECURITY_TRADING_STATUS_UNSPECIFIED: SecurityTradingStatus.ValueType  # 0
-"""Торговый статус не определён."""
+"""Торговый статус не определен."""
 SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.ValueType  # 1
 """Недоступен для торгов."""
 SECURITY_TRADING_STATUS_OPENING_PERIOD: SecurityTradingStatus.ValueType  # 2
@@ -187,7 +187,7 @@ class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     PRICE_TYPE_POINT: _PriceType.ValueType  # 1
     """Цена в пунктах (только для фьючерсов и облигаций)."""
     PRICE_TYPE_CURRENCY: _PriceType.ValueType  # 2
-    """Цена в валюте расчётов по инструменту."""
+    """Цена в валюте расчетов по инструменту."""
 
 class PriceType(_PriceType, metaclass=_PriceTypeEnumTypeWrapper):
     """Тип цены."""
@@ -197,7 +197,7 @@ PRICE_TYPE_UNSPECIFIED: PriceType.ValueType  # 0
 PRICE_TYPE_POINT: PriceType.ValueType  # 1
 """Цена в пунктах (только для фьючерсов и облигаций)."""
 PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
-"""Цена в валюте расчётов по инструменту."""
+"""Цена в валюте расчетов по инструменту."""
 global___PriceType = PriceType
 
 class _ResultSubscriptionStatus:
@@ -225,7 +225,7 @@ global___ResultSubscriptionStatus = ResultSubscriptionStatus
 
 @typing.final
 class MoneyValue(google.protobuf.message.Message):
-    """Денежная сумма в определённой валюте."""
+    """Денежная сумма в определенной валюте."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -278,7 +278,7 @@ class PingRequest(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время формирования запроса"""
+        """Время формирования запроса."""
 
     def __init__(
         self,
@@ -297,7 +297,7 @@ class PingDelaySettings(google.protobuf.message.Message):
 
     PING_DELAY_MS_FIELD_NUMBER: builtins.int
     ping_delay_ms: builtins.int
-    """Задержка пинг сообщений milliseconds 5000-180000, default 120000"""
+    """Задержка (пинг) сообщений:  5000–180 000 миллисекунд. Значение по умолчанию — 120 000."""
     def __init__(
         self,
         *,
@@ -326,7 +326,7 @@ class Ping(google.protobuf.message.Message):
 
     @property
     def ping_request_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время формирования запроса"""
+        """Время формирования запроса."""
 
     def __init__(
         self,

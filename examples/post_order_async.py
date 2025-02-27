@@ -1,10 +1,9 @@
-"""Example - How to get Brands"""
+"""Example - How to get Post Order"""
 
 import os
 from uuid import uuid4
 
 from tinkoff.invest import Client, OrderDirection, OrderType
-from tinkoff.invest.sandbox.client import SandboxClient
 from tinkoff.invest.schemas import PostOrderAsyncRequest
 
 TOKEN = os.environ["INVEST_TOKEN"]

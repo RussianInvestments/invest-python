@@ -32,14 +32,15 @@ class OrdersStreamServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def TradesStream(self, request, context):
-        """Stream сделок пользователя
+        """Stream сделок пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def OrderStateStream(self, request, context):
-        """Stream поручений пользователя. Перед работой прочитайте [статью](https://russianinvestments.github.io/investAPI/orders_state_stream/).
+        """Stream поручений пользователя.
+        Перед работой прочитайте [статью](/invest/services/orders/orders_state_stream).
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -104,9 +105,9 @@ class OrdersStreamService(object):
 
 
 class OrdersServiceStub(object):
-    """Сервис предназначен для работы с торговыми поручениями:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение статуса;</br> **4**.
-    расчёт полной стоимости;</br> **5**. получение списка заявок.
+    """Сервис предназначен для работы с торговыми поручениями:<br/> **1**.
+    выставление;<br/> **2**. отмена;<br/> **3**. получение статуса;<br/> **4**.
+    расчет полной стоимости;<br/> **5**. получение списка заявок.
     """
 
     def __init__(self, channel):
@@ -158,9 +159,9 @@ class OrdersServiceStub(object):
 
 
 class OrdersServiceServicer(object):
-    """Сервис предназначен для работы с торговыми поручениями:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение статуса;</br> **4**.
-    расчёт полной стоимости;</br> **5**. получение списка заявок.
+    """Сервис предназначен для работы с торговыми поручениями:<br/> **1**.
+    выставление;<br/> **2**. отмена;<br/> **3**. получение статуса;<br/> **4**.
+    расчет полной стоимости;<br/> **5**. получение списка заявок.
     """
 
     def PostOrder(self, request, context):
@@ -192,7 +193,7 @@ class OrdersServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetOrders(self, request, context):
-        """Метод получения списка активных заявок по счёту.
+        """Метод получения списка активных заявок по счету.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -206,14 +207,14 @@ class OrdersServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetMaxLots(self, request, context):
-        """расчет количества доступных для покупки/продажи лотов
+        """Расчет количества доступных для покупки/продажи лотов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetOrderPrice(self, request, context):
-        """Метод получения предварительной стоимости для лимитной заявки
+        """Метод получения предварительной стоимости для лимитной заявки.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -270,9 +271,9 @@ def add_OrdersServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class OrdersService(object):
-    """Сервис предназначен для работы с торговыми поручениями:</br> **1**.
-    выставление;</br> **2**. отмена;</br> **3**. получение статуса;</br> **4**.
-    расчёт полной стоимости;</br> **5**. получение списка заявок.
+    """Сервис предназначен для работы с торговыми поручениями:<br/> **1**.
+    выставление;<br/> **2**. отмена;<br/> **3**. получение статуса;<br/> **4**.
+    расчет полной стоимости;<br/> **5**. получение списка заявок.
     """
 
     @staticmethod
