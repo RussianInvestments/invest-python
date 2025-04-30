@@ -7,7 +7,7 @@ from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_use
 
 class UsersServiceStub(object):
     """С помощью сервиса можно получить: <br/> 1.
-    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счeту.
     """
 
     def __init__(self, channel):
@@ -40,32 +40,36 @@ class UsersServiceStub(object):
 
 class UsersServiceServicer(object):
     """С помощью сервиса можно получить: <br/> 1.
-    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счeту.
     """
 
     def GetAccounts(self, request, context):
-        """Получить счета пользователя.
+        """GetAccounts — счета пользователя
+        Получить список счетов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetMarginAttributes(self, request, context):
-        """Рассчитать маржинальные показатели по счёту.
+        """GetMarginAttributes — маржинальные показатели по счeту
+        Метод позволяет получить маржинальные показатели и ликвидность по заданному счeту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserTariff(self, request, context):
-        """Запросить тариф пользователя.
+        """GetUserTariff — тариф пользователя
+        Получить информацию о текущих лимитах на подклчение, согласно текущему тарифу пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInfo(self, request, context):
-        """Получить информацию о пользователе.
+        """GetInfo — информация о пользователе
+        Получить информацию о пользователе: тариф, признак квалификации, пройденные тесты и др.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -103,7 +107,7 @@ def add_UsersServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class UsersService(object):
     """С помощью сервиса можно получить: <br/> 1.
-    список счетов пользователя; <br/> 2. маржинальные показатели по счёту.
+    список счетов пользователя; <br/> 2. маржинальные показатели по счeту.
     """
 
     @staticmethod

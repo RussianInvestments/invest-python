@@ -28,9 +28,9 @@ class _AccountType:
 class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_TYPE_UNSPECIFIED: _AccountType.ValueType  # 0
-    """Тип аккаунта не определён."""
+    """Тип аккаунта не определeн."""
     ACCOUNT_TYPE_TINKOFF: _AccountType.ValueType  # 1
-    """Брокерский счёт Т-Инвестиций."""
+    """Брокерский счeт Т-Инвестиций."""
     ACCOUNT_TYPE_TINKOFF_IIS: _AccountType.ValueType  # 2
     """ИИС."""
     ACCOUNT_TYPE_INVEST_BOX: _AccountType.ValueType  # 3
@@ -39,12 +39,12 @@ class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     """Фонд денежного рынка."""
 
 class AccountType(_AccountType, metaclass=_AccountTypeEnumTypeWrapper):
-    """Тип счёта."""
+    """Тип счeта."""
 
 ACCOUNT_TYPE_UNSPECIFIED: AccountType.ValueType  # 0
-"""Тип аккаунта не определён."""
+"""Тип аккаунта не определeн."""
 ACCOUNT_TYPE_TINKOFF: AccountType.ValueType  # 1
-"""Брокерский счёт Т-Инвестиций."""
+"""Брокерский счeт Т-Инвестиций."""
 ACCOUNT_TYPE_TINKOFF_IIS: AccountType.ValueType  # 2
 """ИИС."""
 ACCOUNT_TYPE_INVEST_BOX: AccountType.ValueType  # 3
@@ -60,27 +60,27 @@ class _AccountStatus:
 class _AccountStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccountStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_STATUS_UNSPECIFIED: _AccountStatus.ValueType  # 0
-    """Статус счёта не определён."""
+    """Статус счeта не определeн."""
     ACCOUNT_STATUS_NEW: _AccountStatus.ValueType  # 1
     """Новый, в процессе открытия."""
     ACCOUNT_STATUS_OPEN: _AccountStatus.ValueType  # 2
-    """Открытый и активный счёт."""
+    """Открытый и активный счeт."""
     ACCOUNT_STATUS_CLOSED: _AccountStatus.ValueType  # 3
-    """Закрытый счёт."""
+    """Закрытый счeт."""
     ACCOUNT_STATUS_ALL: _AccountStatus.ValueType  # 4
     """Все счета."""
 
 class AccountStatus(_AccountStatus, metaclass=_AccountStatusEnumTypeWrapper):
-    """Статус счёта."""
+    """Статус счeта."""
 
 ACCOUNT_STATUS_UNSPECIFIED: AccountStatus.ValueType  # 0
-"""Статус счёта не определён."""
+"""Статус счeта не определeн."""
 ACCOUNT_STATUS_NEW: AccountStatus.ValueType  # 1
 """Новый, в процессе открытия."""
 ACCOUNT_STATUS_OPEN: AccountStatus.ValueType  # 2
-"""Открытый и активный счёт."""
+"""Открытый и активный счeт."""
 ACCOUNT_STATUS_CLOSED: AccountStatus.ValueType  # 3
-"""Закрытый счёт."""
+"""Закрытый счeт."""
 ACCOUNT_STATUS_ALL: AccountStatus.ValueType  # 4
 """Все счета."""
 global___AccountStatus = AccountStatus
@@ -92,21 +92,21 @@ class _AccessLevel:
 class _AccessLevelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AccessLevel.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ACCOUNT_ACCESS_LEVEL_UNSPECIFIED: _AccessLevel.ValueType  # 0
-    """Уровень доступа не определён."""
+    """Уровень доступа не определeн."""
     ACCOUNT_ACCESS_LEVEL_FULL_ACCESS: _AccessLevel.ValueType  # 1
-    """Полный доступ к счёту."""
+    """Полный доступ к счeту."""
     ACCOUNT_ACCESS_LEVEL_READ_ONLY: _AccessLevel.ValueType  # 2
     """Доступ с уровнем прав «только чтение»."""
     ACCOUNT_ACCESS_LEVEL_NO_ACCESS: _AccessLevel.ValueType  # 3
     """Доступа нет."""
 
 class AccessLevel(_AccessLevel, metaclass=_AccessLevelEnumTypeWrapper):
-    """Уровень доступа к счёту."""
+    """Уровень доступа к счeту."""
 
 ACCOUNT_ACCESS_LEVEL_UNSPECIFIED: AccessLevel.ValueType  # 0
-"""Уровень доступа не определён."""
+"""Уровень доступа не определeн."""
 ACCOUNT_ACCESS_LEVEL_FULL_ACCESS: AccessLevel.ValueType  # 1
-"""Полный доступ к счёту."""
+"""Полный доступ к счeту."""
 ACCOUNT_ACCESS_LEVEL_READ_ONLY: AccessLevel.ValueType  # 2
 """Доступ с уровнем прав «только чтение»."""
 ACCOUNT_ACCESS_LEVEL_NO_ACCESS: AccessLevel.ValueType  # 3
@@ -155,7 +155,7 @@ global___GetAccountsResponse = GetAccountsResponse
 
 @typing.final
 class Account(google.protobuf.message.Message):
-    """Информация о счёте."""
+    """Информация о счeте."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -167,22 +167,22 @@ class Account(google.protobuf.message.Message):
     CLOSED_DATE_FIELD_NUMBER: builtins.int
     ACCESS_LEVEL_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """Идентификатор счёта."""
+    """Идентификатор счeта."""
     type: global___AccountType.ValueType
-    """Тип счёта."""
+    """Тип счeта."""
     name: builtins.str
-    """Название счёта."""
+    """Название счeта."""
     status: global___AccountStatus.ValueType
-    """Статус счёта."""
+    """Статус счeта."""
     access_level: global___AccessLevel.ValueType
-    """Уровень доступа к текущему счёту (определяется токеном)."""
+    """Уровень доступа к текущему счeту (определяется токеном)."""
     @property
     def opened_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата открытия счёта в часовом поясе UTC."""
+        """Дата открытия счeта в часовом поясе UTC."""
 
     @property
     def closed_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата закрытия счёта в часовом поясе UTC."""
+        """Дата закрытия счeта в часовом поясе UTC."""
 
     def __init__(
         self,
@@ -202,13 +202,13 @@ global___Account = Account
 
 @typing.final
 class GetMarginAttributesRequest(google.protobuf.message.Message):
-    """Запрос маржинальных показателей по счёту."""
+    """Запрос маржинальных показателей по счeту."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: builtins.str
-    """Идентификатор счёта пользователя."""
+    """Идентификатор счeта пользователя."""
     def __init__(
         self,
         *,
@@ -220,7 +220,7 @@ global___GetMarginAttributesRequest = GetMarginAttributesRequest
 
 @typing.final
 class GetMarginAttributesResponse(google.protobuf.message.Message):
-    """Маржинальные показатели по счёту."""
+    """Маржинальные показатели по счeту."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -252,7 +252,7 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
 
     @property
     def corrected_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Скорректированная маржа. Начальная маржа, в которой плановые позиции рассчитываются с учётом активных заявок на покупку позиций лонг или продажу позиций шорт."""
+        """Скорректированная маржа. Начальная маржа, в которой плановые позиции рассчитываются с учeтом активных заявок на покупку позиций лонг или продажу позиций шорт."""
 
     def __init__(
         self,

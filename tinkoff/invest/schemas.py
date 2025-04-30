@@ -98,6 +98,9 @@ class TradeDirection(_grpc_helpers.Enum):
 
 class CandleInterval(_grpc_helpers.Enum):
     CANDLE_INTERVAL_UNSPECIFIED = 0
+    CANDLE_INTERVAL_5_SEC = 14
+    CANDLE_INTERVAL_10_SEC = 15
+    CANDLE_INTERVAL_30_SEC = 16
     CANDLE_INTERVAL_1_MIN = 1
     CANDLE_INTERVAL_2_MIN = 6
     CANDLE_INTERVAL_3_MIN = 7
@@ -2139,6 +2142,7 @@ class VirtualPortfolioPosition(_grpc_helpers.Message):
     current_price: "MoneyValue" = _grpc_helpers.message_field(10)
     average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(11)
     daily_yield: "MoneyValue" = _grpc_helpers.message_field(31)
+    ticker: str = _grpc_helpers.string_field(32)
 
 
 @dataclass(eq=False, repr=True)
@@ -2209,6 +2213,7 @@ class PortfolioPosition(_grpc_helpers.Message):
     var_margin: "MoneyValue" = _grpc_helpers.message_field(26)
     expected_yield_fifo: "Quotation" = _grpc_helpers.message_field(27)
     daily_yield: "MoneyValue" = _grpc_helpers.message_field(31)
+    ticker: str = _grpc_helpers.string_field(32)
 
 
 @dataclass(eq=False, repr=True)
@@ -2220,6 +2225,7 @@ class PositionsSecurities(_grpc_helpers.Message):
     instrument_uid: str = _grpc_helpers.string_field(5)
     exchange_blocked: bool = _grpc_helpers.bool_field(11)
     instrument_type: str = _grpc_helpers.string_field(16)
+    ticker: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -2682,6 +2688,7 @@ class PositionsFutures(_grpc_helpers.Message):
     balance: int = _grpc_helpers.int64_field(3)
     position_uid: str = _grpc_helpers.string_field(4)
     instrument_uid: str = _grpc_helpers.string_field(5)
+    ticker: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -2690,6 +2697,7 @@ class PositionsOptions(_grpc_helpers.Message):
     instrument_uid: str = _grpc_helpers.string_field(2)
     blocked: int = _grpc_helpers.int64_field(11)
     balance: int = _grpc_helpers.int64_field(21)
+    ticker: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)

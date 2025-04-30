@@ -213,259 +213,261 @@ class InstrumentsServiceServicer(object):
     """
 
     def TradingSchedules(self, request, context):
-        """Получить расписания торгов торговых площадок
+        """TradingSchedules — расписания торговых площадок
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def BondBy(self, request, context):
-        """Получить облигации по ее идентификатору
+        """BondBy — получить облигацию по ее идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Bonds(self, request, context):
-        """Получить список облигаций
+        """Bonds — список облигаций
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetBondCoupons(self, request, context):
-        """Получить график выплат купонов по облигации
+        """GetBondCoupons — график выплат купонов по облигации
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetBondEvents(self, request, context):
-        """Получить события по облигации
+        """GetBondEvents — события по облигации
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CurrencyBy(self, request, context):
-        """Получить валюту по ее идентификатору
+        """CurrencyBy — получить валюту по ее идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Currencies(self, request, context):
-        """Получить список валют
+        """Currencies — список валют
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def EtfBy(self, request, context):
-        """Получить инвестиционный фонд по его идентификатору
+        """EtfBy — получить инвестиционный фонд по его идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Etfs(self, request, context):
-        """Получить список инвестиционных фондов
+        """Etfs — список инвестиционных фондов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def FutureBy(self, request, context):
-        """Получить фьючерс по его идентификатору
+        """FutureBy — получить фьючерс по его идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Futures(self, request, context):
-        """Получить список фьючерсов
+        """Futures — список фьючерсов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def OptionBy(self, request, context):
-        """Получить опцион по его идентификатору
+        """OptionBy — получить опцион по его идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Options(self, request, context):
-        """Deprecated Получить список опционов
+        """Deprecated Options — список опционов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def OptionsBy(self, request, context):
-        """Получить список опционов
+        """OptionsBy — список опционов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ShareBy(self, request, context):
-        """Получить акцию по ее идентификатору
+        """ShareBy — получить акцию по ее идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Shares(self, request, context):
-        """Получить список акций
+        """Shares — список акций
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Indicatives(self, request, context):
-        """Получить индикативные инструменты — индексы, товары и другие
+        """Indicatives — индикативные инструменты — индексы, товары и другие
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAccruedInterests(self, request, context):
-        """Получить накопленный купонный доход по облигации
+        """GetAccruedInterests — накопленный купонный доход по облигации
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFuturesMargin(self, request, context):
-        """Получить размера гарантийного обеспечения по фьючерсам
+        """GetFuturesMargin — размера гарантийного обеспечения по фьючерсам
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInstrumentBy(self, request, context):
-        """Получить основную информацию об инструменте
+        """GetInstrumentBy — основная информация об инструменте
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetDividends(self, request, context):
-        """Получить события выплаты дивидендов по инструменту
+        """GetDividends — события выплаты дивидендов по инструменту
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAssetBy(self, request, context):
-        """Получить актив по его идентификатору
+        """GetAssetBy — получить актив по его идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAssets(self, request, context):
-        """Получить список активов. Метод работает для всех инструментов, кроме срочных — фьючерсов и опционов
+        """GetAssets — список активов
+        Метод работает для всех инструментов, кроме срочных — фьючерсов и опционов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFavorites(self, request, context):
-        """Получить список избранных инструментов
+        """GetFavorites — получить список избранных инструментов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def EditFavorites(self, request, context):
-        """Отредактировать список избранных инструментов
+        """EditFavorites — отредактировать список избранных инструментов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateFavoriteGroup(self, request, context):
-        """Создать новую группу избранных инструментов
+        """CreateFavoriteGroup — создать новую группу избранных инструментов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteFavoriteGroup(self, request, context):
-        """Удалить группу избранных инструментов
+        """DeleteFavoriteGroup — удалить группу избранных инструментов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFavoriteGroups(self, request, context):
-        """Получить список групп избранных инструментов
+        """GetFavoriteGroups — список групп избранных инструментов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetCountries(self, request, context):
-        """Получить список стран
+        """GetCountries — список стран
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def FindInstrument(self, request, context):
-        """Найти инструмент
+        """FindInstrument — найти инструмент
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetBrands(self, request, context):
-        """Получить список брендов
+        """GetBrands — список брендов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetBrandBy(self, request, context):
-        """Получить бренд по его идентификатору
+        """GetBrandBy — получить бренд по его идентификатору
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAssetFundamentals(self, request, context):
-        """Получить фундаментальные показатели по активу
+        """GetAssetFundamentals — фундаментальные показатели по активу
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAssetReports(self, request, context):
-        """Получить расписания выхода отчетностей эмитентов
+        """GetAssetReports — расписания выхода отчетностей эмитентов
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetConsensusForecasts(self, request, context):
-        """Получить мнения аналитиков по инструменту
+        """GetConsensusForecasts — мнения аналитиков по инструменту
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetForecastBy(self, request, context):
-        """Получить прогнозов инвестдомов по инструменту
+        """GetForecastBy — прогнозы инвестдомов по инструменту
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetRiskRates(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """GetRiskRates — ставки риска по инструменту
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

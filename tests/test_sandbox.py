@@ -1,6 +1,7 @@
 # pylint: disable=redefined-outer-name,unused-variable
 
 import os
+import uuid
 from datetime import datetime
 
 import pytest
@@ -17,6 +18,7 @@ from tinkoff.invest import (
     RequestError,
 )
 from tinkoff.invest.sandbox.client import SandboxClient
+from tinkoff.invest.schemas import OrderExecutionReportStatus, PostOrderAsyncRequest
 from tinkoff.invest.utils import money_to_decimal
 
 
@@ -80,6 +82,11 @@ def order_id() -> str:
 
 
 @pytest.fixture()
+def async_order_id() -> str:
+    return str(uuid.uuid4())
+
+
+@pytest.fixture()
 def order(instrument_id, quantity, price, direction, account_id, order_type, order_id):
     return {
         "instrument_id": instrument_id,
@@ -89,6 +96,21 @@ def order(instrument_id, quantity, price, direction, account_id, order_type, ord
         "account_id": account_id,
         "order_type": order_type,
         "order_id": order_id,
+    }
+
+
+@pytest.fixture()
+def async_order(
+    instrument_id, quantity, price, direction, account_id, order_type, async_order_id
+):
+    return {
+        "instrument_id": instrument_id,
+        "quantity": quantity,
+        "price": price,
+        "direction": direction,
+        "account_id": account_id,
+        "order_type": order_type,
+        "order_id": async_order_id,
     }
 
 
@@ -144,6 +166,25 @@ class TestSandboxOperations:
         assert response.lots_requested == quantity
 
     @skip_when_exchange_closed
+    def test_post_sandbox_order_async(
+        self,
+        sandbox_service,
+        async_order,
+        instrument_id,
+        direction,
+        quantity,
+        async_order_id,
+    ):
+        request = PostOrderAsyncRequest(**async_order)
+        response = sandbox_service.orders.post_order_async(request)
+        assert isinstance(response.order_request_id, str)
+        assert (
+            response.execution_report_status
+            == OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_NEW
+        )
+        assert response.order_request_id == async_order_id
+
+    @skip_when_exchange_closed
     def test_get_sandbox_orders(self, sandbox_service, order, account_id):
         response = sandbox_service.orders.post_order(**order)
         assert response
@@ -174,7 +215,9 @@ class TestSandboxOperations:
 
     @pytest.mark.parametrize("order_type", [OrderType.ORDER_TYPE_MARKET])
     @skip_when_exchange_closed
-    def test_get_sandbox_positions(self, sandbox_service, account_id, order):
+    def test_get_sandbox_positions(
+        self, sandbox_service, account_id, order, order_type
+    ):
         _ = sandbox_service.orders.post_order(**order)
 
         response = sandbox_service.operations.get_positions(account_id=account_id)
