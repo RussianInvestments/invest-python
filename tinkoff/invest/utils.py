@@ -13,6 +13,7 @@ from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInte
 __all__ = (
     "get_intervals",
     "quotation_to_decimal",
+    "money_to_decimal",
     "decimal_to_quotation",
     "candle_interval_to_subscription_interval",
     "now",
@@ -28,6 +29,9 @@ DAYS_IN_YEAR = 365
 
 
 MAX_INTERVALS = {
+    CandleInterval.CANDLE_INTERVAL_5_SEC: timedelta(minutes=200),
+    CandleInterval.CANDLE_INTERVAL_10_SEC: timedelta(minutes=200),
+    CandleInterval.CANDLE_INTERVAL_30_SEC: timedelta(hours=20),
     CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(days=1),
     CandleInterval.CANDLE_INTERVAL_2_MIN: timedelta(days=1),
     CandleInterval.CANDLE_INTERVAL_3_MIN: timedelta(days=1),
@@ -98,6 +102,9 @@ def now() -> datetime:
 
 
 _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING = {
+    CandleInterval.CANDLE_INTERVAL_5_SEC: timedelta(seconds=5),
+    CandleInterval.CANDLE_INTERVAL_10_SEC: timedelta(seconds=10),
+    CandleInterval.CANDLE_INTERVAL_30_SEC: timedelta(seconds=30),
     CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(minutes=1),
     CandleInterval.CANDLE_INTERVAL_2_MIN: timedelta(minutes=2),
     CandleInterval.CANDLE_INTERVAL_3_MIN: timedelta(minutes=3),

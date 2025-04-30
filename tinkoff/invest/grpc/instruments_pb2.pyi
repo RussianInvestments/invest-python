@@ -4260,6 +4260,8 @@ global___CreateFavoriteGroupResponse = CreateFavoriteGroupResponse
 
 @typing.final
 class DeleteFavoriteGroupRequest(google.protobuf.message.Message):
+    """Запрос удаления избранной группы"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     GROUP_ID_FIELD_NUMBER: builtins.int
@@ -4286,6 +4288,8 @@ global___DeleteFavoriteGroupResponse = DeleteFavoriteGroupResponse
 
 @typing.final
 class GetFavoriteGroupsRequest(google.protobuf.message.Message):
+    """Запрос получения списка избранных групп"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
@@ -4310,10 +4314,14 @@ global___GetFavoriteGroupsRequest = GetFavoriteGroupsRequest
 
 @typing.final
 class GetFavoriteGroupsResponse(google.protobuf.message.Message):
+    """Избранные группы"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     @typing.final
     class FavoriteGroup(google.protobuf.message.Message):
+        """Избранная группа"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         GROUP_ID_FIELD_NUMBER: builtins.int
@@ -5403,6 +5411,8 @@ global___GetForecastResponse = GetForecastResponse
 
 @typing.final
 class RiskRatesRequest(google.protobuf.message.Message):
+    """Запрос ставок риска"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
@@ -5421,6 +5431,8 @@ global___RiskRatesRequest = RiskRatesRequest
 
 @typing.final
 class RiskRatesResponse(google.protobuf.message.Message):
+    """Ставки риска"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     @typing.final

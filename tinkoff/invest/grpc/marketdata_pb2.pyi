@@ -255,6 +255,12 @@ class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """От 1 недели до 5 лет. Максимальное значение `limit` — 300."""
     CANDLE_INTERVAL_MONTH: _CandleInterval.ValueType  # 13
     """От 1 месяца до 10 лет. Максимальное значение `limit` — 120."""
+    CANDLE_INTERVAL_5_SEC: _CandleInterval.ValueType  # 14
+    """От 5 секунд до 200 минут. Максимальное значение `limit` — 2500."""
+    CANDLE_INTERVAL_10_SEC: _CandleInterval.ValueType  # 15
+    """От 10 секунд до 200 минут. Максимальное значение `limit` — 1250."""
+    CANDLE_INTERVAL_30_SEC: _CandleInterval.ValueType  # 16
+    """От 30 секунд до 20 часов. Максимальное значение `limit` — 2500."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
     """Интервал свечей. Максимальное значение интервала приведено ориентировочно, может отличаться в большую сторону в зависимости от параметров запроса."""
@@ -287,6 +293,12 @@ CANDLE_INTERVAL_WEEK: CandleInterval.ValueType  # 12
 """От 1 недели до 5 лет. Максимальное значение `limit` — 300."""
 CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
 """От 1 месяца до 10 лет. Максимальное значение `limit` — 120."""
+CANDLE_INTERVAL_5_SEC: CandleInterval.ValueType  # 14
+"""От 5 секунд до 200 минут. Максимальное значение `limit` — 2500."""
+CANDLE_INTERVAL_10_SEC: CandleInterval.ValueType  # 15
+"""От 10 секунд до 200 минут. Максимальное значение `limit` — 1250."""
+CANDLE_INTERVAL_30_SEC: CandleInterval.ValueType  # 16
+"""От 30 секунд до 20 часов. Максимальное значение `limit` — 2500."""
 global___CandleInterval = CandleInterval
 
 class _CandleSource:

@@ -39,21 +39,21 @@ class StopOrdersServiceServicer(object):
     """
 
     def PostStopOrder(self, request, context):
-        """Выставить стоп-заявку.
+        """PostStopOrder — выставить стоп-заявку
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetStopOrders(self, request, context):
-        """Получить список активных стоп-заявок по счету.
+        """GetStopOrders — получить список активных стоп-заявок по счету
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CancelStopOrder(self, request, context):
-        """Отменить стоп-заявку.
+        """CancelStopOrder — отменить стоп-заявку
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

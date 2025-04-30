@@ -58,6 +58,9 @@ class TestGetAllCandles:
     @pytest.mark.parametrize(
         ("interval", "call_count"),
         [
+            (CandleInterval.CANDLE_INTERVAL_5_SEC, 224),
+            (CandleInterval.CANDLE_INTERVAL_10_SEC, 224),
+            (CandleInterval.CANDLE_INTERVAL_30_SEC, 38),
             (CandleInterval.CANDLE_INTERVAL_1_MIN, 31),
             (CandleInterval.CANDLE_INTERVAL_2_MIN, 31),
             (CandleInterval.CANDLE_INTERVAL_3_MIN, 31),
