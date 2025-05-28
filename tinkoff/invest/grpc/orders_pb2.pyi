@@ -317,6 +317,7 @@ class PostOrderRequest(google.protobuf.message.Message):
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     TIME_IN_FORCE_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
+    CONFIRM_MARGIN_TRADE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     quantity: builtins.int
@@ -335,6 +336,8 @@ class PostOrderRequest(google.protobuf.message.Message):
     """Алгоритм исполнения поручения, применяется только к лимитной заявке."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены."""
+    confirm_margin_trade: builtins.bool
+    """Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
@@ -352,9 +355,10 @@ class PostOrderRequest(google.protobuf.message.Message):
         instrument_id: builtins.str = ...,
         time_in_force: global___TimeInForceType.ValueType = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
+        confirm_margin_trade: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_figi", b"_figi", "_price", b"_price", "figi", b"figi", "price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_figi", b"_figi", "_price", b"_price", "account_id", b"account_id", "direction", b"direction", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "time_in_force", b"time_in_force"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_figi", b"_figi", "_price", b"_price", "account_id", b"account_id", "confirm_margin_trade", b"confirm_margin_trade", "direction", b"direction", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "time_in_force", b"time_in_force"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_figi", b"_figi"]) -> typing.Literal["figi"] | None: ...
     @typing.overload
@@ -489,6 +493,7 @@ class PostOrderAsyncRequest(google.protobuf.message.Message):
     ORDER_ID_FIELD_NUMBER: builtins.int
     TIME_IN_FORCE_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
+    CONFIRM_MARGIN_TRADE_FIELD_NUMBER: builtins.int
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значения Figi или Instrument_uid."""
     quantity: builtins.int
@@ -505,6 +510,8 @@ class PostOrderAsyncRequest(google.protobuf.message.Message):
     """Алгоритм исполнения поручения, применяется только к лимитной заявке."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены."""
+    confirm_margin_trade: builtins.bool
+    """Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
@@ -521,9 +528,10 @@ class PostOrderAsyncRequest(google.protobuf.message.Message):
         order_id: builtins.str = ...,
         time_in_force: global___TimeInForceType.ValueType | None = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType | None = ...,
+        confirm_margin_trade: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "_time_in_force", b"_time_in_force", "price", b"price", "price_type", b"price_type", "time_in_force", b"time_in_force"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "_time_in_force", b"_time_in_force", "account_id", b"account_id", "direction", b"direction", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "time_in_force", b"time_in_force"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "_time_in_force", b"_time_in_force", "account_id", b"account_id", "confirm_margin_trade", b"confirm_margin_trade", "direction", b"direction", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "time_in_force", b"time_in_force"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_price", b"_price"]) -> typing.Literal["price"] | None: ...
     @typing.overload
@@ -848,6 +856,7 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
     QUANTITY_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
+    CONFIRM_MARGIN_TRADE_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Номер счета."""
     order_id: builtins.str
@@ -858,6 +867,8 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
     """Количество лотов."""
     price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType
     """Тип цены."""
+    confirm_margin_trade: builtins.bool
+    """Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент."""
@@ -871,9 +882,10 @@ class ReplaceOrderRequest(google.protobuf.message.Message):
         quantity: builtins.int = ...,
         price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType | None = ...,
+        confirm_margin_trade: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "price", b"price", "price_type", b"price_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "account_id", b"account_id", "idempotency_key", b"idempotency_key", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_price", b"_price", "_price_type", b"_price_type", "account_id", b"account_id", "confirm_margin_trade", b"confirm_margin_trade", "idempotency_key", b"idempotency_key", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_price", b"_price"]) -> typing.Literal["price"] | None: ...
     @typing.overload

@@ -281,6 +281,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     TRAILING_DATA_FIELD_NUMBER: builtins.int
     PRICE_TYPE_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
+    CONFIRM_MARGIN_TRADE_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Deprecated FIGI-идентификатор инструмента. Используйте `instrument_id`."""
     quantity: builtins.int
@@ -303,6 +304,8 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     """Тип цены."""
     order_id: builtins.str
     """Идентификатор запроса выставления поручения для целей идемпотентности в формате `UID`. Максимальная длина — 36 символов."""
+    confirm_margin_trade: builtins.bool
+    """Согласие на выставление заявки, которая может привести к непокрытой позиции, по умолчанию false."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент биржевой заявки, которая будет выставлена при срабатывании по достижению `stop_price`. Чтобы получить стоимость лота, нужно умножить на лотность инструмента."""
@@ -337,9 +340,10 @@ class PostStopOrderRequest(google.protobuf.message.Message):
         trailing_data: global___PostStopOrderRequest.TrailingData | None = ...,
         price_type: tinkoff.invest.grpc.common_pb2.PriceType.ValueType = ...,
         order_id: builtins.str = ...,
+        confirm_margin_trade: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "expire_date", b"expire_date", "figi", b"figi", "price", b"price", "stop_price", b"stop_price", "trailing_data", b"trailing_data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "account_id", b"account_id", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_expire_date", b"_expire_date", "_figi", b"_figi", "_price", b"_price", "_stop_price", b"_stop_price", "account_id", b"account_id", "confirm_margin_trade", b"confirm_margin_trade", "direction", b"direction", "exchange_order_type", b"exchange_order_type", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "price", b"price", "price_type", b"price_type", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price", "take_profit_type", b"take_profit_type", "trailing_data", b"trailing_data"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_expire_date", b"_expire_date"]) -> typing.Literal["expire_date"] | None: ...
     @typing.overload
