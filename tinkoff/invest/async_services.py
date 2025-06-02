@@ -1480,6 +1480,7 @@ class OrdersService(_grpc_helpers.Service):
         instrument_id: str = "",
         time_in_force: TimeInForceType = TimeInForceType(0),
         price_type: PriceType = PriceType(0),
+        confirm_margin_trade: bool = False,
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.figi = figi
@@ -1499,6 +1500,8 @@ class OrdersService(_grpc_helpers.Service):
         request.order_id = order_id
         request.time_in_force = time_in_force
         request.price_type = price_type
+        if confirm_margin_trade:
+            request.confirm_margin_trade = confirm_margin_trade
         response_coro = self.stub.PostOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.PostOrderRequest()
