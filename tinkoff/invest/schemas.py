@@ -3218,7 +3218,7 @@ class GetOrderPriceResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class OrderStateStreamRequest(_grpc_helpers.Message):
     accounts: List[str] = _grpc_helpers.message_field(1)
-    ping_delay_ms: Optional[int] = _grpc_helpers.int32_field(15)
+    ping_delay_millis: Optional[int] = _grpc_helpers.int32_field(15)
 
 
 @dataclass(eq=False, repr=True)
