@@ -2031,6 +2031,7 @@ class StopOrdersService(_grpc_helpers.Service):
         trailing_data: Optional[PostStopOrderRequestTrailingData] = None,
         price_type: PriceType = PriceType(0),
         order_id: str = "",
+        confirm_margin_trade: bool = False,
     ) -> PostStopOrderResponse:
         request = PostStopOrderRequest()
         request.figi = figi
@@ -2052,6 +2053,8 @@ class StopOrdersService(_grpc_helpers.Service):
             request.trailing_data = trailing_data
         request.price_type = price_type
         request.order_id = order_id
+        if confirm_margin_trade:
+            request.confirm_margin_trade = confirm_margin_trade
         response_coro = self.stub.PostStopOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, stoporders_pb2.PostStopOrderRequest()
