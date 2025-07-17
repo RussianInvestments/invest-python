@@ -115,6 +115,8 @@ from .schemas import (
     GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
+    GetMarketValuesRequest,
+    GetMarketValuesResponse,
     GetMaxLotsRequest,
     GetMaxLotsResponse,
     GetOperationsByCursorRequest,
@@ -329,6 +331,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "TradingSchedules")
         return _grpc_helpers.protobuf_to_dataclass(response, TradingSchedulesResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("BondBy")
     async def bond_by(
         self,
@@ -371,6 +374,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "Bonds")
         return _grpc_helpers.protobuf_to_dataclass(response, BondsResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("CurrencyBy")
     async def currency_by(
         self,
@@ -413,6 +417,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "Currencies")
         return _grpc_helpers.protobuf_to_dataclass(response, CurrenciesResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("EtfBy")
     async def etf_by(
         self,
@@ -455,6 +460,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "Etfs")
         return _grpc_helpers.protobuf_to_dataclass(response, EtfsResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("FutureBy")
     async def future_by(
         self,
@@ -497,6 +503,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "Futures")
         return _grpc_helpers.protobuf_to_dataclass(response, FuturesResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("OptionBy")
     async def option_by(
         self,
@@ -553,6 +560,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "OptionsBy")
         return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("ShareBy")
     async def share_by(
         self,
@@ -654,6 +662,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetFuturesMargin")
         return _grpc_helpers.protobuf_to_dataclass(response, GetFuturesMarginResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("GetInstrumentBy")
     async def get_instrument_by(
         self,
@@ -742,6 +751,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetBondEvents")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBondEventsResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("GetAssetBy")
     async def get_asset_by(
         self,
@@ -931,6 +941,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetBrands")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBrandsResponse)
 
+    # noinspection PyShadowingBuiltins
     @handle_aio_request_error("GetBrandBy")
     async def get_brands_by(self, id: str = "") -> Brand:
         request = GetBrandRequest()
@@ -1033,7 +1044,9 @@ class MarketDataService(_grpc_helpers.Service):
         interval: CandleInterval = CandleInterval(0),
         instrument_id: str = "",
         candle_source_type: Optional[CandleSource] = None,
+        limit: Optional[int] = None,
     ) -> GetCandlesResponse:
+        # noinspection DuplicatedCode
         request = GetCandlesRequest()
         request.figi = figi
         request.instrument_id = instrument_id
@@ -1042,6 +1055,8 @@ class MarketDataService(_grpc_helpers.Service):
             request.from_ = from_
         if to is not None:
             request.to = to
+        if limit is not None:
+            request.limit = limit
         request.interval = interval
         response_coro = self.stub.GetCandles(
             request=_grpc_helpers.dataclass_to_protobuff(
@@ -1198,6 +1213,22 @@ class MarketDataService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetTechAnalysis")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTechAnalysisResponse)
+
+    @handle_aio_request_error("GetMarketValues")
+    async def get_market_values(
+        self,
+        *,
+        request: GetMarketValuesRequest,
+    ) -> GetMarketValuesResponse:
+        response_coro = self.stub.GetMarketValues(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetMarketValuesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetMarketValues")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetMarketValuesResponse)
 
 
 class MarketDataStreamService(_grpc_helpers.Service):
@@ -1408,6 +1439,7 @@ class OperationsStreamService(_grpc_helpers.Service):
         ping_delay_ms: Optional[int] = None,
         with_initial_positions: Optional[bool] = None,
     ) -> AsyncIterable[PositionsStreamResponse]:
+        # noinspection DuplicatedCode
         request = PositionsStreamRequest()
         if accounts:
             request.accounts = accounts
@@ -1482,6 +1514,7 @@ class OrdersService(_grpc_helpers.Service):
         price_type: PriceType = PriceType(0),
         confirm_margin_trade: bool = False,
     ) -> PostOrderResponse:
+        # noinspection DuplicatedCode
         request = PostOrderRequest()
         request.figi = figi
         request.instrument_id = instrument_id
@@ -1765,6 +1798,7 @@ class SandboxService(_grpc_helpers.Service):
         time_in_force: TimeInForceType = TimeInForceType(0),
         price_type: PriceType = PriceType(0),
     ) -> PostOrderResponse:
+        # noinspection DuplicatedCode
         request = PostOrderRequest()
         request.figi = figi
         request.instrument_id = instrument_id
@@ -2033,6 +2067,7 @@ class StopOrdersService(_grpc_helpers.Service):
         order_id: str = "",
         confirm_margin_trade: bool = False,
     ) -> PostStopOrderResponse:
+        # noinspection DuplicatedCode
         request = PostStopOrderRequest()
         request.figi = figi
         request.instrument_id = instrument_id
