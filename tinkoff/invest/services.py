@@ -113,6 +113,8 @@ from .schemas import (
     GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
+    GetMarketValuesRequest,
+    GetMarketValuesResponse,
     GetMaxLotsRequest,
     GetMaxLotsResponse,
     GetOperationsByCursorRequest,
@@ -991,6 +993,7 @@ class MarketDataService(_grpc_helpers.Service):
         interval: CandleInterval = CandleInterval(0),
         instrument_id: str = "",
         candle_source_type: Optional[CandleSource] = None,
+        limit: Optional[int] = None,
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
@@ -1000,6 +1003,8 @@ class MarketDataService(_grpc_helpers.Service):
             request.from_ = from_
         if to is not None:
             request.to = to
+        if limit is not None:
+            request.limit = limit
         request.interval = interval
         response, call = self.stub.GetCandles.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
@@ -1149,6 +1154,21 @@ class MarketDataService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetTechAnalysis")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTechAnalysisResponse)
+
+    @handle_request_error("GetMarketValues")
+    def get_market_values(
+        self,
+        *,
+        request: GetMarketValuesRequest,
+    ) -> GetMarketValuesResponse:
+        response, call = self.stub.GetMarketValues.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetMarketValuesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetMarketValues")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetMarketValuesResponse)
 
 
 class MarketDataStreamService(_grpc_helpers.Service):

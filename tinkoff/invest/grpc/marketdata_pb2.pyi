@@ -324,6 +324,41 @@ CANDLE_SOURCE_DEALER_WEEKEND: CandleSource.ValueType  # 2
 """Свечи  дилера в результате торговли по выходным."""
 global___CandleSource = CandleSource
 
+class _MarketValueType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _MarketValueTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MarketValueType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_VALUE_UNSPECIFIED: _MarketValueType.ValueType  # 0
+    """Не определен."""
+    INSTRUMENT_VALUE_LAST_PRICE: _MarketValueType.ValueType  # 1
+    """Последняя биржевая цена."""
+    INSTRUMENT_VALUE_LAST_PRICE_DEALER: _MarketValueType.ValueType  # 2
+    """Последняя цена дилера."""
+    INSTRUMENT_VALUE_CLOSE_PRICE: _MarketValueType.ValueType  # 3
+    """Цена закрытия."""
+    INSTRUMENT_VALUE_EVENING_SESSION_PRICE: _MarketValueType.ValueType  # 4
+    """Цена последней сделки с вечерней сессии."""
+    INSTRUMENT_VALUE_OPEN_INTEREST: _MarketValueType.ValueType  # 5
+    """Открытый интерес, возвращается только для фьючерсов"""
+
+class MarketValueType(_MarketValueType, metaclass=_MarketValueTypeEnumTypeWrapper): ...
+
+INSTRUMENT_VALUE_UNSPECIFIED: MarketValueType.ValueType  # 0
+"""Не определен."""
+INSTRUMENT_VALUE_LAST_PRICE: MarketValueType.ValueType  # 1
+"""Последняя биржевая цена."""
+INSTRUMENT_VALUE_LAST_PRICE_DEALER: MarketValueType.ValueType  # 2
+"""Последняя цена дилера."""
+INSTRUMENT_VALUE_CLOSE_PRICE: MarketValueType.ValueType  # 3
+"""Цена закрытия."""
+INSTRUMENT_VALUE_EVENING_SESSION_PRICE: MarketValueType.ValueType  # 4
+"""Цена последней сделки с вечерней сессии."""
+INSTRUMENT_VALUE_OPEN_INTEREST: MarketValueType.ValueType  # 5
+"""Открытый интерес, возвращается только для фьючерсов"""
+global___MarketValueType = MarketValueType
+
 class _OrderBookType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -2399,3 +2434,102 @@ class GetTechAnalysisResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["technical_indicators", b"technical_indicators"]) -> None: ...
 
 global___GetTechAnalysisResponse = GetTechAnalysisResponse
+
+@typing.final
+class GetMarketValuesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    VALUES_FIELD_NUMBER: builtins.int
+    @property
+    def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Массив идентификаторов инструментов."""
+
+    @property
+    def values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___MarketValueType.ValueType]:
+        """Массив запрашиваемых параметров."""
+
+    def __init__(
+        self,
+        *,
+        instrument_id: collections.abc.Iterable[builtins.str] | None = ...,
+        values: collections.abc.Iterable[global___MarketValueType.ValueType] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instrument_id", b"instrument_id", "values", b"values"]) -> None: ...
+
+global___GetMarketValuesRequest = GetMarketValuesRequest
+
+@typing.final
+class GetMarketValuesResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MarketValueInstrument]:
+        """Массив значений параметров."""
+
+    def __init__(
+        self,
+        *,
+        instruments: collections.abc.Iterable[global___MarketValueInstrument] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instruments", b"instruments"]) -> None: ...
+
+global___GetMarketValuesResponse = GetMarketValuesResponse
+
+@typing.final
+class MarketValueInstrument(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    VALUES_FIELD_NUMBER: builtins.int
+    instrument_uid: builtins.str
+    """Идентификатор инструмента."""
+    @property
+    def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MarketValue]:
+        """Массив параметров инструмента."""
+
+    def __init__(
+        self,
+        *,
+        instrument_uid: builtins.str = ...,
+        values: collections.abc.Iterable[global___MarketValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instrument_uid", b"instrument_uid", "values", b"values"]) -> None: ...
+
+global___MarketValueInstrument = MarketValueInstrument
+
+@typing.final
+class MarketValue(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TYPE_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    type: global___MarketValueType.ValueType
+    """Тип параметра."""
+    @property
+    def value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Значение."""
+
+    @property
+    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время."""
+
+    def __init__(
+        self,
+        *,
+        type: global___MarketValueType.ValueType | None = ...,
+        value: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_time", b"_time", "_type", b"_type", "_value", b"_value", "time", b"time", "type", b"type", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_time", b"_time", "_type", b"_type", "_value", b"_value", "time", b"time", "type", b"type", "value", b"value"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_time", b"_time"]) -> typing.Literal["time"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_type", b"_type"]) -> typing.Literal["type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_value", b"_value"]) -> typing.Literal["value"] | None: ...
+
+global___MarketValue = MarketValue

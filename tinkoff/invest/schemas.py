@@ -2015,6 +2015,39 @@ class InstrumentClosePriceResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class GetMarketValuesRequest(_grpc_helpers.Message):
+    instrument_id: List[str] = _grpc_helpers.message_field(1)
+    values: List["MarketValueType"] = _grpc_helpers.message_field(2)
+
+
+class MarketValueType(_grpc_helpers.Enum):
+    INSTRUMENT_VALUE_UNSPECIFIED = 0
+    INSTRUMENT_VALUE_LAST_PRICE = 1
+    INSTRUMENT_VALUE_LAST_PRICE_DEALER = 2
+    INSTRUMENT_VALUE_CLOSE_PRICE = 3
+    INSTRUMENT_VALUE_EVENING_SESSION_PRICE = 4
+    INSTRUMENT_VALUE_OPEN_INTEREST = 5
+
+
+@dataclass(eq=False, repr=True)
+class GetMarketValuesResponse(_grpc_helpers.Message):
+    instruments: List["MarketValueInstrument"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class MarketValueInstrument(_grpc_helpers.Message):
+    instrument_uid: str = _grpc_helpers.string_field(1)
+    values: List["MarketValue"] = _grpc_helpers.message_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class MarketValue(_grpc_helpers.Message):
+    type: "MarketValueType" = _grpc_helpers.enum_field(1)
+    value: "Quotation" = _grpc_helpers.message_field(2)
+    time: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
 class Smoothing(_grpc_helpers.Message):
     fast_length: int = _grpc_helpers.int32_field(1)
     slow_length: int = _grpc_helpers.int32_field(2)
