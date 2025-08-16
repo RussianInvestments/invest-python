@@ -12,6 +12,13 @@ from tinkoff.invest import (
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
+channel_options = [
+    ("grpc.keepalive_time_ms", 8000),
+    ("grpc.keepalive_timeout_ms", 5000),
+    ("grpc.http2.max_pings_without_data", 5),
+    ("grpc.keepalive_permit_without_calls", 1),
+]
+
 
 async def main():
     async def request_iterator():
@@ -29,7 +36,7 @@ async def main():
         while True:
             await asyncio.sleep(1)
 
-    async with AsyncClient(TOKEN) as client:
+    async with AsyncClient(token=TOKEN, options=channel_options) as client:
         async for marketdata in client.market_data_stream.market_data_stream(
             request_iterator()
         ):
