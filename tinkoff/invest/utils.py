@@ -27,7 +27,6 @@ __all__ = (
 
 DAYS_IN_YEAR = 365
 
-
 MAX_INTERVALS = {
     CandleInterval.CANDLE_INTERVAL_5_SEC: timedelta(minutes=200),
     CandleInterval.CANDLE_INTERVAL_10_SEC: timedelta(minutes=200),
@@ -38,13 +37,13 @@ MAX_INTERVALS = {
     CandleInterval.CANDLE_INTERVAL_5_MIN: timedelta(days=1),
     CandleInterval.CANDLE_INTERVAL_10_MIN: timedelta(days=1),
     CandleInterval.CANDLE_INTERVAL_15_MIN: timedelta(days=1),
-    CandleInterval.CANDLE_INTERVAL_30_MIN: timedelta(days=1),
+    CandleInterval.CANDLE_INTERVAL_30_MIN: timedelta(days=2),
     CandleInterval.CANDLE_INTERVAL_HOUR: timedelta(weeks=1),
-    CandleInterval.CANDLE_INTERVAL_2_HOUR: timedelta(weeks=1),
-    CandleInterval.CANDLE_INTERVAL_4_HOUR: timedelta(weeks=1),
+    CandleInterval.CANDLE_INTERVAL_2_HOUR: timedelta(weeks=4),
+    CandleInterval.CANDLE_INTERVAL_4_HOUR: timedelta(weeks=4),
     CandleInterval.CANDLE_INTERVAL_DAY: timedelta(days=DAYS_IN_YEAR),
     CandleInterval.CANDLE_INTERVAL_WEEK: timedelta(days=DAYS_IN_YEAR),
-    CandleInterval.CANDLE_INTERVAL_MONTH: timedelta(days=DAYS_IN_YEAR * 3),
+    CandleInterval.CANDLE_INTERVAL_MONTH: timedelta(days=DAYS_IN_YEAR * 10),
 }
 
 
