@@ -53,7 +53,7 @@ def figi() -> str:
 
 @pytest.fixture()
 def instrument_id() -> str:
-    return "9654c2dd-6993-427e-80fa-04e80a1cf4da"
+    return "f509af83-6e71-462f-901f-bcb073f6773b"
 
 
 @pytest.fixture()

@@ -2027,6 +2027,7 @@ class MarketValueType(_grpc_helpers.Enum):
     INSTRUMENT_VALUE_CLOSE_PRICE = 3
     INSTRUMENT_VALUE_EVENING_SESSION_PRICE = 4
     INSTRUMENT_VALUE_OPEN_INTEREST = 5
+    INSTRUMENT_VALUE_THEOR_PRICE = 6
 
 
 @dataclass(eq=False, repr=True)
@@ -2405,6 +2406,18 @@ class GetOrderStateRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetOrdersRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
+    advanced_filters: Optional["GetOrdersRequestFilters"] = _grpc_helpers.message_field(
+        2
+    )
+
+
+@dataclass(eq=False, repr=True)
+class GetOrdersRequestFilters(_grpc_helpers.Message):
+    from_: Optional[datetime] = _grpc_helpers.message_field(1)
+    to: Optional[datetime] = _grpc_helpers.message_field(2)
+    execution_status: List["OrderExecutionReportStatus"] = _grpc_helpers.message_field(
+        3
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -3182,6 +3195,36 @@ class RiskRateResult(_grpc_helpers.Message):
 class RiskRate(_grpc_helpers.Message):
     risk_level_code: str = _grpc_helpers.string_field(2)
     value: Quotation = _grpc_helpers.message_field(5)
+
+
+@dataclass(eq=False, repr=True)
+class GetInsiderDealsRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+    limit: int = _grpc_helpers.int32_field(2)
+    next_cursor: Optional[str] = _grpc_helpers.string_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GetInsiderDealsResponse(_grpc_helpers.Message):
+    insider_deals: List["InsiderDeal"] = _grpc_helpers.message_field(1)
+    next_cursor: Optional[str] = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class InsiderDeal(_grpc_helpers.Message):
+    trade_id: int = _grpc_helpers.int64_field(1)
+    direction: TradeDirection = _grpc_helpers.enum_field(2)
+    currency: str = _grpc_helpers.string_field(3)
+    date: datetime = _grpc_helpers.message_field(4)
+    quantity: int = _grpc_helpers.int64_field(5)
+    price: Quotation = _grpc_helpers.message_field(6)
+    instrument_uid: str = _grpc_helpers.string_field(7)
+    ticker: str = _grpc_helpers.string_field(8)
+    investor_name: str = _grpc_helpers.string_field(9)
+    investor_position: str = _grpc_helpers.string_field(10)
+    percentage: float = _grpc_helpers.float_field(11)
+    is_option_execution: bool = _grpc_helpers.bool_field(12)
+    disclosure_date: datetime = _grpc_helpers.message_field(13)
 
 
 @dataclass(eq=False, repr=True)

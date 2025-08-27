@@ -107,6 +107,8 @@ from .schemas import (
     GetFuturesMarginResponse,
     GetInfoRequest,
     GetInfoResponse,
+    GetInsiderDealsRequest,
+    GetInsiderDealsResponse,
     GetLastPricesRequest,
     GetLastPricesResponse,
     GetLastTradesRequest,
@@ -124,6 +126,7 @@ from .schemas import (
     GetOrderPriceRequest,
     GetOrderPriceResponse,
     GetOrdersRequest,
+    GetOrdersRequestFilters,
     GetOrdersResponse,
     GetOrderStateRequest,
     GetSignalsRequest,
@@ -164,6 +167,7 @@ from .schemas import (
     OptionResponse,
     OptionsResponse,
     OrderDirection,
+    OrderExecutionReportStatus,
     OrderIdType,
     OrderState,
     OrderStateStreamRequest,
@@ -979,6 +983,20 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetRiskRates")
         return _grpc_helpers.protobuf_to_dataclass(response, RiskRatesResponse)
 
+    @handle_request_error("GetInsiderDeals")
+    def get_insider_deals(
+        self,
+        request: GetInsiderDealsRequest,
+    ) -> GetInsiderDealsResponse:
+        response, call = self.stub.GetInsiderDeals.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetInsiderDealsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetInsiderDeals")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetInsiderDealsResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -1560,9 +1578,24 @@ class OrdersService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
 
     @handle_request_error("GetOrders")
-    def get_orders(self, *, account_id: str = "") -> GetOrdersResponse:
+    def get_orders(
+        self,
+        *,
+        account_id: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+        execution_status: Optional[List[OrderExecutionReportStatus]] = None,
+    ) -> GetOrdersResponse:
+        # noinspection DuplicatedCode
         request = GetOrdersRequest()
         request.account_id = account_id
+        request.advanced_filters = GetOrdersRequestFilters()
+        if from_ is not None:
+            request.advanced_filters.from_ = from_
+        if to is not None:
+            request.advanced_filters.to = to
+        if execution_status is not None:
+            request.advanced_filters.execution_status = execution_status
         response, call = self.stub.GetOrders.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrdersRequest()

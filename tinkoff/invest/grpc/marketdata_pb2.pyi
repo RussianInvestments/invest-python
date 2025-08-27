@@ -341,7 +341,9 @@ class _MarketValueTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     INSTRUMENT_VALUE_EVENING_SESSION_PRICE: _MarketValueType.ValueType  # 4
     """Цена последней сделки с вечерней сессии."""
     INSTRUMENT_VALUE_OPEN_INTEREST: _MarketValueType.ValueType  # 5
-    """Открытый интерес, возвращается только для фьючерсов"""
+    """Открытый интерес, возвращается только для фьючерсов."""
+    INSTRUMENT_VALUE_THEOR_PRICE: _MarketValueType.ValueType  # 6
+    """Теоретическая цена, возвращается только для опционов."""
 
 class MarketValueType(_MarketValueType, metaclass=_MarketValueTypeEnumTypeWrapper): ...
 
@@ -356,7 +358,9 @@ INSTRUMENT_VALUE_CLOSE_PRICE: MarketValueType.ValueType  # 3
 INSTRUMENT_VALUE_EVENING_SESSION_PRICE: MarketValueType.ValueType  # 4
 """Цена последней сделки с вечерней сессии."""
 INSTRUMENT_VALUE_OPEN_INTEREST: MarketValueType.ValueType  # 5
-"""Открытый интерес, возвращается только для фьючерсов"""
+"""Открытый интерес, возвращается только для фьючерсов."""
+INSTRUMENT_VALUE_THEOR_PRICE: MarketValueType.ValueType  # 6
+"""Теоретическая цена, возвращается только для опционов."""
 global___MarketValueType = MarketValueType
 
 class _OrderBookType:

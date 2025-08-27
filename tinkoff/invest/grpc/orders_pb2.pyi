@@ -662,15 +662,51 @@ class GetOrdersRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing.final
+    class GetOrdersRequestFilters(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        FROM_FIELD_NUMBER: builtins.int
+        TO_FIELD_NUMBER: builtins.int
+        EXECUTION_STATUS_FIELD_NUMBER: builtins.int
+        @property
+        def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата и время, до которой нужно получить информацию в часовом поясе UTC. Параметр применим только к ордерам, созданным сегодня."""
+
+        @property
+        def execution_status(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___OrderExecutionReportStatus.ValueType]:
+            """Статусы заявок."""
+
+        def __init__(
+            self,
+            *,
+            to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            execution_status: collections.abc.Iterable[global___OrderExecutionReportStatus.ValueType] | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["_from", b"_from", "_to", b"_to", "from", b"from", "to", b"to"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_from", b"_from", "_to", b"_to", "execution_status", b"execution_status", "from", b"from", "to", b"to"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_from", b"_from"]) -> typing.Literal["from"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_to", b"_to"]) -> typing.Literal["to"] | None: ...
+
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    ADVANCED_FILTERS_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Номер счета."""
+    @property
+    def advanced_filters(self) -> global___GetOrdersRequest.GetOrdersRequestFilters:
+        """Дополнительные фильтры."""
+
     def __init__(
         self,
         *,
         account_id: builtins.str = ...,
+        advanced_filters: global___GetOrdersRequest.GetOrdersRequestFilters | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["account_id", b"account_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_advanced_filters", b"_advanced_filters", "advanced_filters", b"advanced_filters"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_advanced_filters", b"_advanced_filters", "account_id", b"account_id", "advanced_filters", b"advanced_filters"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_advanced_filters", b"_advanced_filters"]) -> typing.Literal["advanced_filters"] | None: ...
 
 global___GetOrdersRequest = GetOrdersRequest
 
