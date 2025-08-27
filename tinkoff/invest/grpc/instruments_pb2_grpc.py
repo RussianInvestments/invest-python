@@ -204,6 +204,11 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesResponse.FromString,
                 )
+        self.GetInsiderDeals = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetInsiderDeals',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -472,6 +477,13 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetInsiderDeals(self, request, context):
+        """GetInsiderDeals —  сделки инсайдеров по инструментам
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -659,6 +671,11 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetRiskRates,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesResponse.SerializeToString,
+            ),
+            'GetInsiderDeals': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetInsiderDeals,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1299,5 +1316,22 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetRiskRates',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.RiskRatesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetInsiderDeals(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetInsiderDeals',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

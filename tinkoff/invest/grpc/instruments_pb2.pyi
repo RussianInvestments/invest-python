@@ -321,38 +321,6 @@ EDIT_FAVORITES_ACTION_TYPE_DEL: EditFavoritesActionType.ValueType  # 2
 """Удалить из списка."""
 global___EditFavoritesActionType = EditFavoritesActionType
 
-class _RealExchange:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _RealExchangeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RealExchange.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    REAL_EXCHANGE_UNSPECIFIED: _RealExchange.ValueType  # 0
-    """Тип не определен."""
-    REAL_EXCHANGE_MOEX: _RealExchange.ValueType  # 1
-    """Московская биржа."""
-    REAL_EXCHANGE_RTS: _RealExchange.ValueType  # 2
-    """Санкт-Петербургская биржа."""
-    REAL_EXCHANGE_OTC: _RealExchange.ValueType  # 3
-    """Внебиржевой инструмент."""
-    REAL_EXCHANGE_DEALER: _RealExchange.ValueType  # 4
-    """Инструмент, торгуемый на площадке брокера."""
-
-class RealExchange(_RealExchange, metaclass=_RealExchangeEnumTypeWrapper):
-    """Реальная площадка исполнения расчетов."""
-
-REAL_EXCHANGE_UNSPECIFIED: RealExchange.ValueType  # 0
-"""Тип не определен."""
-REAL_EXCHANGE_MOEX: RealExchange.ValueType  # 1
-"""Московская биржа."""
-REAL_EXCHANGE_RTS: RealExchange.ValueType  # 2
-"""Санкт-Петербургская биржа."""
-REAL_EXCHANGE_OTC: RealExchange.ValueType  # 3
-"""Внебиржевой инструмент."""
-REAL_EXCHANGE_DEALER: RealExchange.ValueType  # 4
-"""Инструмент, торгуемый на площадке брокера."""
-global___RealExchange = RealExchange
-
 class _Recommendation:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -1300,7 +1268,7 @@ class Option(google.protobuf.message.Message):
     """Уникальный идентификатор позиции основного инструмента."""
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     direction: global___OptionDirection.ValueType
     """Направление опциона."""
@@ -1429,7 +1397,7 @@ class Option(google.protobuf.message.Message):
         class_code: builtins.str = ...,
         basic_asset_position_uid: builtins.str = ...,
         trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         direction: global___OptionDirection.ValueType = ...,
         payment_type: global___OptionPaymentType.ValueType = ...,
         style: global___OptionStyle.ValueType = ...,
@@ -1631,7 +1599,7 @@ class Bond(google.protobuf.message.Message):
     """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов. (биржа)"""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -1779,7 +1747,7 @@ class Bond(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         asset_uid: builtins.str = ...,
         required_tests: collections.abc.Iterable[builtins.str] | None = ...,
@@ -1883,7 +1851,7 @@ class Currency(google.protobuf.message.Message):
     """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -1980,7 +1948,7 @@ class Currency(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         required_tests: collections.abc.Iterable[builtins.str] | None = ...,
         for_iis_flag: builtins.bool = ...,
@@ -2089,7 +2057,7 @@ class Etf(google.protobuf.message.Message):
     """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -2204,7 +2172,7 @@ class Etf(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         asset_uid: builtins.str = ...,
         instrument_exchange: global___InstrumentExchangeType.ValueType = ...,
@@ -2318,7 +2286,7 @@ class Future(google.protobuf.message.Message):
     """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -2446,7 +2414,7 @@ class Future(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         basic_asset_position_uid: builtins.str = ...,
         required_tests: collections.abc.Iterable[builtins.str] | None = ...,
@@ -2564,7 +2532,7 @@ class Share(google.protobuf.message.Message):
     """Возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -2676,7 +2644,7 @@ class Share(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         asset_uid: builtins.str = ...,
         instrument_exchange: global___InstrumentExchangeType.ValueType = ...,
@@ -2949,7 +2917,7 @@ class Instrument(google.protobuf.message.Message):
     """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
-    real_exchange: global___RealExchange.ValueType
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
     """Реальная площадка исполнения расчетов (биржа)."""
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
@@ -3045,7 +3013,7 @@ class Instrument(google.protobuf.message.Message):
         min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         api_trade_available_flag: builtins.bool = ...,
         uid: builtins.str = ...,
-        real_exchange: global___RealExchange.ValueType = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
         position_uid: builtins.str = ...,
         asset_uid: builtins.str = ...,
         required_tests: collections.abc.Iterable[builtins.str] | None = ...,
@@ -5603,3 +5571,144 @@ class TradingInterval(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["interval", b"interval", "type", b"type"]) -> None: ...
 
 global___TradingInterval = TradingInterval
+
+@typing.final
+class GetInsiderDealsRequest(google.protobuf.message.Message):
+    """Запрос сделок по инсайдерам"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    LIMIT_FIELD_NUMBER: builtins.int
+    NEXT_CURSOR_FIELD_NUMBER: builtins.int
+    instrument_id: builtins.str
+    limit: builtins.int
+    next_cursor: builtins.str
+    def __init__(
+        self,
+        *,
+        instrument_id: builtins.str = ...,
+        limit: builtins.int = ...,
+        next_cursor: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_next_cursor", b"_next_cursor", "next_cursor", b"next_cursor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_next_cursor", b"_next_cursor", "instrument_id", b"instrument_id", "limit", b"limit", "next_cursor", b"next_cursor"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_next_cursor", b"_next_cursor"]) -> typing.Literal["next_cursor"] | None: ...
+
+global___GetInsiderDealsRequest = GetInsiderDealsRequest
+
+@typing.final
+class GetInsiderDealsResponse(google.protobuf.message.Message):
+    """сделки инсайдеров"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _TradeDirection:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _TradeDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GetInsiderDealsResponse._TradeDirection.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        TRADE_DIRECTION_UNSPECIFIED: GetInsiderDealsResponse._TradeDirection.ValueType  # 0
+        """Не определено."""
+        TRADE_DIRECTION_BUY: GetInsiderDealsResponse._TradeDirection.ValueType  # 1
+        """Покупка."""
+        TRADE_DIRECTION_SELL: GetInsiderDealsResponse._TradeDirection.ValueType  # 2
+        """Продажа."""
+
+    class TradeDirection(_TradeDirection, metaclass=_TradeDirectionEnumTypeWrapper): ...
+    TRADE_DIRECTION_UNSPECIFIED: GetInsiderDealsResponse.TradeDirection.ValueType  # 0
+    """Не определено."""
+    TRADE_DIRECTION_BUY: GetInsiderDealsResponse.TradeDirection.ValueType  # 1
+    """Покупка."""
+    TRADE_DIRECTION_SELL: GetInsiderDealsResponse.TradeDirection.ValueType  # 2
+    """Продажа."""
+
+    @typing.final
+    class InsiderDeal(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        TRADE_ID_FIELD_NUMBER: builtins.int
+        DIRECTION_FIELD_NUMBER: builtins.int
+        CURRENCY_FIELD_NUMBER: builtins.int
+        DATE_FIELD_NUMBER: builtins.int
+        QUANTITY_FIELD_NUMBER: builtins.int
+        PRICE_FIELD_NUMBER: builtins.int
+        INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+        TICKER_FIELD_NUMBER: builtins.int
+        INVESTOR_NAME_FIELD_NUMBER: builtins.int
+        INVESTOR_POSITION_FIELD_NUMBER: builtins.int
+        PERCENTAGE_FIELD_NUMBER: builtins.int
+        IS_OPTION_EXECUTION_FIELD_NUMBER: builtins.int
+        DISCLOSURE_DATE_FIELD_NUMBER: builtins.int
+        trade_id: builtins.int
+        """Уникальный идентификатор сделки."""
+        direction: global___GetInsiderDealsResponse.TradeDirection.ValueType
+        """Направление сделки."""
+        currency: builtins.str
+        """Валюта сделки."""
+        quantity: builtins.int
+        """Количество."""
+        instrument_uid: builtins.str
+        """Уникальный идентификатор инструмента."""
+        ticker: builtins.str
+        """Тикер инструмента."""
+        investor_name: builtins.str
+        """Имя инвестора."""
+        investor_position: builtins.str
+        """Какое отношение покупатель/продавец имеет к эмитенту"""
+        percentage: builtins.float
+        """Купленный/проданный объём от общего количества ценных бумаг на рынке"""
+        is_option_execution: builtins.bool
+        """Признак является ли сделка реализацией опциона"""
+        @property
+        def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата сделки."""
+
+        @property
+        def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Цена."""
+
+        @property
+        def disclosure_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Дата раскрытия сделки."""
+
+        def __init__(
+            self,
+            *,
+            trade_id: builtins.int = ...,
+            direction: global___GetInsiderDealsResponse.TradeDirection.ValueType = ...,
+            currency: builtins.str = ...,
+            date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            quantity: builtins.int = ...,
+            price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+            instrument_uid: builtins.str = ...,
+            ticker: builtins.str = ...,
+            investor_name: builtins.str = ...,
+            investor_position: builtins.str = ...,
+            percentage: builtins.float = ...,
+            is_option_execution: builtins.bool = ...,
+            disclosure_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["date", b"date", "disclosure_date", b"disclosure_date", "price", b"price"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["currency", b"currency", "date", b"date", "direction", b"direction", "disclosure_date", b"disclosure_date", "instrument_uid", b"instrument_uid", "investor_name", b"investor_name", "investor_position", b"investor_position", "is_option_execution", b"is_option_execution", "percentage", b"percentage", "price", b"price", "quantity", b"quantity", "ticker", b"ticker", "trade_id", b"trade_id"]) -> None: ...
+
+    INSIDER_DEALS_FIELD_NUMBER: builtins.int
+    NEXT_CURSOR_FIELD_NUMBER: builtins.int
+    next_cursor: builtins.str
+    """Курсор для получения следующей страницы."""
+    @property
+    def insider_deals(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetInsiderDealsResponse.InsiderDeal]:
+        """Массив сделок."""
+
+    def __init__(
+        self,
+        *,
+        insider_deals: collections.abc.Iterable[global___GetInsiderDealsResponse.InsiderDeal] | None = ...,
+        next_cursor: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_next_cursor", b"_next_cursor", "next_cursor", b"next_cursor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_next_cursor", b"_next_cursor", "insider_deals", b"insider_deals", "next_cursor", b"next_cursor"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_next_cursor", b"_next_cursor"]) -> typing.Literal["next_cursor"] | None: ...
+
+global___GetInsiderDealsResponse = GetInsiderDealsResponse

@@ -223,6 +223,38 @@ RESULT_SUBSCRIPTION_STATUS_ERROR: ResultSubscriptionStatus.ValueType  # 13
 """Ошибка подписки"""
 global___ResultSubscriptionStatus = ResultSubscriptionStatus
 
+class _RealExchange:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RealExchangeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RealExchange.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    REAL_EXCHANGE_UNSPECIFIED: _RealExchange.ValueType  # 0
+    """Тип не определен."""
+    REAL_EXCHANGE_MOEX: _RealExchange.ValueType  # 1
+    """Московская биржа."""
+    REAL_EXCHANGE_RTS: _RealExchange.ValueType  # 2
+    """Санкт-Петербургская биржа."""
+    REAL_EXCHANGE_OTC: _RealExchange.ValueType  # 3
+    """Внебиржевой инструмент."""
+    REAL_EXCHANGE_DEALER: _RealExchange.ValueType  # 4
+    """Инструмент, торгуемый на площадке брокера."""
+
+class RealExchange(_RealExchange, metaclass=_RealExchangeEnumTypeWrapper):
+    """Реальная площадка исполнения расчетов."""
+
+REAL_EXCHANGE_UNSPECIFIED: RealExchange.ValueType  # 0
+"""Тип не определен."""
+REAL_EXCHANGE_MOEX: RealExchange.ValueType  # 1
+"""Московская биржа."""
+REAL_EXCHANGE_RTS: RealExchange.ValueType  # 2
+"""Санкт-Петербургская биржа."""
+REAL_EXCHANGE_OTC: RealExchange.ValueType  # 3
+"""Внебиржевой инструмент."""
+REAL_EXCHANGE_DEALER: RealExchange.ValueType  # 4
+"""Инструмент, торгуемый на площадке брокера."""
+global___RealExchange = RealExchange
+
 @typing.final
 class MoneyValue(google.protobuf.message.Message):
     """Денежная сумма в определенной валюте."""

@@ -183,3 +183,11 @@ def test_get_risk_rates(instruments_service):
         request=request,
     )
     instruments_service.get_risk_rates.assert_called_once_with(request=request)
+
+
+def test_get_insider_deals(instruments_service):
+    request = mock.Mock()
+    response = instruments_service.get_insider_deals(
+        request=request
+    )
+    instruments_service.get_insider_deals.assert_called_once_with(request=request)

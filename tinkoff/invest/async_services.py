@@ -207,7 +207,8 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse,
+    WithdrawLimitsResponse, GetInsiderDealsResponse, GetInsiderDealsRequest,
+    OrderExecutionReportStatus, GetOrdersRequestFilters,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -1030,6 +1031,19 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetRiskRates")
         return _grpc_helpers.protobuf_to_dataclass(response, RiskRatesResponse)
 
+    @handle_aio_request_error("GetInsiderDeals")
+    async def get_insider_deals(
+        self, request: GetInsiderDealsRequest) -> GetInsiderDealsResponse:
+        response_coro = self.stub.GetInsiderDeals(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetInsiderDealsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetInsiderDeals")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetInsiderDealsResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -1612,9 +1626,18 @@ class OrdersService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
 
     @handle_aio_request_error("GetOrders")
-    async def get_orders(self, *, account_id: str = "") -> GetOrdersResponse:
+    async def get_orders(self, *, account_id: str = "", from_: Optional[datetime] = None, to: Optional[datetime] = None,
+                         execution_status: Optional[List[OrderExecutionReportStatus]] = None) -> GetOrdersResponse:
+        # noinspection DuplicatedCode
         request = GetOrdersRequest()
         request.account_id = account_id
+        request.advanced_filters = GetOrdersRequestFilters()
+        if from_ is not None:
+            request.advanced_filters.from_ = from_
+        if to is not None:
+            request.advanced_filters.to = to
+        if execution_status is not None:
+            request.advanced_filters.execution_status = execution_status
         response_coro = self.stub.GetOrders(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.GetOrdersRequest()
