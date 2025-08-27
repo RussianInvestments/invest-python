@@ -24,8 +24,10 @@ def main():
             from_=now - datetime.timedelta(hours=1),
             to=now,
             # filter only executed or partially executed orders
-            execution_status=[OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_FILL,
-                              OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_PARTIALLYFILL]
+            execution_status=[
+                OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_FILL,
+                OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_PARTIALLYFILL,
+            ],
         )
     print("Orders list:")
     for order in orders.orders:

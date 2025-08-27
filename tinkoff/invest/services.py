@@ -107,6 +107,8 @@ from .schemas import (
     GetFuturesMarginResponse,
     GetInfoRequest,
     GetInfoResponse,
+    GetInsiderDealsRequest,
+    GetInsiderDealsResponse,
     GetLastPricesRequest,
     GetLastPricesResponse,
     GetLastTradesRequest,
@@ -124,6 +126,7 @@ from .schemas import (
     GetOrderPriceRequest,
     GetOrderPriceResponse,
     GetOrdersRequest,
+    GetOrdersRequestFilters,
     GetOrdersResponse,
     GetOrderStateRequest,
     GetSignalsRequest,
@@ -164,6 +167,7 @@ from .schemas import (
     OptionResponse,
     OptionsResponse,
     OrderDirection,
+    OrderExecutionReportStatus,
     OrderIdType,
     OrderState,
     OrderStateStreamRequest,
@@ -207,8 +211,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, GetInsiderDealsRequest, GetInsiderDealsResponse,
-    OrderExecutionReportStatus, GetOrdersRequestFilters,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -1575,8 +1578,14 @@ class OrdersService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
 
     @handle_request_error("GetOrders")
-    def get_orders(self, *, account_id: str = "", from_: Optional[datetime] = None, to: Optional[datetime] = None,
-                   execution_status: Optional[List[OrderExecutionReportStatus]] = None) -> GetOrdersResponse:
+    def get_orders(
+        self,
+        *,
+        account_id: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+        execution_status: Optional[List[OrderExecutionReportStatus]] = None,
+    ) -> GetOrdersResponse:
         # noinspection DuplicatedCode
         request = GetOrdersRequest()
         request.account_id = account_id

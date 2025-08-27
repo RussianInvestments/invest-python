@@ -109,6 +109,8 @@ from .schemas import (
     GetFuturesMarginResponse,
     GetInfoRequest,
     GetInfoResponse,
+    GetInsiderDealsRequest,
+    GetInsiderDealsResponse,
     GetLastPricesRequest,
     GetLastPricesResponse,
     GetLastTradesRequest,
@@ -126,6 +128,7 @@ from .schemas import (
     GetOrderPriceRequest,
     GetOrderPriceResponse,
     GetOrdersRequest,
+    GetOrdersRequestFilters,
     GetOrdersResponse,
     GetOrderStateRequest,
     GetSignalsRequest,
@@ -165,6 +168,7 @@ from .schemas import (
     OptionResponse,
     OptionsResponse,
     OrderDirection,
+    OrderExecutionReportStatus,
     OrderIdType,
     OrderState,
     OrderStateStreamRequest,
@@ -207,8 +211,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, GetInsiderDealsResponse, GetInsiderDealsRequest,
-    OrderExecutionReportStatus, GetOrdersRequestFilters,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import get_intervals, now
@@ -1033,7 +1036,8 @@ class InstrumentsService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetInsiderDeals")
     async def get_insider_deals(
-        self, request: GetInsiderDealsRequest) -> GetInsiderDealsResponse:
+        self, request: GetInsiderDealsRequest
+    ) -> GetInsiderDealsResponse:
         response_coro = self.stub.GetInsiderDeals(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetInsiderDealsRequest()
@@ -1626,8 +1630,14 @@ class OrdersService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
 
     @handle_aio_request_error("GetOrders")
-    async def get_orders(self, *, account_id: str = "", from_: Optional[datetime] = None, to: Optional[datetime] = None,
-                         execution_status: Optional[List[OrderExecutionReportStatus]] = None) -> GetOrdersResponse:
+    async def get_orders(
+        self,
+        *,
+        account_id: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+        execution_status: Optional[List[OrderExecutionReportStatus]] = None,
+    ) -> GetOrdersResponse:
         # noinspection DuplicatedCode
         request = GetOrdersRequest()
         request.account_id = account_id

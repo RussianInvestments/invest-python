@@ -2406,14 +2406,18 @@ class GetOrderStateRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetOrdersRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    advanced_filters: Optional["GetOrdersRequestFilters"] = _grpc_helpers.message_field(2)
+    advanced_filters: Optional["GetOrdersRequestFilters"] = _grpc_helpers.message_field(
+        2
+    )
 
 
 @dataclass(eq=False, repr=True)
 class GetOrdersRequestFilters(_grpc_helpers.Message):
     from_: Optional[datetime] = _grpc_helpers.message_field(1)
     to: Optional[datetime] = _grpc_helpers.message_field(2)
-    execution_status: List["OrderExecutionReportStatus"] = _grpc_helpers.message_field(3)
+    execution_status: List["OrderExecutionReportStatus"] = _grpc_helpers.message_field(
+        3
+    )
 
 
 @dataclass(eq=False, repr=True)

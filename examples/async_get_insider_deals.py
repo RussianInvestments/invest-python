@@ -22,9 +22,7 @@ async def main():
         while True:
             response = await client.instruments.get_insider_deals(
                 request=GetInsiderDealsRequest(
-                    instrument_id="BBG004730N88",
-                    limit=10,
-                    next_cursor=next_cursor
+                    instrument_id="BBG004730N88", limit=10, next_cursor=next_cursor
                 )
             )
             deals.extend(response.insider_deals)
