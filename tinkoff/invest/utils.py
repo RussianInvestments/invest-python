@@ -8,13 +8,20 @@ from typing import Any, Callable, Generator, Iterable, List, Protocol, Tuple
 
 import dateutil.parser
 
-from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval
+from .schemas import (
+    CandleInterval,
+    HistoricCandle,
+    MoneyValue,
+    Quotation,
+    SubscriptionInterval,
+)
 
 __all__ = (
     "get_intervals",
     "quotation_to_decimal",
     "money_to_decimal",
     "decimal_to_quotation",
+    "decimal_to_money",
     "candle_interval_to_subscription_interval",
     "now",
     "candle_interval_to_timedelta",
@@ -65,6 +72,15 @@ def quotation_to_decimal(quotation: Quotation) -> Decimal:
 def decimal_to_quotation(decimal: Decimal) -> Quotation:
     fractional = decimal % 1
     return Quotation(units=int(decimal // 1), nano=int(fractional * Decimal("10e8")))
+
+
+def quotation_to_money(quotation: Quotation, currency: str) -> MoneyValue:
+    return MoneyValue(units=quotation.units, nano=quotation.nano, currency=currency)
+
+
+def decimal_to_money(decimal: Decimal, currency: str) -> MoneyValue:
+    quotation = decimal_to_quotation(decimal)
+    return quotation_to_money(quotation, currency)
 
 
 class MoneyProtocol(Protocol):

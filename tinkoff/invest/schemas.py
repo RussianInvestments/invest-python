@@ -3431,7 +3431,7 @@ class Signal(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class StructuredNoteResponse(_grpc_helpers.Message):
-    instrument: "StructuredNote " = _grpc_helpers.message_field(1)
+    instrument: "StructuredNote" = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
