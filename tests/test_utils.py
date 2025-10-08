@@ -17,11 +17,25 @@ from tinkoff.invest.utils import empty_or_uuid, get_intervals
                 (
                     datetime(2021, 1, 25, 0, 0),
                     datetime(2022, 1, 25, 0, 0),
+                )
+            ],
+        ),
+        (
+            CandleInterval.CANDLE_INTERVAL_DAY,
+            (datetime(2021, 1, 25, 0, 0), datetime(2023, 2, 26, 0, 1)),
+            [
+                (
+                    datetime(2021, 1, 25, 0, 0),
+                    datetime(2022, 1, 25, 0, 0),
                 ),
                 (
-                    datetime(2022, 1, 25, 0, 0),
-                    datetime(2022, 1, 25, 0, 1),
+                    datetime(2022, 1, 26, 0, 0),
+                    datetime(2023, 1, 26, 0, 0),
                 ),
+                (
+                    datetime(2023, 1, 27, 0, 0),
+                    datetime(2023, 2, 26, 0, 1),
+                )
             ],
         ),
         (
