@@ -61,9 +61,9 @@
 {% include "../examples/instrument_cache.py" %}
 ~~~
 ## Функция получения списка инструментов подходящих под строку query
-[examples/instruments.py](https://github.com/RussianInvestments/invest-python/blob/main/examples/instruments.py)
+[examples/instruments/instruments.py](https://github.com/RussianInvestments/invest-python/blob/main/examples/instruments/instruments.py)
 ~~~python
-{% include "../examples/instruments.py" %}
+{% include "../examples/instruments/instruments.py" %}
 ~~~
 ## Функция логгирования ошибок
 [examples/logger.py](https://github.com/RussianInvestments/invest-python/blob/main/examples/logger.py)
