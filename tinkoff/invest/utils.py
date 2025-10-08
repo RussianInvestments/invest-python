@@ -54,15 +54,35 @@ MAX_INTERVALS = {
     CandleInterval.CANDLE_INTERVAL_MONTH: timedelta(days=DAYS_IN_YEAR * 3),
 }
 
+INTERVAL_LENGTHS = {
+    CandleInterval.CANDLE_INTERVAL_5_SEC: timedelta(seconds=5),
+    CandleInterval.CANDLE_INTERVAL_10_SEC: timedelta(seconds=10),
+    CandleInterval.CANDLE_INTERVAL_30_SEC: timedelta(seconds=30),
+    CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(minutes=1),
+    CandleInterval.CANDLE_INTERVAL_2_MIN: timedelta(minutes=2),
+    CandleInterval.CANDLE_INTERVAL_3_MIN: timedelta(minutes=3),
+    CandleInterval.CANDLE_INTERVAL_5_MIN: timedelta(minutes=5),
+    CandleInterval.CANDLE_INTERVAL_10_MIN: timedelta(minutes=10),
+    CandleInterval.CANDLE_INTERVAL_15_MIN: timedelta(minutes=15),
+    CandleInterval.CANDLE_INTERVAL_30_MIN: timedelta(minutes=30),
+    CandleInterval.CANDLE_INTERVAL_HOUR: timedelta(hours=1),
+    CandleInterval.CANDLE_INTERVAL_2_HOUR: timedelta(hours=2),
+    CandleInterval.CANDLE_INTERVAL_4_HOUR: timedelta(hours=4),
+    CandleInterval.CANDLE_INTERVAL_DAY: timedelta(days=1),
+    CandleInterval.CANDLE_INTERVAL_WEEK: timedelta(days=7),
+    CandleInterval.CANDLE_INTERVAL_MONTH: timedelta(days=30),
+}
+
 
 def get_intervals(
     interval: CandleInterval, from_: datetime, to: datetime
 ) -> Generator[Tuple[datetime, datetime], None, None]:
     max_interval = MAX_INTERVALS[interval]
+    interval_length = INTERVAL_LENGTHS[interval]
     local_from = from_
-    while local_from < to:
+    while local_from <= to:
         yield local_from, min(local_from + max_interval, to)
-        local_from += max_interval
+        local_from += max_interval + interval_length
 
 
 def quotation_to_decimal(quotation: Quotation) -> Decimal:
