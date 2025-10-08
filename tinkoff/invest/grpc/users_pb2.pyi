@@ -37,6 +37,10 @@ class _AccountTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     """Инвесткопилка."""
     ACCOUNT_TYPE_INVEST_FUND: _AccountType.ValueType  # 4
     """Фонд денежного рынка."""
+    ACCOUNT_TYPE_DEBIT: _AccountType.ValueType  # 5
+    """Дебетовый карточный счeт."""
+    ACCOUNT_TYPE_SAVING: _AccountType.ValueType  # 6
+    """Накопительный счeт."""
 
 class AccountType(_AccountType, metaclass=_AccountTypeEnumTypeWrapper):
     """Тип счeта."""
@@ -51,6 +55,10 @@ ACCOUNT_TYPE_INVEST_BOX: AccountType.ValueType  # 3
 """Инвесткопилка."""
 ACCOUNT_TYPE_INVEST_FUND: AccountType.ValueType  # 4
 """Фонд денежного рынка."""
+ACCOUNT_TYPE_DEBIT: AccountType.ValueType  # 5
+"""Дебетовый карточный счeт."""
+ACCOUNT_TYPE_SAVING: AccountType.ValueType  # 6
+"""Накопительный счeт."""
 global___AccountType = AccountType
 
 class _AccountStatus:
@@ -315,8 +323,11 @@ class UnaryLimit(google.protobuf.message.Message):
 
     LIMIT_PER_MINUTE_FIELD_NUMBER: builtins.int
     METHODS_FIELD_NUMBER: builtins.int
+    LIMIT_PER_SECOND_FIELD_NUMBER: builtins.int
     limit_per_minute: builtins.int
     """Количество unary-запросов в минуту."""
+    limit_per_second: builtins.int
+    """Количество unary-запросов в секунду."""
     @property
     def methods(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Названия методов."""
@@ -326,8 +337,11 @@ class UnaryLimit(google.protobuf.message.Message):
         *,
         limit_per_minute: builtins.int = ...,
         methods: collections.abc.Iterable[builtins.str] | None = ...,
+        limit_per_second: builtins.int | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["limit_per_minute", b"limit_per_minute", "methods", b"methods"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_limit_per_second", b"_limit_per_second", "limit_per_second", b"limit_per_second"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_limit_per_second", b"_limit_per_second", "limit_per_minute", b"limit_per_minute", "limit_per_second", b"limit_per_second", "methods", b"methods"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_limit_per_second", b"_limit_per_second"]) -> typing.Literal["limit_per_second"] | None: ...
 
 global___UnaryLimit = UnaryLimit
 
@@ -410,3 +424,115 @@ class GetInfoResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["prem_status", b"prem_status", "qual_status", b"qual_status", "qualified_for_work_with", b"qualified_for_work_with", "risk_level_code", b"risk_level_code", "tariff", b"tariff", "user_id", b"user_id"]) -> None: ...
 
 global___GetInfoResponse = GetInfoResponse
+
+@typing.final
+class GetBankAccountsRequest(google.protobuf.message.Message):
+    """Запрос списка банковских счетов пользователя."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___GetBankAccountsRequest = GetBankAccountsRequest
+
+@typing.final
+class GetBankAccountsResponse(google.protobuf.message.Message):
+    """Список банковских счетов пользователя."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BANK_ACCOUNTS_FIELD_NUMBER: builtins.int
+    @property
+    def bank_accounts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BankAccount]:
+        """Массив банковских счетов."""
+
+    def __init__(
+        self,
+        *,
+        bank_accounts: collections.abc.Iterable[global___BankAccount] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bank_accounts", b"bank_accounts"]) -> None: ...
+
+global___GetBankAccountsResponse = GetBankAccountsResponse
+
+@typing.final
+class BankAccount(google.protobuf.message.Message):
+    """Банковский счeт."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    MONEY_FIELD_NUMBER: builtins.int
+    OPENED_DATE_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Идентификатор счeта."""
+    name: builtins.str
+    """Название счeта."""
+    type: global___AccountType.ValueType
+    """Тип счeта."""
+    @property
+    def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
+        """Список валютных позиций на счeте."""
+
+    @property
+    def opened_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата открытия счeта в часовом поясе UTC."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        name: builtins.str = ...,
+        money: collections.abc.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue] | None = ...,
+        opened_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        type: global___AccountType.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["opened_date", b"opened_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["id", b"id", "money", b"money", "name", b"name", "opened_date", b"opened_date", "type", b"type"]) -> None: ...
+
+global___BankAccount = BankAccount
+
+@typing.final
+class CurrencyTransferRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FROM_ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    TO_ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    AMOUNT_FIELD_NUMBER: builtins.int
+    TRANSACTION_ID_FIELD_NUMBER: builtins.int
+    from_account_id: builtins.str
+    """Номер счета списания."""
+    to_account_id: builtins.str
+    """Номер счета зачисления."""
+    transaction_id: builtins.str
+    """Идентификатор запроса выставления поручения для целей идемпотентности в формате UUID."""
+    @property
+    def amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сумма перевода с указанием валюты."""
+
+    def __init__(
+        self,
+        *,
+        from_account_id: builtins.str = ...,
+        to_account_id: builtins.str = ...,
+        amount: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        transaction_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["amount", b"amount"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["amount", b"amount", "from_account_id", b"from_account_id", "to_account_id", b"to_account_id", "transaction_id", b"transaction_id"]) -> None: ...
+
+global___CurrencyTransferRequest = CurrencyTransferRequest
+
+@typing.final
+class CurrencyTransferResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___CurrencyTransferResponse = CurrencyTransferResponse

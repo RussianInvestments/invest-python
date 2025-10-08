@@ -6,6 +6,7 @@ from tinkoff.invest.grpc import (
     operations_pb2 as tinkoff_dot_invest_dot_grpc_dot_operations__pb2,
     orders_pb2 as tinkoff_dot_invest_dot_grpc_dot_orders__pb2,
     sandbox_pb2 as tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2,
+    stoporders_pb2 as tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2,
     users_pb2 as tinkoff_dot_invest_dot_grpc_dot_users__pb2,
 )
 
@@ -99,6 +100,21 @@ class SandboxServiceStub(object):
                 '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxMaxLots',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
+                )
+        self.PostSandboxStopOrder = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/PostSandboxStopOrder',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderResponse.FromString,
+                )
+        self.GetSandboxStopOrders = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxStopOrders',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersResponse.FromString,
+                )
+        self.CancelSandboxStopOrder = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/CancelSandboxStopOrder',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderResponse.FromString,
                 )
 
 
@@ -221,6 +237,27 @@ class SandboxServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostSandboxStopOrder(self, request, context):
+        """PostSandboxStopOrder — выставить стоп-заявку
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSandboxStopOrders(self, request, context):
+        """GetSandboxStopOrders — получить список активных стоп-заявок по счету
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CancelSandboxStopOrder(self, request, context):
+        """CancelSandboxStopOrder — отменить стоп-заявку
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SandboxServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -303,6 +340,21 @@ def add_SandboxServiceServicer_to_server(servicer, server):
                     servicer.GetSandboxMaxLots,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.SerializeToString,
+            ),
+            'PostSandboxStopOrder': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostSandboxStopOrder,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderResponse.SerializeToString,
+            ),
+            'GetSandboxStopOrders': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSandboxStopOrders,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersResponse.SerializeToString,
+            ),
+            'CancelSandboxStopOrder': grpc.unary_unary_rpc_method_handler(
+                    servicer.CancelSandboxStopOrder,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -584,5 +636,56 @@ class SandboxService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxMaxLots',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetMaxLotsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostSandboxStopOrder(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/PostSandboxStopOrder',
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.PostStopOrderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSandboxStopOrders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxStopOrders',
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.GetStopOrdersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CancelSandboxStopOrder(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/CancelSandboxStopOrder',
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_stoporders__pb2.CancelStopOrderResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
