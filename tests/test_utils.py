@@ -35,7 +35,7 @@ from tinkoff.invest.utils import empty_or_uuid, get_intervals
                 (
                     datetime(2023, 1, 27, 0, 0),
                     datetime(2023, 2, 26, 0, 1),
-                )
+                ),
             ],
         ),
         (
