@@ -59,8 +59,8 @@ class MarketDataCache:
         from_net: Iterable[HistoricCandle],
     ) -> Iterable[HistoricCandle]:
         candles = list(from_net)
-        if candles:
-            complete_candles = list(self._filter_complete_candles(candles))
+        complete_candles = list(self._filter_complete_candles(candles))
+        if complete_candles:
             complete_candle_times = [candle.time for candle in complete_candles]
             complete_net_range = (
                 min(complete_candle_times),
