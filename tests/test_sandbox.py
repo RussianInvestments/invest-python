@@ -6,6 +6,9 @@ from datetime import datetime
 
 import pytest
 
+from examples.sandbox.sandbox_cancel_stop_order import cancel_stop_order
+from examples.sandbox.sandbox_get_stop_orders import get_stop_orders
+from examples.sandbox.sandbox_post_stop_order import post_stop_order
 from tests.utils import skip_when
 from tinkoff.invest import (
     Account,
@@ -18,7 +21,12 @@ from tinkoff.invest import (
     RequestError,
 )
 from tinkoff.invest.sandbox.client import SandboxClient
-from tinkoff.invest.schemas import OrderExecutionReportStatus, PostOrderAsyncRequest
+from tinkoff.invest.schemas import (
+    OrderExecutionReportStatus,
+    PostOrderAsyncRequest,
+    StopOrderDirection,
+    StopOrderStatusOption,
+)
 from tinkoff.invest.utils import money_to_decimal
 
 
@@ -69,6 +77,16 @@ def price() -> Quotation:
 @pytest.fixture()
 def direction() -> OrderDirection:
     return OrderDirection.ORDER_DIRECTION_BUY
+
+
+@pytest.fixture()
+def stop_order_direction() -> StopOrderDirection:
+    return StopOrderDirection.STOP_ORDER_DIRECTION_BUY
+
+
+@pytest.fixture()
+def stop_order_status() -> StopOrderStatusOption:
+    return StopOrderStatusOption.STOP_ORDER_STATUS_ACTIVE
 
 
 @pytest.fixture()
@@ -269,3 +287,39 @@ class TestSandboxOperations:
         assert money_to_decimal(response.balance) == (
             money_to_decimal(initial_balance_pay_in) + money_to_decimal(amount)
         )
+
+    @skip_when_exchange_closed
+    def test_sandbox_post_stop_order(
+        self,
+        sandbox_service,
+        account_id,
+        instrument_id,
+        stop_order_direction,
+        quantity,
+        price,
+    ):
+        response = post_stop_order(
+            sandbox_service,
+            account_id,
+            instrument_id,
+            stop_order_direction,
+            quantity,
+            price,
+        )
+        assert response.order_request_id is not None
+        assert response.stop_order_id is not None
+
+    def test_sandbox_get_stop_orders(
+        self, sandbox_service, account_id, stop_order_status
+    ):
+        response = get_stop_orders(sandbox_service, account_id, stop_order_status)
+        assert isinstance(response.stop_orders, list)
+
+    def test_sandbox_cancel_stop_order(self, sandbox_service, account_id):
+        stop_orders = get_stop_orders(
+            sandbox_service, account_id, StopOrderStatusOption.STOP_ORDER_STATUS_ACTIVE
+        )
+        if len(stop_orders.stop_orders) > 0:
+            stop_order_id = stop_orders.stop_orders[0].stop_order_id
+            response = cancel_stop_order(sandbox_service, account_id, stop_order_id)
+            assert isinstance(response.time, datetime)

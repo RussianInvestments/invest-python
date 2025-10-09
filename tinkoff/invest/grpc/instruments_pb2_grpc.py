@@ -209,6 +209,16 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.FromString,
                 )
+        self.StructuredNoteBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StructuredNoteBy',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNoteResponse.FromString,
+                )
+        self.StructuredNotes = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StructuredNotes',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNotesResponse.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -484,6 +494,20 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def StructuredNoteBy(self, request, context):
+        """StructuredNoteBy — получить структурную ноту по ее идентификатору
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StructuredNotes(self, request, context):
+        """StructuredNotes — список структурных нот
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -676,6 +700,16 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetInsiderDeals,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.SerializeToString,
+            ),
+            'StructuredNoteBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.StructuredNoteBy,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNoteResponse.SerializeToString,
+            ),
+            'StructuredNotes': grpc.unary_unary_rpc_method_handler(
+                    servicer.StructuredNotes,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNotesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1333,5 +1367,39 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetInsiderDeals',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetInsiderDealsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StructuredNoteBy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StructuredNoteBy',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNoteResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StructuredNotes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StructuredNotes',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StructuredNotesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -124,7 +124,13 @@ class MarketDataCache:
         if processed_time + interval_delta <= to:
             yield from self._with_saving_into_cache(
                 storage=figi_cache_storage,
-                from_net=self._get_candles_from_net(figi, interval, processed_time, to),
+                from_net=self._get_candles_from_net(
+                    figi=figi,
+                    interval=interval,
+                    from_=processed_time,
+                    to=to,
+                    instrument_id=instrument_id,
+                ),
             )
 
         figi_cache_storage.merge()

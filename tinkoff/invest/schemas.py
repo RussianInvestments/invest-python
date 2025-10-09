@@ -2457,6 +2457,7 @@ class OrderStage(_grpc_helpers.Message):
     execution_time: datetime = _grpc_helpers.message_field(5)
 
 
+@dataclass(eq=False, repr=True)
 class ReplaceOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(6)
@@ -3427,3 +3428,136 @@ class Signal(_grpc_helpers.Message):
     stoploss: "Quotation" = _grpc_helpers.message_field(13)
     close_price: "Quotation" = _grpc_helpers.message_field(14)
     close_dt: Optional[datetime] = _grpc_helpers.message_field(15)
+
+
+@dataclass(eq=False, repr=True)
+class StructuredNoteResponse(_grpc_helpers.Message):
+    instrument: "StructuredNote" = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class StructuredNotesResponse(_grpc_helpers.Message):
+    instruments: List["StructuredNote"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class StructuredNote(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    figi: str = _grpc_helpers.string_field(2)
+    ticker: str = _grpc_helpers.string_field(3)
+    class_code: str = _grpc_helpers.string_field(4)
+    isin: str = _grpc_helpers.string_field(5)
+    name: str = _grpc_helpers.string_field(6)
+    asset_uid: str = _grpc_helpers.string_field(7)
+    position_uid: str = _grpc_helpers.string_field(8)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(9)
+    lot: int = _grpc_helpers.int32_field(10)
+    nominal: "MoneyValue" = _grpc_helpers.message_field(11)
+    currency: str = _grpc_helpers.string_field(12)
+    maturity_date: datetime = _grpc_helpers.message_field(13)
+    placement_date: datetime = _grpc_helpers.message_field(14)
+    issue_kind: str = _grpc_helpers.string_field(15)
+    issue_size: int = _grpc_helpers.int32_field(16)
+    issue_size_plan: int = _grpc_helpers.int32_field(17)
+    dlong_client: "Quotation" = _grpc_helpers.message_field(18)
+    dshort_client: "Quotation" = _grpc_helpers.message_field(19)
+    short_enabled_flag: bool = _grpc_helpers.bool_field(20)
+    exchange: str = _grpc_helpers.string_field(21)
+    trading_status: "SecurityTradingStatus" = _grpc_helpers.message_field(22)
+    api_trade_available_flag: bool = _grpc_helpers.bool_field(23)
+    buy_available_flag: bool = _grpc_helpers.bool_field(24)
+    sell_available_flag: bool = _grpc_helpers.bool_field(25)
+    limit_order_available_flag: bool = _grpc_helpers.bool_field(26)
+    market_order_available_flag: bool = _grpc_helpers.bool_field(27)
+    bestprice_order_available_flag: bool = _grpc_helpers.bool_field(28)
+    weekend_flag: bool = _grpc_helpers.bool_field(29)
+    liquidity_flag: bool = _grpc_helpers.bool_field(30)
+    for_iis_flag: bool = _grpc_helpers.bool_field(31)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(32)
+    pawnshop_list_flag: bool = _grpc_helpers.bool_field(33)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(35)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(36)
+    borrow_name: str = _grpc_helpers.string_field(37)
+    type: str = _grpc_helpers.string_field(38)
+    logic_portfolio: "LogicPortfolio" = _grpc_helpers.message_field(39)
+    asset_type: "AssetType" = _grpc_helpers.message_field(40)
+    basic_assets: List["BasicAsset"] = _grpc_helpers.message_field(41)
+    safety_barrier: "Quotation" = _grpc_helpers.message_field(42)
+    coupon_period_base: str = _grpc_helpers.string_field(43)
+    observation_principle: "ObservationPrinciple" = _grpc_helpers.message_field(44)
+    observation_frequency: str = _grpc_helpers.string_field(45)
+    initial_price_fixing_date: datetime = _grpc_helpers.message_field(46)
+    yield_: List["Yield"] = _grpc_helpers.message_field(47)
+    coupon_saving_flag: bool = _grpc_helpers.bool_field(48)
+    sector: str = _grpc_helpers.string_field(49)
+    country_of_risk: str = _grpc_helpers.string_field(50)
+    country_of_risk_name: str = _grpc_helpers.string_field(51)
+    logo_name: str = _grpc_helpers.string_field(52)
+    required_tests: List[str] = _grpc_helpers.message_field(50)
+
+
+@dataclass(eq=False, repr=True)
+class BasicAsset(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    type: "AssetType" = _grpc_helpers.message_field(2)
+    initial_price: "Quotation" = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class Yield(_grpc_helpers.Message):
+    type: "YieldType" = _grpc_helpers.message_field(1)
+    value: "Quotation" = _grpc_helpers.message_field(2)
+
+
+class LogicPortfolio(_grpc_helpers.Enum):
+    LOGIC_PORTFOLIO_UNSPECIFIED = 0
+    LOGIC_PORTFOLIO_VOLATILITY = 1
+    LOGIC_PORTFOLIO_CORRELATION = 2
+
+
+class ObservationPrinciple(_grpc_helpers.Enum):
+    OBSERVATION_PRINCIPLE_UNSPECIFIED = 0
+    OBSERVATION_PRINCIPLE_WORST_BASIC_ASSET = 1
+    OBSERVATION_PRINCIPLE_BEST_BASIC_ASSET = 2
+    OBSERVATION_PRINCIPLE_AVERAGE_OF_BASIC_ASSETS = 3
+    OBSERVATION_PRINCIPLE_SINGLE_BASIC_ASSET_PERFORMANCE = 4
+
+
+class YieldType(_grpc_helpers.Enum):
+    YIELD_TYPE_UNSPECIFIED = 0
+    YIELD_TYPE_GUARANTED_COUPON = 1
+    YIELD_TYPE_CONDITIONAL_COUPON = 2
+    YIELD_TYPE_PARTICIPATION = 3
+
+
+@dataclass(eq=False, repr=True)
+class GetBankAccountsRequest(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class GetBankAccountsResponse(_grpc_helpers.Message):
+    bank_accounts: List["BankAccount"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class BankAccount(_grpc_helpers.Message):
+    id: str = _grpc_helpers.string_field(1)
+    name: str = _grpc_helpers.string_field(2)
+    money: List["MoneyValue"] = _grpc_helpers.message_field(3)
+    opened_date: datetime = _grpc_helpers.message_field(4)
+    type: "AccountType" = _grpc_helpers.message_field(5)
+
+
+@dataclass(eq=False, repr=True)
+class CurrencyTransferRequest(_grpc_helpers.Message):
+    from_account_id: str = _grpc_helpers.string_field(1)
+    to_account_id: str = _grpc_helpers.string_field(2)
+    amount: "MoneyValue" = _grpc_helpers.message_field(3)
+    transaction_id: str = _grpc_helpers.string_field(4)
+
+
+@dataclass(eq=False, repr=True)
+class CurrencyTransferResponse(_grpc_helpers.Message):
+    pass

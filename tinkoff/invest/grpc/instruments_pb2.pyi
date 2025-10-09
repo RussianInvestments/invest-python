@@ -1487,6 +1487,47 @@ class SharesResponse(google.protobuf.message.Message):
 global___SharesResponse = SharesResponse
 
 @typing.final
+class StructuredNoteResponse(google.protobuf.message.Message):
+    """Данные по структурной ноте."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_FIELD_NUMBER: builtins.int
+    @property
+    def instrument(self) -> global___StructuredNote:
+        """Информация о структурной ноте."""
+
+    def __init__(
+        self,
+        *,
+        instrument: global___StructuredNote | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["instrument", b"instrument"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["instrument", b"instrument"]) -> None: ...
+
+global___StructuredNoteResponse = StructuredNoteResponse
+
+@typing.final
+class StructuredNotesResponse(google.protobuf.message.Message):
+    """Данные по структурным нотам."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StructuredNote]:
+        """Массив структурных нот."""
+
+    def __init__(
+        self,
+        *,
+        instruments: collections.abc.Iterable[global___StructuredNote] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["instruments", b"instruments"]) -> None: ...
+
+global___StructuredNotesResponse = StructuredNotesResponse
+
+@typing.final
 class Bond(google.protobuf.message.Message):
     """Объект передачи информации об облигации."""
 
@@ -2664,6 +2705,385 @@ class Share(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["api_trade_available_flag", b"api_trade_available_flag", "asset_uid", b"asset_uid", "blocked_tca_flag", b"blocked_tca_flag", "brand", b"brand", "buy_available_flag", b"buy_available_flag", "class_code", b"class_code", "country_of_risk", b"country_of_risk", "country_of_risk_name", b"country_of_risk_name", "currency", b"currency", "div_yield_flag", b"div_yield_flag", "dlong", b"dlong", "dlong_client", b"dlong_client", "dlong_min", b"dlong_min", "dshort", b"dshort", "dshort_client", b"dshort_client", "dshort_min", b"dshort_min", "exchange", b"exchange", "figi", b"figi", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "for_iis_flag", b"for_iis_flag", "for_qual_investor_flag", b"for_qual_investor_flag", "instrument_exchange", b"instrument_exchange", "ipo_date", b"ipo_date", "isin", b"isin", "issue_size", b"issue_size", "issue_size_plan", b"issue_size_plan", "klong", b"klong", "kshort", b"kshort", "liquidity_flag", b"liquidity_flag", "lot", b"lot", "min_price_increment", b"min_price_increment", "name", b"name", "nominal", b"nominal", "otc_flag", b"otc_flag", "position_uid", b"position_uid", "real_exchange", b"real_exchange", "required_tests", b"required_tests", "sector", b"sector", "sell_available_flag", b"sell_available_flag", "share_type", b"share_type", "short_enabled_flag", b"short_enabled_flag", "ticker", b"ticker", "trading_status", b"trading_status", "uid", b"uid", "weekend_flag", b"weekend_flag"]) -> None: ...
 
 global___Share = Share
+
+@typing.final
+class StructuredNote(google.protobuf.message.Message):
+    """Объект передачи информации о структурной ноте."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _LogicPortfolio:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _LogicPortfolioEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StructuredNote._LogicPortfolio.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        LOGIC_PORTFOLIO_UNSPECIFIED: StructuredNote._LogicPortfolio.ValueType  # 0
+        """Стратегия портфеля не определена."""
+        LOGIC_PORTFOLIO_VOLATILITY: StructuredNote._LogicPortfolio.ValueType  # 1
+        """Волатильность."""
+        LOGIC_PORTFOLIO_CORRELATION: StructuredNote._LogicPortfolio.ValueType  # 2
+        """Корреляция."""
+
+    class LogicPortfolio(_LogicPortfolio, metaclass=_LogicPortfolioEnumTypeWrapper):
+        """Стратегия портфеля."""
+
+    LOGIC_PORTFOLIO_UNSPECIFIED: StructuredNote.LogicPortfolio.ValueType  # 0
+    """Стратегия портфеля не определена."""
+    LOGIC_PORTFOLIO_VOLATILITY: StructuredNote.LogicPortfolio.ValueType  # 1
+    """Волатильность."""
+    LOGIC_PORTFOLIO_CORRELATION: StructuredNote.LogicPortfolio.ValueType  # 2
+    """Корреляция."""
+
+    class _ObservationPrinciple:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _ObservationPrincipleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StructuredNote._ObservationPrinciple.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        OBSERVATION_PRINCIPLE_UNSPECIFIED: StructuredNote._ObservationPrinciple.ValueType  # 0
+        """Принцип наблюдений не определен."""
+        OBSERVATION_PRINCIPLE_WORST_BASIC_ASSET: StructuredNote._ObservationPrinciple.ValueType  # 1
+        """По худшему базовому активу."""
+        OBSERVATION_PRINCIPLE_BEST_BASIC_ASSET: StructuredNote._ObservationPrinciple.ValueType  # 2
+        """По лучшему базовому активу."""
+        OBSERVATION_PRINCIPLE_AVERAGE_OF_BASIC_ASSETS: StructuredNote._ObservationPrinciple.ValueType  # 3
+        """Среднее значение по базовым активам."""
+        OBSERVATION_PRINCIPLE_SINGLE_BASIC_ASSET_PERFORMANCE: StructuredNote._ObservationPrinciple.ValueType  # 4
+        """Динамика актива (только если у ноты один базовый актив)."""
+
+    class ObservationPrinciple(_ObservationPrinciple, metaclass=_ObservationPrincipleEnumTypeWrapper):
+        """Принцип наблюдений."""
+
+    OBSERVATION_PRINCIPLE_UNSPECIFIED: StructuredNote.ObservationPrinciple.ValueType  # 0
+    """Принцип наблюдений не определен."""
+    OBSERVATION_PRINCIPLE_WORST_BASIC_ASSET: StructuredNote.ObservationPrinciple.ValueType  # 1
+    """По худшему базовому активу."""
+    OBSERVATION_PRINCIPLE_BEST_BASIC_ASSET: StructuredNote.ObservationPrinciple.ValueType  # 2
+    """По лучшему базовому активу."""
+    OBSERVATION_PRINCIPLE_AVERAGE_OF_BASIC_ASSETS: StructuredNote.ObservationPrinciple.ValueType  # 3
+    """Среднее значение по базовым активам."""
+    OBSERVATION_PRINCIPLE_SINGLE_BASIC_ASSET_PERFORMANCE: StructuredNote.ObservationPrinciple.ValueType  # 4
+    """Динамика актива (только если у ноты один базовый актив)."""
+
+    class _YieldType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _YieldTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StructuredNote._YieldType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        YIELD_TYPE_UNSPECIFIED: StructuredNote._YieldType.ValueType  # 0
+        """Тип доходности не определен."""
+        YIELD_TYPE_GUARANTED_COUPON: StructuredNote._YieldType.ValueType  # 1
+        """Гарантированный купон."""
+        YIELD_TYPE_CONDITIONAL_COUPON: StructuredNote._YieldType.ValueType  # 2
+        """Условный купон."""
+        YIELD_TYPE_PARTICIPATION: StructuredNote._YieldType.ValueType  # 3
+        """Участие в росте."""
+
+    class YieldType(_YieldType, metaclass=_YieldTypeEnumTypeWrapper):
+        """Тип доходности."""
+
+    YIELD_TYPE_UNSPECIFIED: StructuredNote.YieldType.ValueType  # 0
+    """Тип доходности не определен."""
+    YIELD_TYPE_GUARANTED_COUPON: StructuredNote.YieldType.ValueType  # 1
+    """Гарантированный купон."""
+    YIELD_TYPE_CONDITIONAL_COUPON: StructuredNote.YieldType.ValueType  # 2
+    """Условный купон."""
+    YIELD_TYPE_PARTICIPATION: StructuredNote.YieldType.ValueType  # 3
+    """Участие в росте."""
+
+    @typing.final
+    class BasicAsset(google.protobuf.message.Message):
+        """Базовый актив."""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        UID_FIELD_NUMBER: builtins.int
+        TYPE_FIELD_NUMBER: builtins.int
+        INITIAL_PRICE_FIELD_NUMBER: builtins.int
+        uid: builtins.str
+        """Уникальный идентификатор базового актива."""
+        type: global___AssetType.ValueType
+        """Тип базового актива."""
+        @property
+        def initial_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Начальная цена базового актива."""
+
+        def __init__(
+            self,
+            *,
+            uid: builtins.str = ...,
+            type: global___AssetType.ValueType = ...,
+            initial_price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["initial_price", b"initial_price"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["initial_price", b"initial_price", "type", b"type", "uid", b"uid"]) -> None: ...
+
+    @typing.final
+    class Yield(google.protobuf.message.Message):
+        """Доходность."""
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        TYPE_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        type: global___StructuredNote.YieldType.ValueType
+        """Тип доходности."""
+        @property
+        def value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+            """Значение доходности."""
+
+        def __init__(
+            self,
+            *,
+            type: global___StructuredNote.YieldType.ValueType = ...,
+            value: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["type", b"type", "value", b"value"]) -> None: ...
+
+    UID_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    ISIN_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    ASSET_UID_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
+    LOT_FIELD_NUMBER: builtins.int
+    NOMINAL_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
+    MATURITY_DATE_FIELD_NUMBER: builtins.int
+    PLACEMENT_DATE_FIELD_NUMBER: builtins.int
+    ISSUE_KIND_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_PLAN_FIELD_NUMBER: builtins.int
+    DLONG_CLIENT_FIELD_NUMBER: builtins.int
+    DSHORT_CLIENT_FIELD_NUMBER: builtins.int
+    SHORT_ENABLED_FLAG_FIELD_NUMBER: builtins.int
+    EXCHANGE_FIELD_NUMBER: builtins.int
+    TRADING_STATUS_FIELD_NUMBER: builtins.int
+    API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    BUY_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    LIMIT_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    MARKET_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    BESTPRICE_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    WEEKEND_FLAG_FIELD_NUMBER: builtins.int
+    LIQUIDITY_FLAG_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FOR_QUAL_INVESTOR_FLAG_FIELD_NUMBER: builtins.int
+    PAWNSHOP_LIST_FLAG_FIELD_NUMBER: builtins.int
+    REAL_EXCHANGE_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    BORROW_NAME_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    LOGIC_PORTFOLIO_FIELD_NUMBER: builtins.int
+    ASSET_TYPE_FIELD_NUMBER: builtins.int
+    BASIC_ASSETS_FIELD_NUMBER: builtins.int
+    SAFETY_BARRIER_FIELD_NUMBER: builtins.int
+    COUPON_PERIOD_BASE_FIELD_NUMBER: builtins.int
+    OBSERVATION_PRINCIPLE_FIELD_NUMBER: builtins.int
+    OBSERVATION_FREQUENCY_FIELD_NUMBER: builtins.int
+    INITIAL_PRICE_FIXING_DATE_FIELD_NUMBER: builtins.int
+    YIELD_FIELD_NUMBER: builtins.int
+    COUPON_SAVING_FLAG_FIELD_NUMBER: builtins.int
+    SECTOR_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_NAME_FIELD_NUMBER: builtins.int
+    LOGO_NAME_FIELD_NUMBER: builtins.int
+    REQUIRED_TESTS_FIELD_NUMBER: builtins.int
+    uid: builtins.str
+    """Уникальный идентификатор инструмента."""
+    figi: builtins.str
+    """FIGI-идентификатор инструмента."""
+    ticker: builtins.str
+    """Тикер инструмента."""
+    class_code: builtins.str
+    """Класс-код (секция торгов)."""
+    isin: builtins.str
+    """ISIN-идентификатор инструмента."""
+    name: builtins.str
+    """Название инструмента."""
+    asset_uid: builtins.str
+    """Уникальный идентификатор актива."""
+    position_uid: builtins.str
+    """Уникальный идентификатор позиции."""
+    lot: builtins.int
+    """Лотность инструмента."""
+    currency: builtins.str
+    """Валюта расчетов."""
+    issue_kind: builtins.str
+    """Форма выпуска."""
+    issue_size: builtins.int
+    """Размер выпуска."""
+    issue_size_plan: builtins.int
+    """Плановый размер выпуска."""
+    short_enabled_flag: builtins.bool
+    """Признак доступности для операций в шорт."""
+    exchange: builtins.str
+    """Торговая площадка (секция биржи)."""
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
+    """Текущий режим торгов инструмента."""
+    api_trade_available_flag: builtins.bool
+    """Признак доступности торгов по бумаге через API."""
+    buy_available_flag: builtins.bool
+    """Признак доступности для покупки."""
+    sell_available_flag: builtins.bool
+    """Признак доступности для продажи."""
+    limit_order_available_flag: builtins.bool
+    """Признак доступности выставления лимитной заявки по инструменту."""
+    market_order_available_flag: builtins.bool
+    """Признак доступности выставления рыночной заявки по инструменту."""
+    bestprice_order_available_flag: builtins.bool
+    """Признак доступности выставления bestprice заявки по инструменту."""
+    weekend_flag: builtins.bool
+    """Флаг отображающий доступность торговли инструментом по выходным."""
+    liquidity_flag: builtins.bool
+    """Флаг достаточной ликвидности."""
+    for_iis_flag: builtins.bool
+    """Возможность покупки/продажи на ИИС."""
+    for_qual_investor_flag: builtins.bool
+    """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+    pawnshop_list_flag: builtins.bool
+    """Признак ФИ, включенного в ломбардный список."""
+    real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType
+    """Реальная площадка исполнения расчётов."""
+    borrow_name: builtins.str
+    """Название заемщика."""
+    type: builtins.str
+    """Тип структурной ноты."""
+    logic_portfolio: global___StructuredNote.LogicPortfolio.ValueType
+    """Стратегия портфеля."""
+    asset_type: global___AssetType.ValueType
+    """Тип базового актива."""
+    coupon_period_base: builtins.str
+    """Базис расчета НКД."""
+    observation_principle: global___StructuredNote.ObservationPrinciple.ValueType
+    """Принцип наблюдений."""
+    observation_frequency: builtins.str
+    """Частота наблюдений."""
+    coupon_saving_flag: builtins.bool
+    """Признак сохранения купонов."""
+    sector: builtins.str
+    """Сектор экономики."""
+    country_of_risk: builtins.str
+    """Код страны рисков."""
+    country_of_risk_name: builtins.str
+    """Наименование страны рисков."""
+    logo_name: builtins.str
+    """Имя файла логотипа эмитента."""
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Номинал."""
+
+    @property
+    def maturity_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата погашения облигации в формате UTC."""
+
+    @property
+    def placement_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата размещения в формате UTC."""
+
+    @property
+    def dlong_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска клиента по инструменту лонг."""
+
+    @property
+    def dshort_client(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска клиента по инструменту шорт."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+
+    @property
+    def basic_assets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StructuredNote.BasicAsset]:
+        """Базовые активы, входящие в ноту."""
+
+    @property
+    def safety_barrier(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Барьер сохранности (в процентах)."""
+
+    @property
+    def initial_price_fixing_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата фиксации цен базовых активов."""
+
+    @property
+    def required_tests(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Тесты, которые необходимо пройти клиенту, чтобы совершать покупки по бумаге."""
+
+    def __init__(
+        self,
+        *,
+        uid: builtins.str = ...,
+        figi: builtins.str = ...,
+        ticker: builtins.str = ...,
+        class_code: builtins.str = ...,
+        isin: builtins.str = ...,
+        name: builtins.str = ...,
+        asset_uid: builtins.str = ...,
+        position_uid: builtins.str = ...,
+        min_price_increment: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        lot: builtins.int = ...,
+        nominal: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        currency: builtins.str = ...,
+        maturity_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        placement_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        issue_kind: builtins.str = ...,
+        issue_size: builtins.int = ...,
+        issue_size_plan: builtins.int = ...,
+        dlong_client: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        dshort_client: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        short_enabled_flag: builtins.bool = ...,
+        exchange: builtins.str = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        api_trade_available_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        limit_order_available_flag: builtins.bool = ...,
+        market_order_available_flag: builtins.bool = ...,
+        bestprice_order_available_flag: builtins.bool = ...,
+        weekend_flag: builtins.bool = ...,
+        liquidity_flag: builtins.bool = ...,
+        for_iis_flag: builtins.bool = ...,
+        for_qual_investor_flag: builtins.bool = ...,
+        pawnshop_list_flag: builtins.bool = ...,
+        real_exchange: tinkoff.invest.grpc.common_pb2.RealExchange.ValueType = ...,
+        first_1min_candle_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        first_1day_candle_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        borrow_name: builtins.str = ...,
+        type: builtins.str = ...,
+        logic_portfolio: global___StructuredNote.LogicPortfolio.ValueType = ...,
+        asset_type: global___AssetType.ValueType = ...,
+        basic_assets: collections.abc.Iterable[global___StructuredNote.BasicAsset] | None = ...,
+        safety_barrier: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        coupon_period_base: builtins.str = ...,
+        observation_principle: global___StructuredNote.ObservationPrinciple.ValueType = ...,
+        observation_frequency: builtins.str = ...,
+        initial_price_fixing_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        coupon_saving_flag: builtins.bool = ...,
+        sector: builtins.str = ...,
+        country_of_risk: builtins.str = ...,
+        country_of_risk_name: builtins.str = ...,
+        logo_name: builtins.str = ...,
+        required_tests: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["dlong_client", b"dlong_client", "dshort_client", b"dshort_client", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "initial_price_fixing_date", b"initial_price_fixing_date", "maturity_date", b"maturity_date", "min_price_increment", b"min_price_increment", "nominal", b"nominal", "placement_date", b"placement_date", "safety_barrier", b"safety_barrier"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["api_trade_available_flag", b"api_trade_available_flag", "asset_type", b"asset_type", "asset_uid", b"asset_uid", "basic_assets", b"basic_assets", "bestprice_order_available_flag", b"bestprice_order_available_flag", "borrow_name", b"borrow_name", "buy_available_flag", b"buy_available_flag", "class_code", b"class_code", "country_of_risk", b"country_of_risk", "country_of_risk_name", b"country_of_risk_name", "coupon_period_base", b"coupon_period_base", "coupon_saving_flag", b"coupon_saving_flag", "currency", b"currency", "dlong_client", b"dlong_client", "dshort_client", b"dshort_client", "exchange", b"exchange", "figi", b"figi", "first_1day_candle_date", b"first_1day_candle_date", "first_1min_candle_date", b"first_1min_candle_date", "for_iis_flag", b"for_iis_flag", "for_qual_investor_flag", b"for_qual_investor_flag", "initial_price_fixing_date", b"initial_price_fixing_date", "isin", b"isin", "issue_kind", b"issue_kind", "issue_size", b"issue_size", "issue_size_plan", b"issue_size_plan", "limit_order_available_flag", b"limit_order_available_flag", "liquidity_flag", b"liquidity_flag", "logic_portfolio", b"logic_portfolio", "logo_name", b"logo_name", "lot", b"lot", "market_order_available_flag", b"market_order_available_flag", "maturity_date", b"maturity_date", "min_price_increment", b"min_price_increment", "name", b"name", "nominal", b"nominal", "observation_frequency", b"observation_frequency", "observation_principle", b"observation_principle", "pawnshop_list_flag", b"pawnshop_list_flag", "placement_date", b"placement_date", "position_uid", b"position_uid", "real_exchange", b"real_exchange", "required_tests", b"required_tests", "safety_barrier", b"safety_barrier", "sector", b"sector", "sell_available_flag", b"sell_available_flag", "short_enabled_flag", b"short_enabled_flag", "ticker", b"ticker", "trading_status", b"trading_status", "type", b"type", "uid", b"uid", "weekend_flag", b"weekend_flag", "yield", b"yield"]) -> None: ...
+
+global___StructuredNote = StructuredNote
 
 @typing.final
 class GetAccruedInterestsRequest(google.protobuf.message.Message):
@@ -5615,6 +6035,10 @@ class GetInsiderDealsResponse(google.protobuf.message.Message):
         """Покупка."""
         TRADE_DIRECTION_SELL: GetInsiderDealsResponse._TradeDirection.ValueType  # 2
         """Продажа."""
+        TRADE_DIRECTION_INCREASE: GetInsiderDealsResponse._TradeDirection.ValueType  # 3
+        """Увеличение доли."""
+        TRADE_DIRECTION_DECREASE: GetInsiderDealsResponse._TradeDirection.ValueType  # 4
+        """Уменьшение доли."""
 
     class TradeDirection(_TradeDirection, metaclass=_TradeDirectionEnumTypeWrapper): ...
     TRADE_DIRECTION_UNSPECIFIED: GetInsiderDealsResponse.TradeDirection.ValueType  # 0
@@ -5623,6 +6047,10 @@ class GetInsiderDealsResponse(google.protobuf.message.Message):
     """Покупка."""
     TRADE_DIRECTION_SELL: GetInsiderDealsResponse.TradeDirection.ValueType  # 2
     """Продажа."""
+    TRADE_DIRECTION_INCREASE: GetInsiderDealsResponse.TradeDirection.ValueType  # 3
+    """Увеличение доли."""
+    TRADE_DIRECTION_DECREASE: GetInsiderDealsResponse.TradeDirection.ValueType  # 4
+    """Уменьшение доли."""
 
     @typing.final
     class InsiderDeal(google.protobuf.message.Message):

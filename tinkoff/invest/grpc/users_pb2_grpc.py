@@ -36,6 +36,16 @@ class UsersServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoResponse.FromString,
                 )
+        self.GetBankAccounts = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.UsersService/GetBankAccounts',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsResponse.FromString,
+                )
+        self.CurrencyTransfer = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.UsersService/CurrencyTransfer',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferResponse.FromString,
+                )
 
 
 class UsersServiceServicer(object):
@@ -75,6 +85,22 @@ class UsersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetBankAccounts(self, request, context):
+        """GetBankAccounts — банковские счета пользователя
+        Получить список счетов пользователя, в том числе и банковских.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CurrencyTransfer(self, request, context):
+        """CurrencyTransfer — перевод денежных средств между счетами
+        Перевести денежные средства между брокерскими счетами
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -97,6 +123,16 @@ def add_UsersServiceServicer_to_server(servicer, server):
                     servicer.GetInfo,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoResponse.SerializeToString,
+            ),
+            'GetBankAccounts': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBankAccounts,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsResponse.SerializeToString,
+            ),
+            'CurrencyTransfer': grpc.unary_unary_rpc_method_handler(
+                    servicer.CurrencyTransfer,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -175,5 +211,39 @@ class UsersService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.UsersService/GetInfo',
             tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetInfoResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBankAccounts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.UsersService/GetBankAccounts',
+            tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_users__pb2.GetBankAccountsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CurrencyTransfer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.UsersService/CurrencyTransfer',
+            tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_users__pb2.CurrencyTransferResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

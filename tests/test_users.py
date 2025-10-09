@@ -32,3 +32,13 @@ def test_get_user_tariff(users_service):
 def test_get_info(users_service):
     response = users_service.get_info()  # noqa: F841
     users_service.get_info.assert_called_once()
+
+
+def test_get_bank_accounts(users_service):
+    users_service.get_bank_accounts()
+    users_service.get_bank_accounts.assert_called_once()
+
+
+def test_currency_transfer(users_service):
+    response = users_service.currency_transfer(request=mock.Mock())  # noqa: F841
+    users_service.currency_transfer.assert_called_once()

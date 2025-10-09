@@ -54,6 +54,8 @@ from .schemas import (
     CreateFavoriteGroupResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    CurrencyTransferRequest,
+    CurrencyTransferResponse,
     DeleteFavoriteGroupRequest,
     DeleteFavoriteGroupResponse,
     EditFavoritesActionType,
@@ -78,6 +80,8 @@ from .schemas import (
     GetAssetFundamentalsResponse,
     GetAssetReportsRequest,
     GetAssetReportsResponse,
+    GetBankAccountsRequest,
+    GetBankAccountsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
     GetBondEventsRequest,
@@ -204,6 +208,8 @@ from .schemas import (
     StopOrderExpirationType,
     StopOrderStatusOption,
     StopOrderType,
+    StructuredNoteResponse,
+    StructuredNotesResponse,
     TakeProfitType,
     TimeInForceType,
     TradesStreamRequest,
@@ -1048,6 +1054,34 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetInsiderDeals")
         return _grpc_helpers.protobuf_to_dataclass(response, GetInsiderDealsResponse)
 
+    @handle_aio_request_error("StructuredNoteBy")
+    async def get_structured_note_by(
+        self, request: InstrumentRequest
+    ) -> StructuredNoteResponse:
+        response_coro = self.stub.StructuredNoteBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "StructuredNoteBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, StructuredNoteResponse)
+
+    @handle_aio_request_error("StructuredNotes")
+    async def get_structured_notes(
+        self, request: InstrumentsRequest
+    ) -> StructuredNotesResponse:
+        response_coro = self.stub.StructuredNotes(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "StructuredNotes")
+        return _grpc_helpers.protobuf_to_dataclass(response, StructuredNotesResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -1759,6 +1793,33 @@ class UsersService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetInfo")
         return _grpc_helpers.protobuf_to_dataclass(response, GetInfoResponse)
 
+    @handle_aio_request_error("GetBankAccounts")
+    async def get_bank_accounts(self) -> GetBankAccountsResponse:
+        request = GetBankAccountsRequest()
+        response_coro = self.stub.GetBankAccounts(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, users_pb2.GetBankAccountsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetBankAccounts")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBankAccountsResponse)
+
+    @handle_aio_request_error("CurrencyTransfer")
+    async def currency_transfer(
+        self, request: CurrencyTransferRequest
+    ) -> CurrencyTransferResponse:
+        response_coro = self.stub.CurrencyTransfer(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, users_pb2.CurrencyTransferRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "CurrencyTransfer")
+        return _grpc_helpers.protobuf_to_dataclass(response, CurrencyTransferResponse)
+
 
 class SandboxService(_grpc_helpers.Service):
     _stub_factory = sandbox_pb2_grpc.SandboxServiceStub
@@ -2074,6 +2135,54 @@ class SandboxService(_grpc_helpers.Service):
             await get_tracking_id_from_coro(response_coro), "PostSandboxOrderAsync"
         )
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderAsyncResponse)
+
+    @handle_aio_request_error("PostSandboxStopOrder")
+    async def post_sandbox_stop_order(
+        self, *, request: "PostStopOrderRequest"
+    ) -> PostStopOrderResponse:
+        response_coro = self.stub.PostSandboxStopOrder(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, stoporders_pb2.PostStopOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "PostSandboxStopOrder"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, PostStopOrderResponse)
+
+    @handle_aio_request_error("GetSandboxStopOrders")
+    async def get_sandbox_stop_orders(
+        self, *, request: "GetStopOrdersRequest"
+    ) -> GetStopOrdersResponse:
+        response_coro = self.stub.GetSandboxStopOrders(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, stoporders_pb2.GetStopOrdersRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetSandboxStopOrders"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, GetStopOrdersResponse)
+
+    @handle_aio_request_error("CancelSandboxStopOrder")
+    async def cancel_sandbox_stop_order(
+        self, *, request: "CancelStopOrderRequest"
+    ) -> CancelStopOrderResponse:
+        response_coro = self.stub.CancelSandboxStopOrder(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, stoporders_pb2.CancelStopOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "CancelSandboxStopOrder"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, CancelStopOrderResponse)
 
 
 class StopOrdersService(_grpc_helpers.Service):

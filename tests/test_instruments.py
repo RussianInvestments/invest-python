@@ -1,15 +1,29 @@
 # pylint: disable=redefined-outer-name,unused-variable
-
+import os
 from unittest import mock
 
 import pytest
 
+from tinkoff.invest import (
+    Client,
+    InstrumentIdType,
+    InstrumentRequest,
+    InstrumentsRequest,
+    InstrumentStatus,
+)
+from tinkoff.invest.schemas import StructuredNote
 from tinkoff.invest.services import InstrumentsService
 
 
 @pytest.fixture()
 def instruments_service():
     return mock.MagicMock(spec=InstrumentsService)
+
+
+@pytest.fixture()
+def instruments_client_service():
+    with Client(token=os.environ["INVEST_SANDBOX_TOKEN"]) as client:
+        yield client.instruments
 
 
 def test_trading_schedules(instruments_service):
@@ -189,3 +203,19 @@ def test_get_insider_deals(instruments_service):
     request = mock.Mock()
     response = instruments_service.get_insider_deals(request=request)  # noqa: F841
     instruments_service.get_insider_deals.assert_called_once_with(request=request)
+
+
+def test_structured_notes(instruments_client_service):
+    request = InstrumentsRequest(
+        instrument_status=InstrumentStatus.INSTRUMENT_STATUS_ALL
+    )
+    response = instruments_client_service.structured_notes(request=request)
+    assert len(response.instruments) > 0
+
+
+def test_structured_notes_by(instruments_client_service):
+    request = InstrumentRequest(
+        id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI, id="BBG012S2DCJ8"
+    )
+    response = instruments_client_service.structured_note_by(request=request)
+    assert isinstance(response.instrument, StructuredNote)
