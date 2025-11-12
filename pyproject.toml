@@ -24,10 +24,20 @@ protobuf = "^4.25.1"
 python-dateutil = "^2.8.2"
 tinkoff = "^0.1.1"
 deprecation = "^2.1.0"
-matplotlib = {version = "^3.5.1", optional = true}
-mplfinance = {version = "^0.12.8-beta.9", optional = true}
-numpy = {version = "^1.22.2", optional = true}
-pandas = {version = ">=1.4.0", optional = true}
+matplotlib = [
+  {version = "^3.5.1", optional = true, python = "<3.12"},
+  {version = ">=3.8",  optional = true, python = ">=3.12"}
+]
+mplfinance = {version = "^0.12.8-beta.9", optional = true}  # обычно ок и с pandas 2.x
+numpy = [
+  {version = "^1.22.2", optional = true, python = "<3.12"},
+  {version = ">=1.26,<3", optional = true, python = ">=3.12"}  # можно и ">=2" если хочешь
+]
+pandas = [
+  {version = ">=1.4.0,<2.2", optional = true, python = "<3.12"},
+  {version = ">=2.2",        optional = true, python = ">=3.12"}
+]
+iprotopy = "^0.3.0"
 
 [tool.poetry.extras]
 all = ["pandas", "numpy", "matplotlib", "mplfinance"]

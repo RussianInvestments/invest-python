@@ -96,3 +96,7 @@ gen-grpc:
 
 .PHONY: gen-client
 gen-client: download-protos gen-grpc
+
+gen-models:
+	$(POETRY_RUN) python -X utf8 -m scripts.generate_models
+	$(MAKE) format

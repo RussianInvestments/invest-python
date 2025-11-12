@@ -147,3 +147,6 @@ docs/CONTRIBUTING.md
 .idea
 .market_data_cache
 .DS_Store
+
+# Visual Studio Code
+.vscode/

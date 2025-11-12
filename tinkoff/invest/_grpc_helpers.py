@@ -22,6 +22,7 @@ from typing import (
 
 from google.protobuf import symbol_database
 from google.protobuf.timestamp_pb2 import Timestamp
+from iprotopy.convertion import PLACEHOLDER
 
 _sym_db = symbol_database.Default()
 NoneType = type(None)
@@ -59,8 +60,6 @@ TYPE_STRING = "string"
 TYPE_BYTES = "bytes"
 TYPE_MESSAGE = "message"
 TYPE_MAP = "map"
-
-PLACEHOLDER: Any = object()
 
 
 @dataclasses.dataclass(frozen=True)
@@ -428,31 +427,31 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
     return dataclass_type(**dataclass_dict)
 
 
-def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C901
+def dataclass_to_protobuf(dataclass_obj: Any, protobuf_obj: T) -> T:  # noqa:C901
     dataclass_type = type(dataclass_obj)
     dataclass_hints = get_type_hints(dataclass_type)
     if not dataclass_hints:
-        protobuff_obj.SetInParent()  # type:ignore
-        return protobuff_obj
+        protobuf_obj.SetInParent()  # type:ignore
+        return protobuf_obj
     for field_name, field_type in dataclass_hints.items():
         field_value = getattr(dataclass_obj, field_name)
         if field_value is PLACEHOLDER:
             continue
         origin = get_origin(field_type)
         if origin is None:
-            _update_field(field_type, protobuff_obj, field_name, field_value)
+            _update_field(field_type, protobuf_obj, field_name, field_value)
         elif origin == list:
             args = get_args(field_type)
             first_arg = args[0]
-            pb_value = getattr(protobuff_obj, field_name)
+            pb_value = getattr(protobuf_obj, field_name)
             if first_arg in PRIMITIVE_TYPES:
                 pb_value.extend(item for item in field_value)
             elif dataclasses.is_dataclass(first_arg):
-                descriptor = protobuff_obj.DESCRIPTOR  # type:ignore
+                descriptor = protobuf_obj.DESCRIPTOR  # type:ignore
                 field_descriptor = descriptor.fields_by_name[field_name].message_type
                 type_ = _sym_db.GetPrototype(field_descriptor)
                 pb_value.extend(
-                    dataclass_to_protobuff(item, type_()) for item in field_value
+                    dataclass_to_protobuf(item, type_()) for item in field_value
                 )
             elif issubclass(first_arg, Enum):
                 pb_value.extend(item.value for item in field_value)
@@ -468,32 +467,32 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
             if field_value is None:
                 pass  # just skip setting the field, since its set to None by default
             else:
-                _update_field(first_arg, protobuff_obj, field_name, field_value)
+                _update_field(first_arg, protobuf_obj, field_name, field_value)
         else:
             raise UnknownType(f"type {field_type} unknown")
 
-    return protobuff_obj
+    return protobuf_obj
 
 
 def _update_field(
-    field_type: Type[Any], protobuff_obj: Any, field_name: str, field_value: Any
+    field_type: Type[Any], protobuf_obj: Any, field_name: str, field_value: Any
 ) -> None:
     if field_type in PRIMITIVE_TYPES:
-        setattr(protobuff_obj, field_name, field_value)
+        setattr(protobuf_obj, field_name, field_value)
     elif issubclass(field_type, datetime):
         field_name_ = field_name
         if field_name == "from_":
             field_name_ = "from"
-        pb_value = getattr(protobuff_obj, field_name_)
+        pb_value = getattr(protobuf_obj, field_name_)
         seconds, nanos = datetime_to_ts(field_value)
         pb_value.seconds = seconds
         pb_value.nanos = nanos
     elif dataclasses.is_dataclass(field_type):
-        pb_value = getattr(protobuff_obj, field_name)
-        dataclass_to_protobuff(field_value, pb_value)
+        pb_value = getattr(protobuf_obj, field_name)
+        dataclass_to_protobuf(field_value, pb_value)
     elif issubclass(field_type, Enum):
         if isinstance(field_value, int):
             field_value = field_type(field_value)
-        setattr(protobuff_obj, field_name, field_value.value)
+        setattr(protobuf_obj, field_name, field_value.value)
     else:
         raise UnknownType(f"type {field_type} unknown")
