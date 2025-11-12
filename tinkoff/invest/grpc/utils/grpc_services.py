@@ -86,16 +86,20 @@ class Services:
         orders_service: OrdersService = self.orders
         stop_orders_service: StopOrdersService = self.stop_orders
 
-        orders_response = orders_service.get_orders(account_id=account_id)
+        orders_response = orders_service.get_orders(GetOrdersRequest(account_id=account_id))
         for order in orders_response.orders:
-            orders_service.cancel_order(account_id=account_id, order_id=order.order_id)
+            orders_service.cancel_order(CancelOrderRequest(account_id=account_id, order_id=order.order_id))
 
         stop_orders_response = stop_orders_service.get_stop_orders(
-            account_id=account_id
+            GetStopOrdersRequest(
+                account_id=account_id
+            )
         )
         for stop_order in stop_orders_response.stop_orders:
             stop_orders_service.cancel_stop_order(
-                account_id=account_id, stop_order_id=stop_order.stop_order_id
+                CancelStopOrderRequest(
+                    account_id=account_id, stop_order_id=stop_order.stop_order_id
+                )
             )
 
     # pylint:disable=too-many-nested-blocks
@@ -173,8 +177,8 @@ class AsyncServices:
         return AsyncMarketDataStreamManager(market_data_stream=self.market_data_stream)
 
     async def cancel_all_orders(self, account_id: AccountId) -> None:
-        orders_service: OrdersService = self.orders
-        stop_orders_service: StopOrdersService = self.stop_orders
+        orders_service: AsyncOrdersService = self.orders
+        stop_orders_service: AsyncStopOrdersService = self.stop_orders
 
         orders_response = await orders_service.get_orders(GetOrdersRequest(account_id=account_id))
         await asyncio.gather(

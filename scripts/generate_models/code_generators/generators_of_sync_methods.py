@@ -4,10 +4,10 @@ from ast import Call, Constant, Expr, FunctionDef, Load, Name
 
 from iprotopy.service_method_generator import (
     ServiceMethodGenerator as DefaultServiceMethodGenerator,
-    ServiceMethodStreamStreamFunctionGenerator as DefaultServiceMethodStreamStreamFunctionGenerator,
-    ServiceMethodStreamUnaryFunctionGenerator as DefaultServiceMethodStreamUnaryFunctionGenerator,
-    ServiceMethodUnaryStreamFunctionGenerator as DefaultServiceMethodUnaryStreamFunctionGenerator,
-    ServiceMethodUnaryUnaryFunctionGenerator as DefaultServiceMethodUnaryUnaryFunctionGenerator,
+    ServiceMethodStreamStreamFunctionGenerator as DefaultMethodStrmStrmFuncGenerator,
+    ServiceMethodStreamUnaryFunctionGenerator as DefaultMethodStrmUnrFuncGenerator,
+    ServiceMethodUnaryStreamFunctionGenerator as DefaultMethodUnrStrmFuncGenerator,
+    ServiceMethodUnaryUnaryFunctionGenerator as DefaultMethodUnrUnrFuncGenerator,
 )
 from proto_schema_parser.ast import Method
 
@@ -20,7 +20,7 @@ from scripts.generate_models.code_generators.base_generators import (
 
 class ServiceMethodUnaryUnaryFunctionGenerator(
     BaseSyncServiceAnyUnaryFunctionGenerator,
-    DefaultServiceMethodUnaryUnaryFunctionGenerator,
+    DefaultMethodUnrUnrFuncGenerator,
 ):
     def _get_function_body(self, method):
         body = super()._get_function_body(method)
@@ -44,21 +44,21 @@ class ServiceMethodUnaryUnaryFunctionGenerator(
 
 class ServiceMethodStreamUnaryFunctionGenerator(
     BaseSyncServiceAnyUnaryFunctionGenerator,
-    DefaultServiceMethodStreamUnaryFunctionGenerator,
+    DefaultMethodStrmUnrFuncGenerator,
 ):
     ...
 
 
 class ServiceMethodUnaryStreamFunctionGenerator(
     BaseSyncServiceAnyStreamFunctionGenerator,
-    DefaultServiceMethodUnaryStreamFunctionGenerator,
+    DefaultMethodUnrStrmFuncGenerator,
 ):
     ...
 
 
 class ServiceMethodStreamStreamFunctionGenerator(
     BaseSyncServiceAnyStreamFunctionGenerator,
-    DefaultServiceMethodStreamStreamFunctionGenerator,
+    DefaultMethodStrmStrmFuncGenerator,
 ):
     ...
 

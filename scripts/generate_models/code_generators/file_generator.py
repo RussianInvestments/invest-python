@@ -1,8 +1,7 @@
 import logging
-from ast import Module, stmt
+from ast import ClassDef, Module
 from pathlib import Path
 from types import NoneType
-from typing import List
 
 from iprotopy.domestic_importer import DomesticImporter
 from iprotopy.enum_generator import EnumGenerator
@@ -43,7 +42,6 @@ class SourceGenerator:
         self._proto_file = proto_file
         self._out_dir = out_dir
         self._pyfile = pyfile
-        self._body: List[stmt] = []
 
     def generate_source(self) -> Module:
         logger.debug(f"Generating source for {self._proto_file}")
@@ -52,25 +50,27 @@ class SourceGenerator:
 
         file: File = self._parser.parse(text)
 
+        enums: list[ClassDef] = []
+        messages: list[ClassDef] = []
+        services: list[ClassDef] = []
+
         for element in file.file_elements:
-            if isinstance(element, Message):
+            if isinstance(element, Enum):
+                proto_enum_processor = EnumGenerator(self._importer)
+                enums.append(proto_enum_processor.process_enum(element))
+            elif isinstance(element, Message):
                 proto_message_processor = MessageClassGenerator(
                     self._importer, self._type_mapper
                 )
-                self._body.append(
-                    proto_message_processor.process_proto_message(element)
-                )
+                messages.append(proto_message_processor.process_proto_message(element))
             elif isinstance(element, Service):
                 service_generator = ServiceGenerator(self._importer, self._pyfile)
-                self._body.append(service_generator.process_sync_service(element))
-                self._body.append(service_generator.process_aio_service(element))
-            elif isinstance(element, Enum):
-                proto_enum_processor = EnumGenerator(self._importer)
-                self._body.append(proto_enum_processor.process_enum(element))
+                services.append(service_generator.process_sync_service(element))
+                services.append(service_generator.process_aio_service(element))
             elif isinstance(
                 element, (Extension, Comment, ProtoImport, Option, Package, NoneType)
             ):
                 continue
             else:
                 raise NotImplementedError(f"Unknown element {element}")
-        return Module(body=self._body, type_ignores=[])
+        return Module(body=[*enums, *messages, *services], type_ignores=[])

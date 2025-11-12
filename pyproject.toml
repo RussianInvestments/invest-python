@@ -37,6 +37,7 @@ pandas = [
   {version = ">=1.4.0,<2.2", optional = true, python = "<3.12"},
   {version = ">=2.2",        optional = true, python = ">=3.12"}
 ]
+iprotopy = "^0.3.0"
 
 [tool.poetry.extras]
 all = ["pandas", "numpy", "matplotlib", "mplfinance"]
@@ -66,7 +67,6 @@ types-protobuf = "^4.23.0.4"
 types-python-dateutil = "^2.8.12"
 types-PyYAML = "^6.0.7"
 types-requests = "^2.27.7"
-iprotopy = "^0.3.0"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "1.5.3"

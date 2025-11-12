@@ -6,13 +6,13 @@ from typing import AsyncIterable, Iterable, List, Optional
 from iprotopy import dataclass_to_protobuf, protobuf_to_dataclass
 
 from base_service import BaseService
+from tinkoff.invest import _grpc_helpers
 from tinkoff.invest._errors import (
     handle_aio_request_error,
     handle_aio_request_error_gen,
     handle_request_error,
     handle_request_error_gen,
 )
-from tinkoff.invest._grpc_helpers import message_field
 from tinkoff.invest.grpc import operations_pb2, operations_pb2_grpc
 from tinkoff.invest.grpc.common import (
     InstrumentType,
@@ -26,471 +26,6 @@ from tinkoff.invest.logging import (
     get_tracking_id_from_coro,
     log_request,
 )
-
-
-class OperationsService(BaseService):
-    """/*С помощью методов сервиса можно получить:<br/><br/> **1**. Список операций по счету.<br/> **2**.
-                              Портфель по счету.<br/> **3**. Позиции ценных бумаг на счете.<br/> **4**.
-                              Доступный остаток для вывода средств.<br/> **5**. Различные отчеты.*/"""
-    _protobuf = operations_pb2
-    _protobuf_grpc = operations_pb2_grpc
-    _protobuf_stub = _protobuf_grpc.OperationsServiceStub
-
-    @handle_request_error('GetOperations')
-    def get_operations(self, request: 'OperationsRequest'
-        ) ->'OperationsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            OperationsRequest())
-        response, call = self._stub.GetOperations.with_call(request=
-            protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetOperations')
-        return protobuf_to_dataclass(response, OperationsResponse)
-
-    @handle_request_error('GetPortfolio')
-    def get_portfolio(self, request: 'PortfolioRequest') ->'PortfolioResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PortfolioRequest())
-        response, call = self._stub.GetPortfolio.with_call(request=
-            protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetPortfolio')
-        return protobuf_to_dataclass(response, PortfolioResponse)
-
-    @handle_request_error('GetPositions')
-    def get_positions(self, request: 'PositionsRequest') ->'PositionsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PositionsRequest())
-        response, call = self._stub.GetPositions.with_call(request=
-            protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetPositions')
-        return protobuf_to_dataclass(response, PositionsResponse)
-
-    @handle_request_error('GetWithdrawLimits')
-    def get_withdraw_limits(self, request: 'WithdrawLimitsRequest'
-        ) ->'WithdrawLimitsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            WithdrawLimitsRequest())
-        response, call = self._stub.GetWithdrawLimits.with_call(request=
-            protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetWithdrawLimits')
-        return protobuf_to_dataclass(response, WithdrawLimitsResponse)
-
-    @handle_request_error('GetBrokerReport')
-    def get_broker_report(self, request: 'BrokerReportRequest'
-        ) ->'BrokerReportResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            BrokerReportRequest())
-        response, call = self._stub.GetBrokerReport.with_call(request=
-            protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetBrokerReport')
-        return protobuf_to_dataclass(response, BrokerReportResponse)
-
-    @handle_request_error('GetDividendsForeignIssuer')
-    def get_dividends_foreign_issuer(self, request:
-        'GetDividendsForeignIssuerRequest'
-        ) ->'GetDividendsForeignIssuerResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            GetDividendsForeignIssuerRequest())
-        response, call = self._stub.GetDividendsForeignIssuer.with_call(request
-            =protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call),
-            'GetDividendsForeignIssuer')
-        return protobuf_to_dataclass(response,
-            GetDividendsForeignIssuerResponse)
-
-    @handle_request_error('GetOperationsByCursor')
-    def get_operations_by_cursor(self, request: 'GetOperationsByCursorRequest'
-        ) ->'GetOperationsByCursorResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            GetOperationsByCursorRequest())
-        response, call = self._stub.GetOperationsByCursor.with_call(request
-            =protobuf_request, metadata=self._metadata)
-        log_request(get_tracking_id_from_call(call), 'GetOperationsByCursor')
-        return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
-
-
-class AsyncOperationsService(BaseService):
-    """//GetOperations — список операций по счету"""
-    _protobuf = operations_pb2
-    _protobuf_grpc = operations_pb2_grpc
-    _protobuf_stub = _protobuf_grpc.OperationsServiceStub
-
-    @handle_aio_request_error('GetOperations')
-    async def get_operations(self, request: 'OperationsRequest'
-        ) ->'OperationsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            OperationsRequest())
-        response_coro = self._stub.GetOperations(request=protobuf_request,
-            metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetOperations')
-        return protobuf_to_dataclass(response, OperationsResponse)
-
-    @handle_aio_request_error('GetPortfolio')
-    async def get_portfolio(self, request: 'PortfolioRequest'
-        ) ->'PortfolioResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PortfolioRequest())
-        response_coro = self._stub.GetPortfolio(request=protobuf_request,
-            metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetPortfolio')
-        return protobuf_to_dataclass(response, PortfolioResponse)
-
-    @handle_aio_request_error('GetPositions')
-    async def get_positions(self, request: 'PositionsRequest'
-        ) ->'PositionsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PositionsRequest())
-        response_coro = self._stub.GetPositions(request=protobuf_request,
-            metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetPositions')
-        return protobuf_to_dataclass(response, PositionsResponse)
-
-    @handle_aio_request_error('GetWithdrawLimits')
-    async def get_withdraw_limits(self, request: 'WithdrawLimitsRequest'
-        ) ->'WithdrawLimitsResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            WithdrawLimitsRequest())
-        response_coro = self._stub.GetWithdrawLimits(request=
-            protobuf_request, metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetWithdrawLimits')
-        return protobuf_to_dataclass(response, WithdrawLimitsResponse)
-
-    @handle_aio_request_error('GetBrokerReport')
-    async def get_broker_report(self, request: 'BrokerReportRequest'
-        ) ->'BrokerReportResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            BrokerReportRequest())
-        response_coro = self._stub.GetBrokerReport(request=protobuf_request,
-            metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetBrokerReport')
-        return protobuf_to_dataclass(response, BrokerReportResponse)
-
-    @handle_aio_request_error('GetDividendsForeignIssuer')
-    async def get_dividends_foreign_issuer(self, request:
-        'GetDividendsForeignIssuerRequest'
-        ) ->'GetDividendsForeignIssuerResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            GetDividendsForeignIssuerRequest())
-        response_coro = self._stub.GetDividendsForeignIssuer(request=
-            protobuf_request, metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetDividendsForeignIssuer')
-        return protobuf_to_dataclass(response,
-            GetDividendsForeignIssuerResponse)
-
-    @handle_aio_request_error('GetOperationsByCursor')
-    async def get_operations_by_cursor(self, request:
-        'GetOperationsByCursorRequest') ->'GetOperationsByCursorResponse':
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            GetOperationsByCursorRequest())
-        response_coro = self._stub.GetOperationsByCursor(request=
-            protobuf_request, metadata=self._metadata)
-        response = await response_coro
-        log_request(await get_tracking_id_from_coro(response_coro),
-            'GetOperationsByCursor')
-        return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
-
-
-class OperationsStreamService(BaseService):
-    """//PortfolioStream — стрим обновлений портфеля"""
-    _protobuf = operations_pb2
-    _protobuf_grpc = operations_pb2_grpc
-    _protobuf_stub = _protobuf_grpc.OperationsStreamServiceStub
-
-    @handle_request_error_gen('PortfolioStream')
-    def portfolio_stream(self, request: 'PortfolioStreamRequest') ->Iterable[
-        'PortfolioStreamResponse']:
-        for response in self._stub.PortfolioStream(request=
-            dataclass_to_protobuf(request, self._protobuf.
-            PortfolioStreamRequest()), metadata=self._metadata):
-            yield protobuf_to_dataclass(response, PortfolioStreamResponse)
-
-    @handle_request_error_gen('PositionsStream')
-    def positions_stream(self, request: 'PositionsStreamRequest') ->Iterable[
-        'PositionsStreamResponse']:
-        for response in self._stub.PositionsStream(request=
-            dataclass_to_protobuf(request, self._protobuf.
-            PositionsStreamRequest()), metadata=self._metadata):
-            yield protobuf_to_dataclass(response, PositionsStreamResponse)
-
-
-class AsyncOperationsStreamService(BaseService):
-    _protobuf = operations_pb2
-    _protobuf_grpc = operations_pb2_grpc
-    _protobuf_stub = _protobuf_grpc.OperationsStreamServiceStub
-
-    @handle_aio_request_error_gen('PortfolioStream')
-    async def portfolio_stream(self, request: 'PortfolioStreamRequest'
-        ) ->AsyncIterable['PortfolioStreamResponse']:
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PortfolioStreamRequest())
-        async for response in self._stub.PortfolioStream(request=
-            protobuf_request, metadata=self._metadata):(yield
-            protobuf_to_dataclass(response, PortfolioStreamResponse))
-
-    @handle_aio_request_error_gen('PositionsStream')
-    async def positions_stream(self, request: 'PositionsStreamRequest'
-        ) ->AsyncIterable['PositionsStreamResponse']:
-        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
-            PositionsStreamRequest())
-        async for response in self._stub.PositionsStream(request=
-            protobuf_request, metadata=self._metadata):(yield
-            protobuf_to_dataclass(response, PositionsStreamResponse))
-
-
-@dataclass
-class OperationsRequest:
-    account_id: str = message_field(1)
-    from_: Optional[datetime] = message_field(2, optional=True)
-    to: Optional[datetime] = message_field(3, optional=True)
-    state: Optional['OperationState'] = message_field(4, optional=True)
-    figi: Optional[str] = message_field(5, optional=True)
-
-
-@dataclass
-class OperationsResponse:
-    operations: List['Operation'] = message_field(1)
-
-
-@dataclass
-class Operation:
-    id: str = message_field(1)
-    parent_operation_id: str = message_field(2)
-    currency: str = message_field(3)
-    payment: 'MoneyValue' = message_field(4)
-    price: 'MoneyValue' = message_field(5)
-    state: 'OperationState' = message_field(6)
-    quantity: int = message_field(7)
-    quantity_rest: int = message_field(8)
-    figi: str = message_field(9)
-    instrument_type: str = message_field(10)
-    date: datetime = message_field(11)
-    type: str = message_field(12)
-    operation_type: 'OperationType' = message_field(13)
-    trades: List['OperationTrade'] = message_field(14)
-    asset_uid: str = message_field(16)
-    position_uid: str = message_field(17)
-    instrument_uid: str = message_field(18)
-    child_operations: List['ChildOperationItem'] = message_field(19)
-
-
-@dataclass
-class OperationTrade:
-    trade_id: str = message_field(1)
-    date_time: datetime = message_field(2)
-    quantity: int = message_field(3)
-    price: 'MoneyValue' = message_field(4)
-
-
-@dataclass
-class PortfolioRequest:
-    account_id: str = message_field(1)
-    currency: Optional['CurrencyRequest'] = message_field(2, optional=True)
-
-
-    class CurrencyRequest(IntEnum):
-        RUB = 0
-        USD = 1
-        EUR = 2
-
-
-@dataclass
-class PortfolioResponse:
-    total_amount_shares: 'MoneyValue' = message_field(1)
-    total_amount_bonds: 'MoneyValue' = message_field(2)
-    total_amount_etf: 'MoneyValue' = message_field(3)
-    total_amount_currencies: 'MoneyValue' = message_field(4)
-    total_amount_futures: 'MoneyValue' = message_field(5)
-    expected_yield: 'Quotation' = message_field(6)
-    positions: List['PortfolioPosition'] = message_field(7)
-    account_id: str = message_field(8)
-    total_amount_options: 'MoneyValue' = message_field(9)
-    total_amount_sp: 'MoneyValue' = message_field(10)
-    total_amount_portfolio: 'MoneyValue' = message_field(11)
-    virtual_positions: List['VirtualPortfolioPosition'] = message_field(12)
-    daily_yield: 'MoneyValue' = message_field(15)
-    daily_yield_relative: 'Quotation' = message_field(16)
-
-
-@dataclass
-class PositionsRequest:
-    account_id: str = message_field(1)
-
-
-@dataclass
-class PositionsResponse:
-    money: List['MoneyValue'] = message_field(1)
-    blocked: List['MoneyValue'] = message_field(2)
-    securities: List['PositionsSecurities'] = message_field(3)
-    limits_loading_in_progress: bool = message_field(4)
-    futures: List['PositionsFutures'] = message_field(5)
-    options: List['PositionsOptions'] = message_field(6)
-    account_id: str = message_field(15)
-
-
-@dataclass
-class WithdrawLimitsRequest:
-    account_id: str = message_field(1)
-
-
-@dataclass
-class WithdrawLimitsResponse:
-    money: List['MoneyValue'] = message_field(1)
-    blocked: List['MoneyValue'] = message_field(2)
-    blocked_guarantee: List['MoneyValue'] = message_field(3)
-
-
-@dataclass
-class PortfolioPosition:
-    figi: str = message_field(1)
-    instrument_type: str = message_field(2)
-    quantity: 'Quotation' = message_field(3)
-    average_position_price: 'MoneyValue' = message_field(4)
-    expected_yield: 'Quotation' = message_field(5)
-    current_nkd: 'MoneyValue' = message_field(6)
-    average_position_price_pt: 'Quotation' = message_field(7)
-    current_price: 'MoneyValue' = message_field(8)
-    average_position_price_fifo: 'MoneyValue' = message_field(9)
-    quantity_lots: 'Quotation' = message_field(10)
-    blocked: bool = message_field(21)
-    blocked_lots: 'Quotation' = message_field(22)
-    position_uid: str = message_field(24)
-    instrument_uid: str = message_field(25)
-    var_margin: 'MoneyValue' = message_field(26)
-    expected_yield_fifo: 'Quotation' = message_field(27)
-    daily_yield: 'MoneyValue' = message_field(31)
-    ticker: str = message_field(32)
-
-
-@dataclass
-class VirtualPortfolioPosition:
-    position_uid: str = message_field(1)
-    instrument_uid: str = message_field(2)
-    figi: str = message_field(3)
-    instrument_type: str = message_field(4)
-    quantity: 'Quotation' = message_field(5)
-    average_position_price: 'MoneyValue' = message_field(6)
-    expected_yield: 'Quotation' = message_field(7)
-    expected_yield_fifo: 'Quotation' = message_field(8)
-    expire_date: datetime = message_field(9)
-    current_price: 'MoneyValue' = message_field(10)
-    average_position_price_fifo: 'MoneyValue' = message_field(11)
-    daily_yield: 'MoneyValue' = message_field(31)
-    ticker: str = message_field(32)
-
-
-@dataclass
-class PositionsSecurities:
-    figi: str = message_field(1)
-    blocked: int = message_field(2)
-    balance: int = message_field(3)
-    position_uid: str = message_field(4)
-    instrument_uid: str = message_field(5)
-    ticker: str = message_field(6)
-    exchange_blocked: bool = message_field(11)
-    instrument_type: str = message_field(16)
-
-
-@dataclass
-class PositionsFutures:
-    figi: str = message_field(1)
-    blocked: int = message_field(2)
-    balance: int = message_field(3)
-    position_uid: str = message_field(4)
-    instrument_uid: str = message_field(5)
-    ticker: str = message_field(6)
-
-
-@dataclass
-class PositionsOptions:
-    position_uid: str = message_field(1)
-    instrument_uid: str = message_field(2)
-    ticker: str = message_field(3)
-    blocked: int = message_field(11)
-    balance: int = message_field(21)
-
-
-@dataclass
-class BrokerReportRequest:
-    generate_broker_report_request: Optional['GenerateBrokerReportRequest'
-        ] = message_field(1, optional=True)
-    get_broker_report_request: Optional['GetBrokerReportRequest'
-        ] = message_field(2, optional=True)
-
-
-@dataclass
-class BrokerReportResponse:
-    generate_broker_report_response: Optional['GenerateBrokerReportResponse'
-        ] = message_field(1, optional=True)
-    get_broker_report_response: Optional['GetBrokerReportResponse'
-        ] = message_field(2, optional=True)
-
-
-@dataclass
-class GenerateBrokerReportRequest:
-    account_id: str = message_field(1)
-    from_: datetime = message_field(2)
-    to: datetime = message_field(3)
-
-
-@dataclass
-class GenerateBrokerReportResponse:
-    task_id: str = message_field(1)
-
-
-@dataclass
-class GetBrokerReportRequest:
-    task_id: str = message_field(1)
-    page: Optional[int] = message_field(2, optional=True)
-
-
-@dataclass
-class GetBrokerReportResponse:
-    broker_report: List['BrokerReport'] = message_field(1)
-    itemsCount: int = message_field(2)
-    pagesCount: int = message_field(3)
-    page: int = message_field(4)
-
-
-@dataclass
-class BrokerReport:
-    trade_id: str = message_field(1)
-    order_id: str = message_field(2)
-    figi: str = message_field(3)
-    execute_sign: str = message_field(4)
-    trade_datetime: datetime = message_field(5)
-    exchange: str = message_field(6)
-    class_code: str = message_field(7)
-    direction: str = message_field(8)
-    name: str = message_field(9)
-    ticker: str = message_field(10)
-    price: 'MoneyValue' = message_field(11)
-    quantity: int = message_field(12)
-    order_amount: 'MoneyValue' = message_field(13)
-    aci_value: 'Quotation' = message_field(14)
-    total_order_amount: 'MoneyValue' = message_field(15)
-    broker_commission: 'MoneyValue' = message_field(16)
-    exchange_commission: 'MoneyValue' = message_field(17)
-    exchange_clearing_commission: 'MoneyValue' = message_field(18)
-    repo_rate: 'Quotation' = message_field(19)
-    party: str = message_field(20)
-    clear_value_date: datetime = message_field(21)
-    sec_value_date: datetime = message_field(22)
-    broker_status: str = message_field(23)
-    separate_agreement_type: str = message_field(24)
-    separate_agreement_number: str = message_field(25)
-    separate_agreement_date: str = message_field(26)
-    delivery_type: str = message_field(27)
 
 
 class OperationState(IntEnum):
@@ -566,201 +101,11 @@ class OperationType(IntEnum):
     OPERATION_TYPE_FUTURE_EXPIRATION = 65
 
 
-@dataclass
-class GetDividendsForeignIssuerRequest:
-    generate_div_foreign_issuer_report: Optional[
-        'GenerateDividendsForeignIssuerReportRequest'] = message_field(1,
-        optional=True)
-    get_div_foreign_issuer_report: Optional[
-        'GetDividendsForeignIssuerReportRequest'] = message_field(2,
-        optional=True)
-
-
-@dataclass
-class GetDividendsForeignIssuerResponse:
-    generate_div_foreign_issuer_report_response: Optional[
-        'GenerateDividendsForeignIssuerReportResponse'] = message_field(1,
-        optional=True)
-    div_foreign_issuer_report: Optional[
-        'GetDividendsForeignIssuerReportResponse'] = message_field(2,
-        optional=True)
-
-
-@dataclass
-class GenerateDividendsForeignIssuerReportRequest:
-    account_id: str = message_field(1)
-    from_: datetime = message_field(2)
-    to: datetime = message_field(3)
-
-
-@dataclass
-class GetDividendsForeignIssuerReportRequest:
-    task_id: str = message_field(1)
-    page: Optional[int] = message_field(2, optional=True)
-
-
-@dataclass
-class GenerateDividendsForeignIssuerReportResponse:
-    task_id: str = message_field(1)
-
-
-@dataclass
-class GetDividendsForeignIssuerReportResponse:
-    dividends_foreign_issuer_report: List['DividendsForeignIssuerReport'
-        ] = message_field(1)
-    itemsCount: int = message_field(2)
-    pagesCount: int = message_field(3)
-    page: int = message_field(4)
-
-
-@dataclass
-class DividendsForeignIssuerReport:
-    record_date: datetime = message_field(1)
-    payment_date: datetime = message_field(2)
-    security_name: str = message_field(3)
-    isin: str = message_field(4)
-    issuer_country: str = message_field(5)
-    quantity: int = message_field(6)
-    dividend: 'Quotation' = message_field(7)
-    external_commission: 'Quotation' = message_field(8)
-    dividend_gross: 'Quotation' = message_field(9)
-    tax: 'Quotation' = message_field(10)
-    dividend_amount: 'Quotation' = message_field(11)
-    currency: str = message_field(12)
-
-
-@dataclass
-class PortfolioStreamRequest:
-    accounts: List[str] = message_field(1)
-    ping_settings: 'PingDelaySettings' = message_field(15)
-
-
-@dataclass
-class PortfolioStreamResponse:
-    subscriptions: Optional['PortfolioSubscriptionResult'] = message_field(
-        1, optional=True)
-    portfolio: Optional['PortfolioResponse'] = message_field(2, optional=True)
-    ping: Optional['Ping'] = message_field(3, optional=True)
-
-
-@dataclass
-class PortfolioSubscriptionResult:
-    accounts: List['AccountSubscriptionStatus'] = message_field(1)
-    tracking_id: str = message_field(7)
-    stream_id: str = message_field(8)
-
-
-@dataclass
-class AccountSubscriptionStatus:
-    account_id: str = message_field(1)
-    subscription_status: 'PortfolioSubscriptionStatus' = message_field(6)
-
-
 class PortfolioSubscriptionStatus(IntEnum):
     PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED = 0
     PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS = 1
     PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND = 2
     PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
-
-
-@dataclass
-class GetOperationsByCursorRequest:
-    account_id: str = message_field(1)
-    instrument_id: Optional[str] = message_field(2, optional=True)
-    from_: Optional[datetime] = message_field(6, optional=True)
-    to: Optional[datetime] = message_field(7, optional=True)
-    cursor: Optional[str] = message_field(11, optional=True)
-    limit: Optional[int] = message_field(12, optional=True)
-    operation_types: List['OperationType'] = message_field(13)
-    state: Optional['OperationState'] = message_field(14, optional=True)
-    without_commissions: Optional[bool] = message_field(15, optional=True)
-    without_trades: Optional[bool] = message_field(16, optional=True)
-    without_overnights: Optional[bool] = message_field(17, optional=True)
-
-
-@dataclass
-class GetOperationsByCursorResponse:
-    has_next: bool = message_field(1)
-    next_cursor: str = message_field(2)
-    items: List['OperationItem'] = message_field(6)
-
-
-@dataclass
-class OperationItem:
-    cursor: str = message_field(1)
-    broker_account_id: str = message_field(6)
-    id: str = message_field(16)
-    parent_operation_id: str = message_field(17)
-    name: str = message_field(18)
-    date: datetime = message_field(21)
-    type: 'OperationType' = message_field(22)
-    description: str = message_field(23)
-    state: 'OperationState' = message_field(24)
-    instrument_uid: str = message_field(31)
-    figi: str = message_field(32)
-    instrument_type: str = message_field(33)
-    instrument_kind: 'InstrumentType' = message_field(34)
-    position_uid: str = message_field(35)
-    payment: 'MoneyValue' = message_field(41)
-    price: 'MoneyValue' = message_field(42)
-    commission: 'MoneyValue' = message_field(43)
-    yield_: 'MoneyValue' = message_field(44)
-    yield_relative: 'Quotation' = message_field(45)
-    accrued_int: 'MoneyValue' = message_field(46)
-    quantity: int = message_field(51)
-    quantity_rest: int = message_field(52)
-    quantity_done: int = message_field(53)
-    cancel_date_time: datetime = message_field(56)
-    cancel_reason: str = message_field(57)
-    trades_info: 'OperationItemTrades' = message_field(61)
-    asset_uid: str = message_field(64)
-    child_operations: List['ChildOperationItem'] = message_field(65)
-
-
-@dataclass
-class OperationItemTrades:
-    trades: List['OperationItemTrade'] = message_field(6)
-
-
-@dataclass
-class OperationItemTrade:
-    num: str = message_field(1)
-    date: datetime = message_field(6)
-    quantity: int = message_field(11)
-    price: 'MoneyValue' = message_field(16)
-    yield_: 'MoneyValue' = message_field(21)
-    yield_relative: 'Quotation' = message_field(22)
-
-
-@dataclass
-class PositionsStreamRequest:
-    accounts: List[str] = message_field(1)
-    with_initial_positions: bool = message_field(3)
-    ping_settings: 'PingDelaySettings' = message_field(15)
-
-
-@dataclass
-class PositionsStreamResponse:
-    subscriptions: Optional['PositionsSubscriptionResult'] = message_field(
-        1, optional=True)
-    position: Optional['PositionData'] = message_field(2, optional=True)
-    ping: Optional['Ping'] = message_field(3, optional=True)
-    initial_positions: Optional['PositionsResponse'] = message_field(5,
-        optional=True)
-
-
-@dataclass
-class PositionsSubscriptionResult:
-    accounts: List['PositionsSubscriptionStatus'] = message_field(1)
-    tracking_id: str = message_field(7)
-    stream_id: str = message_field(8)
-
-
-@dataclass
-class PositionsSubscriptionStatus:
-    account_id: str = message_field(1)
-    subscription_status: 'PositionsAccountSubscriptionStatus' = message_field(6
-        )
 
 
 class PositionsAccountSubscriptionStatus(IntEnum):
@@ -771,22 +116,696 @@ class PositionsAccountSubscriptionStatus(IntEnum):
 
 
 @dataclass
-class PositionData:
-    account_id: str = message_field(1)
-    money: List['PositionsMoney'] = message_field(2)
-    securities: List['PositionsSecurities'] = message_field(3)
-    futures: List['PositionsFutures'] = message_field(4)
-    options: List['PositionsOptions'] = message_field(5)
-    date: datetime = message_field(6)
+class OperationsRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    from_: Optional[datetime] = _grpc_helpers.message_field(2, optional=True)
+    to: Optional[datetime] = _grpc_helpers.message_field(3, optional=True)
+    state: Optional['OperationState'] = _grpc_helpers.message_field(4,
+        optional=True)
+    figi: Optional[str] = _grpc_helpers.string_field(5, optional=True)
 
 
 @dataclass
-class PositionsMoney:
-    available_value: 'MoneyValue' = message_field(1)
-    blocked_value: 'MoneyValue' = message_field(2)
+class OperationsResponse(_grpc_helpers.Message):
+    operations: List['Operation'] = _grpc_helpers.message_field(1)
 
 
 @dataclass
-class ChildOperationItem:
-    instrument_uid: str = message_field(1)
-    payment: 'MoneyValue' = message_field(2)
+class Operation(_grpc_helpers.Message):
+    id: str = _grpc_helpers.string_field(1)
+    parent_operation_id: str = _grpc_helpers.string_field(2)
+    currency: str = _grpc_helpers.string_field(3)
+    payment: 'MoneyValue' = _grpc_helpers.message_field(4)
+    price: 'MoneyValue' = _grpc_helpers.message_field(5)
+    state: 'OperationState' = _grpc_helpers.message_field(6)
+    quantity: int = _grpc_helpers.int64_field(7)
+    quantity_rest: int = _grpc_helpers.int64_field(8)
+    figi: str = _grpc_helpers.string_field(9)
+    instrument_type: str = _grpc_helpers.string_field(10)
+    date: datetime = _grpc_helpers.message_field(11)
+    type: str = _grpc_helpers.string_field(12)
+    operation_type: 'OperationType' = _grpc_helpers.message_field(13)
+    trades: List['OperationTrade'] = _grpc_helpers.message_field(14)
+    asset_uid: str = _grpc_helpers.string_field(16)
+    position_uid: str = _grpc_helpers.string_field(17)
+    instrument_uid: str = _grpc_helpers.string_field(18)
+    child_operations: List['ChildOperationItem'] = _grpc_helpers.message_field(
+        19)
+
+
+@dataclass
+class OperationTrade(_grpc_helpers.Message):
+    trade_id: str = _grpc_helpers.string_field(1)
+    date_time: datetime = _grpc_helpers.message_field(2)
+    quantity: int = _grpc_helpers.int64_field(3)
+    price: 'MoneyValue' = _grpc_helpers.message_field(4)
+
+
+@dataclass
+class PortfolioRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    currency: Optional['CurrencyRequest'] = _grpc_helpers.message_field(2,
+        optional=True)
+
+
+    class CurrencyRequest(IntEnum):
+        RUB = 0
+        USD = 1
+        EUR = 2
+
+
+@dataclass
+class PortfolioResponse(_grpc_helpers.Message):
+    total_amount_shares: 'MoneyValue' = _grpc_helpers.message_field(1)
+    total_amount_bonds: 'MoneyValue' = _grpc_helpers.message_field(2)
+    total_amount_etf: 'MoneyValue' = _grpc_helpers.message_field(3)
+    total_amount_currencies: 'MoneyValue' = _grpc_helpers.message_field(4)
+    total_amount_futures: 'MoneyValue' = _grpc_helpers.message_field(5)
+    expected_yield: 'Quotation' = _grpc_helpers.message_field(6)
+    positions: List['PortfolioPosition'] = _grpc_helpers.message_field(7)
+    account_id: str = _grpc_helpers.string_field(8)
+    total_amount_options: 'MoneyValue' = _grpc_helpers.message_field(9)
+    total_amount_sp: 'MoneyValue' = _grpc_helpers.message_field(10)
+    total_amount_portfolio: 'MoneyValue' = _grpc_helpers.message_field(11)
+    virtual_positions: List['VirtualPortfolioPosition'
+        ] = _grpc_helpers.message_field(12)
+    daily_yield: 'MoneyValue' = _grpc_helpers.message_field(15)
+    daily_yield_relative: 'Quotation' = _grpc_helpers.message_field(16)
+
+
+@dataclass
+class PositionsRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class PositionsResponse(_grpc_helpers.Message):
+    money: List['MoneyValue'] = _grpc_helpers.message_field(1)
+    blocked: List['MoneyValue'] = _grpc_helpers.message_field(2)
+    securities: List['PositionsSecurities'] = _grpc_helpers.message_field(3)
+    limits_loading_in_progress: bool = _grpc_helpers.bool_field(4)
+    futures: List['PositionsFutures'] = _grpc_helpers.message_field(5)
+    options: List['PositionsOptions'] = _grpc_helpers.message_field(6)
+    account_id: str = _grpc_helpers.string_field(15)
+
+
+@dataclass
+class WithdrawLimitsRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class WithdrawLimitsResponse(_grpc_helpers.Message):
+    money: List['MoneyValue'] = _grpc_helpers.message_field(1)
+    blocked: List['MoneyValue'] = _grpc_helpers.message_field(2)
+    blocked_guarantee: List['MoneyValue'] = _grpc_helpers.message_field(3)
+
+
+@dataclass
+class PortfolioPosition(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    instrument_type: str = _grpc_helpers.string_field(2)
+    quantity: 'Quotation' = _grpc_helpers.message_field(3)
+    average_position_price: 'MoneyValue' = _grpc_helpers.message_field(4)
+    expected_yield: 'Quotation' = _grpc_helpers.message_field(5)
+    current_nkd: 'MoneyValue' = _grpc_helpers.message_field(6)
+    average_position_price_pt: 'Quotation' = _grpc_helpers.message_field(7)
+    current_price: 'MoneyValue' = _grpc_helpers.message_field(8)
+    average_position_price_fifo: 'MoneyValue' = _grpc_helpers.message_field(9)
+    quantity_lots: 'Quotation' = _grpc_helpers.message_field(10)
+    blocked: bool = _grpc_helpers.bool_field(21)
+    blocked_lots: 'Quotation' = _grpc_helpers.message_field(22)
+    position_uid: str = _grpc_helpers.string_field(24)
+    instrument_uid: str = _grpc_helpers.string_field(25)
+    var_margin: 'MoneyValue' = _grpc_helpers.message_field(26)
+    expected_yield_fifo: 'Quotation' = _grpc_helpers.message_field(27)
+    daily_yield: 'MoneyValue' = _grpc_helpers.message_field(31)
+    ticker: str = _grpc_helpers.string_field(32)
+
+
+@dataclass
+class VirtualPortfolioPosition(_grpc_helpers.Message):
+    position_uid: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    figi: str = _grpc_helpers.string_field(3)
+    instrument_type: str = _grpc_helpers.string_field(4)
+    quantity: 'Quotation' = _grpc_helpers.message_field(5)
+    average_position_price: 'MoneyValue' = _grpc_helpers.message_field(6)
+    expected_yield: 'Quotation' = _grpc_helpers.message_field(7)
+    expected_yield_fifo: 'Quotation' = _grpc_helpers.message_field(8)
+    expire_date: datetime = _grpc_helpers.message_field(9)
+    current_price: 'MoneyValue' = _grpc_helpers.message_field(10)
+    average_position_price_fifo: 'MoneyValue' = _grpc_helpers.message_field(11)
+    daily_yield: 'MoneyValue' = _grpc_helpers.message_field(31)
+    ticker: str = _grpc_helpers.string_field(32)
+
+
+@dataclass
+class PositionsSecurities(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    blocked: int = _grpc_helpers.int64_field(2)
+    balance: int = _grpc_helpers.int64_field(3)
+    position_uid: str = _grpc_helpers.string_field(4)
+    instrument_uid: str = _grpc_helpers.string_field(5)
+    ticker: str = _grpc_helpers.string_field(6)
+    exchange_blocked: bool = _grpc_helpers.bool_field(11)
+    instrument_type: str = _grpc_helpers.string_field(16)
+
+
+@dataclass
+class PositionsFutures(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    blocked: int = _grpc_helpers.int64_field(2)
+    balance: int = _grpc_helpers.int64_field(3)
+    position_uid: str = _grpc_helpers.string_field(4)
+    instrument_uid: str = _grpc_helpers.string_field(5)
+    ticker: str = _grpc_helpers.string_field(6)
+
+
+@dataclass
+class PositionsOptions(_grpc_helpers.Message):
+    position_uid: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    ticker: str = _grpc_helpers.string_field(3)
+    blocked: int = _grpc_helpers.int64_field(11)
+    balance: int = _grpc_helpers.int64_field(21)
+
+
+@dataclass
+class BrokerReportRequest(_grpc_helpers.Message):
+    generate_broker_report_request: Optional['GenerateBrokerReportRequest'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    get_broker_report_request: Optional['GetBrokerReportRequest'
+        ] = _grpc_helpers.message_field(2, optional=True)
+
+
+@dataclass
+class BrokerReportResponse(_grpc_helpers.Message):
+    generate_broker_report_response: Optional['GenerateBrokerReportResponse'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    get_broker_report_response: Optional['GetBrokerReportResponse'
+        ] = _grpc_helpers.message_field(2, optional=True)
+
+
+@dataclass
+class GenerateBrokerReportRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    from_: datetime = _grpc_helpers.message_field(2)
+    to: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass
+class GenerateBrokerReportResponse(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class GetBrokerReportRequest(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+    page: Optional[int] = _grpc_helpers.int32_field(2, optional=True)
+
+
+@dataclass
+class GetBrokerReportResponse(_grpc_helpers.Message):
+    broker_report: List['BrokerReport'] = _grpc_helpers.message_field(1)
+    itemsCount: int = _grpc_helpers.int32_field(2)
+    pagesCount: int = _grpc_helpers.int32_field(3)
+    page: int = _grpc_helpers.int32_field(4)
+
+
+@dataclass
+class BrokerReport(_grpc_helpers.Message):
+    trade_id: str = _grpc_helpers.string_field(1)
+    order_id: str = _grpc_helpers.string_field(2)
+    figi: str = _grpc_helpers.string_field(3)
+    execute_sign: str = _grpc_helpers.string_field(4)
+    trade_datetime: datetime = _grpc_helpers.message_field(5)
+    exchange: str = _grpc_helpers.string_field(6)
+    class_code: str = _grpc_helpers.string_field(7)
+    direction: str = _grpc_helpers.string_field(8)
+    name: str = _grpc_helpers.string_field(9)
+    ticker: str = _grpc_helpers.string_field(10)
+    price: 'MoneyValue' = _grpc_helpers.message_field(11)
+    quantity: int = _grpc_helpers.int64_field(12)
+    order_amount: 'MoneyValue' = _grpc_helpers.message_field(13)
+    aci_value: 'Quotation' = _grpc_helpers.message_field(14)
+    total_order_amount: 'MoneyValue' = _grpc_helpers.message_field(15)
+    broker_commission: 'MoneyValue' = _grpc_helpers.message_field(16)
+    exchange_commission: 'MoneyValue' = _grpc_helpers.message_field(17)
+    exchange_clearing_commission: 'MoneyValue' = _grpc_helpers.message_field(18
+        )
+    repo_rate: 'Quotation' = _grpc_helpers.message_field(19)
+    party: str = _grpc_helpers.string_field(20)
+    clear_value_date: datetime = _grpc_helpers.message_field(21)
+    sec_value_date: datetime = _grpc_helpers.message_field(22)
+    broker_status: str = _grpc_helpers.string_field(23)
+    separate_agreement_type: str = _grpc_helpers.string_field(24)
+    separate_agreement_number: str = _grpc_helpers.string_field(25)
+    separate_agreement_date: str = _grpc_helpers.string_field(26)
+    delivery_type: str = _grpc_helpers.string_field(27)
+
+
+@dataclass
+class GetDividendsForeignIssuerRequest(_grpc_helpers.Message):
+    generate_div_foreign_issuer_report: Optional[
+        'GenerateDividendsForeignIssuerReportRequest'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    get_div_foreign_issuer_report: Optional[
+        'GetDividendsForeignIssuerReportRequest'
+        ] = _grpc_helpers.message_field(2, optional=True)
+
+
+@dataclass
+class GetDividendsForeignIssuerResponse(_grpc_helpers.Message):
+    generate_div_foreign_issuer_report_response: Optional[
+        'GenerateDividendsForeignIssuerReportResponse'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    div_foreign_issuer_report: Optional[
+        'GetDividendsForeignIssuerReportResponse'
+        ] = _grpc_helpers.message_field(2, optional=True)
+
+
+@dataclass
+class GenerateDividendsForeignIssuerReportRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    from_: datetime = _grpc_helpers.message_field(2)
+    to: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass
+class GetDividendsForeignIssuerReportRequest(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+    page: Optional[int] = _grpc_helpers.int32_field(2, optional=True)
+
+
+@dataclass
+class GenerateDividendsForeignIssuerReportResponse(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class GetDividendsForeignIssuerReportResponse(_grpc_helpers.Message):
+    dividends_foreign_issuer_report: List['DividendsForeignIssuerReport'
+        ] = _grpc_helpers.message_field(1)
+    itemsCount: int = _grpc_helpers.int32_field(2)
+    pagesCount: int = _grpc_helpers.int32_field(3)
+    page: int = _grpc_helpers.int32_field(4)
+
+
+@dataclass
+class DividendsForeignIssuerReport(_grpc_helpers.Message):
+    record_date: datetime = _grpc_helpers.message_field(1)
+    payment_date: datetime = _grpc_helpers.message_field(2)
+    security_name: str = _grpc_helpers.string_field(3)
+    isin: str = _grpc_helpers.string_field(4)
+    issuer_country: str = _grpc_helpers.string_field(5)
+    quantity: int = _grpc_helpers.int64_field(6)
+    dividend: 'Quotation' = _grpc_helpers.message_field(7)
+    external_commission: 'Quotation' = _grpc_helpers.message_field(8)
+    dividend_gross: 'Quotation' = _grpc_helpers.message_field(9)
+    tax: 'Quotation' = _grpc_helpers.message_field(10)
+    dividend_amount: 'Quotation' = _grpc_helpers.message_field(11)
+    currency: str = _grpc_helpers.string_field(12)
+
+
+@dataclass
+class PortfolioStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.string_field(1)
+    ping_settings: 'PingDelaySettings' = _grpc_helpers.message_field(15)
+
+
+@dataclass
+class PortfolioStreamResponse(_grpc_helpers.Message):
+    subscriptions: Optional['PortfolioSubscriptionResult'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    portfolio: Optional['PortfolioResponse'] = _grpc_helpers.message_field(
+        2, optional=True)
+    ping: Optional['Ping'] = _grpc_helpers.message_field(3, optional=True)
+
+
+@dataclass
+class PortfolioSubscriptionResult(_grpc_helpers.Message):
+    accounts: List['AccountSubscriptionStatus'] = _grpc_helpers.message_field(1
+        )
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
+
+
+@dataclass
+class AccountSubscriptionStatus(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    subscription_status: 'PortfolioSubscriptionStatus' = (_grpc_helpers.
+        message_field(6))
+
+
+@dataclass
+class GetOperationsByCursorRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    instrument_id: Optional[str] = _grpc_helpers.string_field(2, optional=True)
+    from_: Optional[datetime] = _grpc_helpers.message_field(6, optional=True)
+    to: Optional[datetime] = _grpc_helpers.message_field(7, optional=True)
+    cursor: Optional[str] = _grpc_helpers.string_field(11, optional=True)
+    limit: Optional[int] = _grpc_helpers.int32_field(12, optional=True)
+    operation_types: List['OperationType'] = _grpc_helpers.message_field(13)
+    state: Optional['OperationState'] = _grpc_helpers.message_field(14,
+        optional=True)
+    without_commissions: Optional[bool] = _grpc_helpers.bool_field(15,
+        optional=True)
+    without_trades: Optional[bool] = _grpc_helpers.bool_field(16, optional=True
+        )
+    without_overnights: Optional[bool] = _grpc_helpers.bool_field(17,
+        optional=True)
+
+
+@dataclass
+class GetOperationsByCursorResponse(_grpc_helpers.Message):
+    has_next: bool = _grpc_helpers.bool_field(1)
+    next_cursor: str = _grpc_helpers.string_field(2)
+    items: List['OperationItem'] = _grpc_helpers.message_field(6)
+
+
+@dataclass
+class OperationItem(_grpc_helpers.Message):
+    cursor: str = _grpc_helpers.string_field(1)
+    broker_account_id: str = _grpc_helpers.string_field(6)
+    id: str = _grpc_helpers.string_field(16)
+    parent_operation_id: str = _grpc_helpers.string_field(17)
+    name: str = _grpc_helpers.string_field(18)
+    date: datetime = _grpc_helpers.message_field(21)
+    type: 'OperationType' = _grpc_helpers.message_field(22)
+    description: str = _grpc_helpers.string_field(23)
+    state: 'OperationState' = _grpc_helpers.message_field(24)
+    instrument_uid: str = _grpc_helpers.string_field(31)
+    figi: str = _grpc_helpers.string_field(32)
+    instrument_type: str = _grpc_helpers.string_field(33)
+    instrument_kind: 'InstrumentType' = _grpc_helpers.message_field(34)
+    position_uid: str = _grpc_helpers.string_field(35)
+    payment: 'MoneyValue' = _grpc_helpers.message_field(41)
+    price: 'MoneyValue' = _grpc_helpers.message_field(42)
+    commission: 'MoneyValue' = _grpc_helpers.message_field(43)
+    yield_: 'MoneyValue' = _grpc_helpers.message_field(44)
+    yield_relative: 'Quotation' = _grpc_helpers.message_field(45)
+    accrued_int: 'MoneyValue' = _grpc_helpers.message_field(46)
+    quantity: int = _grpc_helpers.int64_field(51)
+    quantity_rest: int = _grpc_helpers.int64_field(52)
+    quantity_done: int = _grpc_helpers.int64_field(53)
+    cancel_date_time: datetime = _grpc_helpers.message_field(56)
+    cancel_reason: str = _grpc_helpers.string_field(57)
+    trades_info: 'OperationItemTrades' = _grpc_helpers.message_field(61)
+    asset_uid: str = _grpc_helpers.string_field(64)
+    child_operations: List['ChildOperationItem'] = _grpc_helpers.message_field(
+        65)
+
+
+@dataclass
+class OperationItemTrades(_grpc_helpers.Message):
+    trades: List['OperationItemTrade'] = _grpc_helpers.message_field(6)
+
+
+@dataclass
+class OperationItemTrade(_grpc_helpers.Message):
+    num: str = _grpc_helpers.string_field(1)
+    date: datetime = _grpc_helpers.message_field(6)
+    quantity: int = _grpc_helpers.int64_field(11)
+    price: 'MoneyValue' = _grpc_helpers.message_field(16)
+    yield_: 'MoneyValue' = _grpc_helpers.message_field(21)
+    yield_relative: 'Quotation' = _grpc_helpers.message_field(22)
+
+
+@dataclass
+class PositionsStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.string_field(1)
+    with_initial_positions: bool = _grpc_helpers.bool_field(3)
+    ping_settings: 'PingDelaySettings' = _grpc_helpers.message_field(15)
+
+
+@dataclass
+class PositionsStreamResponse(_grpc_helpers.Message):
+    subscriptions: Optional['PositionsSubscriptionResult'
+        ] = _grpc_helpers.message_field(1, optional=True)
+    position: Optional['PositionData'] = _grpc_helpers.message_field(2,
+        optional=True)
+    ping: Optional['Ping'] = _grpc_helpers.message_field(3, optional=True)
+    initial_positions: Optional['PositionsResponse'
+        ] = _grpc_helpers.message_field(5, optional=True)
+
+
+@dataclass
+class PositionsSubscriptionResult(_grpc_helpers.Message):
+    accounts: List['PositionsSubscriptionStatus'
+        ] = _grpc_helpers.message_field(1)
+    tracking_id: str = _grpc_helpers.string_field(7)
+    stream_id: str = _grpc_helpers.string_field(8)
+
+
+@dataclass
+class PositionsSubscriptionStatus(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    subscription_status: 'PositionsAccountSubscriptionStatus' = (_grpc_helpers
+        .message_field(6))
+
+
+@dataclass
+class PositionData(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    money: List['PositionsMoney'] = _grpc_helpers.message_field(2)
+    securities: List['PositionsSecurities'] = _grpc_helpers.message_field(3)
+    futures: List['PositionsFutures'] = _grpc_helpers.message_field(4)
+    options: List['PositionsOptions'] = _grpc_helpers.message_field(5)
+    date: datetime = _grpc_helpers.message_field(6)
+
+
+@dataclass
+class PositionsMoney(_grpc_helpers.Message):
+    available_value: 'MoneyValue' = _grpc_helpers.message_field(1)
+    blocked_value: 'MoneyValue' = _grpc_helpers.message_field(2)
+
+
+@dataclass
+class ChildOperationItem(_grpc_helpers.Message):
+    instrument_uid: str = _grpc_helpers.string_field(1)
+    payment: 'MoneyValue' = _grpc_helpers.message_field(2)
+
+
+class OperationsService(BaseService):
+    """/*С помощью методов сервиса можно получить:<br/><br/> **1**. Список операций по счету.<br/> **2**.
+                              Портфель по счету.<br/> **3**. Позиции ценных бумаг на счете.<br/> **4**.
+                              Доступный остаток для вывода средств.<br/> **5**. Различные отчеты.*/"""
+    _protobuf = operations_pb2
+    _protobuf_grpc = operations_pb2_grpc
+    _protobuf_stub = _protobuf_grpc.OperationsServiceStub
+
+    @handle_request_error('GetOperations')
+    def get_operations(self, request: 'OperationsRequest'=OperationsRequest()
+        ) ->'OperationsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            OperationsRequest())
+        response, call = self._stub.GetOperations.with_call(request=
+            protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetOperations')
+        return protobuf_to_dataclass(response, OperationsResponse)
+
+    @handle_request_error('GetPortfolio')
+    def get_portfolio(self, request: 'PortfolioRequest'=PortfolioRequest()
+        ) ->'PortfolioResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PortfolioRequest())
+        response, call = self._stub.GetPortfolio.with_call(request=
+            protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetPortfolio')
+        return protobuf_to_dataclass(response, PortfolioResponse)
+
+    @handle_request_error('GetPositions')
+    def get_positions(self, request: 'PositionsRequest'=PositionsRequest()
+        ) ->'PositionsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PositionsRequest())
+        response, call = self._stub.GetPositions.with_call(request=
+            protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetPositions')
+        return protobuf_to_dataclass(response, PositionsResponse)
+
+    @handle_request_error('GetWithdrawLimits')
+    def get_withdraw_limits(self, request: 'WithdrawLimitsRequest'=
+        WithdrawLimitsRequest()) ->'WithdrawLimitsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            WithdrawLimitsRequest())
+        response, call = self._stub.GetWithdrawLimits.with_call(request=
+            protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetWithdrawLimits')
+        return protobuf_to_dataclass(response, WithdrawLimitsResponse)
+
+    @handle_request_error('GetBrokerReport')
+    def get_broker_report(self, request: 'BrokerReportRequest'=
+        BrokerReportRequest()) ->'BrokerReportResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            BrokerReportRequest())
+        response, call = self._stub.GetBrokerReport.with_call(request=
+            protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetBrokerReport')
+        return protobuf_to_dataclass(response, BrokerReportResponse)
+
+    @handle_request_error('GetDividendsForeignIssuer')
+    def get_dividends_foreign_issuer(self, request:
+        'GetDividendsForeignIssuerRequest'=GetDividendsForeignIssuerRequest()
+        ) ->'GetDividendsForeignIssuerResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            GetDividendsForeignIssuerRequest())
+        response, call = self._stub.GetDividendsForeignIssuer.with_call(request
+            =protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call),
+            'GetDividendsForeignIssuer')
+        return protobuf_to_dataclass(response,
+            GetDividendsForeignIssuerResponse)
+
+    @handle_request_error('GetOperationsByCursor')
+    def get_operations_by_cursor(self, request:
+        'GetOperationsByCursorRequest'=GetOperationsByCursorRequest()
+        ) ->'GetOperationsByCursorResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            GetOperationsByCursorRequest())
+        response, call = self._stub.GetOperationsByCursor.with_call(request
+            =protobuf_request, metadata=self._metadata)
+        log_request(get_tracking_id_from_call(call), 'GetOperationsByCursor')
+        return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
+
+
+class AsyncOperationsService(BaseService):
+    """//GetOperations — список операций по счету"""
+    _protobuf = operations_pb2
+    _protobuf_grpc = operations_pb2_grpc
+    _protobuf_stub = _protobuf_grpc.OperationsServiceStub
+
+    @handle_aio_request_error('GetOperations')
+    async def get_operations(self, request: 'OperationsRequest'=
+        OperationsRequest()) ->'OperationsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            OperationsRequest())
+        response_coro = self._stub.GetOperations(request=protobuf_request,
+            metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetOperations')
+        return protobuf_to_dataclass(response, OperationsResponse)
+
+    @handle_aio_request_error('GetPortfolio')
+    async def get_portfolio(self, request: 'PortfolioRequest'=
+        PortfolioRequest()) ->'PortfolioResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PortfolioRequest())
+        response_coro = self._stub.GetPortfolio(request=protobuf_request,
+            metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetPortfolio')
+        return protobuf_to_dataclass(response, PortfolioResponse)
+
+    @handle_aio_request_error('GetPositions')
+    async def get_positions(self, request: 'PositionsRequest'=
+        PositionsRequest()) ->'PositionsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PositionsRequest())
+        response_coro = self._stub.GetPositions(request=protobuf_request,
+            metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetPositions')
+        return protobuf_to_dataclass(response, PositionsResponse)
+
+    @handle_aio_request_error('GetWithdrawLimits')
+    async def get_withdraw_limits(self, request: 'WithdrawLimitsRequest'=
+        WithdrawLimitsRequest()) ->'WithdrawLimitsResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            WithdrawLimitsRequest())
+        response_coro = self._stub.GetWithdrawLimits(request=
+            protobuf_request, metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetWithdrawLimits')
+        return protobuf_to_dataclass(response, WithdrawLimitsResponse)
+
+    @handle_aio_request_error('GetBrokerReport')
+    async def get_broker_report(self, request: 'BrokerReportRequest'=
+        BrokerReportRequest()) ->'BrokerReportResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            BrokerReportRequest())
+        response_coro = self._stub.GetBrokerReport(request=protobuf_request,
+            metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetBrokerReport')
+        return protobuf_to_dataclass(response, BrokerReportResponse)
+
+    @handle_aio_request_error('GetDividendsForeignIssuer')
+    async def get_dividends_foreign_issuer(self, request:
+        'GetDividendsForeignIssuerRequest'=GetDividendsForeignIssuerRequest()
+        ) ->'GetDividendsForeignIssuerResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            GetDividendsForeignIssuerRequest())
+        response_coro = self._stub.GetDividendsForeignIssuer(request=
+            protobuf_request, metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetDividendsForeignIssuer')
+        return protobuf_to_dataclass(response,
+            GetDividendsForeignIssuerResponse)
+
+    @handle_aio_request_error('GetOperationsByCursor')
+    async def get_operations_by_cursor(self, request:
+        'GetOperationsByCursorRequest'=GetOperationsByCursorRequest()
+        ) ->'GetOperationsByCursorResponse':
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            GetOperationsByCursorRequest())
+        response_coro = self._stub.GetOperationsByCursor(request=
+            protobuf_request, metadata=self._metadata)
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro),
+            'GetOperationsByCursor')
+        return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
+
+
+class OperationsStreamService(BaseService):
+    """//PortfolioStream — стрим обновлений портфеля"""
+    _protobuf = operations_pb2
+    _protobuf_grpc = operations_pb2_grpc
+    _protobuf_stub = _protobuf_grpc.OperationsStreamServiceStub
+
+    @handle_request_error_gen('PortfolioStream')
+    def portfolio_stream(self, request: 'PortfolioStreamRequest'=
+        PortfolioStreamRequest()) ->Iterable['PortfolioStreamResponse']:
+        for response in self._stub.PortfolioStream(request=
+            dataclass_to_protobuf(request, self._protobuf.
+            PortfolioStreamRequest()), metadata=self._metadata):
+            yield protobuf_to_dataclass(response, PortfolioStreamResponse)
+
+    @handle_request_error_gen('PositionsStream')
+    def positions_stream(self, request: 'PositionsStreamRequest'=
+        PositionsStreamRequest()) ->Iterable['PositionsStreamResponse']:
+        for response in self._stub.PositionsStream(request=
+            dataclass_to_protobuf(request, self._protobuf.
+            PositionsStreamRequest()), metadata=self._metadata):
+            yield protobuf_to_dataclass(response, PositionsStreamResponse)
+
+
+class AsyncOperationsStreamService(BaseService):
+    _protobuf = operations_pb2
+    _protobuf_grpc = operations_pb2_grpc
+    _protobuf_stub = _protobuf_grpc.OperationsStreamServiceStub
+
+    @handle_aio_request_error_gen('PortfolioStream')
+    async def portfolio_stream(self, request: 'PortfolioStreamRequest'=
+        PortfolioStreamRequest()) ->AsyncIterable['PortfolioStreamResponse']:
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PortfolioStreamRequest())
+        async for response in self._stub.PortfolioStream(request=
+            protobuf_request, metadata=self._metadata):(yield
+            protobuf_to_dataclass(response, PortfolioStreamResponse))
+
+    @handle_aio_request_error_gen('PositionsStream')
+    async def positions_stream(self, request: 'PositionsStreamRequest'=
+        PositionsStreamRequest()) ->AsyncIterable['PositionsStreamResponse']:
+        protobuf_request = dataclass_to_protobuf(request, self._protobuf.
+            PositionsStreamRequest())
+        async for response in self._stub.PositionsStream(request=
+            protobuf_request, metadata=self._metadata):(yield
+            protobuf_to_dataclass(response, PositionsStreamResponse))

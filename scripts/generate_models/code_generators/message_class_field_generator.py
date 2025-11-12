@@ -1,5 +1,16 @@
 import keyword as default_keyword
-from ast import AnnAssign, Call, Constant, Load, Name, Store, Subscript, alias, keyword
+from ast import (
+    AnnAssign,
+    Attribute,
+    Call,
+    Constant,
+    Load,
+    Name,
+    Store,
+    Subscript,
+    alias,
+    keyword,
+)
 
 from iprotopy.annotation_generator import AnnotationGenerator
 from iprotopy.domestic_importer import DomesticImporter
@@ -11,8 +22,28 @@ from iprotopy.one_of_generator import OneOfGenerator
 from iprotopy.type_mapper import TypeMapper
 from proto_schema_parser import Field, FieldCardinality
 
+from tinkoff.invest import _grpc_helpers
+
 
 class ClassFieldGenerator:
+    _mapped_field_helpers = {
+        "bool": _grpc_helpers.bool_field,
+        "string": _grpc_helpers.string_field,
+        "bytes": _grpc_helpers.bytes_field,
+        "double": _grpc_helpers.double_field,
+        "float": _grpc_helpers.float_field,
+        "int32": _grpc_helpers.int32_field,
+        "sint32": _grpc_helpers.sint32_field,
+        "sfixed32": _grpc_helpers.sfixed32_field,
+        "uint32": _grpc_helpers.uint32_field,
+        "fixed32": _grpc_helpers.fixed32_field,
+        "int64": _grpc_helpers.int64_field,
+        "sint64": _grpc_helpers.sint64_field,
+        "sfixed64": _grpc_helpers.sfixed64_field,
+        "uint64": _grpc_helpers.uint64_field,
+        "fixed64": _grpc_helpers.fixed64_field,
+    }
+
     def __init__(self, importer: DomesticImporter, type_mapper: TypeMapper):
         self._importer = importer
         self._type_mapper = type_mapper
@@ -38,11 +69,14 @@ class ClassFieldGenerator:
         is_optional: bool = False,
     ) -> AnnAssign:
         safe_field_name = self._safe_field_name(field.name)
+        field_helper = self._mapped_field_helpers.get(
+            field.type, _grpc_helpers.message_field
+        ).__name__
         self._importer.add_import(
             ImportFrom(
-                module="tinkoff.invest._grpc_helpers",
+                module="tinkoff.invest",
                 names=[
-                    alias(name="message_field"),
+                    alias(name="_grpc_helpers"),
                 ],
                 level=0,
             )
@@ -60,7 +94,11 @@ class ClassFieldGenerator:
             target=Name(id=safe_field_name, ctx=Store()),
             annotation=annotation,
             value=Call(
-                func=Name(id="message_field", ctx=Load()),
+                func=Attribute(
+                    value=Name(id="_grpc_helpers", ctx=Load()),
+                    attr=field_helper,
+                    ctx=Load(),
+                ),
                 args=[Constant(value=field.number)],
                 keywords=([keyword("optional", Constant(True))] if is_optional else []),
             ),
@@ -95,3 +133,23 @@ class MessageClassGenerator(DefaultMessageClassGenerator):
             self._importer, self._type_mapper
         )
         self._one_of_generator = OneOfGenerator(self._class_field_generator)
+
+    def process_proto_message(self, current_element):
+        message = super().process_proto_message(current_element)
+        self._importer.add_import(
+            ImportFrom(
+                module="tinkoff.invest",
+                names=[
+                    alias(name="_grpc_helpers"),
+                ],
+                level=0,
+            )
+        )
+        message.bases.append(
+            Attribute(
+                value=Name(id="_grpc_helpers", ctx=Load()),
+                attr="Message",
+                ctx=Load(),
+            )
+        )
+        return message

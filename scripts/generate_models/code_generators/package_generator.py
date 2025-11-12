@@ -5,10 +5,10 @@ from typing import Dict
 
 import astor
 from iprotopy import PackageGenerator as DefaultPackageGenerator
-from iprotopy.importer import Importer
 from iprotopy.protos_generator import ProtosGenerator
 
 from scripts.generate_models.code_generators.file_generator import SourceGenerator
+from scripts.generate_models.code_generators.imports_resolver import Importer
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,6 @@ class PackageGenerator(DefaultPackageGenerator):
 
         for proto_file in proto_files:
             pyfile = proto_file.relative_to(proto_dir).with_suffix(".py")
-            print(proto_file)
             logger.debug(pyfile)
             source_generator = SourceGenerator(
                 proto_file, out_dir, pyfile, self._parser, self._type_mapper, importer

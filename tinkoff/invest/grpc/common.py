@@ -3,7 +3,7 @@ from datetime import datetime
 from enum import IntEnum
 from typing import Optional
 
-from tinkoff.invest._grpc_helpers import message_field
+from tinkoff.invest import _grpc_helpers
 
 
 class InstrumentType(IntEnum):
@@ -26,19 +26,6 @@ class InstrumentStatus(IntEnum):
     INSTRUMENT_STATUS_ALL = 2
 
 
-@dataclass
-class MoneyValue:
-    currency: str = message_field(1)
-    units: int = message_field(2)
-    nano: int = message_field(3)
-
-
-@dataclass
-class Quotation:
-    units: int = message_field(1)
-    nano: int = message_field(2)
-
-
 class SecurityTradingStatus(IntEnum):
     SECURITY_TRADING_STATUS_UNSPECIFIED = 0
     SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING = 1
@@ -59,53 +46,10 @@ class SecurityTradingStatus(IntEnum):
     SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING = 16
 
 
-@dataclass
-class PingRequest:
-    time: Optional[datetime] = message_field(1, optional=True)
-
-
-@dataclass
-class PingDelaySettings:
-    ping_delay_ms: Optional[int] = message_field(15, optional=True)
-
-
-@dataclass
-class Ping:
-    time: datetime = message_field(1)
-    stream_id: str = message_field(2)
-    ping_request_time: Optional[datetime] = message_field(4, optional=True)
-
-
 class PriceType(IntEnum):
     PRICE_TYPE_UNSPECIFIED = 0
     PRICE_TYPE_POINT = 1
     PRICE_TYPE_CURRENCY = 2
-
-
-@dataclass
-class Page:
-    limit: int = message_field(1)
-    page_number: int = message_field(2)
-
-
-@dataclass
-class PageResponse:
-    limit: int = message_field(1)
-    page_number: int = message_field(2)
-    total_count: int = message_field(3)
-
-
-@dataclass
-class ResponseMetadata:
-    tracking_id: str = message_field(42)
-    server_time: datetime = message_field(43)
-
-
-@dataclass
-class BrandData:
-    logo_name: str = message_field(1)
-    logo_base_color: str = message_field(2)
-    text_color: str = message_field(3)
 
 
 class ResultSubscriptionStatus(IntEnum):
@@ -114,15 +58,72 @@ class ResultSubscriptionStatus(IntEnum):
     RESULT_SUBSCRIPTION_STATUS_ERROR = 13
 
 
-@dataclass
-class ErrorDetail:
-    code: str = message_field(1)
-    message: str = message_field(3)
-
-
 class RealExchange(IntEnum):
     REAL_EXCHANGE_UNSPECIFIED = 0
     REAL_EXCHANGE_MOEX = 1
     REAL_EXCHANGE_RTS = 2
     REAL_EXCHANGE_OTC = 3
     REAL_EXCHANGE_DEALER = 4
+
+
+@dataclass
+class MoneyValue(_grpc_helpers.Message):
+    currency: str = _grpc_helpers.string_field(1)
+    units: int = _grpc_helpers.int64_field(2)
+    nano: int = _grpc_helpers.int32_field(3)
+
+
+@dataclass
+class Quotation(_grpc_helpers.Message):
+    units: int = _grpc_helpers.int64_field(1)
+    nano: int = _grpc_helpers.int32_field(2)
+
+
+@dataclass
+class PingRequest(_grpc_helpers.Message):
+    time: Optional[datetime] = _grpc_helpers.message_field(1, optional=True)
+
+
+@dataclass
+class PingDelaySettings(_grpc_helpers.Message):
+    ping_delay_ms: Optional[int] = _grpc_helpers.int32_field(15, optional=True)
+
+
+@dataclass
+class Ping(_grpc_helpers.Message):
+    time: datetime = _grpc_helpers.message_field(1)
+    stream_id: str = _grpc_helpers.string_field(2)
+    ping_request_time: Optional[datetime] = _grpc_helpers.message_field(4,
+        optional=True)
+
+
+@dataclass
+class Page(_grpc_helpers.Message):
+    limit: int = _grpc_helpers.int32_field(1)
+    page_number: int = _grpc_helpers.int32_field(2)
+
+
+@dataclass
+class PageResponse(_grpc_helpers.Message):
+    limit: int = _grpc_helpers.int32_field(1)
+    page_number: int = _grpc_helpers.int32_field(2)
+    total_count: int = _grpc_helpers.int32_field(3)
+
+
+@dataclass
+class ResponseMetadata(_grpc_helpers.Message):
+    tracking_id: str = _grpc_helpers.string_field(42)
+    server_time: datetime = _grpc_helpers.message_field(43)
+
+
+@dataclass
+class BrandData(_grpc_helpers.Message):
+    logo_name: str = _grpc_helpers.string_field(1)
+    logo_base_color: str = _grpc_helpers.string_field(2)
+    text_color: str = _grpc_helpers.string_field(3)
+
+
+@dataclass
+class ErrorDetail(_grpc_helpers.Message):
+    code: str = _grpc_helpers.string_field(1)
+    message: str = _grpc_helpers.string_field(3)

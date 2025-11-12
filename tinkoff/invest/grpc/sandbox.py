@@ -4,8 +4,8 @@ from typing import Optional
 from iprotopy import dataclass_to_protobuf, protobuf_to_dataclass
 
 from base_service import BaseService
+from tinkoff.invest import _grpc_helpers
 from tinkoff.invest._errors import handle_aio_request_error, handle_request_error
-from tinkoff.invest._grpc_helpers import message_field
 from tinkoff.invest.grpc import sandbox_pb2, sandbox_pb2_grpc
 from tinkoff.invest.grpc.common import MoneyValue
 from tinkoff.invest.grpc.operations import (
@@ -43,6 +43,37 @@ from tinkoff.invest.logging import (
 )
 
 
+@dataclass
+class OpenSandboxAccountRequest(_grpc_helpers.Message):
+    name: Optional[str] = _grpc_helpers.string_field(1, optional=True)
+
+
+@dataclass
+class OpenSandboxAccountResponse(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class CloseSandboxAccountRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass
+class CloseSandboxAccountResponse(_grpc_helpers.Message):
+    pass
+
+
+@dataclass
+class SandboxPayInRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    amount: 'MoneyValue' = _grpc_helpers.message_field(2)
+
+
+@dataclass
+class SandboxPayInResponse(_grpc_helpers.Message):
+    balance: 'MoneyValue' = _grpc_helpers.message_field(1)
+
+
 class SandboxService(BaseService):
     """// Методы для работы с песочницей T-Invest API"""
     _protobuf = sandbox_pb2
@@ -50,8 +81,8 @@ class SandboxService(BaseService):
     _protobuf_stub = _protobuf_grpc.SandboxServiceStub
 
     @handle_request_error('OpenSandboxAccount')
-    def open_sandbox_account(self, request: 'OpenSandboxAccountRequest'
-        ) ->'OpenSandboxAccountResponse':
+    def open_sandbox_account(self, request: 'OpenSandboxAccountRequest'=
+        OpenSandboxAccountRequest()) ->'OpenSandboxAccountResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             OpenSandboxAccountRequest())
         response, call = self._stub.OpenSandboxAccount.with_call(request=
@@ -60,8 +91,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, OpenSandboxAccountResponse)
 
     @handle_request_error('GetSandboxAccounts')
-    def get_sandbox_accounts(self, request: 'GetAccountsRequest'
-        ) ->'GetAccountsResponse':
+    def get_sandbox_accounts(self, request: 'GetAccountsRequest'=
+        GetAccountsRequest()) ->'GetAccountsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetAccountsRequest())
         response, call = self._stub.GetSandboxAccounts.with_call(request=
@@ -70,8 +101,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, GetAccountsResponse)
 
     @handle_request_error('CloseSandboxAccount')
-    def close_sandbox_account(self, request: 'CloseSandboxAccountRequest'
-        ) ->'CloseSandboxAccountResponse':
+    def close_sandbox_account(self, request: 'CloseSandboxAccountRequest'=
+        CloseSandboxAccountRequest()) ->'CloseSandboxAccountResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             CloseSandboxAccountRequest())
         response, call = self._stub.CloseSandboxAccount.with_call(request=
@@ -80,7 +111,7 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, CloseSandboxAccountResponse)
 
     @handle_request_error('PostSandboxOrder')
-    def post_sandbox_order(self, request: 'PostOrderRequest'
+    def post_sandbox_order(self, request: 'PostOrderRequest'=PostOrderRequest()
         ) ->'PostOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PostOrderRequest())
@@ -90,8 +121,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_request_error('PostSandboxOrderAsync')
-    def post_sandbox_order_async(self, request: 'PostOrderAsyncRequest'
-        ) ->'PostOrderAsyncResponse':
+    def post_sandbox_order_async(self, request: 'PostOrderAsyncRequest'=
+        PostOrderAsyncRequest()) ->'PostOrderAsyncResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PostOrderAsyncRequest())
         response, call = self._stub.PostSandboxOrderAsync.with_call(request
@@ -100,8 +131,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderAsyncResponse)
 
     @handle_request_error('ReplaceSandboxOrder')
-    def replace_sandbox_order(self, request: 'ReplaceOrderRequest'
-        ) ->'PostOrderResponse':
+    def replace_sandbox_order(self, request: 'ReplaceOrderRequest'=
+        ReplaceOrderRequest()) ->'PostOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             ReplaceOrderRequest())
         response, call = self._stub.ReplaceSandboxOrder.with_call(request=
@@ -110,7 +141,7 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_request_error('GetSandboxOrders')
-    def get_sandbox_orders(self, request: 'GetOrdersRequest'
+    def get_sandbox_orders(self, request: 'GetOrdersRequest'=GetOrdersRequest()
         ) ->'GetOrdersResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOrdersRequest())
@@ -120,8 +151,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, GetOrdersResponse)
 
     @handle_request_error('CancelSandboxOrder')
-    def cancel_sandbox_order(self, request: 'CancelOrderRequest'
-        ) ->'CancelOrderResponse':
+    def cancel_sandbox_order(self, request: 'CancelOrderRequest'=
+        CancelOrderRequest()) ->'CancelOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             CancelOrderRequest())
         response, call = self._stub.CancelSandboxOrder.with_call(request=
@@ -130,8 +161,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, CancelOrderResponse)
 
     @handle_request_error('GetSandboxOrderState')
-    def get_sandbox_order_state(self, request: 'GetOrderStateRequest'
-        ) ->'OrderState':
+    def get_sandbox_order_state(self, request: 'GetOrderStateRequest'=
+        GetOrderStateRequest()) ->'OrderState':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOrderStateRequest())
         response, call = self._stub.GetSandboxOrderState.with_call(request=
@@ -140,8 +171,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, OrderState)
 
     @handle_request_error('GetSandboxPositions')
-    def get_sandbox_positions(self, request: 'PositionsRequest'
-        ) ->'PositionsResponse':
+    def get_sandbox_positions(self, request: 'PositionsRequest'=
+        PositionsRequest()) ->'PositionsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PositionsRequest())
         response, call = self._stub.GetSandboxPositions.with_call(request=
@@ -150,8 +181,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, PositionsResponse)
 
     @handle_request_error('GetSandboxOperations')
-    def get_sandbox_operations(self, request: 'OperationsRequest'
-        ) ->'OperationsResponse':
+    def get_sandbox_operations(self, request: 'OperationsRequest'=
+        OperationsRequest()) ->'OperationsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             OperationsRequest())
         response, call = self._stub.GetSandboxOperations.with_call(request=
@@ -161,7 +192,8 @@ class SandboxService(BaseService):
 
     @handle_request_error('GetSandboxOperationsByCursor')
     def get_sandbox_operations_by_cursor(self, request:
-        'GetOperationsByCursorRequest') ->'GetOperationsByCursorResponse':
+        'GetOperationsByCursorRequest'=GetOperationsByCursorRequest()
+        ) ->'GetOperationsByCursorResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOperationsByCursorRequest())
         response, call = self._stub.GetSandboxOperationsByCursor.with_call(
@@ -171,8 +203,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
 
     @handle_request_error('GetSandboxPortfolio')
-    def get_sandbox_portfolio(self, request: 'PortfolioRequest'
-        ) ->'PortfolioResponse':
+    def get_sandbox_portfolio(self, request: 'PortfolioRequest'=
+        PortfolioRequest()) ->'PortfolioResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PortfolioRequest())
         response, call = self._stub.GetSandboxPortfolio.with_call(request=
@@ -181,8 +213,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, PortfolioResponse)
 
     @handle_request_error('SandboxPayIn')
-    def sandbox_pay_in(self, request: 'SandboxPayInRequest'
-        ) ->'SandboxPayInResponse':
+    def sandbox_pay_in(self, request: 'SandboxPayInRequest'=
+        SandboxPayInRequest()) ->'SandboxPayInResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             SandboxPayInRequest())
         response, call = self._stub.SandboxPayIn.with_call(request=
@@ -191,8 +223,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, SandboxPayInResponse)
 
     @handle_request_error('GetSandboxWithdrawLimits')
-    def get_sandbox_withdraw_limits(self, request: 'WithdrawLimitsRequest'
-        ) ->'WithdrawLimitsResponse':
+    def get_sandbox_withdraw_limits(self, request: 'WithdrawLimitsRequest'=
+        WithdrawLimitsRequest()) ->'WithdrawLimitsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             WithdrawLimitsRequest())
         response, call = self._stub.GetSandboxWithdrawLimits.with_call(request
@@ -202,8 +234,8 @@ class SandboxService(BaseService):
         return protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
     @handle_request_error('GetSandboxMaxLots')
-    def get_sandbox_max_lots(self, request: 'GetMaxLotsRequest'
-        ) ->'GetMaxLotsResponse':
+    def get_sandbox_max_lots(self, request: 'GetMaxLotsRequest'=
+        GetMaxLotsRequest()) ->'GetMaxLotsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetMaxLotsRequest())
         response, call = self._stub.GetSandboxMaxLots.with_call(request=
@@ -219,7 +251,8 @@ class AsyncSandboxService(BaseService):
     _protobuf_stub = _protobuf_grpc.SandboxServiceStub
 
     @handle_aio_request_error('OpenSandboxAccount')
-    async def open_sandbox_account(self, request: 'OpenSandboxAccountRequest'
+    async def open_sandbox_account(self, request:
+        'OpenSandboxAccountRequest'=OpenSandboxAccountRequest()
         ) ->'OpenSandboxAccountResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             OpenSandboxAccountRequest())
@@ -231,8 +264,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, OpenSandboxAccountResponse)
 
     @handle_aio_request_error('GetSandboxAccounts')
-    async def get_sandbox_accounts(self, request: 'GetAccountsRequest'
-        ) ->'GetAccountsResponse':
+    async def get_sandbox_accounts(self, request: 'GetAccountsRequest'=
+        GetAccountsRequest()) ->'GetAccountsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetAccountsRequest())
         response_coro = self._stub.GetSandboxAccounts(request=
@@ -243,7 +276,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, GetAccountsResponse)
 
     @handle_aio_request_error('CloseSandboxAccount')
-    async def close_sandbox_account(self, request: 'CloseSandboxAccountRequest'
+    async def close_sandbox_account(self, request:
+        'CloseSandboxAccountRequest'=CloseSandboxAccountRequest()
         ) ->'CloseSandboxAccountResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             CloseSandboxAccountRequest())
@@ -255,8 +289,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, CloseSandboxAccountResponse)
 
     @handle_aio_request_error('PostSandboxOrder')
-    async def post_sandbox_order(self, request: 'PostOrderRequest'
-        ) ->'PostOrderResponse':
+    async def post_sandbox_order(self, request: 'PostOrderRequest'=
+        PostOrderRequest()) ->'PostOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PostOrderRequest())
         response_coro = self._stub.PostSandboxOrder(request=
@@ -267,7 +301,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_aio_request_error('PostSandboxOrderAsync')
-    async def post_sandbox_order_async(self, request: 'PostOrderAsyncRequest'
+    async def post_sandbox_order_async(self, request:
+        'PostOrderAsyncRequest'=PostOrderAsyncRequest()
         ) ->'PostOrderAsyncResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PostOrderAsyncRequest())
@@ -279,8 +314,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderAsyncResponse)
 
     @handle_aio_request_error('ReplaceSandboxOrder')
-    async def replace_sandbox_order(self, request: 'ReplaceOrderRequest'
-        ) ->'PostOrderResponse':
+    async def replace_sandbox_order(self, request: 'ReplaceOrderRequest'=
+        ReplaceOrderRequest()) ->'PostOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             ReplaceOrderRequest())
         response_coro = self._stub.ReplaceSandboxOrder(request=
@@ -291,8 +326,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_aio_request_error('GetSandboxOrders')
-    async def get_sandbox_orders(self, request: 'GetOrdersRequest'
-        ) ->'GetOrdersResponse':
+    async def get_sandbox_orders(self, request: 'GetOrdersRequest'=
+        GetOrdersRequest()) ->'GetOrdersResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOrdersRequest())
         response_coro = self._stub.GetSandboxOrders(request=
@@ -303,8 +338,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, GetOrdersResponse)
 
     @handle_aio_request_error('CancelSandboxOrder')
-    async def cancel_sandbox_order(self, request: 'CancelOrderRequest'
-        ) ->'CancelOrderResponse':
+    async def cancel_sandbox_order(self, request: 'CancelOrderRequest'=
+        CancelOrderRequest()) ->'CancelOrderResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             CancelOrderRequest())
         response_coro = self._stub.CancelSandboxOrder(request=
@@ -316,7 +351,7 @@ class AsyncSandboxService(BaseService):
 
     @handle_aio_request_error('GetSandboxOrderState')
     async def get_sandbox_order_state(self, request: 'GetOrderStateRequest'
-        ) ->'OrderState':
+        =GetOrderStateRequest()) ->'OrderState':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOrderStateRequest())
         response_coro = self._stub.GetSandboxOrderState(request=
@@ -327,8 +362,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, OrderState)
 
     @handle_aio_request_error('GetSandboxPositions')
-    async def get_sandbox_positions(self, request: 'PositionsRequest'
-        ) ->'PositionsResponse':
+    async def get_sandbox_positions(self, request: 'PositionsRequest'=
+        PositionsRequest()) ->'PositionsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PositionsRequest())
         response_coro = self._stub.GetSandboxPositions(request=
@@ -339,8 +374,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, PositionsResponse)
 
     @handle_aio_request_error('GetSandboxOperations')
-    async def get_sandbox_operations(self, request: 'OperationsRequest'
-        ) ->'OperationsResponse':
+    async def get_sandbox_operations(self, request: 'OperationsRequest'=
+        OperationsRequest()) ->'OperationsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             OperationsRequest())
         response_coro = self._stub.GetSandboxOperations(request=
@@ -352,7 +387,8 @@ class AsyncSandboxService(BaseService):
 
     @handle_aio_request_error('GetSandboxOperationsByCursor')
     async def get_sandbox_operations_by_cursor(self, request:
-        'GetOperationsByCursorRequest') ->'GetOperationsByCursorResponse':
+        'GetOperationsByCursorRequest'=GetOperationsByCursorRequest()
+        ) ->'GetOperationsByCursorResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetOperationsByCursorRequest())
         response_coro = self._stub.GetSandboxOperationsByCursor(request=
@@ -363,8 +399,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, GetOperationsByCursorResponse)
 
     @handle_aio_request_error('GetSandboxPortfolio')
-    async def get_sandbox_portfolio(self, request: 'PortfolioRequest'
-        ) ->'PortfolioResponse':
+    async def get_sandbox_portfolio(self, request: 'PortfolioRequest'=
+        PortfolioRequest()) ->'PortfolioResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             PortfolioRequest())
         response_coro = self._stub.GetSandboxPortfolio(request=
@@ -375,8 +411,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, PortfolioResponse)
 
     @handle_aio_request_error('SandboxPayIn')
-    async def sandbox_pay_in(self, request: 'SandboxPayInRequest'
-        ) ->'SandboxPayInResponse':
+    async def sandbox_pay_in(self, request: 'SandboxPayInRequest'=
+        SandboxPayInRequest()) ->'SandboxPayInResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             SandboxPayInRequest())
         response_coro = self._stub.SandboxPayIn(request=protobuf_request,
@@ -388,7 +424,8 @@ class AsyncSandboxService(BaseService):
 
     @handle_aio_request_error('GetSandboxWithdrawLimits')
     async def get_sandbox_withdraw_limits(self, request:
-        'WithdrawLimitsRequest') ->'WithdrawLimitsResponse':
+        'WithdrawLimitsRequest'=WithdrawLimitsRequest()
+        ) ->'WithdrawLimitsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             WithdrawLimitsRequest())
         response_coro = self._stub.GetSandboxWithdrawLimits(request=
@@ -399,8 +436,8 @@ class AsyncSandboxService(BaseService):
         return protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
     @handle_aio_request_error('GetSandboxMaxLots')
-    async def get_sandbox_max_lots(self, request: 'GetMaxLotsRequest'
-        ) ->'GetMaxLotsResponse':
+    async def get_sandbox_max_lots(self, request: 'GetMaxLotsRequest'=
+        GetMaxLotsRequest()) ->'GetMaxLotsResponse':
         protobuf_request = dataclass_to_protobuf(request, self._protobuf.
             GetMaxLotsRequest())
         response_coro = self._stub.GetSandboxMaxLots(request=
@@ -409,34 +446,3 @@ class AsyncSandboxService(BaseService):
         log_request(await get_tracking_id_from_coro(response_coro),
             'GetSandboxMaxLots')
         return protobuf_to_dataclass(response, GetMaxLotsResponse)
-
-
-@dataclass
-class OpenSandboxAccountRequest:
-    name: Optional[str] = message_field(1, optional=True)
-
-
-@dataclass
-class OpenSandboxAccountResponse:
-    account_id: str = message_field(1)
-
-
-@dataclass
-class CloseSandboxAccountRequest:
-    account_id: str = message_field(1)
-
-
-@dataclass
-class CloseSandboxAccountResponse:
-    pass
-
-
-@dataclass
-class SandboxPayInRequest:
-    account_id: str = message_field(1)
-    amount: 'MoneyValue' = message_field(2)
-
-
-@dataclass
-class SandboxPayInResponse:
-    balance: 'MoneyValue' = message_field(1)

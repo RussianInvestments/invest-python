@@ -326,7 +326,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.TradingSchedules(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.TradingSchedulesRequest()
             ),
             metadata=self.metadata,
@@ -349,7 +349,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.BondBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -369,7 +369,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.instrument_status = instrument_status
         request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Bonds(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -392,7 +392,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.CurrencyBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -412,7 +412,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.instrument_status = instrument_status
         request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Currencies(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -435,7 +435,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.EtfBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -455,7 +455,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.instrument_status = instrument_status
         request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Etfs(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -478,7 +478,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.FutureBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -498,7 +498,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.instrument_status = instrument_status
         request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Futures(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -521,7 +521,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.OptionBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -538,7 +538,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request = InstrumentsRequest()
         request.instrument_status = instrument_status
         response_coro = self.stub.Options(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -555,7 +555,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.basic_asset_uid = basic_asset_uid
         request.basic_asset_position_uid = basic_asset_position_uid
         response_coro = self.stub.OptionsBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.FilterOptionsRequest()
             ),
             metadata=self.metadata,
@@ -578,7 +578,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.ShareBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -598,7 +598,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.instrument_status = instrument_status
         request.instrument_exchange = instrument_exchange
         response_coro = self.stub.Shares(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -610,7 +610,7 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("Indicatives")
     async def indicatives(self, request: IndicativesRequest) -> IndicativesResponse:
         response_coro = self.stub.Indicatives(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentsRequest()
             ),
             metadata=self.metadata,
@@ -636,7 +636,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.GetAccruedInterests(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetAccruedInterestsRequest()
             ),
             metadata=self.metadata,
@@ -657,7 +657,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.figi = figi
         request.instrument_id = instrument_id
         response_coro = self.stub.GetFuturesMargin(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetFuturesMarginRequest()
             ),
             metadata=self.metadata,
@@ -680,7 +680,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request.class_code = class_code
         request.id = id
         response_coro = self.stub.GetInstrumentBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.InstrumentRequest()
             ),
             metadata=self.metadata,
@@ -706,7 +706,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.GetDividends(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetDividendsRequest()
             ),
             metadata=self.metadata,
@@ -732,7 +732,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.GetBondCoupons(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetBondCouponsRequest()
             ),
             metadata=self.metadata,
@@ -746,7 +746,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self, request: GetBondEventsRequest
     ) -> GetBondEventsResponse:
         response_coro = self.stub.GetBondEvents(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetBondEventsRequest()
             ),
             metadata=self.metadata,
@@ -765,7 +765,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request = AssetRequest()
         request.id = id
         response_coro = self.stub.GetAssetBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.AssetRequest()
             ),
             metadata=self.metadata,
@@ -782,7 +782,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if request is None:
             request = AssetsRequest()
         response_coro = self.stub.GetAssets(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.AssetsRequest()
             ),
             metadata=self.metadata,
@@ -801,7 +801,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if group_id is not None:
             request.group_id = group_id
         response_coro = self.stub.GetFavorites(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetFavoritesRequest()
             ),
             metadata=self.metadata,
@@ -826,7 +826,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if group_id is not None:
             request.group_id = group_id
         response_coro = self.stub.EditFavorites(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.EditFavoritesRequest()
             ),
             metadata=self.metadata,
@@ -841,7 +841,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request: CreateFavoriteGroupRequest,
     ) -> CreateFavoriteGroupResponse:
         response_coro = self.stub.CreateFavoriteGroup(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.CreateFavoriteGroupRequest()
             ),
             metadata=self.metadata,
@@ -860,7 +860,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request: DeleteFavoriteGroupRequest,
     ) -> DeleteFavoriteGroupResponse:
         response_coro = self.stub.DeleteFavoriteGroup(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.DeleteFavoriteGroupRequest()
             ),
             metadata=self.metadata,
@@ -879,7 +879,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request: GetFavoriteGroupsRequest,
     ) -> GetFavoriteGroupsResponse:
         response_coro = self.stub.GetFavoriteGroups(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetFavoriteGroupsRequest()
             ),
             metadata=self.metadata,
@@ -894,7 +894,7 @@ class InstrumentsService(_grpc_helpers.Service):
     ) -> GetCountriesResponse:
         request = GetCountriesRequest()
         response_coro = self.stub.GetCountries(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetCountriesRequest()
             ),
             metadata=self.metadata,
@@ -918,7 +918,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if api_trade_available_flag is not None:
             request.api_trade_available_flag = api_trade_available_flag
         response_coro = self.stub.FindInstrument(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.FindInstrumentRequest()
             ),
             metadata=self.metadata,
@@ -936,7 +936,7 @@ class InstrumentsService(_grpc_helpers.Service):
         if paging is not None:
             request.paging = paging
         response_coro = self.stub.GetBrands(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetBrandsRequest()
             ),
             metadata=self.metadata,
@@ -951,7 +951,7 @@ class InstrumentsService(_grpc_helpers.Service):
         request = GetBrandRequest()
         request.id = id
         response_coro = self.stub.GetBrandBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetBrandRequest()
             ),
             metadata=self.metadata,
@@ -965,7 +965,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self, request: GetAssetFundamentalsRequest
     ) -> GetAssetFundamentalsResponse:
         response_coro = self.stub.GetAssetFundamentals(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetAssetFundamentalsRequest()
             ),
             metadata=self.metadata,
@@ -983,7 +983,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self, request: GetAssetReportsRequest
     ) -> GetAssetReportsResponse:
         response_coro = self.stub.GetAssetReports(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetAssetReportsRequest()
             ),
             metadata=self.metadata,
@@ -997,7 +997,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self, request: GetConsensusForecastsRequest
     ) -> GetConsensusForecastsResponse:
         response_coro = self.stub.GetConsensusForecasts(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetConsensusForecastsRequest()
             ),
             metadata=self.metadata,
@@ -1013,7 +1013,7 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetForecastBy")
     async def get_forecast_by(self, request: GetForecastRequest) -> GetForecastResponse:
         response_coro = self.stub.GetForecastBy(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetForecastRequest()
             ),
             metadata=self.metadata,
@@ -1025,7 +1025,7 @@ class InstrumentsService(_grpc_helpers.Service):
     @handle_aio_request_error("GetRiskRates")
     async def get_risk_rates(self, request: RiskRatesRequest) -> RiskRatesResponse:
         response_coro = self.stub.GetRiskRates(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.RiskRatesRequest()
             ),
             metadata=self.metadata,
@@ -1039,7 +1039,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self, request: GetInsiderDealsRequest
     ) -> GetInsiderDealsResponse:
         response_coro = self.stub.GetInsiderDeals(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, instruments_pb2.GetInsiderDealsRequest()
             ),
             metadata=self.metadata,
@@ -1077,7 +1077,7 @@ class MarketDataService(_grpc_helpers.Service):
             request.limit = limit
         request.interval = interval
         response_coro = self.stub.GetCandles(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetCandlesRequest()
             ),
             metadata=self.metadata,
@@ -1105,7 +1105,7 @@ class MarketDataService(_grpc_helpers.Service):
         if instrument_status:
             request.instrument_status = instrument_status
         response_coro = self.stub.GetLastPrices(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetLastPricesRequest()
             ),
             metadata=self.metadata,
@@ -1123,7 +1123,7 @@ class MarketDataService(_grpc_helpers.Service):
         request.instrument_id = instrument_id
         request.depth = depth
         response_coro = self.stub.GetOrderBook(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetOrderBookRequest()
             ),
             metadata=self.metadata,
@@ -1140,7 +1140,7 @@ class MarketDataService(_grpc_helpers.Service):
         request.figi = figi
         request.instrument_id = instrument_id
         response_coro = self.stub.GetTradingStatus(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetTradingStatusRequest()
             ),
             metadata=self.metadata,
@@ -1157,7 +1157,7 @@ class MarketDataService(_grpc_helpers.Service):
         if instrument_ids:
             request.instrument_id = instrument_ids
         response_coro = self.stub.GetTradingStatuses(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetTradingStatusesRequest()
             ),
             metadata=self.metadata,
@@ -1185,7 +1185,7 @@ class MarketDataService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.GetLastTrades(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetLastTradesRequest()
             ),
             metadata=self.metadata,
@@ -1207,7 +1207,7 @@ class MarketDataService(_grpc_helpers.Service):
         if instrument_status:
             request.instrument_status = instrument_status
         response_coro = self.stub.GetClosePrices(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetClosePricesRequest()
             ),
             metadata=self.metadata,
@@ -1223,7 +1223,7 @@ class MarketDataService(_grpc_helpers.Service):
         request: GetTechAnalysisRequest,
     ) -> GetTechAnalysisResponse:
         response_coro = self.stub.GetTechAnalysis(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetTechAnalysisRequest()
             ),
             metadata=self.metadata,
@@ -1239,7 +1239,7 @@ class MarketDataService(_grpc_helpers.Service):
         request: GetMarketValuesRequest,
     ) -> GetMarketValuesResponse:
         response_coro = self.stub.GetMarketValues(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.GetMarketValuesRequest()
             ),
             metadata=self.metadata,
@@ -1257,7 +1257,7 @@ class MarketDataStreamService(_grpc_helpers.Service):
         request_iterator: AsyncIterable[MarketDataRequest],
     ) -> AsyncIterable[marketdata_pb2.MarketDataRequest]:
         async for request in request_iterator:
-            yield _grpc_helpers.dataclass_to_protobuff(
+            yield _grpc_helpers.dataclass_to_protobuf(
                 request, marketdata_pb2.MarketDataRequest()
             )
 
@@ -1295,7 +1295,7 @@ class OperationsService(_grpc_helpers.Service):
         request.state = state
         request.figi = figi
         response_coro = self.stub.GetOperations(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.OperationsRequest()
             ),
             metadata=self.metadata,
@@ -1309,7 +1309,7 @@ class OperationsService(_grpc_helpers.Service):
         request = PortfolioRequest()
         request.account_id = account_id
         response_coro = self.stub.GetPortfolio(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PortfolioRequest()
             ),
             metadata=self.metadata,
@@ -1323,7 +1323,7 @@ class OperationsService(_grpc_helpers.Service):
         request = PositionsRequest()
         request.account_id = account_id
         response_coro = self.stub.GetPositions(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PositionsRequest()
             ),
             metadata=self.metadata,
@@ -1339,7 +1339,7 @@ class OperationsService(_grpc_helpers.Service):
         request = WithdrawLimitsRequest()
         request.account_id = account_id
         response_coro = self.stub.GetWithdrawLimits(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.WithdrawLimitsRequest()
             ),
             metadata=self.metadata,
@@ -1361,7 +1361,7 @@ class OperationsService(_grpc_helpers.Service):
         if get_broker_report_request:
             request.get_broker_report_request = get_broker_report_request
         response_coro = self.stub.GetBrokerReport(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.BrokerReportRequest()
             ),
             metadata=self.metadata,
@@ -1389,7 +1389,7 @@ class OperationsService(_grpc_helpers.Service):
         if get_div_foreign_issuer_report is not None:
             request.get_div_foreign_issuer_report = get_div_foreign_issuer_report
         response_coro = self.stub.GetDividendsForeignIssuer(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.GetDividendsForeignIssuerRequest()
             ),
             metadata=self.metadata,
@@ -1408,7 +1408,7 @@ class OperationsService(_grpc_helpers.Service):
         request: GetOperationsByCursorRequest,
     ) -> GetOperationsByCursorResponse:
         response_coro = self.stub.GetOperationsByCursor(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.GetOperationsByCursorRequest()
             ),
             metadata=self.metadata,
@@ -1442,7 +1442,7 @@ class OperationsStreamService(_grpc_helpers.Service):
             ping_settings.ping_delay_ms = ping_delay_ms
         request.ping_settings = ping_settings
         async for response in self.stub.PortfolioStream(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PortfolioStreamRequest()
             ),
             metadata=self.metadata,
@@ -1470,7 +1470,7 @@ class OperationsStreamService(_grpc_helpers.Service):
         if with_initial_positions:
             request.with_initial_positions = with_initial_positions
         async for response in self.stub.PositionsStream(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PositionsStreamRequest()
             ),
             metadata=self.metadata,
@@ -1491,7 +1491,7 @@ class OrdersStreamService(_grpc_helpers.Service):
         else:
             raise ValueError("accounts can not be empty")
         async for response in self.stub.TradesStream(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.TradesStreamRequest()
             ),
             metadata=self.metadata,
@@ -1503,7 +1503,7 @@ class OrdersStreamService(_grpc_helpers.Service):
         self, *, request: OrderStateStreamRequest
     ) -> AsyncIterable[OrderStateStreamResponse]:
         async for response in self.stub.OrderStateStream(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.OrderStateStreamRequest()
             ),
             metadata=self.metadata,
@@ -1554,7 +1554,7 @@ class OrdersService(_grpc_helpers.Service):
         if confirm_margin_trade:
             request.confirm_margin_trade = confirm_margin_trade
         response_coro = self.stub.PostOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.PostOrderRequest()
             ),
             metadata=self.metadata,
@@ -1574,7 +1574,7 @@ class OrdersService(_grpc_helpers.Service):
                 None,
             )
         response_coro = self.stub.PostOrderAsync(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.PostOrderAsyncRequest()
             ),
             metadata=self.metadata,
@@ -1596,7 +1596,7 @@ class OrdersService(_grpc_helpers.Service):
         request.order_id = order_id
         request.order_id_type = order_id_type
         response_coro = self.stub.CancelOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.CancelOrderRequest()
             ),
             metadata=self.metadata,
@@ -1620,7 +1620,7 @@ class OrdersService(_grpc_helpers.Service):
         request.price_type = price_type
         request.order_id_type = order_id_type
         response_coro = self.stub.GetOrderState(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetOrderStateRequest()
             ),
             metadata=self.metadata,
@@ -1649,7 +1649,7 @@ class OrdersService(_grpc_helpers.Service):
         if execution_status is not None:
             request.advanced_filters.execution_status = execution_status
         response_coro = self.stub.GetOrders(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetOrdersRequest()
             ),
             metadata=self.metadata,
@@ -1661,7 +1661,7 @@ class OrdersService(_grpc_helpers.Service):
     @handle_aio_request_error("ReplaceOrder")
     async def replace_order(self, request: ReplaceOrderRequest) -> PostOrderResponse:
         response_coro = self.stub.ReplaceOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.ReplaceOrderRequest()
             ),
             metadata=self.metadata,
@@ -1673,7 +1673,7 @@ class OrdersService(_grpc_helpers.Service):
     @handle_aio_request_error("GetMaxLots")
     async def get_max_lots(self, request: GetMaxLotsRequest) -> GetMaxLotsResponse:
         response_coro = self.stub.GetMaxLots(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetMaxLotsRequest()
             ),
             metadata=self.metadata,
@@ -1687,7 +1687,7 @@ class OrdersService(_grpc_helpers.Service):
         self, request: GetOrderPriceRequest
     ) -> GetOrderPriceResponse:
         response_coro = self.stub.GetOrderPrice(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetOrderPriceRequest()
             ),
             metadata=self.metadata,
@@ -1704,7 +1704,7 @@ class UsersService(_grpc_helpers.Service):
     async def get_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
         response_coro = self.stub.GetAccounts(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, users_pb2.GetAccountsRequest()
             ),
             metadata=self.metadata,
@@ -1720,7 +1720,7 @@ class UsersService(_grpc_helpers.Service):
         request = GetMarginAttributesRequest()
         request.account_id = account_id
         response_coro = self.stub.GetMarginAttributes(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, users_pb2.GetMarginAttributesRequest()
             ),
             metadata=self.metadata,
@@ -1737,7 +1737,7 @@ class UsersService(_grpc_helpers.Service):
     async def get_user_tariff(self) -> GetUserTariffResponse:
         request = GetUserTariffRequest()
         response_coro = self.stub.GetUserTariff(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, users_pb2.GetUserTariffRequest()
             ),
             metadata=self.metadata,
@@ -1750,7 +1750,7 @@ class UsersService(_grpc_helpers.Service):
     async def get_info(self) -> GetInfoResponse:
         request = GetInfoRequest()
         response_coro = self.stub.GetInfo(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, users_pb2.GetInfoRequest()
             ),
             metadata=self.metadata,
@@ -1770,7 +1770,7 @@ class SandboxService(_grpc_helpers.Service):
         request = OpenSandboxAccountRequest()
         request.name = name
         response_coro = self.stub.OpenSandboxAccount(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, sandbox_pb2.OpenSandboxAccountRequest()
             ),
             metadata=self.metadata,
@@ -1785,7 +1785,7 @@ class SandboxService(_grpc_helpers.Service):
     async def get_sandbox_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
         response_coro = self.stub.GetSandboxAccounts(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, users_pb2.GetAccountsRequest()
             ),
             metadata=self.metadata,
@@ -1803,7 +1803,7 @@ class SandboxService(_grpc_helpers.Service):
         request = CloseSandboxAccountRequest()
         request.account_id = account_id
         response_coro = self.stub.CloseSandboxAccount(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, sandbox_pb2.CloseSandboxAccountRequest()
             ),
             metadata=self.metadata,
@@ -1851,7 +1851,7 @@ class SandboxService(_grpc_helpers.Service):
         request.time_in_force = time_in_force
         request.price_type = price_type
         response_coro = self.stub.PostSandboxOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.PostOrderRequest()
             ),
             metadata=self.metadata,
@@ -1866,7 +1866,7 @@ class SandboxService(_grpc_helpers.Service):
         request: "ReplaceOrderRequest",
     ) -> PostOrderResponse:
         response_coro = self.stub.ReplaceSandboxOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.ReplaceOrderRequest()
             ),
             metadata=self.metadata,
@@ -1882,7 +1882,7 @@ class SandboxService(_grpc_helpers.Service):
         request = GetOrdersRequest()
         request.account_id = account_id
         response_coro = self.stub.GetSandboxOrders(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetOrdersRequest()
             ),
             metadata=self.metadata,
@@ -1904,7 +1904,7 @@ class SandboxService(_grpc_helpers.Service):
         request.order_id = order_id
         request.order_id_type = order_id_type
         response_coro = self.stub.CancelSandboxOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.CancelOrderRequest()
             ),
             metadata=self.metadata,
@@ -1930,7 +1930,7 @@ class SandboxService(_grpc_helpers.Service):
         request.price_type = price_type
         request.order_id_type = order_id_type
         response_coro = self.stub.GetSandboxOrderState(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetOrderStateRequest()
             ),
             metadata=self.metadata,
@@ -1946,7 +1946,7 @@ class SandboxService(_grpc_helpers.Service):
         request = PositionsRequest()
         request.account_id = account_id
         response_coro = self.stub.GetSandboxPositions(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PositionsRequest()
             ),
             metadata=self.metadata,
@@ -1976,7 +1976,7 @@ class SandboxService(_grpc_helpers.Service):
         request.state = state
         request.figi = figi
         response_coro = self.stub.GetSandboxOperations(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.OperationsRequest()
             ),
             metadata=self.metadata,
@@ -1992,7 +1992,7 @@ class SandboxService(_grpc_helpers.Service):
         request = PortfolioRequest()
         request.account_id = account_id
         response_coro = self.stub.GetSandboxPortfolio(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.PortfolioRequest()
             ),
             metadata=self.metadata,
@@ -2012,7 +2012,7 @@ class SandboxService(_grpc_helpers.Service):
         if amount is not None:
             request.amount = amount
         response_coro = self.stub.SandboxPayIn(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, sandbox_pb2.SandboxPayInRequest()
             ),
             metadata=self.metadata,
@@ -2030,7 +2030,7 @@ class SandboxService(_grpc_helpers.Service):
         request = WithdrawLimitsRequest()
         request.account_id = account_id
         response_coro = self.stub.GetSandboxWithdrawLimits(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, operations_pb2.WithdrawLimitsRequest()
             ),
             metadata=self.metadata,
@@ -2048,7 +2048,7 @@ class SandboxService(_grpc_helpers.Service):
         request: GetMaxLotsRequest,
     ) -> GetMaxLotsResponse:
         response_coro = self.stub.GetSandboxMaxLots(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.GetMaxLotsRequest()
             ),
             metadata=self.metadata,
@@ -2064,7 +2064,7 @@ class SandboxService(_grpc_helpers.Service):
         request: "PostOrderAsyncRequest",
     ) -> PostOrderAsyncResponse:
         response_coro = self.stub.PostSandboxOrderAsync(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, orders_pb2.PostOrderAsyncRequest()
             ),
             metadata=self.metadata,
@@ -2124,7 +2124,7 @@ class StopOrdersService(_grpc_helpers.Service):
         if confirm_margin_trade:
             request.confirm_margin_trade = confirm_margin_trade
         response_coro = self.stub.PostStopOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, stoporders_pb2.PostStopOrderRequest()
             ),
             metadata=self.metadata,
@@ -2150,7 +2150,7 @@ class StopOrdersService(_grpc_helpers.Service):
         if to is not None:
             request.to = to
         response_coro = self.stub.GetStopOrders(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, stoporders_pb2.GetStopOrdersRequest()
             ),
             metadata=self.metadata,
@@ -2167,7 +2167,7 @@ class StopOrdersService(_grpc_helpers.Service):
         request.account_id = account_id
         request.stop_order_id = stop_order_id
         response_coro = self.stub.CancelStopOrder(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, stoporders_pb2.CancelStopOrderRequest()
             ),
             metadata=self.metadata,
@@ -2187,7 +2187,7 @@ class SignalsService(_grpc_helpers.Service):
         request: GetSignalsRequest,
     ) -> GetSignalsResponse:
         response_coro = self.stub.GetSignals(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, signals_pb2.GetSignalsRequest()
             ),
             metadata=self.metadata,
@@ -2203,7 +2203,7 @@ class SignalsService(_grpc_helpers.Service):
         request: GetStrategiesRequest,
     ) -> GetStrategiesResponse:
         response_coro = self.stub.GetStrategies(
-            request=_grpc_helpers.dataclass_to_protobuff(
+            request=_grpc_helpers.dataclass_to_protobuf(
                 request, signals_pb2.GetStrategiesRequest()
             ),
             metadata=self.metadata,

@@ -7,6 +7,8 @@ from ast import (
     Name,
     Subscript,
     alias,
+    arg,
+    arguments,
     expr,
 )
 
@@ -39,6 +41,30 @@ class BaseServiceMethodGenerator(DefaultBaseServiceMethodGenerator):
                 ctx=Load(),
             )
         return Constant(value=class_type)
+
+    def _get_args(self, input_class: str) -> arguments:
+        input_annotation = self._get_annotation(input_class, self._is_input_stream)
+        if not self._is_input_stream:
+            default_request = Call(
+                func=Name(id=input_class, ctx=Load()),
+                args=[],
+                keywords=[],
+            )
+        else:
+            default_request = None
+        return arguments(
+            posonlyargs=[],
+            args=[
+                arg(arg="self"),
+                arg(
+                    arg=self._input_arg_name,
+                    annotation=input_annotation,
+                ),
+            ],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[default_request] if default_request else [],
+        )
 
     def create(self, method):
         input_class = method.input_type.type
@@ -74,6 +100,20 @@ class BaseServiceMethodGenerator(DefaultBaseServiceMethodGenerator):
         )
 
     def _add_function_body_imports(self):
+        # self._importer.add_import(
+        #     ImportFrom(
+        #         module="tinkoff.invest._grpc_helpers",
+        #         names=[alias(name="dataclass_to_protobuf")],
+        #         level=0,
+        #     )
+        # )
+        # self._importer.add_import(
+        #     ImportFrom(
+        #         module="tinkoff.invest._grpc_helpers",
+        #         names=[alias(name="protobuf_to_dataclass")],
+        #         level=0,
+        #     )
+        # )
         super()._add_function_body_imports()
         self._importer.add_import(
             ImportFrom(
